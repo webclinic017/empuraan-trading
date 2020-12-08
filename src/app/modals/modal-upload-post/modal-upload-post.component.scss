@@ -1,0 +1,16 @@
+ion-title{
+    color:black;
+}
+@media screen and (max-width: 360px) {
+    ion-title, h3{
+      font-size:15px;
+    }
+    ion-label, ion-text, p, h5, ion-button, span{
+      font-size: 13px !important;
+    }
+}
+@media(prefers-color-scheme: dark) {
+    ion-title{
+        color:white;
+    }
+}

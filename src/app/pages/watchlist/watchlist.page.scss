@@ -1,0 +1,31 @@
+.logo{
+  height: 70px;
+  width: 70px;
+  padding-right: 10px;
+}
+ion-title{
+  color:black;
+}
+ion-content {
+  div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 360px) {
+  ion-title{
+    font-size:14px !important;
+  }
+  ion-label, h3, p{
+    font-size: 12px !important;
+  }
+}
+@media(prefers-color-scheme: dark) {
+  ion-title{
+    color:white;
+  }
+}

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-back-button defaultHref="home/dashboard"></ion-back-button>
+    </ion-buttons> -->
+    <ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-title class="ion-text-center ion-margin-vertical" color="warning"><h1>Welcome to Empuraan</h1></ion-title>
+    <ion-title class="ion-text-center ion-margin-vertical"><h2>Login</h2></ion-title>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">E-mail</ion-label>
+            <ion-input type="email"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button class="login-button" (click)="login()">Login</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size=6>
+          <ion-button color="tertiary" size="small" fill="clear" class="link-button" (click)="navigateToSignup()">
+            New user?
+          </ion-button>
+        </ion-col>
+        <ion-col size=6>
+          <ion-button color="tertiary" size="small" fill="clear" class="link-button ion-float-right">
+            Forgot password?
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="or-line">
+            <hr>
+            <span>OR</span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button class="login-button" color="danger" (click)="login()">
+            <ion-icon name="logo-google" slot="start"></ion-icon>
+            Login with Google
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

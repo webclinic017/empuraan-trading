@@ -1,0 +1,29 @@
+.logo{
+    height: 70px;
+    width: 70px;
+    padding-right: 10px;
+}
+.sign-up-button{
+    width: 100%;
+    height: 50px;
+}
+h1,h2{
+    padding:0;
+    margin:0;
+}
+@media screen and (max-width: 360px) {
+    h1,h2{
+      font-size: 17px;
+    }
+    ion-label, ion-text, p, h5, ion-button, span{
+      font-size: 13px !important;
+    }
+    ion-icon{
+        font-size: 17px;
+    }
+    .sign-up-button{
+        width: 100%; 
+        height: 40px;
+        font-size: 13px !important;
+    }
+}

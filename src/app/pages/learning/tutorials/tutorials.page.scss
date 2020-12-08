@@ -1,0 +1,17 @@
+.video-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .video-title{
+        font-size: 17px;
+    }
+    iframe{
+        -webkit-overflow-scrolling: touch !important;
+        overflow: scroll !important;
+    }
+}
+@media screen and (max-width: 360px) {
+    .video-title{
+        font-size: 13px;
+    }
+}

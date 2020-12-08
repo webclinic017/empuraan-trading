@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar>
+		<ion-title>Marubozu</ion-title>
+		<ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<super-tabs [config]="config">
+		<super-tabs-toolbar slot="top" color="translucent" scrollable="true" scrollable-padding="false">
+			<super-tab-button><ion-label>Tutorials</ion-label></super-tab-button>
+			<super-tab-button><ion-label>Blogs</ion-label></super-tab-button>
+			<super-tab-button><ion-label>Intra-day</ion-label></super-tab-button>
+			<super-tab-button><ion-label>Positional</ion-label></super-tab-button>
+			<super-tab-button><ion-label>Demo-trading</ion-label></super-tab-button>
+		</super-tabs-toolbar>
+		<super-tabs-container>
+			<super-tab>
+				<app-tutorials></app-tutorials>
+			</super-tab>
+			<super-tab>
+				<app-blogs></app-blogs>
+			</super-tab>
+			<super-tab>
+				<app-intra-day></app-intra-day>
+			</super-tab>
+			<super-tab>
+				<app-positional></app-positional>
+			</super-tab>
+			<super-tab>
+				<app-demo-trading></app-demo-trading>
+			</super-tab>
+		</super-tabs-container>
+	</super-tabs>
+</ion-content>

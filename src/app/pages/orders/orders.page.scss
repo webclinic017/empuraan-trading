@@ -1,0 +1,134 @@
+.logo{
+    height: 70px;
+    width: 70px;
+    padding-right: 10px;
+}
+super-tab-button{
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+}
+.success{
+    color:#7fd300;
+    font-weight: 500;
+}
+.failure{
+    color:#d20000;
+    font-weight: 500;
+}
+table p{
+    padding-bottom: 0;
+    margin-bottom: 0%;
+    padding-left: 10px;
+}
+.column-centralise-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+ion-card{
+    ion-card-content{
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center;
+    }
+}
+ion-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    ion-grid{
+        padding-right: 0;
+        ion-col{
+            padding-right: 0;
+        }
+    }
+}
+ion-item{
+    .success{
+        color:#7fd300;
+        font-weight: 500;
+    }
+    .failure{
+        color:#d20000;
+        font-weight: 500;
+    }
+    p{
+        font-size: 13px;
+    }
+    span{
+        color:#747474;
+    }
+    .sell{
+        background-color: #ffa8a880;
+        color:#ff0000;
+        padding:3px 12px;
+        border-radius: 5px;
+    }
+    .buy{
+        background-color: #7474ff80;
+        color:#0008ff;
+        padding:3px 12px;
+        border-radius: 5px;
+    }
+    .cancelled{
+        background-color: #e3e3e380;
+        color:#4b4b4b;
+        padding:3px 12px;
+        border-radius: 5px;
+    }
+    .complete{
+        background-color: #4dff4d80;
+        color:#078f00;
+        padding:3px 12px;
+        border-radius: 5px;
+    }
+    .padding-hor{
+        padding:0 7px;
+    }
+    .padding-strt{
+        padding-left: 7px;
+    }
+}
+@media(prefers-color-scheme: dark) {
+    ion-item{
+        span{
+            color:#949494;
+        }
+        .sell{
+            background-color: #ff747459;
+            color:#ffaaaa;
+        }
+        .buy{
+            background-color: #7474ff59;
+            color:#aaadff;
+        }
+        .cancelled{
+            background-color: #6a6a6a80;
+            color:#ffffff;
+        }
+        .complete{
+            background-color: #1fe41f80;
+            color:#4dff43;
+        }
+    }
+}
+@media screen and (max-width: 360px) {
+    ion-title{
+      font-size:14px !important;
+    }
+    ion-label, h3, p{
+      font-size: 12px !important;
+    }
+    ion-card-subtitle{
+        font-size: 12px !important;
+    }
+    ion-card-title{
+        font-size: 13px !important;
+    }
+    ion-searchbar{
+        font-size: 12px !important;
+    }
+}

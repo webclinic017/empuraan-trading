@@ -1,0 +1,58 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar>
+		<ion-title>Upload post</ion-title>
+		<ion-buttons slot="end">
+			<ion-button (click)="dismissModal()">Close</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-item class="ion-no-padding">
+					<ion-label position="floating">Post title</ion-label>
+					<ion-input></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-item class="ion-no-padding">
+					<ion-label position="floating">Share Name</ion-label>
+					<ion-input></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="6">
+				<ion-button color="success" class="post-button" expand="block" (click)="selectImage()"> 
+					<ion-icon name="attach-outline"></ion-icon> 
+				</ion-button>
+			</ion-col>
+			<ion-col size="6">
+				<ion-button expand="block" class="post-button">Post</ion-button>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-list>
+					<ion-item *ngFor="let img of images; index as pos" text-wrap>
+						<ion-thumbnail slot="start">
+							<ion-img [src]="img.path"></ion-img>
+						</ion-thumbnail>
+						<ion-label>
+							{{ img.name }}
+						</ion-label>
+						<ion-button slot="end" fill="clear" (click)="startUpload(img)">
+							<ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+						</ion-button>
+						<ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
+							<ion-icon slot="icon-only" name="trash"></ion-icon>
+						</ion-button>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

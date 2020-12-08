@@ -1,0 +1,80 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Dashboard</ion-title>
+		<ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
+	</ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding-top">
+	<ion-grid>
+		<ion-row>
+			<ion-col size="12">
+				<ion-text> <h5>Hi Ibrahim</h5> </ion-text>
+			</ion-col>
+		</ion-row>
+		<hr />
+
+		<ion-row>
+			<ion-col size="12">
+				<ion-title class="ion-no-padding ion-padding-bottom">Funds</ion-title>
+				<table class="balance-overview-table">
+					<tr>
+						<td><ion-label>Opening bal:</ion-label></td>
+						<td class="ion-padding-start"><ion-label>6200</ion-label></td>
+					</tr>
+					<tr>
+						<td><ion-label>Available bal:</ion-label></td>
+						<td class="ion-padding-start"><ion-label>6000</ion-label></td>
+					</tr>
+					<tr>
+						<td><ion-label>P/L:</ion-label></td>
+						<td class="ion-padding-start"><ion-label>100</ion-label></td>
+					</tr>
+					<tr>
+						<td><ion-label>% gain:</ion-label></td>
+						<td class="ion-padding-start"><ion-label>20%</ion-label></td>
+					</tr>
+				</table>
+			</ion-col>
+		</ion-row>
+		<hr />
+		<ion-row>
+			<ion-col>
+				<ion-title class="ion-no-padding">Leaderboard</ion-title>
+				<ion-list>
+					<table class="leaderboard-table">
+						<thead class="header-labels">
+							<tr>
+								<th><ion-label>Rank</ion-label></th>
+								<th><ion-label>Name</ion-label></th>
+								<th><ion-label>% Gain</ion-label></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let user of leaderboard | slice:0:5 ; let i=index">
+								<td><ion-label>{{i + 1}}</ion-label></td>
+								<td><ion-label>{{user.name}}</ion-label></td>
+								<td><ion-label>{{user.score | percent:'1.1'}}</ion-label></td>
+							</tr>
+						</tbody>
+					</table>
+					<ion-item class="ion-no-padding">
+						<ion-button
+							(click)="navigateToLeaderboard()"
+							color="tertiary"
+							size="small"
+							fill="clear"
+							class="see-more-button"
+						>
+							See more
+						</ion-button>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div id="highcharts" style="width:100%; height:400px;"></div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

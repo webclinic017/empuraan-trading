@@ -1,0 +1,21 @@
+.logo{
+  height: 70px;
+  width: 70px;
+  padding-right: 10px;
+}
+ion-title{
+    color:black;
+  }
+@media screen and (max-width: 360px) {
+    ion-title{
+      font-size:15px !important;
+    }
+    ion-label, ion-select, ion-select-option, p, h5, h3{
+      font-size: 13px !important;
+    }
+}
+@media(prefers-color-scheme: dark) {
+    ion-title{
+        color:white;
+    }
+}
