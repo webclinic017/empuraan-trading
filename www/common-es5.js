@@ -819,11 +819,9 @@
                 while (1) {
                   switch (_context2.prev = _context2.next) {
                     case 0:
-                      _context2.next = 2;
-                      return LocalNotifications.requestPermission();
-
-                    case 2:
                       this.isLoggedIn = true;
+                      _context2.next = 3;
+                      return LocalNotifications.requestPermission();
 
                     case 3:
                     case "end":

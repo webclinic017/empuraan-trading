@@ -526,8 +526,8 @@ let UserService = class UserService {
     }
     logIn() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            yield LocalNotifications.requestPermission();
             this.isLoggedIn = true;
+            yield LocalNotifications.requestPermission();
         });
     }
     logout() {

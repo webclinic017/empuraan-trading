@@ -12,8 +12,8 @@ export class UserService {
   constructor() { }
 
   async logIn(){
-    // await LocalNotifications.requestPermission()
     this.isLoggedIn = true
+    await LocalNotifications.requestPermission()
   }
 
   logout(){

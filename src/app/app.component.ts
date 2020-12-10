@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NetworkStatus, PluginListenerHandle, Plugins } from '@capacitor/core'
-import { Platform } from '@ionic/angular';
+import { AlertController, Platform, IonRouterOutlet } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Local } from 'protractor/built/driverProviders';
+import { Location } from '@angular/common';
 
-const { Network, LocalNotifications } = Plugins;
+const { Network, LocalNotifications, App } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -17,23 +16,55 @@ const { Network, LocalNotifications } = Plugins;
 export class AppComponent implements OnInit{
   networkListener: PluginListenerHandle
   networkStatus: NetworkStatus 
+  @ViewChild(IonRouterOutlet, {static: false}) routerOutlet: IonRouterOutlet
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    // private push: Push
+    private alertController: AlertController,
+    private location: Location,
   ) {}
 
   async ngOnInit(){
-    this.networkListener = Network.addListener('networkStatusChange', status => {
+    this.initializeApp()
+    this.connectionLostEvent()
+  }
+
+  connectionLostEvent(){
+    this.networkListener = Network.addListener('networkStatusChange', async status => {
       console.log('Network status changed', status)
       this.networkStatus = status
       if(!this.networkStatus.connected)
-        this.connectionLostNotification()
+        await this.connectionLostNotification()
     })
-    this.initializeApp();
   }
+
+  backButtonEvent(){
+    this.platform.backButton.subscribeWithPriority(10,() => {
+      if(this.routerOutlet.canGoBack())
+        this.location.back()
+      else this.backButtonAlert()
+    })
+  }
+
+  async backButtonAlert(){
+    const alert = await this.alertController.create({
+      message: 'You\'ve just pressed the back button',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel'
+      }, {
+        text: 'Close app',
+        handler: () => {
+          App.exitApp()
+        }
+      }]
+    })
+
+    await alert.present()
+  }
+
   async connectionLostNotification(){
     await LocalNotifications.schedule({
       notifications: [{
@@ -48,6 +79,7 @@ export class AppComponent implements OnInit{
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.backButtonEvent()
     });
   }
 }

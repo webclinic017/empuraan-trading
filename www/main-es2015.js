@@ -381,6 +381,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "54vc");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "VYYF");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "ofXK");
 
 
 
@@ -389,21 +390,53 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { Network, LocalNotifications } = _capacitor_core__WEBPACK_IMPORTED_MODULE_4__["Plugins"];
+
+const { Network, LocalNotifications, App } = _capacitor_core__WEBPACK_IMPORTED_MODULE_4__["Plugins"];
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar) {
+    constructor(platform, splashScreen, statusBar, alertController, location) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.alertController = alertController;
+        this.location = location;
     }
     ngOnInit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            this.networkListener = Network.addListener('networkStatusChange', status => {
-                console.log('Network status changed', status);
-                this.networkStatus = status;
-                this.connectionLostNotification();
-            });
             this.initializeApp();
+            this.connectionLostEvent();
+        });
+    }
+    connectionLostEvent() {
+        this.networkListener = Network.addListener('networkStatusChange', (status) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            console.log('Network status changed', status);
+            this.networkStatus = status;
+            if (!this.networkStatus.connected)
+                yield this.connectionLostNotification();
+        }));
+    }
+    backButtonEvent() {
+        this.platform.backButton.subscribeWithPriority(10, () => {
+            if (this.routerOutlet.canGoBack())
+                this.location.back();
+            else
+                this.backButtonAlert();
+        });
+    }
+    backButtonAlert() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                message: 'You\'ve just pressed the back button',
+                buttons: [{
+                        text: 'Cancel',
+                        role: 'cancel'
+                    }, {
+                        text: 'Close app',
+                        handler: () => {
+                            App.exitApp();
+                        }
+                    }]
+            });
+            yield alert.present();
         });
     }
     connectionLostNotification() {
@@ -421,14 +454,20 @@ let AppComponent = class AppComponent {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
+            this.backButtonEvent();
         });
     }
 };
 AppComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"] },
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_6__["SplashScreen"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_8__["Location"] }
 ];
+AppComponent.propDecorators = {
+    routerOutlet: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: [_ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonRouterOutlet"], { static: false },] }]
+};
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-root',
@@ -473,6 +512,96 @@ let WatchlistService = class WatchlistService {
         this.companies = [
             {
                 id: 1,
+                name: 'AAA',
+                code: 'AAA',
+                greenNum: 92.90,
+                rateRaw: 4.00,
+                isRising: true,
+                ratePercentage: 4.50
+            },
+            {
+                id: 2,
+                name: 'BBB',
+                code: 'BBB',
+                greenNum: 92.90,
+                rateRaw: 4.00,
+                isRising: true,
+                ratePercentage: 4.50
+            },
+            {
+                id: 3,
+                name: 'CCC',
+                code: 'CCC',
+                greenNum: 92.90,
+                rateRaw: 4.00,
+                isRising: true,
+                ratePercentage: 4.50
+            },
+            {
+                id: 4,
+                name: 'DDD',
+                code: 'DDD',
+                greenNum: 92.90,
+                rateRaw: 4.00,
+                isRising: true,
+                ratePercentage: 4.50
+            },
+            {
+                id: 5,
+                name: 'EEE',
+                code: 'EEE',
+                greenNum: 92.90,
+                rateRaw: 4.00,
+                isRising: true,
+                ratePercentage: 4.50
+            },
+            {
+                id: 6,
+                name: 'FFF',
+                code: 'FFF',
+                greenNum: 92.90,
+                rateRaw: 4.00,
+                isRising: true,
+                ratePercentage: 4.50
+            },
+            {
+                id: 7,
+                name: 'GGG',
+                code: 'GGG',
+                greenNum: 92.90,
+                rateRaw: 4.00,
+                isRising: true,
+                ratePercentage: 4.50
+            },
+            {
+                id: 8,
+                name: 'HHH',
+                code: 'HHH',
+                greenNum: 92.90,
+                rateRaw: 4.00,
+                isRising: true,
+                ratePercentage: 4.50
+            },
+            {
+                id: 9,
+                name: 'III',
+                code: 'III',
+                greenNum: 92.90,
+                rateRaw: 4.00,
+                isRising: true,
+                ratePercentage: 4.50
+            },
+            {
+                id: 10,
+                name: 'JJJ',
+                code: 'JJJ',
+                greenNum: 92.90,
+                rateRaw: 4.00,
+                isRising: true,
+                ratePercentage: 4.50
+            },
+            {
+                id: 11,
                 name: 'Infosys',
                 code: 'Infy',
                 greenNum: 92.90,
@@ -481,7 +610,7 @@ let WatchlistService = class WatchlistService {
                 ratePercentage: 4.50
             },
             {
-                id: 2,
+                id: 12,
                 name: 'Niftybees',
                 code: 'Nifty',
                 greenNum: 958.10,
@@ -490,7 +619,7 @@ let WatchlistService = class WatchlistService {
                 ratePercentage: 1.94
             },
             {
-                id: 3,
+                id: 13,
                 name: 'Tesla Motors',
                 code: 'Tsla',
                 greenNum: 119.85,
@@ -499,7 +628,7 @@ let WatchlistService = class WatchlistService {
                 ratePercentage: 4.40
             },
             {
-                id: 4,
+                id: 14,
                 name: 'Apple Inc.',
                 code: 'Aapl',
                 greenNum: 2102.35,
@@ -508,7 +637,7 @@ let WatchlistService = class WatchlistService {
                 ratePercentage: 2.05
             },
             {
-                id: 5,
+                id: 15,
                 name: 'McDonalds',
                 code: 'MCDS',
                 greenNum: 128.25,
@@ -520,25 +649,41 @@ let WatchlistService = class WatchlistService {
         this.watchlists = [
             {
                 id: 1,
-                name: 'Watchlist 1',
+                name: 'Trending',
                 companies: [
                     this.companies[0],
                     this.companies[1],
+                    this.companies[2],
+                    this.companies[3],
+                    this.companies[4],
+                    this.companies[5],
+                    this.companies[6],
+                    this.companies[7],
+                    this.companies[8],
+                    this.companies[9],
                 ]
             },
             {
                 id: 2,
-                name: 'Watchlist 2',
+                name: 'W1',
                 companies: [
-                    this.companies[2],
-                    this.companies[3],
+                    this.companies[10],
+                    this.companies[11],
                 ]
             },
             {
                 id: 3,
-                name: 'Watchlist 3',
+                name: 'W2',
                 companies: [
-                    this.companies[4],
+                    this.companies[12],
+                    this.companies[13],
+                ]
+            },
+            {
+                id: 4,
+                name: 'W3',
+                companies: [
+                    this.companies[14],
                 ]
             }
         ];

@@ -661,37 +661,39 @@
       var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @ionic-native/status-bar/ngx */
       "VYYF");
+      /* harmony import */
+
+
+      var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! @angular/common */
+      "ofXK");
 
       var _capacitor_core__WEBP = _capacitor_core__WEBPACK_IMPORTED_MODULE_4__["Plugins"],
           Network = _capacitor_core__WEBP.Network,
-          LocalNotifications = _capacitor_core__WEBP.LocalNotifications;
+          LocalNotifications = _capacitor_core__WEBP.LocalNotifications,
+          App = _capacitor_core__WEBP.App;
 
       var AppComponent = /*#__PURE__*/function () {
-        function AppComponent(platform, splashScreen, statusBar) {
+        function AppComponent(platform, splashScreen, statusBar, alertController, location) {
           _classCallCheck(this, AppComponent);
 
           this.platform = platform;
           this.splashScreen = splashScreen;
           this.statusBar = statusBar;
+          this.alertController = alertController;
+          this.location = location;
         }
 
         _createClass(AppComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var _this = this;
-
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
-                      this.networkListener = Network.addListener('networkStatusChange', function (status) {
-                        console.log('Network status changed', status);
-                        _this.networkStatus = status;
-
-                        _this.connectionLostNotification();
-                      });
                       this.initializeApp();
+                      this.connectionLostEvent();
 
                     case 2:
                     case "end":
@@ -702,14 +704,90 @@
             }));
           }
         }, {
+          key: "connectionLostEvent",
+          value: function connectionLostEvent() {
+            var _this = this;
+
+            this.networkListener = Network.addListener('networkStatusChange', function (status) {
+              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                  while (1) {
+                    switch (_context2.prev = _context2.next) {
+                      case 0:
+                        console.log('Network status changed', status);
+                        this.networkStatus = status;
+
+                        if (this.networkStatus.connected) {
+                          _context2.next = 5;
+                          break;
+                        }
+
+                        _context2.next = 5;
+                        return this.connectionLostNotification();
+
+                      case 5:
+                      case "end":
+                        return _context2.stop();
+                    }
+                  }
+                }, _callee2, this);
+              }));
+            });
+          }
+        }, {
+          key: "backButtonEvent",
+          value: function backButtonEvent() {
+            var _this2 = this;
+
+            this.platform.backButton.subscribeWithPriority(10, function () {
+              if (_this2.routerOutlet.canGoBack()) _this2.location.back();else _this2.backButtonAlert();
+            });
+          }
+        }, {
+          key: "backButtonAlert",
+          value: function backButtonAlert() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              var alert;
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      _context3.next = 2;
+                      return this.alertController.create({
+                        message: 'You\'ve just pressed the back button',
+                        buttons: [{
+                          text: 'Cancel',
+                          role: 'cancel'
+                        }, {
+                          text: 'Close app',
+                          handler: function handler() {
+                            App.exitApp();
+                          }
+                        }]
+                      });
+
+                    case 2:
+                      alert = _context3.sent;
+                      _context3.next = 5;
+                      return alert.present();
+
+                    case 5:
+                    case "end":
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
+          }
+        }, {
           key: "connectionLostNotification",
           value: function connectionLostNotification() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
-                  switch (_context2.prev = _context2.next) {
+                  switch (_context4.prev = _context4.next) {
                     case 0:
-                      _context2.next = 2;
+                      _context4.next = 2;
                       return LocalNotifications.schedule({
                         notifications: [{
                           id: 1,
@@ -720,21 +798,23 @@
 
                     case 2:
                     case "end":
-                      return _context2.stop();
+                      return _context4.stop();
                   }
                 }
-              }, _callee2);
+              }, _callee4);
             }));
           }
         }, {
           key: "initializeApp",
           value: function initializeApp() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.platform.ready().then(function () {
-              _this2.statusBar.styleDefault();
+              _this3.statusBar.styleDefault();
 
-              _this2.splashScreen.hide();
+              _this3.splashScreen.hide();
+
+              _this3.backButtonEvent();
             });
           }
         }]);
@@ -749,9 +829,21 @@
           type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_6__["SplashScreen"]
         }, {
           type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]
+        }, {
+          type: _angular_common__WEBPACK_IMPORTED_MODULE_8__["Location"]
         }];
       };
 
+      AppComponent.propDecorators = {
+        routerOutlet: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"],
+          args: [_ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonRouterOutlet"], {
+            "static": false
+          }]
+        }]
+      };
       AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-root',
         template: _raw_loader_app_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -818,6 +910,86 @@
 
           this.companies = [{
             id: 1,
+            name: 'AAA',
+            code: 'AAA',
+            greenNum: 92.90,
+            rateRaw: 4.00,
+            isRising: true,
+            ratePercentage: 4.50
+          }, {
+            id: 2,
+            name: 'BBB',
+            code: 'BBB',
+            greenNum: 92.90,
+            rateRaw: 4.00,
+            isRising: true,
+            ratePercentage: 4.50
+          }, {
+            id: 3,
+            name: 'CCC',
+            code: 'CCC',
+            greenNum: 92.90,
+            rateRaw: 4.00,
+            isRising: true,
+            ratePercentage: 4.50
+          }, {
+            id: 4,
+            name: 'DDD',
+            code: 'DDD',
+            greenNum: 92.90,
+            rateRaw: 4.00,
+            isRising: true,
+            ratePercentage: 4.50
+          }, {
+            id: 5,
+            name: 'EEE',
+            code: 'EEE',
+            greenNum: 92.90,
+            rateRaw: 4.00,
+            isRising: true,
+            ratePercentage: 4.50
+          }, {
+            id: 6,
+            name: 'FFF',
+            code: 'FFF',
+            greenNum: 92.90,
+            rateRaw: 4.00,
+            isRising: true,
+            ratePercentage: 4.50
+          }, {
+            id: 7,
+            name: 'GGG',
+            code: 'GGG',
+            greenNum: 92.90,
+            rateRaw: 4.00,
+            isRising: true,
+            ratePercentage: 4.50
+          }, {
+            id: 8,
+            name: 'HHH',
+            code: 'HHH',
+            greenNum: 92.90,
+            rateRaw: 4.00,
+            isRising: true,
+            ratePercentage: 4.50
+          }, {
+            id: 9,
+            name: 'III',
+            code: 'III',
+            greenNum: 92.90,
+            rateRaw: 4.00,
+            isRising: true,
+            ratePercentage: 4.50
+          }, {
+            id: 10,
+            name: 'JJJ',
+            code: 'JJJ',
+            greenNum: 92.90,
+            rateRaw: 4.00,
+            isRising: true,
+            ratePercentage: 4.50
+          }, {
+            id: 11,
             name: 'Infosys',
             code: 'Infy',
             greenNum: 92.90,
@@ -825,7 +997,7 @@
             isRising: true,
             ratePercentage: 4.50
           }, {
-            id: 2,
+            id: 12,
             name: 'Niftybees',
             code: 'Nifty',
             greenNum: 958.10,
@@ -833,7 +1005,7 @@
             rateRaw: 18.25,
             ratePercentage: 1.94
           }, {
-            id: 3,
+            id: 13,
             name: 'Tesla Motors',
             code: 'Tsla',
             greenNum: 119.85,
@@ -841,7 +1013,7 @@
             rateRaw: 5.05,
             ratePercentage: 4.40
           }, {
-            id: 4,
+            id: 14,
             name: 'Apple Inc.',
             code: 'Aapl',
             greenNum: 2102.35,
@@ -849,7 +1021,7 @@
             rateRaw: 42.30,
             ratePercentage: 2.05
           }, {
-            id: 5,
+            id: 15,
             name: 'McDonalds',
             code: 'MCDS',
             greenNum: 128.25,
@@ -859,16 +1031,20 @@
           }];
           this.watchlists = [{
             id: 1,
-            name: 'Watchlist 1',
-            companies: [this.companies[0], this.companies[1]]
+            name: 'Trending',
+            companies: [this.companies[0], this.companies[1], this.companies[2], this.companies[3], this.companies[4], this.companies[5], this.companies[6], this.companies[7], this.companies[8], this.companies[9]]
           }, {
             id: 2,
-            name: 'Watchlist 2',
-            companies: [this.companies[2], this.companies[3]]
+            name: 'W1',
+            companies: [this.companies[10], this.companies[11]]
           }, {
             id: 3,
-            name: 'Watchlist 3',
-            companies: [this.companies[4]]
+            name: 'W2',
+            companies: [this.companies[12], this.companies[13]]
+          }, {
+            id: 4,
+            name: 'W3',
+            companies: [this.companies[14]]
           }];
         }
 
