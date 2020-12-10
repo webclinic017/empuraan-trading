@@ -46,7 +46,6 @@ import { ModalEditOrderComponent } from './modals/modal-edit-order/modal-edit-or
     CommonModule,
     FormsModule,
     HttpClientModule,
-    HttpClientModule,
     DragDropModule,
     IonicStorageModule.forRoot(),
     BrowserAnimationsModule,

@@ -13,6 +13,7 @@
     "src/**/*.d.ts"
   ],
   "exclude": [
+    "assets/datafeeds/udf/src",
     "src/**/*.spec.ts"
   ]
 }

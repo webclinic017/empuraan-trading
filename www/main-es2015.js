@@ -382,6 +382,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "54vc");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "VYYF");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
 
 
 
@@ -393,17 +395,19 @@ __webpack_require__.r(__webpack_exports__);
 
 const { Network, LocalNotifications, App } = _capacitor_core__WEBPACK_IMPORTED_MODULE_4__["Plugins"];
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar, alertController, location) {
+    constructor(platform, splashScreen, statusBar, alertController, location, router) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.alertController = alertController;
         this.location = location;
+        this.router = router;
     }
     ngOnInit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.initializeApp();
             this.connectionLostEvent();
+            this.backButtonEvent();
         });
     }
     connectionLostEvent() {
@@ -416,10 +420,10 @@ let AppComponent = class AppComponent {
     }
     backButtonEvent() {
         this.platform.backButton.subscribeWithPriority(10, () => {
-            if (this.routerOutlet.canGoBack())
-                this.location.back();
-            else
+            if (this.router.url == "/home/dashboard")
                 this.backButtonAlert();
+            else
+                this.location.back();
         });
     }
     backButtonAlert() {
@@ -454,7 +458,6 @@ let AppComponent = class AppComponent {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            this.backButtonEvent();
         });
     }
 };
@@ -463,7 +466,8 @@ AppComponent.ctorParameters = () => [
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_6__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] },
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_8__["Location"] }
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_8__["Location"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"] }
 ];
 AppComponent.propDecorators = {
     routerOutlet: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: [_ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonRouterOutlet"], { static: false },] }]
@@ -829,7 +833,6 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _ionic_super_tabs_angular__WEBPACK_IMPORTED_MODULE_9__["SuperTabsModule"].forRoot(),
             _angular_common__WEBPACK_IMPORTED_MODULE_10__["CommonModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormsModule"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"],
             _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_22__["DragDropModule"],
             _ionic_storage__WEBPACK_IMPORTED_MODULE_20__["IonicStorageModule"].forRoot(),
@@ -1417,7 +1420,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: '',
+        path: 'home',
         loadChildren: () => Promise.all(/*! import() | home-home-module */[__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ./home/home.module */ "ct+p")).then(m => m.HomePageModule)
     },
     {
@@ -1440,6 +1443,11 @@ const routes = [
         path: 'sign-up',
         loadChildren: () => Promise.all(/*! import() | pages-sign-up-sign-up-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-sign-up-sign-up-module")]).then(__webpack_require__.bind(null, /*! ./pages/sign-up/sign-up.module */ "J606")).then(m => m.SignUpPageModule)
     },
+    {
+        path: '',
+        redirectTo: 'home/dashboard',
+        pathMatch: 'full'
+    }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };

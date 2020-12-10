@@ -68,7 +68,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: 'home',
+        path: '',
         component: _home_page__WEBPACK_IMPORTED_MODULE_4__["HomePage"],
         children: [
             {
@@ -111,11 +111,6 @@ const routes = [
             },
         ],
     },
-    {
-        path: '',
-        redirectTo: 'home/dashboard',
-        pathMatch: 'full'
-    }
 ];
 let HomePageRoutingModule = class HomePageRoutingModule {
 };

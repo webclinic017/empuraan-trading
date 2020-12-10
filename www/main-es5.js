@@ -667,6 +667,12 @@
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
       "ofXK");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
 
       var _capacitor_core__WEBP = _capacitor_core__WEBPACK_IMPORTED_MODULE_4__["Plugins"],
           Network = _capacitor_core__WEBP.Network,
@@ -674,7 +680,7 @@
           App = _capacitor_core__WEBP.App;
 
       var AppComponent = /*#__PURE__*/function () {
-        function AppComponent(platform, splashScreen, statusBar, alertController, location) {
+        function AppComponent(platform, splashScreen, statusBar, alertController, location, router) {
           _classCallCheck(this, AppComponent);
 
           this.platform = platform;
@@ -682,6 +688,7 @@
           this.statusBar = statusBar;
           this.alertController = alertController;
           this.location = location;
+          this.router = router;
         }
 
         _createClass(AppComponent, [{
@@ -694,8 +701,9 @@
                     case 0:
                       this.initializeApp();
                       this.connectionLostEvent();
+                      this.backButtonEvent();
 
-                    case 2:
+                    case 3:
                     case "end":
                       return _context.stop();
                   }
@@ -740,7 +748,7 @@
             var _this2 = this;
 
             this.platform.backButton.subscribeWithPriority(10, function () {
-              if (_this2.routerOutlet.canGoBack()) _this2.location.back();else _this2.backButtonAlert();
+              if (_this2.router.url == "/home/dashboard") _this2.backButtonAlert();else _this2.location.back();
             });
           }
         }, {
@@ -813,8 +821,6 @@
               _this3.statusBar.styleDefault();
 
               _this3.splashScreen.hide();
-
-              _this3.backButtonEvent();
             });
           }
         }]);
@@ -833,6 +839,8 @@
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]
         }, {
           type: _angular_common__WEBPACK_IMPORTED_MODULE_8__["Location"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"]
         }];
       };
 
@@ -1326,7 +1334,7 @@
 
       AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"], _modals_modal_watchlist_modal_watchlist_component__WEBPACK_IMPORTED_MODULE_11__["ModalWatchlistComponent"], _modals_modal_watchlist_ce_modal_watchlist_ce_component__WEBPACK_IMPORTED_MODULE_12__["ModalWatchlistCeComponent"], _modals_buy_sell_modal_popup_buy_sell_modal_popup_component__WEBPACK_IMPORTED_MODULE_14__["BuySellModalPopupComponent"], _modals_modal_edit_watchlists_modal_edit_watchlists_component__WEBPACK_IMPORTED_MODULE_23__["ModalEditWatchlistsComponent"], _modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_25__["ModalEditOrderComponent"]],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _ionic_super_tabs_angular__WEBPACK_IMPORTED_MODULE_9__["SuperTabsModule"].forRoot(), _angular_common__WEBPACK_IMPORTED_MODULE_10__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_22__["DragDropModule"], _ionic_storage__WEBPACK_IMPORTED_MODULE_20__["IonicStorageModule"].forRoot(), _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__["BrowserAnimationsModule"], highcharts_angular__WEBPACK_IMPORTED_MODULE_24__["HighchartsChartModule"]],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _ionic_super_tabs_angular__WEBPACK_IMPORTED_MODULE_9__["SuperTabsModule"].forRoot(), _angular_common__WEBPACK_IMPORTED_MODULE_10__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_22__["DragDropModule"], _ionic_storage__WEBPACK_IMPORTED_MODULE_20__["IonicStorageModule"].forRoot(), _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__["BrowserAnimationsModule"], highcharts_angular__WEBPACK_IMPORTED_MODULE_24__["HighchartsChartModule"]],
         exports: [],
         providers: [_ionic_native_Camera_ngx__WEBPACK_IMPORTED_MODULE_16__["Camera"], _ionic_native_File_ngx__WEBPACK_IMPORTED_MODULE_17__["File"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_18__["WebView"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_19__["FilePath"], {
           provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
@@ -1937,7 +1945,7 @@
       "tyNb");
 
       var routes = [{
-        path: '',
+        path: 'home',
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | home-home-module */
@@ -2002,6 +2010,10 @@
             return m.SignUpPageModule;
           });
         }
+      }, {
+        path: '',
+        redirectTo: 'home/dashboard',
+        pathMatch: 'full'
       }];
 
       var AppRoutingModule = function AppRoutingModule() {

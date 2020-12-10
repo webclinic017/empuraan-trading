@@ -136,7 +136,7 @@
       "zpKS");
 
       var routes = [{
-        path: 'home',
+        path: '',
         component: _home_page__WEBPACK_IMPORTED_MODULE_4__["HomePage"],
         children: [{
           path: 'watchlist',
@@ -233,10 +233,6 @@
             });
           }
         }]
-      }, {
-        path: '',
-        redirectTo: 'home/dashboard',
-        pathMatch: 'full'
       }];
 
       var HomePageRoutingModule = function HomePageRoutingModule() {

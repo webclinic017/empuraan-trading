@@ -4,6 +4,7 @@ import { AlertController, Platform, IonRouterOutlet } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 const { Network, LocalNotifications, App } = Plugins;
 
@@ -14,9 +15,9 @@ const { Network, LocalNotifications, App } = Plugins;
 })
 
 export class AppComponent implements OnInit{
+  @ViewChild(IonRouterOutlet, {static: false}) routerOutlet: IonRouterOutlet
   networkListener: PluginListenerHandle
   networkStatus: NetworkStatus 
-  @ViewChild(IonRouterOutlet, {static: false}) routerOutlet: IonRouterOutlet
 
   constructor(
     private platform: Platform,
@@ -24,11 +25,13 @@ export class AppComponent implements OnInit{
     private statusBar: StatusBar,
     private alertController: AlertController,
     private location: Location,
+    private router: Router
   ) {}
 
   async ngOnInit(){
     this.initializeApp()
     this.connectionLostEvent()
+    this.backButtonEvent()
   }
 
   connectionLostEvent(){
@@ -42,9 +45,9 @@ export class AppComponent implements OnInit{
 
   backButtonEvent(){
     this.platform.backButton.subscribeWithPriority(10,() => {
-      if(this.routerOutlet.canGoBack())
-        this.location.back()
-      else this.backButtonAlert()
+      if(this.router.url == "/home/dashboard")
+        this.backButtonAlert()
+      else this.location.back()
     })
   }
 
@@ -79,7 +82,6 @@ export class AppComponent implements OnInit{
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.backButtonEvent()
     });
   }
 }
