@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Plugins } from '@capacitor/core';
 import { Subject } from 'rxjs';
+const { LocalNotifications } = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,8 @@ export class UserService {
   isOnLoginOrSignUpPage = new Subject<boolean>()
   constructor() { }
 
-  logIn(){
+  async logIn(){
+    // await LocalNotifications.requestPermission()
     this.isLoggedIn = true
   }
 

@@ -42,16 +42,11 @@ export class DashboardPage implements OnInit {
         text: 'Funds Overview'
       },
       xAxis: {
-        categories: ['2020/01/01', '2020/01/02', '2020/01/03', '2020/01/04', '2020/01/05', '2020/01/06', '2020/01/07', '2020/01/08', '2020/01/09']
+        categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9']
       },
-      // yAxis: {
-      //   title: {
-      //     text: 'Capital'
-      //   }
-      // },
       series: [
         {
-          name: 'Capital',
+          // name: 'Capital',
           type: undefined,
           data: [0, 500, 550, 620, 790, 950, 1200, 810, 910]
         }

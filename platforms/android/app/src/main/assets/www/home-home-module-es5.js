@@ -1,0 +1,452 @@
+(function () {
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+  (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["home-home-module"], {
+    /***/
+    "1eeg":
+    /*!********************************************!*\
+      !*** ./src/app/guards/auth-guard.guard.ts ***!
+      \********************************************/
+
+    /*! exports provided: AuthGuard */
+
+    /***/
+    function eeg(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "AuthGuard", function () {
+        return AuthGuard;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
+      /* harmony import */
+
+
+      var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ../services/user.service */
+      "qfBg");
+
+      var AuthGuard = /*#__PURE__*/function () {
+        function AuthGuard(userService, router) {
+          _classCallCheck(this, AuthGuard);
+
+          this.userService = userService;
+          this.router = router;
+        }
+
+        _createClass(AuthGuard, [{
+          key: "canActivate",
+          value: function canActivate(next, state) {
+            if (!this.userService.isLoggedIn) {
+              this.router.navigate(['home', 'login']);
+              return false;
+            } else return true;
+          }
+        }]);
+
+        return AuthGuard;
+      }();
+
+      AuthGuard.ctorParameters = function () {
+        return [{
+          type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        }];
+      };
+
+      AuthGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      })], AuthGuard);
+      /***/
+    },
+
+    /***/
+    "A3+G":
+    /*!*********************************************!*\
+      !*** ./src/app/home/home-routing.module.ts ***!
+      \*********************************************/
+
+    /*! exports provided: HomePageRoutingModule */
+
+    /***/
+    function A3G(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "HomePageRoutingModule", function () {
+        return HomePageRoutingModule;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
+      /* harmony import */
+
+
+      var _guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ../guards/auth-guard.guard */
+      "1eeg");
+      /* harmony import */
+
+
+      var _home_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ./home.page */
+      "zpKS");
+
+      var routes = [{
+        path: 'home',
+        component: _home_page__WEBPACK_IMPORTED_MODULE_4__["HomePage"],
+        children: [{
+          path: 'watchlist',
+          canActivate: [_guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
+          loadChildren: function loadChildren() {
+            return Promise.all(
+            /*! import() | pages-watchlist-watchlist-module */
+            [__webpack_require__.e("default~pages-watchlist-buy-sell-buy-sell-module~pages-watchlist-watchlist-module"), __webpack_require__.e("pages-watchlist-watchlist-module")]).then(__webpack_require__.bind(null,
+            /*! ../pages/watchlist/watchlist.module */
+            "122F")).then(function (m) {
+              return m.WatchlistPageModule;
+            });
+          }
+        }, {
+          path: 'account',
+          canActivate: [_guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
+          loadChildren: function loadChildren() {
+            return __webpack_require__.e(
+            /*! import() | pages-account-account-module */
+            "pages-account-account-module").then(__webpack_require__.bind(null,
+            /*! ../pages/account/account.module */
+            "4+IK")).then(function (m) {
+              return m.AccountPageModule;
+            });
+          }
+        }, {
+          path: 'dashboard',
+          canActivate: [_guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
+          loadChildren: function loadChildren() {
+            return __webpack_require__.e(
+            /*! import() | pages-dashboard-dashboard-module */
+            "pages-dashboard-dashboard-module").then(__webpack_require__.bind(null,
+            /*! ../pages/dashboard/dashboard.module */
+            "/2RN")).then(function (m) {
+              return m.DashboardPageModule;
+            });
+          }
+        }, {
+          path: 'orders',
+          canActivate: [_guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
+          loadChildren: function loadChildren() {
+            return __webpack_require__.e(
+            /*! import() | pages-orders-orders-module */
+            "pages-orders-orders-module").then(__webpack_require__.bind(null,
+            /*! ../pages/orders/orders.module */
+            "Xlj8")).then(function (m) {
+              return m.OrdersPageModule;
+            });
+          }
+        }, {
+          path: 'login',
+          loadChildren: function loadChildren() {
+            return Promise.all(
+            /*! import() | pages-login-login-module */
+            [__webpack_require__.e("common"), __webpack_require__.e("pages-login-login-module")]).then(__webpack_require__.bind(null,
+            /*! ../pages/login/login.module */
+            "F4UR")).then(function (m) {
+              return m.LoginPageModule;
+            });
+          }
+        }, {
+          path: 'sign-up',
+          loadChildren: function loadChildren() {
+            return Promise.all(
+            /*! import() | pages-sign-up-sign-up-module */
+            [__webpack_require__.e("common"), __webpack_require__.e("pages-sign-up-sign-up-module")]).then(__webpack_require__.bind(null,
+            /*! ../pages/sign-up/sign-up.module */
+            "J606")).then(function (m) {
+              return m.SignUpPageModule;
+            });
+          }
+        }, {
+          path: 'chart',
+          canActivate: [_guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
+          loadChildren: function loadChildren() {
+            return __webpack_require__.e(
+            /*! import() | pages-chart-chart-module */
+            "pages-chart-chart-module").then(__webpack_require__.bind(null,
+            /*! ../pages/chart/chart.module */
+            "ThXp")).then(function (m) {
+              return m.ChartPageModule;
+            });
+          }
+        }, {
+          path: 'learning',
+          canActivate: [_guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
+          loadChildren: function loadChildren() {
+            return __webpack_require__.e(
+            /*! import() | pages-learning-learning-module */
+            "pages-learning-learning-module").then(__webpack_require__.bind(null,
+            /*! ../pages/learning/learning.module */
+            "hxX9")).then(function (m) {
+              return m.LearningPageModule;
+            });
+          }
+        }]
+      }, {
+        path: '',
+        redirectTo: 'home/dashboard',
+        pathMatch: 'full'
+      }];
+
+      var HomePageRoutingModule = function HomePageRoutingModule() {
+        _classCallCheck(this, HomePageRoutingModule);
+      };
+
+      HomePageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
+      })], HomePageRoutingModule);
+      /***/
+    },
+
+    /***/
+    "WcN3":
+    /*!***************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/home/home.page.html ***!
+      \***************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function WcN3(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-tabs>\n\t<div [ngClass]=\"{'d-none': isLoginOrSignUp}\">\n\t\t<ion-tab-bar slot=\"bottom\">\n\t\t\t<ion-tab-button tab=\"watchlist\">\n\t\t\t\t<ion-icon name=\"bookmark-outline\"></ion-icon>\n\t\t\t\t<ion-label class=\"route-label\">Watchlist</ion-label>\n\t\t\t</ion-tab-button>\n\t\n\t\t\t<ion-tab-button tab=\"orders\">\n\t\t\t\t<ion-icon name=\"cube-outline\"></ion-icon>\n\t\t\t\t<ion-label class=\"route-label\">Orders</ion-label>\n\t\t\t</ion-tab-button>\n\t\n\t\t\t<ion-tab-button tab=\"dashboard\">\n\t\t\t\t<ion-icon name=\"grid-outline\"></ion-icon>\n\t\t\t\t<ion-label class=\"route-label\">Dashboard</ion-label>\n\t\t\t</ion-tab-button>\n\t\n\t\t\t<ion-tab-button tab=\"learning\">\n\t\t\t\t<ion-icon name=\"book-outline\"></ion-icon>\n\t\t\t\t<ion-label class=\"route-label\">Marubozu</ion-label>\n\t\t\t</ion-tab-button>\n\t\n\t\t\t<ion-tab-button tab=\"account\">\n\t\t\t\t<ion-icon name=\"person-circle-outline\"></ion-icon>\n\t\t\t\t<ion-label class=\"route-label\">TE8123</ion-label>\n\t\t\t</ion-tab-button>\n\t\t</ion-tab-bar>\n\t</div>\n</ion-tabs>\n";
+      /***/
+    },
+
+    /***/
+    "ct+p":
+    /*!*************************************!*\
+      !*** ./src/app/home/home.module.ts ***!
+      \*************************************/
+
+    /*! exports provided: HomePageModule */
+
+    /***/
+    function ctP(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "HomePageModule", function () {
+        return HomePageModule;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/common */
+      "ofXK");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @ionic/angular */
+      "TEn/");
+      /* harmony import */
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/forms */
+      "3Pt+");
+      /* harmony import */
+
+
+      var _home_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ./home.page */
+      "zpKS");
+      /* harmony import */
+
+
+      var _home_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ./home-routing.module */
+      "A3+G");
+
+      var HomePageModule = function HomePageModule() {
+        _classCallCheck(this, HomePageModule);
+      };
+
+      HomePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"], _home_routing_module__WEBPACK_IMPORTED_MODULE_6__["HomePageRoutingModule"]],
+        declarations: [_home_page__WEBPACK_IMPORTED_MODULE_5__["HomePage"]]
+      })], HomePageModule);
+      /***/
+    },
+
+    /***/
+    "f6od":
+    /*!*************************************!*\
+      !*** ./src/app/home/home.page.scss ***!
+      \*************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function f6od(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = ".d-none {\n  display: none;\n}\n\n@media screen and (max-width: 360px) {\n  ion-label {\n    font-size: 10px;\n  }\n\n  ion-icon {\n    font-size: 19px;\n  }\n\n  ion-tab-button {\n    widows: 69px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9ob21lLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7QUFDRjs7QUFDQTtFQUNFO0lBQ0UsZUFBQTtFQUVGOztFQUFBO0lBQ0UsZUFBQTtFQUdGOztFQURBO0lBQ0UsWUFBQTtFQUlGO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmQtbm9uZXtcbiAgZGlzcGxheTogbm9uZTtcbn1cbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDM2MHB4KSB7XG4gIGlvbi1sYWJlbHtcbiAgICBmb250LXNpemU6IDEwcHg7XG4gIH1cbiAgaW9uLWljb257XG4gICAgZm9udC1zaXplOiAxOXB4O1xuICB9XG4gIGlvbi10YWItYnV0dG9ue1xuICAgIHdpZG93czogNjlweDtcbiAgfVxufSJdfQ== */";
+      /***/
+    },
+
+    /***/
+    "zpKS":
+    /*!***********************************!*\
+      !*** ./src/app/home/home.page.ts ***!
+      \***********************************/
+
+    /*! exports provided: HomePage */
+
+    /***/
+    function zpKS(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "HomePage", function () {
+        return HomePage;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_home_page_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./home.page.html */
+      "WcN3");
+      /* harmony import */
+
+
+      var _home_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./home.page.scss */
+      "f6od");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ../services/user.service */
+      "qfBg");
+
+      var HomePage = /*#__PURE__*/function () {
+        function HomePage(userService) {
+          _classCallCheck(this, HomePage);
+
+          this.userService = userService;
+        }
+
+        _createClass(HomePage, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            var _this = this;
+
+            this.userService.isOnLoginOrSignUpPage.subscribe(function (b) {
+              return _this.isLoginOrSignUp = b;
+            });
+          }
+        }]);
+
+        return HomePage;
+      }();
+
+      HomePage.ctorParameters = function () {
+        return [{
+          type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]
+        }];
+      };
+
+      HomePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-home',
+        template: _raw_loader_home_page_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_home_page_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+      })], HomePage);
+      /***/
+    }
+  }]);
+})();
+//# sourceMappingURL=home-home-module-es5.js.map
