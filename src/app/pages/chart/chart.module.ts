@@ -10,6 +10,7 @@ import { ChartWrapperPage } from './chart-wrapper/chart-wrapper.page';
 import { HistoricalDataPage } from './historical-data/historical-data.page';
 import { BuySellTradePage } from './buy-sell-trade/buy-sell-trade.page';
 import { ChartWidgetDirective } from './chart-wrapper/chart-widget.directive';
+import { TvChartPage } from './tv-chart/tv-chart.page';
 
 @NgModule({
   imports: [
@@ -22,8 +23,9 @@ import { ChartWidgetDirective } from './chart-wrapper/chart-widget.directive';
     ChartPage, 
     ChartWrapperPage, 
     HistoricalDataPage, 
+    TvChartPage,
     BuySellTradePage, 
-    ChartWidgetDirective
+    ChartWidgetDirective,
   ]
 })
 export class ChartPageModule {}

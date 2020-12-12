@@ -19,10 +19,12 @@ export class LoginPage implements OnInit {
     this.router.navigate(['home','sign-up'])
   }
 
-  login(){
-    this.userService.logIn()
-    this.router.navigate(['home','dashboard'])
-    this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard')
+  login(input){
+    this.userService.logIn(input)
+    if(this.userService.isLoggedIn){
+      this.router.navigate(['home','dashboard'])
+      this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard')
+    }
   }
 
   checkIfIsLogin(){

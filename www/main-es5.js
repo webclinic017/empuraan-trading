@@ -336,6 +336,90 @@
     },
 
     /***/
+    "K2jm":
+    /*!*********************************************************************************!*\
+      !*** ./src/app/modals/modal-change-password/modal-change-password.component.ts ***!
+      \*********************************************************************************/
+
+    /*! exports provided: ModalChangePasswordComponent */
+
+    /***/
+    function K2jm(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ModalChangePasswordComponent", function () {
+        return ModalChangePasswordComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_modal_change_password_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./modal-change-password.component.html */
+      "y2a+");
+      /* harmony import */
+
+
+      var _modal_change_password_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./modal-change-password.component.scss */
+      "W723");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @ionic/angular */
+      "TEn/");
+
+      var ModalChangePasswordComponent = /*#__PURE__*/function () {
+        function ModalChangePasswordComponent(modalCtrl) {
+          _classCallCheck(this, ModalChangePasswordComponent);
+
+          this.modalCtrl = modalCtrl;
+        }
+
+        _createClass(ModalChangePasswordComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {}
+        }, {
+          key: "dismissModal",
+          value: function dismissModal() {
+            this.modalCtrl.dismiss();
+          }
+        }]);
+
+        return ModalChangePasswordComponent;
+      }();
+
+      ModalChangePasswordComponent.ctorParameters = function () {
+        return [{
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]
+        }];
+      };
+
+      ModalChangePasswordComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-modal-change-password',
+        template: _raw_loader_modal_change_password_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_modal_change_password_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+      })], ModalChangePasswordComponent);
+      /***/
+    },
+
+    /***/
     "LX2U":
     /*!***********************************************************************!*\
       !*** ./src/app/modals/modal-edit-order/modal-edit-order.component.ts ***!
@@ -1153,6 +1237,26 @@
     },
 
     /***/
+    "W723":
+    /*!***********************************************************************************!*\
+      !*** ./src/app/modals/modal-change-password/modal-change-password.component.scss ***!
+      \***********************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function W723(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9tb2RhbC1jaGFuZ2UtcGFzc3dvcmQvbW9kYWwtY2hhbmdlLXBhc3N3b3JkLmNvbXBvbmVudC5zY3NzIn0= */";
+      /***/
+    },
+
+    /***/
     "ZAI4":
     /*!*******************************!*\
       !*** ./src/app/app.module.ts ***!
@@ -1216,131 +1320,149 @@
       /* harmony import */
 
 
-      var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @ionic-native/clipboard/ngx */
+      "zzaN");
+      /* harmony import */
+
+
+      var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! @ionic-native/social-sharing/ngx */
+      "/XPu");
+      /* harmony import */
+
+
+      var _app_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ./app.component */
       "Sy1n");
       /* harmony import */
 
 
-      var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _app_routing_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! ./app-routing.module */
       "vY5A");
       /* harmony import */
 
 
-      var _ionic_super_tabs_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _ionic_super_tabs_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @ionic-super-tabs/angular */
       "k6Iy");
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/common */
       "ofXK");
       /* harmony import */
 
 
-      var _modals_modal_watchlist_modal_watchlist_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      var _modals_modal_watchlist_modal_watchlist_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ./modals/modal-watchlist/modal-watchlist.component */
       "Nbj3");
       /* harmony import */
 
 
-      var _modals_modal_watchlist_ce_modal_watchlist_ce_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      var _modals_modal_watchlist_ce_modal_watchlist_ce_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! ./modals/modal-watchlist-ce/modal-watchlist-ce.component */
       "1r9f");
       /* harmony import */
 
 
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
       /*! @angular/forms */
       "3Pt+");
       /* harmony import */
 
 
-      var _modals_buy_sell_modal_popup_buy_sell_modal_popup_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      var _modals_buy_sell_modal_popup_buy_sell_modal_popup_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
       /*! ./modals/buy-sell-modal-popup/buy-sell-modal-popup.component */
       "lNYK");
       /* harmony import */
 
 
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! @angular/common/http */
       "tk/3");
       /* harmony import */
 
 
-      var _ionic_native_Camera_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+      var _ionic_native_Camera_ngx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
       /*! @ionic-native/Camera/ngx */
       "KqBo");
       /* harmony import */
 
 
-      var _ionic_native_File_ngx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
+      var _ionic_native_File_ngx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! @ionic-native/File/ngx */
       "B7Vy");
       /* harmony import */
 
 
-      var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
+      var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
       /*! @ionic-native/ionic-webview/ngx */
       "eHpL");
       /* harmony import */
 
 
-      var _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
+      var _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
       /*! @ionic-native/file-path/ngx */
       "G769");
       /* harmony import */
 
 
-      var _ionic_storage__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
+      var _ionic_storage__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(
       /*! @ionic/storage */
       "e8h1");
       /* harmony import */
 
 
-      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
+      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(
       /*! @angular/platform-browser/animations */
       "R1ws");
       /* harmony import */
 
 
-      var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(
+      var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
       "5+WD");
       /* harmony import */
 
 
-      var _modals_modal_edit_watchlists_modal_edit_watchlists_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(
+      var _modals_modal_edit_watchlists_modal_edit_watchlists_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
       /*! ./modals/modal-edit-watchlists/modal-edit-watchlists.component */
       "rdK+");
       /* harmony import */
 
 
-      var highcharts_angular__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
+      var highcharts_angular__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
       /*! highcharts-angular */
       "kAVD");
       /* harmony import */
 
 
-      var _modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
+      var _modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
       /*! ./modals/modal-edit-order/modal-edit-order.component */
       "LX2U");
+      /* harmony import */
+
+
+      var _modals_modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(
+      /*! ./modals/modal-change-password/modal-change-password.component */
+      "K2jm");
 
       var AppModule = function AppModule() {
         _classCallCheck(this, AppModule);
       };
 
       AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"], _modals_modal_watchlist_modal_watchlist_component__WEBPACK_IMPORTED_MODULE_11__["ModalWatchlistComponent"], _modals_modal_watchlist_ce_modal_watchlist_ce_component__WEBPACK_IMPORTED_MODULE_12__["ModalWatchlistCeComponent"], _modals_buy_sell_modal_popup_buy_sell_modal_popup_component__WEBPACK_IMPORTED_MODULE_14__["BuySellModalPopupComponent"], _modals_modal_edit_watchlists_modal_edit_watchlists_component__WEBPACK_IMPORTED_MODULE_23__["ModalEditWatchlistsComponent"], _modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_25__["ModalEditOrderComponent"]],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _ionic_super_tabs_angular__WEBPACK_IMPORTED_MODULE_9__["SuperTabsModule"].forRoot(), _angular_common__WEBPACK_IMPORTED_MODULE_10__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_22__["DragDropModule"], _ionic_storage__WEBPACK_IMPORTED_MODULE_20__["IonicStorageModule"].forRoot(), _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__["BrowserAnimationsModule"], highcharts_angular__WEBPACK_IMPORTED_MODULE_24__["HighchartsChartModule"]],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"], _modals_modal_watchlist_modal_watchlist_component__WEBPACK_IMPORTED_MODULE_13__["ModalWatchlistComponent"], _modals_modal_watchlist_ce_modal_watchlist_ce_component__WEBPACK_IMPORTED_MODULE_14__["ModalWatchlistCeComponent"], _modals_buy_sell_modal_popup_buy_sell_modal_popup_component__WEBPACK_IMPORTED_MODULE_16__["BuySellModalPopupComponent"], _modals_modal_edit_watchlists_modal_edit_watchlists_component__WEBPACK_IMPORTED_MODULE_25__["ModalEditWatchlistsComponent"], _modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_27__["ModalEditOrderComponent"], _modals_modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_28__["ModalChangePasswordComponent"]],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_10__["AppRoutingModule"], _ionic_super_tabs_angular__WEBPACK_IMPORTED_MODULE_11__["SuperTabsModule"].forRoot(), _angular_common__WEBPACK_IMPORTED_MODULE_12__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_15__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_17__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_24__["DragDropModule"], _ionic_storage__WEBPACK_IMPORTED_MODULE_22__["IonicStorageModule"].forRoot(), _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_23__["BrowserAnimationsModule"], highcharts_angular__WEBPACK_IMPORTED_MODULE_26__["HighchartsChartModule"]],
         exports: [],
-        providers: [_ionic_native_Camera_ngx__WEBPACK_IMPORTED_MODULE_16__["Camera"], _ionic_native_File_ngx__WEBPACK_IMPORTED_MODULE_17__["File"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_18__["WebView"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_19__["FilePath"], {
+        providers: [_ionic_native_Camera_ngx__WEBPACK_IMPORTED_MODULE_18__["Camera"], _ionic_native_File_ngx__WEBPACK_IMPORTED_MODULE_19__["File"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_20__["WebView"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_21__["FilePath"], _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_7__["Clipboard"], _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_8__["SocialSharing"], {
           provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
           useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
         }],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
       })], AppModule);
       /***/
     },
@@ -2046,6 +2168,26 @@
 
 
       __webpack_exports__["default"] = "<ion-header>\n\t<ion-toolbar>\n\t\t<ion-title slot=\"start\"> {{ company.name }} </ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n\t<ion-toolbar>\n\t\t<ion-text slot=\"start\" class=\"subtitle\" *ngIf=\"company.isRising\">\n\t\t\t<h5 class=\"ion-margin-end\">{{ company.code }}</h5>\n\t\t\t<ion-text class=\"ion-margin-end\" color=\"success\">\n\t\t\t\t<h5>{{ company.greenNum }}</h5>\n\t\t\t</ion-text>\n\t\t\t<h5 class=\"ion-margin-end\">+{{ company.rateRaw }} (+{{ company.ratePercentage }}%)</h5>\n\t\t</ion-text>\n\t\t<ion-text slot=\"start\" class=\"subtitle\" *ngIf=\"!company.isRising\">\n\t\t\t<h5 class=\"ion-margin-end\">{{ company.code }}</h5>\n\t\t\t<ion-text class=\"ion-margin-end\" color=\"danger\">\n\t\t\t\t<h5>{{ company.greenNum }}</h5>\n\t\t\t</ion-text>\n\t\t\t<h5 class=\"ion-margin-end\">-{{ company.rateRaw }} (-{{ company.ratePercentage }}%)</h5>\n\t\t</ion-text>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-grid>\n\t\t<ion-row class=\"ion-margin-vertical\">\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<ion-button color=\"tertiary\" size=\"medium\" expand=\"full\" class=\"ion-margin-start buy-sell-btn\"\n\t\t\t\t(click)=\"onClick(true)\">Buy</ion-button>\n\t\t\t</ion-col>\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<ion-button color=\"danger\" size=\"medium\" expand=\"full\" class=\"ion-margin-end buy-sell-btn\"\n\t\t\t\t(click)=\"onClick(false)\">Sell</ion-button>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<ion-row>\n\t\t\t<ion-col>\n\t\t\t\t<ion-button (click)=\"navigateToChart()\" color=\"tertiary\" size=\"small\" expand=\"block\" fill=\"clear\" class=\"ion-margin-end ion-float-left\">\n\t\t\t\t\tView chart\n\t\t\t\t</ion-button>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<!-- <ion-row>\n\t\t\t<ion-col size=\"12\">\n\t\t\t\t<ion-text>\n\t\t\t\t\t<h4 class=\"table-title ion-text-left\">Market depth</h4>\n\t\t\t\t</ion-text>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<ion-row>\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<table>\n\t\t\t\t\t<thead>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th class=\"ion-text-left\">Bid</th>\n\t\t\t\t\t\t\t<th class=\"ion-text-center ion-margin-horizontal\">Orders</th>\n\t\t\t\t\t\t\t<th class=\"ion-text-end\">Qty</th>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</thead>\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td class=\"ion-text-left\">\n\t\t\t\t\t\t\t\t<ion-text color=\"secondary\"> 771.20 </ion-text>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td class=\"ion-text-center\">\n\t\t\t\t\t\t\t\t<ion-text color=\"secondary\"> 1 </ion-text>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td class=\"ion-text-end\">\n\t\t\t\t\t\t\t\t<ion-text color=\"secondary\"> 33 </ion-text>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t\t<tfoot>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td colspan=\"2\">\n\t\t\t\t\t\t\t\t<ion-text color=\"secondary\"> Total </ion-text>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td colspan=\"1\">\n\t\t\t\t\t\t\t\t<ion-text color=\"secondary\"> 9,03,720 </ion-text>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tfoot>\n\t\t\t\t</table>\n\t\t\t</ion-col>\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<table>\n\t\t\t\t\t<thead>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th class=\"ion-text-left\">Offer</th>\n\t\t\t\t\t\t\t<th class=\"ion-text-center ion-margin-horizontal\">Orders</th>\n\t\t\t\t\t\t\t<th class=\"ion-text-end\">Qty</th>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</thead>\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td class=\"ion-text-left\">\n\t\t\t\t\t\t\t\t<ion-text color=\"danger\"> 773.05 </ion-text>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td class=\"ion-text-center\">\n\t\t\t\t\t\t\t\t<ion-text color=\"danger\"> 1 </ion-text>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td class=\"ion-text-end\">\n\t\t\t\t\t\t\t\t<ion-text color=\"danger\"> 29 </ion-text>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t\t<tfoot>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td colspan=\"2\">\n\t\t\t\t\t\t\t\t<ion-text color=\"danger\"> Total </ion-text>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td colspan=\"1\">\n\t\t\t\t\t\t\t\t<ion-text color=\"danger\"> 11,84,482 </ion-text>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tfoot>\n\t\t\t\t</table>\n\t\t\t</ion-col>\n\t\t</ion-row> -->\n\t</ion-grid>\n</ion-content>\n";
+      /***/
+    },
+
+    /***/
+    "y2a+":
+    /*!*************************************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/modal-change-password/modal-change-password.component.html ***!
+      \*************************************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function y2a(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Change password</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-item>\n    <ion-label>New password</ion-label>\n    <ion-input type=\"password\"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label>Confirm password</ion-label>\n    <ion-input type=\"password\"></ion-input>\n  </ion-item>\n  <ion-button class=\"ion-margin\" expand=\"block\">Submit</ion-button>\n</ion-content>";
       /***/
     },
 

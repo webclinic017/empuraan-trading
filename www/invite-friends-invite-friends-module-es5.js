@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n\t\t<ion-buttons slot=\"start\">\n\t\t\t<ion-back-button [defaultHref]=\"['home','watchlist']\" (click)=\"navigateToAccount()\"></ion-back-button>\n\t\t</ion-buttons>\n    <ion-title>Invite friends</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n\t\t<ion-buttons slot=\"start\">\n\t\t\t<ion-back-button [defaultHref]=\"['home','watchlist']\" (click)=\"navigateToAccount()\"></ion-back-button>\n\t\t</ion-buttons>\n    <ion-title>Invite friends</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div style=\"height: 100%;width: 100%;display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;\">\n    <ion-label>\n      <span style=\"font-weight: 500;\">Invite your friends<br>for some amazing rewards!</span>\n    </ion-label>\n    <ion-button style=\"width: 80%; height: 50px;\" class=\"ion-margin\" (click)=\"shareLink()\">Invite</ion-button>\n    <ion-label class=\"ion-margin-vertical\">\n      <span style=\"font-weight: 500; font-size: 14px;\">or just copy this link</span>\n    </ion-label>\n    <ion-item style=\"width:80%\">\n      <ion-input readonly [value]=\"link\"></ion-input>\n      <ion-icon name=\"attach-outline\" (click)=\"showToast()\"></ion-icon>\n    </ion-item>\n  </div>\n</ion-content>\n";
       /***/
     },
 
@@ -208,21 +208,77 @@
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
       "tyNb");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! @ionic/angular */
+      "TEn/");
+      /* harmony import */
+
+
+      var _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! @ionic-native/clipboard/ngx */
+      "zzaN");
+      /* harmony import */
+
+
+      var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @ionic-native/social-sharing/ngx */
+      "/XPu");
 
       var InviteFriendsPage = /*#__PURE__*/function () {
-        function InviteFriendsPage(router) {
+        function InviteFriendsPage(router, toastController, clipboard, socialSharing) {
           _classCallCheck(this, InviteFriendsPage);
 
           this.router = router;
+          this.toastController = toastController;
+          this.clipboard = clipboard;
+          this.socialSharing = socialSharing;
+          this.link = "https://somelinktosomething.com";
+          this.googlePlayLink = "https://play.google.com/store/apps/details?id=" + 'io.ionic.starter';
         }
 
         _createClass(InviteFriendsPage, [{
           key: "ngOnInit",
           value: function ngOnInit() {}
         }, {
+          key: "shareLink",
+          value: function shareLink() {
+            this.socialSharing.share('', 'Invite friends', '', this.link).then(function () {});
+          }
+        }, {
           key: "navigateToAccount",
           value: function navigateToAccount() {
             this.router.navigate(['home', 'account']);
+          }
+        }, {
+          key: "showToast",
+          value: function showToast() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      this.clipboard.copy(this.link);
+                      _context.next = 3;
+                      return this.toastController.create({
+                        message: 'Link is copied to your clipboard',
+                        duration: 2500
+                      });
+
+                    case 3:
+                      toast = _context.sent;
+                      toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
           }
         }]);
 
@@ -232,6 +288,12 @@
       InviteFriendsPage.ctorParameters = function () {
         return [{
           type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"]
+        }, {
+          type: _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_6__["Clipboard"]
+        }, {
+          type: _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_7__["SocialSharing"]
         }];
       };
 

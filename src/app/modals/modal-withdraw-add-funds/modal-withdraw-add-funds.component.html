@@ -1,0 +1,72 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title slot="start">{{ isAdd ? "Add funds" : "Withdraw funds" }}</ion-title>
+		<ion-buttons slot="end">
+			<ion-button (click)="dismissModal()">Close</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<form #fundsForm="ngForm" (ngSubmit)="submitFundsRequest(fundsForm.value)">
+					<ion-item>
+						<ion-label>Amount</ion-label>
+						<ion-input
+							type="number"
+							min="0"
+							max="{{ isAdd ? 999999 : user.balance.availableBal }}"
+							required
+							ngModel
+							name="amount"
+						></ion-input>
+					</ion-item>
+					<ion-button *ngIf="isAdd" class="ion-margin-vertical" style="height: 50px" expand="block" color="success" type="submit">
+						<ion-icon name="add-outline"></ion-icon>
+						Add funds
+          </ion-button>
+          <ion-button *ngIf="!isAdd" class="ion-margin-vertical" style="height: 50px" expand="block" type="submit">
+						<ion-icon name="refresh-outline"></ion-icon>
+						Withdraw
+					</ion-button>
+				</form>
+			</ion-col>
+		</ion-row>
+		<!-- <ion-row *ngIf="isAdd">
+			<ion-col>
+				<form #addForm="ngForm" (ngSubmit)="add(addForm.value)">
+					<ion-item>
+						<ion-label>Amount</ion-label>
+						<ion-input type="number" min="0" max="9999999" required ngModel name="amount"></ion-input>
+					</ion-item>
+					<ion-button class="ion-margin-vertical" style="height: 50px" expand="block" color="success" type="submit">
+						<ion-icon name="add-outline"></ion-icon>
+						Add funds
+					</ion-button>
+				</form>
+			</ion-col>
+		</ion-row>
+		<ion-row *ngIf="!isAdd">
+			<ion-col>
+				<form #withdrawForm="ngForm" (ngSubmit)="withdraw(withdrawForm)">
+					<ion-item>
+						<ion-label>Amount</ion-label>
+						<ion-input
+							type="number"
+							min="0"
+							max="{{ user.balance.availableBal }}"
+							required
+							ngModel
+							name="amount"
+						></ion-input>
+					</ion-item>
+					<ion-button class="ion-margin-vertical" style="height: 50px" expand="block" type="submit">
+						<ion-icon name="refresh-outline"></ion-icon>
+						Withdraw
+					</ion-button>
+				</form>
+			</ion-col>
+		</ion-row> -->
+	</ion-grid>
+</ion-content>

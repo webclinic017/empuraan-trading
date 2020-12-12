@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LeaderboardService } from 'src/app/services/leaderboard.service';
 import * as Highcharts from 'highcharts';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class DashboardPage implements OnInit {
   leaderboard
+  user: User
   
   constructor(private sanitizer: DomSanitizer, 
     private router: Router, 
@@ -23,6 +25,7 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     this.leaderboard = this.leaderboardService.leaderboard
+    this.user = this.userService.user
     this.checkIfItIsDashboard()
   }
   

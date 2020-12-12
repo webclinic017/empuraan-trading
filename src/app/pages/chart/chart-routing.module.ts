@@ -19,7 +19,15 @@ const routes: Routes = [
   {
     path: 'buy-sell-trade',
     loadChildren: () => import('./buy-sell-trade/buy-sell-trade.module').then( m => m.BuySellTradePageModule)
-  }
+  },
+  // {
+  //   path: 'tv-chart',
+  //   loadChildren: () => import('./tvchart/tv-chart.module').then( m => m.TvChartPageModule)
+  // },
+  {
+    path: 'tv-chart',
+    loadChildren: () => import('./tv-chart/tv-chart.module').then( m => m.TvChartPageModule)
+  },
 ];
 
 @NgModule({

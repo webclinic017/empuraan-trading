@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, IonRouterOutlet } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +30,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
 import { ModalEditWatchlistsComponent } from './modals/modal-edit-watchlists/modal-edit-watchlists.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ModalEditOrderComponent } from './modals/modal-edit-order/modal-edit-order.component';
+import { ModalChangePasswordComponent } from './modals/modal-change-password/modal-change-password.component';
+import { ModalWithdrawAddFundsComponent } from './modals/modal-withdraw-add-funds/modal-withdraw-add-funds.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,8 @@ import { ModalEditOrderComponent } from './modals/modal-edit-order/modal-edit-or
     BuySellModalPopupComponent,
     ModalEditWatchlistsComponent,
     ModalEditOrderComponent,
+    ModalChangePasswordComponent,
+    ModalWithdrawAddFundsComponent,
   ],
   imports: [
     BrowserModule, 
@@ -60,6 +66,8 @@ import { ModalEditOrderComponent } from './modals/modal-edit-order/modal-edit-or
     StatusBar,
     SplashScreen,
     FilePath,
+    Clipboard,
+    SocialSharing,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
