@@ -500,56 +500,6 @@ const createButtonActiveGesture = (el, isButton) => {
 
 /***/ }),
 
-/***/ "qfBg":
-/*!******************************************!*\
-  !*** ./src/app/services/user.service.ts ***!
-  \******************************************/
-/*! exports provided: UserService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/core */ "gcOT");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
-
-
-
-
-const { LocalNotifications } = _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["Plugins"];
-let UserService = class UserService {
-    constructor() {
-        this.isLoggedIn = true;
-        this.isOnLoginOrSignUpPage = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
-    }
-    logIn() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            yield LocalNotifications.requestPermission();
-            this.isLoggedIn = true;
-        });
-    }
-    logout() {
-        this.isLoggedIn = false;
-    }
-    checkIfIsOnLoginOrSignUpPage(link) {
-        link.includes('login') || link.includes('sign-up')
-            ? this.isOnLoginOrSignUpPage.next(true)
-            : this.isOnLoginOrSignUpPage.next(false);
-    }
-};
-UserService.ctorParameters = () => [];
-UserService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], UserService);
-
-
-
-/***/ }),
-
 /***/ "sPtc":
 /*!*************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/theme-5641d27f.js ***!

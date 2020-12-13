@@ -1,12 +1,6 @@
 (function () {
   function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
   function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -758,105 +752,6 @@
     },
 
     /***/
-    "qfBg":
-    /*!******************************************!*\
-      !*** ./src/app/services/user.service.ts ***!
-      \******************************************/
-
-    /*! exports provided: UserService */
-
-    /***/
-    function qfBg(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "UserService", function () {
-        return UserService;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var _capacitor_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @capacitor/core */
-      "gcOT");
-      /* harmony import */
-
-
-      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
-
-      var LocalNotifications = _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["Plugins"].LocalNotifications;
-
-      var UserService = /*#__PURE__*/function () {
-        function UserService() {
-          _classCallCheck(this, UserService);
-
-          this.isLoggedIn = true;
-          this.isOnLoginOrSignUpPage = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
-        }
-
-        _createClass(UserService, [{
-          key: "logIn",
-          value: function logIn() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      this.isLoggedIn = true;
-                      _context2.next = 3;
-                      return LocalNotifications.requestPermission();
-
-                    case 3:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2, this);
-            }));
-          }
-        }, {
-          key: "logout",
-          value: function logout() {
-            this.isLoggedIn = false;
-          }
-        }, {
-          key: "checkIfIsOnLoginOrSignUpPage",
-          value: function checkIfIsOnLoginOrSignUpPage(link) {
-            link.includes('login') || link.includes('sign-up') ? this.isOnLoginOrSignUpPage.next(true) : this.isOnLoginOrSignUpPage.next(false);
-          }
-        }]);
-
-        return UserService;
-      }();
-
-      UserService.ctorParameters = function () {
-        return [];
-      };
-
-      UserService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], UserService);
-      /***/
-    },
-
-    /***/
     "sPtc":
     /*!*************************************************************!*\
       !*** ./node_modules/@ionic/core/dist/esm/theme-5641d27f.js ***!
@@ -934,21 +829,21 @@
       var SCHEME = /^[a-z][a-z0-9+\-.]*:/;
 
       var openURL = /*#__PURE__*/function () {
-        var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(url, ev, direction, animation) {
+        var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(url, ev, direction, animation) {
           var router;
-          return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context2.prev = _context2.next) {
                 case 0:
                   if (!(url != null && url[0] !== '#' && !SCHEME.test(url))) {
-                    _context3.next = 5;
+                    _context2.next = 5;
                     break;
                   }
 
                   router = document.querySelector('ion-router');
 
                   if (!router) {
-                    _context3.next = 5;
+                    _context2.next = 5;
                     break;
                   }
 
@@ -956,17 +851,17 @@
                     ev.preventDefault();
                   }
 
-                  return _context3.abrupt("return", router.push(url, direction, animation));
+                  return _context2.abrupt("return", router.push(url, direction, animation));
 
                 case 5:
-                  return _context3.abrupt("return", false);
+                  return _context2.abrupt("return", false);
 
                 case 6:
                 case "end":
-                  return _context3.stop();
+                  return _context2.stop();
               }
             }
-          }, _callee3);
+          }, _callee2);
         }));
 
         return function openURL(_x6, _x7, _x8, _x9) {

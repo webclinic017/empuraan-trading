@@ -1,51 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["home-home-module"],{
 
-/***/ "1eeg":
-/*!********************************************!*\
-  !*** ./src/app/guards/auth-guard.guard.ts ***!
-  \********************************************/
-/*! exports provided: AuthGuard */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/user.service */ "qfBg");
-
-
-
-
-let AuthGuard = class AuthGuard {
-    constructor(userService, router) {
-        this.userService = userService;
-        this.router = router;
-    }
-    canActivate(next, state) {
-        if (!this.userService.isLoggedIn) {
-            this.router.navigate(['home', 'login']);
-            return false;
-        }
-        else
-            return true;
-    }
-};
-AuthGuard.ctorParameters = () => [
-    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
-];
-AuthGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], AuthGuard);
-
-
-
-/***/ }),
-
 /***/ "A3+G":
 /*!*********************************************!*\
   !*** ./src/app/home/home-routing.module.ts ***!
@@ -68,13 +22,13 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: 'home',
+        path: '',
         component: _home_page__WEBPACK_IMPORTED_MODULE_4__["HomePage"],
         children: [
             {
                 path: 'watchlist',
                 canActivate: [_guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
-                loadChildren: () => Promise.all(/*! import() | pages-watchlist-watchlist-module */[__webpack_require__.e("default~pages-watchlist-buy-sell-buy-sell-module~pages-watchlist-watchlist-module"), __webpack_require__.e("pages-watchlist-watchlist-module")]).then(__webpack_require__.bind(null, /*! ../pages/watchlist/watchlist.module */ "122F")).then(m => m.WatchlistPageModule)
+                loadChildren: () => __webpack_require__.e(/*! import() | pages-watchlist-watchlist-module */ "pages-watchlist-watchlist-module").then(__webpack_require__.bind(null, /*! ../pages/watchlist/watchlist.module */ "122F")).then(m => m.WatchlistPageModule)
             },
             {
                 path: 'account',
@@ -93,11 +47,11 @@ const routes = [
             },
             {
                 path: 'login',
-                loadChildren: () => Promise.all(/*! import() | pages-login-login-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-login-login-module")]).then(__webpack_require__.bind(null, /*! ../pages/login/login.module */ "F4UR")).then(m => m.LoginPageModule)
+                loadChildren: () => __webpack_require__.e(/*! import() | pages-login-login-module */ "pages-login-login-module").then(__webpack_require__.bind(null, /*! ../pages/login/login.module */ "F4UR")).then(m => m.LoginPageModule)
             },
             {
                 path: 'sign-up',
-                loadChildren: () => Promise.all(/*! import() | pages-sign-up-sign-up-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-sign-up-sign-up-module")]).then(__webpack_require__.bind(null, /*! ../pages/sign-up/sign-up.module */ "J606")).then(m => m.SignUpPageModule)
+                loadChildren: () => __webpack_require__.e(/*! import() | pages-sign-up-sign-up-module */ "pages-sign-up-sign-up-module").then(__webpack_require__.bind(null, /*! ../pages/sign-up/sign-up.module */ "J606")).then(m => m.SignUpPageModule)
             },
             {
                 path: 'chart',
@@ -111,11 +65,6 @@ const routes = [
             },
         ],
     },
-    {
-        path: '',
-        redirectTo: 'home/dashboard',
-        pathMatch: 'full'
-    }
 ];
 let HomePageRoutingModule = class HomePageRoutingModule {
 };

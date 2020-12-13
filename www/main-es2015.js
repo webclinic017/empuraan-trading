@@ -12,6 +12,52 @@ module.exports = __webpack_require__(/*! /Users/ibrahimsefer/Desktop/demo tradin
 
 /***/ }),
 
+/***/ "1eeg":
+/*!********************************************!*\
+  !*** ./src/app/guards/auth-guard.guard.ts ***!
+  \********************************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/user.service */ "qfBg");
+
+
+
+
+let AuthGuard = class AuthGuard {
+    constructor(userService, router) {
+        this.userService = userService;
+        this.router = router;
+    }
+    canActivate(next, state) {
+        if (!this.userService.isLoggedIn) {
+            this.router.navigate(['home', 'login']);
+            return false;
+        }
+        else
+            return true;
+    }
+};
+AuthGuard.ctorParameters = () => [
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+AuthGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], AuthGuard);
+
+
+
+/***/ }),
+
 /***/ "1r9f":
 /*!***************************************************************************!*\
   !*** ./src/app/modals/modal-watchlist-ce/modal-watchlist-ce.component.ts ***!
@@ -76,6 +122,19 @@ ModalWatchlistCeComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorat
 ], ModalWatchlistCeComponent);
 
 
+
+/***/ }),
+
+/***/ "3waL":
+/*!*****************************************************************************************!*\
+  !*** ./src/app/modals/modal-withdraw-add-funds/modal-withdraw-add-funds.component.scss ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9tb2RhbC13aXRoZHJhdy1hZGQtZnVuZHMvbW9kYWwtd2l0aGRyYXctYWRkLWZ1bmRzLmNvbXBvbmVudC5zY3NzIn0= */");
 
 /***/ }),
 
@@ -147,6 +206,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Create watchlist</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t\t<ion-item class=\"ion-margin-horizontal\">\n\t\t\t<ion-label position=\"floating\">Name of watchlist</ion-label>\n\t\t\t<ion-input [(ngModel)]=\"watchlistName\"></ion-input>\n\t\t</ion-item>\n\t\t<!-- <ion-label position=\"floating\" color=\"danger\" class=\"ion-padding\"\n\t\t\t*ngIf=\"createWatchlistForm.invalid && createWatchlistForm.touched\">\n\t\t\tPlease enter the name of watchlist\n\t\t</ion-label> -->\n\t\t<ion-button class=\"ion-margin\" expand=\"block\" (click)=\"onCreateWatchlist()\">Create watchlist</ion-button>\n\t<div cdkDropList class=\"drag-list\" (cdkDropListDropped)=\"drop($event)\">\n\t\t<div class=\"drag-box\" *ngFor=\"let watchlist of watchlists\" cdkDrag>\n\t\t\t<ion-icon name=\"reorder-three-outline\" class=\"ion-margin-end\"></ion-icon>\n\t\t\t<span>{{ watchlist.name }}</span>\n\t\t</div>\n\t</div>\n</ion-content>\n");
+
+/***/ }),
+
+/***/ "976h":
+/*!*******************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/modal-withdraw-add-funds/modal-withdraw-add-funds.component.html ***!
+  \*******************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n\t<ion-toolbar>\n\t\t<ion-title slot=\"start\">{{ isAdd ? \"Add funds\" : \"Withdraw funds\" }}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col>\n\t\t\t\t<form #fundsForm=\"ngForm\" (ngSubmit)=\"submitFundsRequest(fundsForm.value)\">\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label>Amount</ion-label>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t\tmax=\"{{ isAdd ? 999999 : user.balance.availableBal }}\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tngModel\n\t\t\t\t\t\t\tname=\"amount\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t\t<ion-button *ngIf=\"isAdd\" class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" color=\"success\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"add-outline\"></ion-icon>\n\t\t\t\t\t\tAdd funds\n          </ion-button>\n          <ion-button *ngIf=\"!isAdd\" class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"refresh-outline\"></ion-icon>\n\t\t\t\t\t\tWithdraw\n\t\t\t\t\t</ion-button>\n\t\t\t\t</form>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<!-- <ion-row *ngIf=\"isAdd\">\n\t\t\t<ion-col>\n\t\t\t\t<form #addForm=\"ngForm\" (ngSubmit)=\"add(addForm.value)\">\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label>Amount</ion-label>\n\t\t\t\t\t\t<ion-input type=\"number\" min=\"0\" max=\"9999999\" required ngModel name=\"amount\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t\t<ion-button class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" color=\"success\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"add-outline\"></ion-icon>\n\t\t\t\t\t\tAdd funds\n\t\t\t\t\t</ion-button>\n\t\t\t\t</form>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<ion-row *ngIf=\"!isAdd\">\n\t\t\t<ion-col>\n\t\t\t\t<form #withdrawForm=\"ngForm\" (ngSubmit)=\"withdraw(withdrawForm)\">\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label>Amount</ion-label>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t\tmax=\"{{ user.balance.availableBal }}\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tngModel\n\t\t\t\t\t\t\tname=\"amount\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t\t<ion-button class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"refresh-outline\"></ion-icon>\n\t\t\t\t\t\tWithdraw\n\t\t\t\t\t</ion-button>\n\t\t\t\t</form>\n\t\t\t</ion-col>\n\t\t</ion-row> -->\n\t</ion-grid>\n</ion-content>\n");
 
 /***/ }),
 
@@ -232,22 +304,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modal_change_password_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal-change-password.component.scss */ "W723");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/user.service */ "qfBg");
+
 
 
 
 
 
 let ModalChangePasswordComponent = class ModalChangePasswordComponent {
-    constructor(modalCtrl) {
+    constructor(modalCtrl, userService) {
         this.modalCtrl = modalCtrl;
+        this.userService = userService;
     }
     ngOnInit() { }
     dismissModal() {
         this.modalCtrl.dismiss();
     }
+    changePassword(input) {
+        if (this.userService.changePassword(input.newPassword, input.confirmPassword) != false) {
+            this.userService.changePassword(input.newPassword, input.confirmPassword);
+            this.dismissModal();
+        }
+        else
+            this.passwordsDontMatch = false;
+    }
 };
 ModalChangePasswordComponent.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
+    { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] }
 ];
 ModalChangePasswordComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -848,6 +932,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var highcharts_angular__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! highcharts-angular */ "kAVD");
 /* harmony import */ var _modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./modals/modal-edit-order/modal-edit-order.component */ "LX2U");
 /* harmony import */ var _modals_modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./modals/modal-change-password/modal-change-password.component */ "K2jm");
+/* harmony import */ var _modals_modal_withdraw_add_funds_modal_withdraw_add_funds_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./modals/modal-withdraw-add-funds/modal-withdraw-add-funds.component */ "whIa");
+
 
 
 
@@ -888,7 +974,8 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _modals_buy_sell_modal_popup_buy_sell_modal_popup_component__WEBPACK_IMPORTED_MODULE_16__["BuySellModalPopupComponent"],
             _modals_modal_edit_watchlists_modal_edit_watchlists_component__WEBPACK_IMPORTED_MODULE_25__["ModalEditWatchlistsComponent"],
             _modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_27__["ModalEditOrderComponent"],
-            _modals_modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_28__["ModalChangePasswordComponent"]
+            _modals_modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_28__["ModalChangePasswordComponent"],
+            _modals_modal_withdraw_add_funds_modal_withdraw_add_funds_component__WEBPACK_IMPORTED_MODULE_29__["ModalWithdrawAddFundsComponent"],
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
@@ -1382,7 +1469,7 @@ let BuySellModalPopupComponent = class BuySellModalPopupComponent {
     }
     navigateToChart() {
         this.modalCtrl.dismiss();
-        this.router.navigate(['home', 'chart']);
+        this.router.navigate(['chart']);
     }
 };
 BuySellModalPopupComponent.ctorParameters = () => [
@@ -1400,6 +1487,120 @@ BuySellModalPopupComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decora
         styles: [_buy_sell_modal_popup_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
     })
 ], BuySellModalPopupComponent);
+
+
+
+/***/ }),
+
+/***/ "qfBg":
+/*!******************************************!*\
+  !*** ./src/app/services/user.service.ts ***!
+  \******************************************/
+/*! exports provided: UserService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor/core */ "gcOT");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "qCKp");
+
+
+
+
+
+const { LocalNotifications } = _capacitor_core__WEBPACK_IMPORTED_MODULE_3__["Plugins"];
+let UserService = class UserService {
+    constructor(router) {
+        this.router = router;
+        this.users = [
+            {
+                id: 1,
+                firstname: 'Ibrahim',
+                lastname: 'Sefer',
+                email: 'seferibrahim2@gmail.com',
+                password: '1234567890',
+                imgUrl: 'IS',
+                balance: {
+                    openBal: 6200,
+                    availableBal: 6000,
+                    pAndL: 100,
+                    gain: 0.02
+                }
+            }
+        ];
+        this.isLoggedIn = false;
+        this.isOnLoginOrSignUpPage = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
+    }
+    logIn(input) {
+        const email = input.email;
+        const password = input.password;
+        const userInDb = this.users.find(u => u.email == email);
+        if (userInDb != null && userInDb.password == password) {
+            this.isLoggedIn = true;
+            // await LocalNotifications.requestPermission()
+            this.user = userInDb;
+        }
+        else
+            this.isLoggedIn = false;
+    }
+    signUp(user) {
+        if (!this.checkIfUserIsInDb(user.email)) {
+            this.users.push(user);
+            this.router.navigate(['home', 'login']);
+        }
+        else
+            return 'This email is already used.';
+    }
+    logout() {
+        this.isLoggedIn = false;
+    }
+    checkIfIsOnLoginOrSignUpPage(link) {
+        link.includes('login') || link.includes('sign-up')
+            ? this.isOnLoginOrSignUpPage.next(true)
+            : this.isOnLoginOrSignUpPage.next(false);
+    }
+    generateId() {
+        if (this.users.length == 0)
+            return 1;
+        else
+            return this.users.length + 1;
+    }
+    checkIfUserIsInDb(email) {
+        const userInDb = this.users.find(u => u.email == email);
+        if (userInDb != null)
+            return true;
+        else
+            return false;
+    }
+    changePassword(newPassword, confirmPassword) {
+        if (newPassword == confirmPassword)
+            this.user.password = newPassword;
+        else
+            return false;
+    }
+    add(amount) {
+        this.user.balance.openBal += amount;
+        this.user.balance.availableBal += amount;
+    }
+    withdraw(amount) {
+        if ((this.user.balance.openBal - amount) >= 0)
+            this.user.balance.openBal -= amount;
+        if ((this.user.balance.availableBal - amount) >= 0)
+            this.user.balance.availableBal -= amount;
+    }
+};
+UserService.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+UserService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], UserService);
 
 
 
@@ -1481,36 +1682,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./guards/auth-guard.guard */ "1eeg");
+
 
 
 
 const routes = [
     {
         path: 'home',
-        loadChildren: () => Promise.all(/*! import() | home-home-module */[__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ./home/home.module */ "ct+p")).then(m => m.HomePageModule)
-    },
-    {
-        path: 'buy-sell',
-        loadChildren: () => Promise.all(/*! import() | pages-watchlist-buy-sell-buy-sell-module */[__webpack_require__.e("default~pages-watchlist-buy-sell-buy-sell-module~pages-watchlist-watchlist-module"), __webpack_require__.e("pages-watchlist-buy-sell-buy-sell-module")]).then(__webpack_require__.bind(null, /*! ./pages/watchlist/buy-sell/buy-sell.module */ "EJ7/")).then(m => m.BuySellPageModule)
-    },
-    {
-        path: 'login',
-        loadChildren: () => Promise.all(/*! import() | pages-login-login-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-login-login-module")]).then(__webpack_require__.bind(null, /*! ./pages/login/login.module */ "F4UR")).then(m => m.LoginPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() | home-home-module */ "home-home-module").then(__webpack_require__.bind(null, /*! ./home/home.module */ "ct+p")).then(m => m.HomePageModule)
     },
     {
         path: 'chart',
+        canActivate: [_guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
         loadChildren: () => __webpack_require__.e(/*! import() | pages-chart-chart-module */ "pages-chart-chart-module").then(__webpack_require__.bind(null, /*! ./pages/chart/chart.module */ "ThXp")).then(m => m.ChartPageModule)
     },
     {
-        path: 'learning',
-        loadChildren: () => __webpack_require__.e(/*! import() | pages-learning-learning-module */ "pages-learning-learning-module").then(__webpack_require__.bind(null, /*! ./pages/learning/learning.module */ "hxX9")).then(m => m.LearningPageModule)
-    },
-    {
-        path: 'sign-up',
-        loadChildren: () => Promise.all(/*! import() | pages-sign-up-sign-up-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-sign-up-sign-up-module")]).then(__webpack_require__.bind(null, /*! ./pages/sign-up/sign-up.module */ "J606")).then(m => m.SignUpPageModule)
-    },
-    {
         path: '',
+        canActivate: [_guards_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
         redirectTo: 'home/dashboard',
         pathMatch: 'full'
     }
@@ -1525,6 +1714,65 @@ AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
     })
 ], AppRoutingModule);
+
+
+
+/***/ }),
+
+/***/ "whIa":
+/*!***************************************************************************************!*\
+  !*** ./src/app/modals/modal-withdraw-add-funds/modal-withdraw-add-funds.component.ts ***!
+  \***************************************************************************************/
+/*! exports provided: ModalWithdrawAddFundsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalWithdrawAddFundsComponent", function() { return ModalWithdrawAddFundsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_modal_withdraw_add_funds_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./modal-withdraw-add-funds.component.html */ "976h");
+/* harmony import */ var _modal_withdraw_add_funds_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal-withdraw-add-funds.component.scss */ "3waL");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/user.service */ "qfBg");
+
+
+
+
+
+
+let ModalWithdrawAddFundsComponent = class ModalWithdrawAddFundsComponent {
+    constructor(modalCtrl, userService) {
+        this.modalCtrl = modalCtrl;
+        this.userService = userService;
+    }
+    ngOnInit() {
+        this.user = this.userService.user;
+    }
+    dismissModal() {
+        this.modalCtrl.dismiss();
+    }
+    submitFundsRequest(input) {
+        this.isAdd
+            ? this.userService.add(input.amount)
+            : this.userService.withdraw(input.amount);
+        this.dismissModal();
+    }
+};
+ModalWithdrawAddFundsComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
+    { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] }
+];
+ModalWithdrawAddFundsComponent.propDecorators = {
+    isAdd: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['isAdd',] }]
+};
+ModalWithdrawAddFundsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-modal-withdraw-add-funds',
+        template: _raw_loader_modal_withdraw_add_funds_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_modal_withdraw_add_funds_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], ModalWithdrawAddFundsComponent);
 
 
 
@@ -1552,7 +1800,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Change password</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-item>\n    <ion-label>New password</ion-label>\n    <ion-input type=\"password\"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label>Confirm password</ion-label>\n    <ion-input type=\"password\"></ion-input>\n  </ion-item>\n  <ion-button class=\"ion-margin\" expand=\"block\">Submit</ion-button>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Change password</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n  <form #changePasswordForm=\"ngForm\" (ngSubmit)=\"changePassword(changePasswordForm.value)\">\n    <ion-item>\n      <ion-label>New password</ion-label>\n      <ion-input type=\"password\" required ngModel name=\"newPassword\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Confirm password</ion-label>\n      <ion-input type=\"password\" required ngModel name=\"confirmPassword\"></ion-input>\n    </ion-item>\n    <ion-button class=\"ion-margin\" expand=\"block\" type=\"submit\">Submit</ion-button>\n  </form>\n</ion-content>");
 
 /***/ }),
 

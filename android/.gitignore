@@ -8,11 +8,6 @@
 *.apk
 *.ap_
 *.aab
-*.java
-*.xml
-*.svg
-*.gradle
-*.js.map
 
 # Files for the ART/Dalvik VM
 *.dex

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n\t<ion-toolbar>\n\t\t<ion-buttons slot=\"start\">\n\t\t\t<ion-back-button [defaultHref]=\"['home','watchlist']\" (click)=\"navigateToAccount()\"></ion-back-button>\n\t\t</ion-buttons>\n\t\t<ion-title>Funds</ion-title>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<ion-card>\n\t\t<ion-card-header class=\"ion-text-center ion-padding-bottom\">\n\t\t\t<ion-card-subtitle>Available margin (Cash + Collateral)</ion-card-subtitle>\n\t\t\t<ion-card-title color=\"tertiary\"><h2 class=\"ion-no-margin\">$6,203.21</h2></ion-card-title>\n\t\t</ion-card-header>\n\t</ion-card>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col size=\"6\" class=\"ion-text-center\">\n\t\t\t\t<ion-button color=\"success\">\n\t\t\t\t\t<ion-icon name=\"add-outline\"></ion-icon>\n\t\t\t\t\tAdd funds\n\t\t\t\t</ion-button>\n\t\t\t\t<ion-text><p class=\"subtitle-text\">Available cash</p></ion-text>\n\t\t\t\t<ion-text><p class=\"cash-text\">6,203.21</p> </ion-text>\n\t\t\t</ion-col>\n\t\t\t<ion-col size=\"6\" class=\"ion-text-center\">\n\t\t\t\t<ion-button>\n\t\t\t\t\t<ion-icon name=\"refresh-outline\"></ion-icon>\n\t\t\t\t\tWithdraw\n\t\t\t\t</ion-button>\n\t\t\t\t<ion-text><p class=\"subtitle-text\">Used margin</p></ion-text>\n\t\t\t\t<ion-text><p class=\"cash-text\">0</p> </ion-text>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n\t<hr>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n\t<ion-toolbar>\n\t\t<ion-buttons slot=\"start\">\n\t\t\t<ion-back-button [defaultHref]=\"['home','watchlist']\" (click)=\"navigateToAccount()\"></ion-back-button>\n\t\t</ion-buttons>\n\t\t<ion-title>Funds</ion-title>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<ion-card>\n\t\t<ion-card-header class=\"ion-text-center ion-padding-bottom\">\n\t\t\t<ion-card-subtitle>Available margin (Cash + Collateral)</ion-card-subtitle>\n\t\t\t<ion-card-title color=\"tertiary\"><h2 class=\"ion-no-margin\">${{user.balance.openBal}}</h2></ion-card-title>\n\t\t</ion-card-header>\n\t</ion-card>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col size=\"6\" class=\"ion-text-center\">\n\t\t\t\t<ion-button color=\"success\" (click)=\"openWithdrawAddFundsModal(true)\">\n\t\t\t\t\t<ion-icon name=\"add-outline\"></ion-icon>\n\t\t\t\t\tAdd funds\n\t\t\t\t</ion-button>\n\t\t\t\t<ion-text><p class=\"subtitle-text\">Available cash</p></ion-text>\n\t\t\t\t<ion-text><p class=\"cash-text\">${{user.balance.openBal}}</p> </ion-text>\n\t\t\t</ion-col>\n\t\t\t<ion-col size=\"6\" class=\"ion-text-center\">\n\t\t\t\t<ion-button (click)=\"openWithdrawAddFundsModal(false)\">\n\t\t\t\t\t<ion-icon name=\"refresh-outline\"></ion-icon>\n\t\t\t\t\tWithdraw\n\t\t\t\t</ion-button>\n\t\t\t\t<ion-text><p class=\"subtitle-text\">Used margin</p></ion-text>\n\t\t\t\t<ion-text><p class=\"cash-text\">0</p> </ion-text>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n\t<hr>\n</ion-content>\n");
 
 /***/ }),
 
@@ -83,23 +83,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _funds_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./funds.page.scss */ "lq2L");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var src_app_modals_modal_withdraw_add_funds_modal_withdraw_add_funds_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/modals/modal-withdraw-add-funds/modal-withdraw-add-funds.component */ "whIa");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/user.service */ "qfBg");
+
+
+
 
 
 
 
 
 let FundsPage = class FundsPage {
-    constructor(router) {
+    constructor(router, modalController, userService) {
         this.router = router;
+        this.modalController = modalController;
+        this.userService = userService;
     }
     ngOnInit() {
+        this.user = this.userService.user;
     }
     navigateToAccount() {
         this.router.navigate(['home', 'account']);
     }
+    openWithdrawAddFundsModal(isAdd) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const modal = yield this.modalController.create({
+                component: src_app_modals_modal_withdraw_add_funds_modal_withdraw_add_funds_component__WEBPACK_IMPORTED_MODULE_6__["ModalWithdrawAddFundsComponent"],
+                componentProps: { isAdd }
+            });
+            return yield modal.present();
+        });
+    }
 };
 FundsPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ModalController"] },
+    { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"] }
 ];
 FundsPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({

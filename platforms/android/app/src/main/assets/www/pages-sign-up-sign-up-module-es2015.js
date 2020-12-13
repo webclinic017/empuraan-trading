@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n\t<ion-toolbar>\n\t\t<!-- <ion-buttons slot=\"start\">\n\t\t\t<ion-back-button defaultHref=\"home/dashboard\"></ion-back-button>\n\t\t</ion-buttons> -->\n\t\t<ion-img slot=\"end\" src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<form>\n\t\t<ion-title class=\"ion-text-center ion-margin-vertical\" color=\"warning\"><h1>Welcome to Empuraan</h1></ion-title>\n\t\t<ion-title class=\"ion-text-center ion-margin-vertical\"><h2>Sign Up</h2></ion-title>\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col col=\"6\">\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Name</ion-label>\n\t\t\t\t\t\t<ion-input></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t\t<ion-col col=\"6\">\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Surname</ion-label>\n\t\t\t\t\t\t<ion-input></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Email or Phone Number</ion-label>\n\t\t\t\t\t\t<ion-input></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Confirm Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-button class=\"sign-up-button\" (click)=\"signUp()\">Sign Up</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-button\n\t\t\t\t\t\tcolor=\"tertiary\"\n\t\t\t\t\t\tsize=\"small\"\n\t\t\t\t\t\texpand=\"block\"\n\t\t\t\t\t\tfill=\"clear\"\n\t\t\t\t\t\tclass=\"ion-float-left\"\n\t\t\t\t\t\t(click)=\"navigateToLogin()\"\n\t\t\t\t\t>\n\t\t\t\t\t\tAlready have an account?\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n\t<ion-toolbar>\n\t\t<!-- <ion-buttons slot=\"start\">\n\t\t\t<ion-back-button defaultHref=\"home/dashboard\"></ion-back-button>\n\t\t</ion-buttons> -->\n\t\t<ion-img slot=\"end\" src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<form #signUpForm=\"ngForm\" (ngSubmit)=\"signUp(signUpForm.value)\">\n\t\t<ion-title class=\"ion-text-center ion-margin-vertical\" color=\"warning\"><h1>Welcome to Empuraan</h1></ion-title>\n\t\t<ion-title class=\"ion-text-center ion-margin-vertical\"><h2>Sign Up</h2></ion-title>\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col col=\"6\">\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Name</ion-label>\n\t\t\t\t\t\t<ion-input required ngModel name=\"firstname\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t\t<ion-col col=\"6\">\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Surname</ion-label>\n\t\t\t\t\t\t<ion-input required ngModel name=\"lastname\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Email or Phone Number</ion-label>\n\t\t\t\t\t\t<ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Confirm Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\" required ngModel name=\"confirmPassword\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-button type=\"submit\" class=\"sign-up-button\">Sign Up</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-button\n\t\t\t\t\t\tcolor=\"tertiary\"\n\t\t\t\t\t\tsize=\"small\"\n\t\t\t\t\t\texpand=\"block\"\n\t\t\t\t\t\tfill=\"clear\"\n\t\t\t\t\t\tclass=\"ion-float-left\"\n\t\t\t\t\t\t(click)=\"navigateToLogin()\"\n\t\t\t\t\t>\n\t\t\t\t\t\tAlready have an account?\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n");
 
 /***/ }),
 
@@ -138,13 +138,39 @@ let SignUpPage = class SignUpPage {
     navigateToLogin() {
         this.router.navigate(['home', 'login']);
     }
-    signUp() {
-        this.userService.logIn();
-        this.router.navigate(['home', 'dashboard']);
-        this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard');
+    signUp(input) {
+        if (this.checkIfPasswordsMatch(input.password, input.confirmPassword) && !this.userService.checkIfUserIsInDb(input.email)) {
+            const user = {
+                id: this.userService.generateId(),
+                firstname: input.firstname,
+                lastname: input.lastname,
+                email: input.email,
+                password: input.password,
+                imgUrl: input.firstname[0] + input.lastname[0],
+                balance: {
+                    availableBal: 0,
+                    openBal: 0,
+                    pAndL: 0,
+                    gain: 0
+                }
+            };
+            this.userService.signUp(user);
+            // this.router.navigate(['home','dashboard'])
+            this.userService.checkIfIsOnLoginOrSignUpPage('/home/login');
+        }
     }
     checkIfIsSignUp() {
         this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url);
+    }
+    checkIfPasswordsMatch(password, confirmPassword) {
+        if (password === confirmPassword) {
+            this.passwordsMatching = true;
+            return true;
+        }
+        else {
+            this.passwordsMatching = false;
+            return false;
+        }
     }
 };
 SignUpPage.ctorParameters = () => [

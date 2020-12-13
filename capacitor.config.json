@@ -1,6 +1,6 @@
 {
-  "appId": "com.tradingApp.app",
-  "appName": "tradingApp",
+  "appId": "com.empuraanTradingApp.app",
+  "appName": "Empuraan Trading App",
   "webDir": "www",
   "npmClient": "npm",
   "cordova": {
