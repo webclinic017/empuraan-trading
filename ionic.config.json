@@ -1,5 +1,7 @@
 {
-  "name": "New Ionic App",
-  "integrations": {},
+  "name": "Empuraan Trading App",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

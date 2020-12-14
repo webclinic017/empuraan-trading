@@ -8,7 +8,7 @@
 	<ion-grid>
 		<ion-row>
 			<ion-col size="12">
-				<ion-text> <h5>Hi Ibrahim</h5> </ion-text>
+				<ion-text> <h5>Hi {{user.firstname}}</h5> </ion-text>
 			</ion-col>
 		</ion-row>
 		<hr />
@@ -19,19 +19,19 @@
 				<table class="balance-overview-table">
 					<tr>
 						<td><ion-label>Opening bal:</ion-label></td>
-						<td class="ion-padding-start"><ion-label>6200</ion-label></td>
+						<td class="ion-padding-start"><ion-label>{{user.balance.openBal}}</ion-label></td>
 					</tr>
 					<tr>
 						<td><ion-label>Available bal:</ion-label></td>
-						<td class="ion-padding-start"><ion-label>6000</ion-label></td>
+						<td class="ion-padding-start"><ion-label>{{user.balance.availableBal}}</ion-label></td>
 					</tr>
 					<tr>
 						<td><ion-label>P/L:</ion-label></td>
-						<td class="ion-padding-start"><ion-label>100</ion-label></td>
+						<td class="ion-padding-start"><ion-label>{{user.balance.pAndL}}</ion-label></td>
 					</tr>
 					<tr>
 						<td><ion-label>% gain:</ion-label></td>
-						<td class="ion-padding-start"><ion-label>20%</ion-label></td>
+						<td class="ion-padding-start"><ion-label>{{user.balance.gain * 100}}%</ion-label></td>
 					</tr>
 				</table>
 			</ion-col>

@@ -34,6 +34,27 @@ The next step is to initialize our app by the following line in terminal: <br>
 where the `[appName]` should be the actual name of the app, for eg. "tradingApp", <br>
 and the `[appId]` is the domain identifier of your app `(ex: com.tradingApp.app)`.
 
+#### Solving a potential error:
+
+So for some reason, when you specify a new name for the app, for eg. 'Empuuran Trading App' <br>
+and the domain identifier for eg. 'com.empuraanTradingApp.app', and when you open up <br>
+Android Studio, you would usually expect it to have these names as well as the domain changed <br>
+as you've specified it in ```npx cap init``` right? Well yes, but actually no. And to add on, <br>
+these changes will not only be updated, but there will also be an error waiting for you in AS. <br>
+
+__*So how do you fix this?*__ <br>
+
+In VSCode, or whatever IDE you are using, it should have a file locator, and in there search for <br>
+__strings.xml__.
+
+Now in there you will, hopefully, see the wrong names of your app located in there, as well as the <br>
+wrong domain name in there. This is where you, once again, change your app and domain name to whatever <br>
+you want.
+
+And for the error in Android Studio, it can be ignored, even though it is in the red color. <br>
+You can still run an emulator just fine and the app too. So the best way to solve this error <br>
+is by _ignoring it_.
+
 The next thing to do is to run `ionic build` in the terminal. This generates <br>
 a `www` file, so don't touch it.
 

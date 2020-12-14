@@ -6,8 +6,11 @@
 </ion-header>
 <ion-content>
 	<super-tabs #superTabs *ngIf="watchlists.length > 0">
-		<super-tabs-toolbar slot="top" color="translucent" [scrollable]="watchlists.length > 3" [scrollablePadding]="watchlists.length < 3">
-			<super-tab-button *ngFor="let w of watchlists" (click)="tabIndex(w.id)" appDoubleTap (eventHandler)="onWatchlistTabClick()">
+		<super-tabs-toolbar slot="top" color="translucent" [scrollable]="watchlists.length > 4" [scrollablePadding]="watchlists.length < 3">
+			<super-tab-button (click)="tabIndex(1)" (eventHandler)="onWatchlistTabClick()">
+				<ion-label>{{'Trending'.length > 8 ? 'Trending'.substring(0,8) + '...' : 'Trending'}}</ion-label>
+			</super-tab-button>
+			<super-tab-button *ngFor="let w of watchlists | slice:1" (click)="tabIndex(w.id)" appDoubleTap (eventHandler)="onWatchlistTabClick()">
 				<ion-label>{{w.name.length > 8 ? w.name.substring(0,8) + '...' : w.name}}</ion-label>
 			</super-tab-button>
 		</super-tabs-toolbar>
@@ -29,7 +32,7 @@
 						</ion-label>
 					</ion-item>
 				</ion-list>
-				<ion-fab horizontal="end" vertical="bottom">
+				<ion-fab horizontal="end" vertical="bottom" *ngIf="w.name != 'Trending'">
 					<ion-fab-button (click)="openCompaniesModal(w.id)">
 						<ion-icon name="add"></ion-icon>
 					</ion-fab-button>

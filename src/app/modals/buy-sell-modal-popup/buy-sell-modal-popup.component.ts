@@ -30,6 +30,6 @@ export class BuySellModalPopupComponent implements OnInit {
   }
   navigateToChart(){
     this.modalCtrl.dismiss()
-    this.router.navigate(['home','chart'])
+    this.router.navigate(['chart'])
   }
 }

@@ -11,21 +11,21 @@
 	<ion-card>
 		<ion-card-header class="ion-text-center ion-padding-bottom">
 			<ion-card-subtitle>Available margin (Cash + Collateral)</ion-card-subtitle>
-			<ion-card-title color="tertiary"><h2 class="ion-no-margin">$6,203.21</h2></ion-card-title>
+			<ion-card-title color="tertiary"><h2 class="ion-no-margin">${{user.balance.openBal}}</h2></ion-card-title>
 		</ion-card-header>
 	</ion-card>
 	<ion-grid>
 		<ion-row>
 			<ion-col size="6" class="ion-text-center">
-				<ion-button color="success">
+				<ion-button color="success" (click)="openWithdrawAddFundsModal(true)">
 					<ion-icon name="add-outline"></ion-icon>
 					Add funds
 				</ion-button>
 				<ion-text><p class="subtitle-text">Available cash</p></ion-text>
-				<ion-text><p class="cash-text">6,203.21</p> </ion-text>
+				<ion-text><p class="cash-text">${{user.balance.openBal}}</p> </ion-text>
 			</ion-col>
 			<ion-col size="6" class="ion-text-center">
-				<ion-button>
+				<ion-button (click)="openWithdrawAddFundsModal(false)">
 					<ion-icon name="refresh-outline"></ion-icon>
 					Withdraw
 				</ion-button>
