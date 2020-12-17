@@ -8,28 +8,22 @@
 </ion-header>
 
 <ion-content>
-	<form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.value)">
+	<form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
 		<ion-title class="ion-text-center ion-margin-vertical" color="warning"><h1>Welcome to Empuraan</h1></ion-title>
 		<ion-title class="ion-text-center ion-margin-vertical"><h2>Sign Up</h2></ion-title>
 		<ion-grid>
 			<ion-row>
-				<ion-col col="6">
+				<ion-col>
 					<ion-item class="ion-no-padding">
-						<ion-label position="floating">Name</ion-label>
-						<ion-input required ngModel name="firstname"></ion-input>
-					</ion-item>
-				</ion-col>
-				<ion-col col="6">
-					<ion-item class="ion-no-padding">
-						<ion-label position="floating">Surname</ion-label>
-						<ion-input required ngModel name="lastname"></ion-input>
+						<ion-label position="floating">Username</ion-label>
+						<ion-input required ngModel name="username"></ion-input>
 					</ion-item>
 				</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col>
 					<ion-item class="ion-no-padding">
-						<ion-label position="floating">Email or Phone Number</ion-label>
+						<ion-label position="floating">Email</ion-label>
 						<ion-input type="email" required ngModel name="email"></ion-input>
 					</ion-item>
 				</ion-col>
@@ -63,7 +57,7 @@
 						expand="block"
 						fill="clear"
 						class="ion-float-left"
-						(click)="navigateToLogin()"
+						routerLink="/home/login"
 					>
 						Already have an account?
 					</ion-button>

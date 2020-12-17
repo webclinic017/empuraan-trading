@@ -6,9 +6,9 @@
 </ion-header>
 <ion-content class="ion-padding-top">
 	<ion-grid>
-		<ion-row>
+		<ion-row (click)="clgJWT()">
 			<ion-col size="12">
-				<ion-text> <h5>Hi {{user.firstname}}</h5> </ion-text>
+				<ion-text> <h5>Hi {{user.username}}</h5> </ion-text>
 			</ion-col>
 		</ion-row>
 		<hr />

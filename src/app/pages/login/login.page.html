@@ -1,14 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <!-- <ion-buttons slot="start">
-      <ion-back-button defaultHref="home/dashboard"></ion-back-button>
-    </ion-buttons> -->
     <ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
     <ion-title class="ion-text-center ion-margin-vertical" color="warning"><h1>Welcome to Empuraan</h1></ion-title>
     <ion-title class="ion-text-center ion-margin-vertical"><h2>Login</h2></ion-title>
     <ion-grid>
@@ -35,7 +32,7 @@
       </ion-row>
       <ion-row>
         <ion-col size=6>
-          <ion-button color="tertiary" size="small" fill="clear" class="link-button" (click)="navigateToSignup()">
+          <ion-button color="tertiary" size="small" fill="clear" class="link-button" routerLink="/home/sign-up">
             New user?
           </ion-button>
         </ion-col>

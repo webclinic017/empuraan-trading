@@ -6,6 +6,7 @@ import { LeaderboardService } from 'src/app/services/leaderboard.service';
 import * as Highcharts from 'highcharts';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { StockService } from 'src/app/services/stock.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,9 +21,13 @@ export class DashboardPage implements OnInit {
     private router: Router, 
     private leaderboardService: LeaderboardService,
     private navCtrl: NavController,
-    private userService: UserService){
+    private userService: UserService,
+    private stockService: StockService){
   }
-
+  clgJWT(){
+    // this.stockService.getStock('5fd63fae38276214a665442c').subscribe(res => console.log(res))
+    this.stockService.getStocks().subscribe(res => console.log(res))
+  }
   ngOnInit() {
     this.leaderboard = this.leaderboardService.leaderboard
     this.user = this.userService.user
