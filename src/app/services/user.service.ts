@@ -5,13 +5,14 @@ import { Plugins } from '@capacitor/core';
 import { Subject } from 'rxjs';
 import { User } from '../models/user.model';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { environment } from 'src/environments/environment';
 const { LocalNotifications } = Plugins;
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  apiUrl: string = "http://104.198.233.233/api/v1/auth/"
+  apiUrl: string = environment.apiUrl + "auth/"
   user: User
   decodedToken
 
@@ -34,6 +35,22 @@ export class UserService {
 
   googleAuth(){
     return this.http.get(this.apiUrl + 'google')
+  }
+
+  accountDetails(){
+    return this.http.get(this.apiUrl + 'account')
+  }
+
+  changePassword(email: string, password: string){
+    return this.http.post(this.apiUrl + 'password/change', {email, password})
+  }
+
+  emailExists(email: string){
+    return this.http.post(this.apiUrl + 'password/reset/emailcheck', email)
+  }
+
+  checkCodeValid(email: string, code: string){
+    return this.http.post(this.apiUrl + 'password/code/check', {email, code})
   }
 
   logout(){

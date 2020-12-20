@@ -1,7 +1,7 @@
 import { Balance } from './balance.model';
 
 export interface User {
-    id: number
+    id: string
     username: string
     imgUrl?: string
     email: string

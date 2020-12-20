@@ -1,4 +1,4 @@
-<ion-header #header class="ion-no-border">
+<ion-header [ngClass]="{'ion-no-border': watchlists.length > 0, '': watchlists.length == 0 }">
 	<ion-toolbar>
 		<ion-title (click)="onWatchlistTitleClick()">Watchlist</ion-title>
 		<ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
@@ -19,17 +19,18 @@
 				<ion-list>
 					<ion-item *ngFor="let company of w.companies" (click)="openBuySellModal(company.id)">
 						<ion-label>
-							<h3>{{company.code | uppercase}}</h3>
+							<h3>{{company.name | uppercase}}</h3>
+							<!-- <h3>{{company.code | uppercase}}</h3> -->
 							<p>{{company.name}}</p>
 						</ion-label>
-						<ion-label class="ion-margin-start ion-text-right" *ngIf="company.isRising">
+						<!-- <ion-label class="ion-margin-start ion-text-right" *ngIf="company.isRising">
 							<ion-text color="success"><h3>{{company.greenNum}}</h3></ion-text>
 							<p>+{{company.rateRaw}} (+{{company.ratePercentage}}%)</p>
 						</ion-label>
 						<ion-label class="ion-margin-start ion-text-right" *ngIf="!company.isRising">
 							<ion-text color="danger"><h3>{{company.greenNum}}</h3></ion-text>
 							<p>-{{company.rateRaw}} (-{{company.ratePercentage}}%)</p>
-						</ion-label>
+						</ion-label> -->
 					</ion-item>
 				</ion-list>
 				<ion-fab horizontal="end" vertical="bottom" *ngIf="w.name != 'Trending'">

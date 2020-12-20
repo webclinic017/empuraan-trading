@@ -7,6 +7,7 @@ import { ModalWatchlistCeComponent } from 'src/app/modals/modal-watchlist-ce/mod
 import { ModalWatchlistComponent } from 'src/app/modals/modal-watchlist/modal-watchlist.component';
 import { Company } from 'src/app/models/company.model';
 import { Watchlist } from 'src/app/models/watchlist.model';
+import { UserService } from 'src/app/services/user.service';
 import { WatchlistService } from 'src/app/services/watchlist.service';
 
 @Component({
@@ -17,14 +18,24 @@ import { WatchlistService } from 'src/app/services/watchlist.service';
 export class WatchlistPage implements OnInit {
   companies: Company[] = []
   watchlists: Watchlist[] = []
-  selectedWatchlist: number = 1
+  selectedWatchlist: string = '1'
   constructor(private modalController: ModalController, 
     private watchlistService: WatchlistService, 
-    private actionSheetController: ActionSheetController) { }
+    private actionSheetController: ActionSheetController,
+    private userService: UserService) { }
 
   ngOnInit() {
-    this.companies = this.watchlistService.companies
-    this.watchlists = this.watchlistService.watchlists
+    this.watchlistService.getCompanies().subscribe((companies:any) => {
+      companies.data.forEach(c => {
+        console.log(c)
+        this.companies.push({id: c._id, name: c.name})
+      });
+    })
+    this.watchlistService.getUserWatchlists(this.userService.user.id).subscribe((watchlist:any) => {
+      watchlist.data.forEach(w => {
+        console.log(w)
+      });
+    })
   }
 
   drop(event: CdkDragDrop<string[]>){

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as HighCharts from 'highcharts';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({

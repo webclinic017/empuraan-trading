@@ -29,7 +29,11 @@ export class BuySellPage implements OnInit {
     this.route.queryParams.subscribe(data => {
       data.isBuy == 'true' ? this.isBuy = true : this.isBuy = false
     })
-    this.route.params.subscribe(data => this.company = this.watchlistService.getCompany(data["id"]))
+    this.route.params.subscribe(data => 
+      this.watchlistService.getCompany(data["id"]).subscribe((c:Company) => {
+        this.company = c
+      })
+    )
   }
   
   navigateToWatchlist(){

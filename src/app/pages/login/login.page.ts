@@ -22,17 +22,20 @@ export class LoginPage implements OnInit {
       console.log(res)
       localStorage.setItem('token', res.jwt)
       this.userService.decodedToken = res.jwt
-      const user: User = {
+      let user: User = {
         id: res.user._id,
         email: res.user.email,
         username: res.user.username,
         balance: {
           availableBal: 0,
           openBal: 0,
-          pAndL: 0,
-          gain: 0
         }
       }
+      this.userService.accountDetails().subscribe((res: any) => {
+        user.balance.availableBal = res.account.initialAmount
+        user.balance.openBal = parseFloat(res.account.currentBalance)
+        user.balance.currency = res.account.currency
+      })
       this.userService.user = user
       form.resetForm()
       this.router.navigate(['home','dashboard'])

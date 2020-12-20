@@ -10,14 +10,14 @@ import { WatchlistService } from 'src/app/services/watchlist.service';
   styleUrls: ['./buy-sell-modal-popup.component.scss'],
 })
 export class BuySellModalPopupComponent implements OnInit {
-  @Input() selectedCompany: number
+  @Input() selectedCompany: string
   company: Company
   constructor(private modalCtrl: ModalController, 
     private watchlistService: WatchlistService,
     private router: Router) { }
 
   ngOnInit() {
-    this.company = this.watchlistService.getCompany(this.selectedCompany)
+    this.watchlistService.getCompany(this.selectedCompany).subscribe((c:Company) => this.company = c)
   }
 
   dismissModal(){

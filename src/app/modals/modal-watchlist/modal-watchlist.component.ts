@@ -13,13 +13,17 @@ export class ModalWatchlistComponent implements OnInit{
   companies: Company[]
   filteredData: Company[]
   sWatchlist: Watchlist
-  @Input() selectedWatchlist: number
+  @Input() selectedWatchlist: string
 
   constructor(private modalCtrl: ModalController, private watchlistService: WatchlistService) { }
   
   ngOnInit(){
-    this.companies = this.watchlistService.companies
-    this.sWatchlist = this.watchlistService.getWatchlist(this.selectedWatchlist)
+    this.watchlistService.getCompanies().subscribe((res: any) => {
+      this.companies = res.data
+    })
+    this.watchlistService.getWatchlist(this.selectedWatchlist).subscribe((w:Watchlist)=>{
+      this.sWatchlist = w
+    })
   }
 
   dismissModal(){

@@ -1,15 +1,16 @@
-<ion-header>
+<ion-header class="ion-no-border">
 	<ion-toolbar>
-		<!-- <ion-buttons slot="start">
-			<ion-back-button defaultHref="home/dashboard"></ion-back-button>
-		</ion-buttons> -->
-		<ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
+		<ion-img src="/assets/logo_no_back.png" class="logo"></ion-img>
 	</ion-toolbar>
 </ion-header>
+<!-- 
+	123 pg, pitanja activity 6
+	105 pg tekst, pitanja sa strane, roze kockice
 
+ -->
 <ion-content>
 	<form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
-		<ion-title class="ion-text-center ion-margin-vertical" color="warning"><h1>Welcome to Empuraan</h1></ion-title>
+		<!-- <ion-title class="ion-text-center ion-margin-vertical" color="warning"><h1>Welcome to Empuraan</h1></ion-title> -->
 		<ion-title class="ion-text-center ion-margin-vertical"><h2>Sign Up</h2></ion-title>
 		<ion-grid>
 			<ion-row>
@@ -46,21 +47,21 @@
 			</ion-row>
 			<ion-row>
 				<ion-col>
-					<ion-button type="submit" class="sign-up-button">Sign Up</ion-button>
+					<button type="submit" class="button sign-up-button">Sign Up</button>
 				</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col>
-					<ion-button
+					<button
 						color="tertiary"
 						size="small"
 						expand="block"
 						fill="clear"
-						class="ion-float-left"
+						class="ion-float-left link-button"
 						routerLink="/home/login"
 					>
 						Already have an account?
-					</ion-button>
+					</button>
 				</ion-col>
 			</ion-row>
 		</ion-grid>

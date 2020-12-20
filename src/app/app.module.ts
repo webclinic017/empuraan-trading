@@ -18,6 +18,7 @@ import { ModalWatchlistCeComponent } from './modals/modal-watchlist-ce/modal-wat
 import { FormsModule } from '@angular/forms';
 import { BuySellModalPopupComponent } from './modals/buy-sell-modal-popup/buy-sell-modal-popup.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
  
 import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/File/ngx';
@@ -29,11 +30,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DragDropModule } from '@angular/cdk/drag-drop'
 import { ModalEditWatchlistsComponent } from './modals/modal-edit-watchlists/modal-edit-watchlists.component';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { ModalEditOrderComponent } from './modals/modal-edit-order/modal-edit-order.component';
 import { ModalChangePasswordComponent } from './modals/modal-change-password/modal-change-password.component';
 import { ModalWithdrawAddFundsComponent } from './modals/modal-withdraw-add-funds/modal-withdraw-add-funds.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { environment } from 'src/environments/environment';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -59,16 +60,16 @@ export function tokenGetter() {
     FormsModule,
     HttpClientModule,
     DragDropModule,
+    NgxChartsModule,
     IonicStorageModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["http://35.206.66.170"],
-        disallowedRoutes: ["http://35.206.66.170/api/v1/auth"],
+        allowedDomains: [ environment.apiUrl],
+        disallowedRoutes: [environment.apiUrl+"auth"],
       },
     }),
     BrowserAnimationsModule,
-    HighchartsChartModule,
   ],
   exports:[
   ],

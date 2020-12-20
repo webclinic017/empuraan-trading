@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockService {
-  apiUrl: string = "http://104.198.233.233/api/v1/stocks/"
+  apiUrl: string = environment.apiUrl + "stocks/"
 
   constructor(private http: HttpClient) { }
 
@@ -15,6 +16,10 @@ export class StockService {
 
   getStocks(){
     return this.http.get(this.apiUrl)
+  }
+  
+  initStocks(){
+    return this.http.post(this.apiUrl + 'init', {})
   }
 
   orderStockLimitBuy(input){

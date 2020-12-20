@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Company } from '../models/company.model';
 import { Completed } from '../models/completed.model';
 import { Pending } from '../models/pending.model';
 import { Position } from '../models/position.model';
@@ -97,12 +98,13 @@ export class OrderService {
     return val
   }
 
-  buy(cId: number,quantity: number, stopLoss: number, target: number, order: string, price?: number){
-    const company = this.watchlistService.getCompany(cId)
+  buy(cId: string,quantity: number, stopLoss: number, target: number, order: string, price?: number){
+    let company
+    this.watchlistService.getCompany(cId).subscribe(c => company = c)
     var pending : Pending
     order == 'limit' 
-    ? pending = {name: company.name, code: company.code, quantity, LTP: stopLoss, price}
-    : pending = {name: company.name, code: company.code, quantity, LTP: stopLoss, price: 0}
+    ? pending = {name: company.name, code: company.name, quantity, LTP: stopLoss, price}
+    : pending = {name: company.name, code: company.name, quantity, LTP: stopLoss, price: 0}
     this.pending.unshift(pending)
   }
 
