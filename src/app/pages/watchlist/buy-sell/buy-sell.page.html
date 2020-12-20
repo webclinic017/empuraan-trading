@@ -9,7 +9,7 @@
 			<ion-button>
 				<ion-select ok-text="Okay" cancel-text="Cancel" value="{{isBuy ? 'true' : 'false'}}" (ionChange)="changeType($event)">
 					<ion-select-option value="true">Buy</ion-select-option>
-					<ion-select-option value="false">Sale</ion-select-option>
+					<ion-select-option value="false">Sell</ion-select-option>
 				</ion-select>
 			</ion-button>
 		</ion-buttons>
@@ -126,7 +126,7 @@
 				</ion-col>
 				<ion-col class="footer" *ngIf="!isBuy">
 					<ion-button class="footer-button" size="medium" color="danger" form="buySellForm" (click)="onSubmit()">
-						Confirm sale
+						Confirm Sell
 					</ion-button>
 				</ion-col>
 			</ion-row>
