@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Company } from '../models/company.model';
+import { Stock } from '../models/stock.model';
 import { Watchlist } from '../models/watchlist.model';
 
 @Injectable({
@@ -9,8 +10,8 @@ import { Watchlist } from '../models/watchlist.model';
 })
 export class WatchlistService {
   apiUrl = environment.apiUrl + 'watchlist/'
-  apiUrlStock = environment.apiUrl + 'stocks/'
-  // companies: Company[] = [
+  updatedWatchlist = new Subject<boolean>()
+  // companies: Stock[] = [
   //   {
   //     id: 1,
   //     name: 'AAA',
@@ -194,42 +195,34 @@ export class WatchlistService {
 
   getWatchlist(id: string){
     // return this.watchlists.find(w => w.id == id)
-    return this.http.get(this.apiUrl + '5fdbd4703f68f0b44acc55f9')
+    return this.http.get(this.apiUrl + id)
   }
 
-  getUserWatchlists(userId: string){
+  getUserWatchlists(){
     return this.http.get(this.apiUrl)
-  }
-
-  getCompanies(){
-    return this.http.get(this.apiUrlStock)
-  }
-
-  getCompany(id: string){
-    return this.http.get(this.apiUrlStock + id)
   }
 
   updateWatchlist(newWatchlist){
     // this.watchlists = newWatchlist
   }
 
-  addToWatchlist(id: string, company: Company){
+  addToWatchlist(id: string, company: Stock){
     // needs to be a update watchlist method
     // this.getWatchlist(id).companies.push(company)
   }
 
-  removeFromWatchlist(id: string, company: Company){
+  removeFromWatchlist(id: string, company: Stock){
     let watchlist
     this.getWatchlist(id).subscribe(res => watchlist = res)
-    const indexOfCompany = watchlist.companies.indexOf(company)
-    watchlist.companies.splice(indexOfCompany,1)
+    const indexOfStock = watchlist.companies.indexOf(company)
+    watchlist.companies.splice(indexOfStock,1)
     //update watchlist
   }
 
   createWatchlist(name: string){
     // const watchlist: Watchlist = {id: this.generateId(this.watchlists), name, companies:[]}
     // this.watchlists.push(watchlist)
-    // return this.http.get(this.apiUrl + 'new')
+    return this.http.post(this.apiUrl + 'new', {name})
   }
 
   editWatchlist(id: string, name: string){

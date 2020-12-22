@@ -6,6 +6,7 @@ import {
   LanguageCode,
   ResolutionString,
 } from '../../../../assets/charting_library/charting_library';
+import * as data from 'src/assets/reliance-data.json';
 
 @Component({
   selector: 'app-tv-chart',
@@ -93,6 +94,7 @@ export class TvChartPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log(JSON.stringify(data))
     function getLanguageFromURL(): LanguageCode | null {
       const regex = new RegExp('[\\?&]lang=([^&#]*)');
       const results = regex.exec(location.search);

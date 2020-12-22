@@ -14,6 +14,7 @@ const { LocalNotifications } = Plugins;
 export class UserService {
   apiUrl: string = environment.apiUrl + "auth/"
   user: User
+  isSimulated: boolean = true
   decodedToken
 
   isOnLoginOrSignUpPage = new Subject<boolean>()

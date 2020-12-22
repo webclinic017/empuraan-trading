@@ -94,6 +94,7 @@ ion-title{
     color:black;
   }
 .balance-overview-table{
+    width: 100%;
     // tr:first-child{
     //     border-bottom: 1px solid #cecece;
     // }
@@ -102,7 +103,7 @@ ion-title{
     }
     td{
         padding:15px;
-        width: 69%;
+        width: 50%;
     }
 }
 @media screen and (max-width: 360px) {

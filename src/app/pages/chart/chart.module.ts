@@ -17,7 +17,7 @@ import { TvChartPage } from './tv-chart/tv-chart.page';
   ],
   declarations: [
     ChartPage, 
-    TvChartPage,
+    // TvChartPage,
   ]
 })
 export class ChartPageModule {}

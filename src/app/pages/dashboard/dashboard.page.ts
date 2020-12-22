@@ -49,25 +49,16 @@ export class DashboardPage implements OnInit {
   leaderboard
   user: User
   
-  constructor(private sanitizer: DomSanitizer, 
-    private router: Router, 
+  constructor(private router: Router, 
     private leaderboardService: LeaderboardService,
-    private navCtrl: NavController,
     private userService: UserService,
     private stockService: StockService){
   }
-  clgJWT(){
-    this.stockService.getStocks().subscribe(res => console.log(res))
-    // this.stockService.initStocks().subscribe(res => console.log(res))
-  }
+
   ngOnInit() {
     this.leaderboard = this.leaderboardService.leaderboard
     this.user = this.userService.user
     this.checkIfItIsDashboard()
-  }
-  
-  sanitizeUrl(url:string){
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   navigateToLeaderboard(){
