@@ -21,7 +21,7 @@ export class ModalWatchlistCeComponent implements OnInit {
       this.watchlistName = w.name
     })
     this.watchlistService.getWatchlist(this.selectedWatchlist).subscribe((w:Watchlist)=>{
-      this.companies = w.companies
+      this.companies = w.stockIds
     })
   }
 
@@ -38,6 +38,7 @@ export class ModalWatchlistCeComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>){
+    //needs to happen in backend
     moveItemInArray(this.companies, event.previousIndex, event.currentIndex);
   }
 }

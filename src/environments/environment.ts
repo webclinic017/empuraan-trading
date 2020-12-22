@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://empuraan.com/api/v1/'
+  apiUrl: 'https://empuraan.com/api/v1/',
+  socketUrl: 'http://socket.empuraan.com'
 };
 
 /*

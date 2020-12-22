@@ -13,13 +13,13 @@ import { WatchlistService } from 'src/app/services/watchlist.service';
   styleUrls: ['./modal-edit-watchlists.component.scss'],
 })
 export class ModalEditWatchlistsComponent implements OnInit {
-  watchlists = []
+  watchlists: Watchlist[] = []
   watchlistName: string
 
   constructor(private modalCtrl: ModalController, private watchlistService: WatchlistService, private userService: UserService) { }
 
   ngOnInit() {
-    this.watchlistService.getUserWatchlists(this.userService.user.id).subscribe((w:Watchlist[]) => this.watchlists = w)
+    this.watchlistService.getUserWatchlists().subscribe((w:any) => this.watchlists = w.data)
   }
 
   dismissModal(){
@@ -29,12 +29,14 @@ export class ModalEditWatchlistsComponent implements OnInit {
   onCreateWatchlist(createWatchlistForm: NgForm){
     if(this.watchlistName.trim() != '' && this.watchlistName != null && this.watchlistName != undefined){
       this.watchlistName = this.watchlistName.trim()
-      this.watchlistService.createWatchlist(this.watchlistName)
+      this.watchlistService.createWatchlist(this.watchlistName).subscribe(res => console.log(res))
       this.watchlistName = ''
     }
   }
 
   drop(event: CdkDragDrop<string[]>){
+    //needs to happen in backend
     moveItemInArray(this.watchlists, event.previousIndex, event.currentIndex);
+    this.watchlistService.updatedWatchlist.next(true)
   }
 }
