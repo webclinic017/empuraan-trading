@@ -28,14 +28,14 @@ export class ModalWatchlistComponent implements OnInit{
   }
 
   dismissModal(){
-    this.modalCtrl.dismiss()
+    this.modalCtrl.dismiss(true)
   }
 
   onSelect(event: boolean, stock){
     if(event == true)
-      this.watchlistService.addToWatchlist(this.selectedWatchlist, stock._id).subscribe(res => console.log(res))
+      this.watchlistService.addToWatchlist(this.selectedWatchlist, stock._id).subscribe(r => console.log(r))
     else if(event == false) 
-      this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock)
+      this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock._id).subscribe(r => console.log(r))
   }
 
   filter(filterValue: any){

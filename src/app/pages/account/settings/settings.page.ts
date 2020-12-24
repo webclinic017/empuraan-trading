@@ -2,6 +2,7 @@ import { User } from './../../../models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { WatchlistService } from 'src/app/services/watchlist.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,16 +13,15 @@ export class SettingsPage implements OnInit {
   datatype: string
   risk: number
   leverage: string
-  user: User
-  constructor(private router: Router, private userService: UserService) { }
+  _id: string
+  constructor(private router: Router, private userService: UserService, private watchlistService: WatchlistService) { }
 
   ngOnInit() {
-    this.userService.user.subscribe(u => this.user = u)
     this.userService.getSettings().subscribe((r:any) => {
-      console.log(r)
       this.datatype = r.data.datatype
       this.risk = r.data.risk
       this.leverage = r.data.leverage.toString()
+      this._id = r.data._id
     })
   }
 
@@ -30,6 +30,6 @@ export class SettingsPage implements OnInit {
   }
   
   dataChange(){
-    this.userService.updateSettings(this.user.id, this.datatype, this.risk, this.leverage).subscribe(r => console.log(r))
+    this.userService.updateSettings(this._id, this.datatype, this.risk, this.leverage).subscribe()
   }
 }
