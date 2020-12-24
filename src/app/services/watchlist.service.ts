@@ -194,7 +194,6 @@ export class WatchlistService {
   constructor(private http: HttpClient) { }
 
   getWatchlist(id: string){
-    // return this.watchlists.find(w => w.id == id)
     return this.http.get(this.apiUrl + id)
   }
 
@@ -202,21 +201,27 @@ export class WatchlistService {
     return this.http.get(this.apiUrl)
   }
 
+  getSimulatedWatchlists(){
+    return this.http.get(this.apiUrl + 'filter/simulated')
+  }
+
   updateWatchlist(newWatchlist){
     // this.watchlists = newWatchlist
   }
 
-  addToWatchlist(id: string, company: Stock){
+  addToWatchlist(watchlistId, stockId){
     // needs to be a update watchlist method
     // this.getWatchlist(id).companies.push(company)
+    return this.http.put(this.apiUrl + 'add/stock', {watchlistId, stockId})
   }
 
-  removeFromWatchlist(id: string, company: Stock){
-    let watchlist
-    this.getWatchlist(id).subscribe(res => watchlist = res)
-    const indexOfStock = watchlist.companies.indexOf(company)
-    watchlist.companies.splice(indexOfStock,1)
+  removeFromWatchlist(watchlistId: string, stockId: string){
+    // let watchlist
+    // this.getWatchlist(id).subscribe(res => watchlist = res)
+    // const indexOfStock = watchlist.companies.indexOf(company)
+    // watchlist.companies.splice(indexOfStock,1)
     //update watchlist
+    return this.http.put(this.apiUrl + 'stock/remove', {watchlistId, stockId})
   }
 
   createWatchlist(name: string){
@@ -230,6 +235,7 @@ export class WatchlistService {
   }
 
   deleteWatchlist(id: string){
+    return this.http.delete(this.apiUrl + id)
     // this.watchlists.splice(this.watchlists.indexOf(this.getWatchlist(id)), 1)
   }
 

@@ -29,7 +29,7 @@ export class ModalEditWatchlistsComponent implements OnInit {
   onCreateWatchlist(createWatchlistForm: NgForm){
     if(this.watchlistName.trim() != '' && this.watchlistName != null && this.watchlistName != undefined){
       this.watchlistName = this.watchlistName.trim()
-      this.watchlistService.createWatchlist(this.watchlistName).subscribe(res => console.log(res))
+      this.watchlistService.createWatchlist(this.watchlistName).subscribe()
       this.watchlistName = ''
     }
   }

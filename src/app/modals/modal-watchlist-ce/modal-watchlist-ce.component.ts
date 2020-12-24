@@ -32,7 +32,6 @@ export class ModalWatchlistCeComponent implements OnInit {
   onEditWatchlist(){    
     if(this.watchlistName.trim() != '' && this.watchlistName != null && this.watchlistName != undefined){
       this.watchlistName = this.watchlistName.trim()
-      console.log(this.watchlistName)
       this.watchlistService.editWatchlist(this.selectedWatchlist, this.watchlistName)
     }
   }
