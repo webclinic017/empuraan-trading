@@ -135,6 +135,7 @@ export class ChartPage implements OnInit, OnDestroy {
             title: 'Notification',
             body: 'TradingView Charting Library API works correctly',
             callback: () => {
+              console.log('Noticed!');
             },
           })
         );
