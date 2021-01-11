@@ -3,6 +3,11 @@
     width: 70px;
     padding-right: 10px;
 }
+.title{
+    text-align: center;
+    font-weight: 500 !important;
+    font-size: 18px;
+}
 hr {
     border-top: 1px solid rgba(167, 167, 167, 0.5) !important;
     height: 1px !important;
@@ -60,11 +65,6 @@ span{
         font-weight: 500;
     }
 }
-.balance-overview-table{
-    tr td ion-label{
-        font-weight: 400;
-    }
-}
 .leaderboard-table{
     width: 100%;
     tr{
@@ -94,18 +94,31 @@ ion-title{
     color:black;
   }
 .balance-overview-table{
+    .table-title{
+        text-align: center;
+        ion-label{
+            font-weight: 500 !important;
+            font-size: 18px;
+        }
+    }
     width: 100%;
-    // tr:first-child{
-    //     border-bottom: 1px solid #cecece;
-    // }
     tr{
         border-bottom: 1px solid #cecece;
     }
-    td{
-        padding:15px;
+    td {
         width: 50%;
+        padding: 15px;
+        ion-label{
+            font-weight: 400;
+        }
+    }
+    .text-cell{
+        padding: 21px 15px;
     }
 }
+// .ngx-charts{
+//     height: #{inherit * 0.86};
+// }
 @media screen and (max-width: 360px) {
     h4{
         font-size: 20px;

@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class BuySellPage implements OnInit, AfterViewInit {
   isBuy: boolean
   company: any
+  wId: string
   price: number = 0
   quantity: number = 0
   availableBalance: number
@@ -33,12 +34,13 @@ export class BuySellPage implements OnInit, AfterViewInit {
     this.route.queryParams.subscribe(data => {
       data.isBuy == 'true' ? this.isBuy = true : this.isBuy = false
     })
-    this.route.params.subscribe(data => 
-      this.stockService.getStock(data["id"]).subscribe((c:any) => {
+    this.route.params.subscribe(data => {
+      this.stockService.getStock(data.id).subscribe((c:any) => {
         this.company = c.data
+        this.wId = data.wId
         this.updateLtp()
       })
-    )
+    })
   }
   ngAfterViewInit(){
     this.buySellForm.valueChanges.subscribe(data => {
@@ -52,7 +54,7 @@ export class BuySellPage implements OnInit, AfterViewInit {
   }
   
   updateLtp(){
-    this.stockService.listen(this.company?._id).subscribe((res:any) => {
+    this.stockService.listen(`${this.company?._id}-${this.wId}`).subscribe((res:any) => {
       this.company.ltp = res[0].price
     })
   }

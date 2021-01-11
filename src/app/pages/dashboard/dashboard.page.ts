@@ -11,7 +11,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage{
+export class DashboardPage implements OnInit{
   data = [
     {
       "name": "Open balance",
@@ -72,15 +72,21 @@ export class DashboardPage{
       ]
     },
   ];
-
   leaderboard
   user: User
+  balanceLoaded: boolean
+  leaderboardLoaded: boolean
   view = []
   
   constructor(private router: Router, 
     private userService: UserService,
     private platform: Platform,
     private screenOrientation: ScreenOrientation){
+  }
+
+  ngOnInit(){
+    this.balanceLoaded = false
+    this.leaderboardLoaded = false
   }
 
   ionViewDidEnter(){
@@ -101,9 +107,13 @@ export class DashboardPage{
         this.user.balance.pAndL = this.user.balance.availableBal - this.user.balance.openBal
         this.user.balance.gain = this.user.balance.pAndL / this.user.balance.openBal
         this.user.balance.currency = r.account.currency
+        this.balanceLoaded = true
       })
     })
-    this.userService.getLeaderboard().subscribe((r:any) => this.leaderboard = r.data)
+    this.userService.getLeaderboard().subscribe((r:any) => {
+      this.leaderboard = r.data
+      this.leaderboardLoaded = true
+    })
   }
 
   navigateToLeaderboard(){

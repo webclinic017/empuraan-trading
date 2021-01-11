@@ -30,16 +30,15 @@ export class OrdersPage implements OnInit, OnDestroy {
     private stockService: StockService) { }
 
   ngOnInit() {
-    this.dataLoaded = false
     this.pageIndex = 0
   }
 
   ionViewDidEnter(){
+    this.dataLoaded = false
     this.getOrders()
   }
 
   getOrders(){
-    this.dataLoaded = false
     this.pending = []
     this.position = []
     this.completed = []
@@ -101,7 +100,7 @@ export class OrdersPage implements OnInit, OnDestroy {
         if(orderCategory != null)
           o.orderCategory = orderCategory == 'buy' ? 'sell' : 'buy'
         else o.orderCategory = order.orderCategory
-        o.price = price
+        o.price = order.price
         o['status'] = status
         this.completed.push(o)
         break;

@@ -43,12 +43,18 @@ hr {
 ion-title{
     color:black;
   }
+//   ion-card-title{
+//       font-size: 17px;
+//   }
+//   ion-card-subtitle{
+//       font-size: 11px !important;
+//   }
 @media screen and (max-width: 360px) {
     ion-title, h3, ion-card-title{
       font-size:15px !important;
     }
     ion-label, ion-text, p, h5, ion-card-subtitle{
-      font-size: 13px !important;
+      font-size: 10px !important;
     }
     ion-icon{
         font-size: 17px;

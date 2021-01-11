@@ -7,11 +7,15 @@
 <ion-content>
   <form #loginForm="ngForm">
     <!-- <ion-title class="ion-text-center ion-margin-vertical" color="warning"><h1>Welcome to Empuraan</h1></ion-title> -->
-    <ion-title class="ion-text-center ion-margin-vertical"><h2>Login</h2></ion-title>
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-item>
+          <ion-title style="font-size: 25px" class="ion-text-center">Login</ion-title>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-item class="ion-no-padding">
             <ion-label position="floating">E-mail</ion-label>
             <ion-input type="email" required ngModel name="email"></ion-input>
           </ion-item>
@@ -19,7 +23,7 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item>
+          <ion-item class="ion-no-padding">
             <ion-label position="floating">Password</ion-label>
             <ion-input type="password" required ngModel name="password"></ion-input>
           </ion-item>

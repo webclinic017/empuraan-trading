@@ -1,63 +1,68 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import * as io from 'socket.io-client'
-import * as rx from 'rxjs'
-import { Observable, Subject } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
+import * as io from "socket.io-client";
+import * as rx from "rxjs";
+import { Observable, Subject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: "root",
 })
 export class StockService {
-  apiUrl: string = environment.apiUrl + "stocks/order/"
-  apiGetStock: string = environment.apiUrl + "stocks/"
-  private socket
+	apiUrl: string = environment.apiUrl + "stocks/order/";
+	apiGetStock: string = environment.apiUrl + "stocks/";
+	apiStockStart: string = environment.apiUrl + "stocks/start/emit/";
+	private socket;
 
-  constructor(private http: HttpClient) { 
-    this.socket = io(environment.socketUrl)
-    console.log('socket',this.socket)
-  }
+	constructor(private http: HttpClient) {
+		this.socket = io(environment.socketUrl);
+		console.log("socket", this.socket);
+	}
 
-  listen(eventName){
-    return new Observable(subscriber => {
-      this.socket.on(eventName, (data)=>{
-        subscriber.next(data)
-      })
-    })
-  }
-  emit(eventName, data){
-    this.socket.emit(eventName, data)
-  }
+	listen(eventName) {
+		return new Observable((subscriber) => {
+			this.socket.on(eventName, (data) => {
+				subscriber.next(data);
+			});
+		});
+	}
+	emit(eventName, data) {
+		this.socket.emit(eventName, data);
+	}
 
-  getStock(id: string){
-    return this.http.get(this.apiGetStock + id)
-  }
+	getStock(id: string) {
+		return this.http.get(this.apiGetStock + id);
+	}
 
-  getStocks(){
-    return this.http.get(this.apiGetStock)
-  }
-  
-  initStocks(){
-    return this.http.post(this.apiUrl + 'init', {})
-  }
+	getStocks() {
+		return this.http.get(this.apiGetStock);
+	}
 
-  orderStockLimitBuy(input){
-    return this.http.post(this.apiUrl + 'limit/buy', input)
-  }
+	startStock(stockId, watchlistId){
+		return this.http.post(this.apiStockStart, {stockId, watchlistId})
+	}
 
-  orderStockLimitSell(input){
-    return this.http.post(this.apiUrl + 'limit/sell', input)
-  }
+	initStocks() {
+		return this.http.post(this.apiUrl + "init", {});
+	}
 
-  orderStockMarketBuy(input){
-    return this.http.post(this.apiUrl + 'market/buy', input)
-  }
+	orderStockLimitBuy(input) {
+		return this.http.post(this.apiUrl + "limit/buy", input);
+	}
 
-  orderStockMarketSell(input){
-    return this.http.post(this.apiUrl + 'market/sell', input)
-  }
+	orderStockLimitSell(input) {
+		return this.http.post(this.apiUrl + "limit/sell", input);
+	}
 
-  createNewStocks(input){
-    return this.http.post(this.apiUrl + 'new', input)
-  }
+	orderStockMarketBuy(input) {
+		return this.http.post(this.apiUrl + "market/buy", input);
+	}
+
+	orderStockMarketSell(input) {
+		return this.http.post(this.apiUrl + "market/sell", input);
+	}
+
+	createNewStocks(input) {
+		return this.http.post(this.apiUrl + "new", input);
+	}
 }

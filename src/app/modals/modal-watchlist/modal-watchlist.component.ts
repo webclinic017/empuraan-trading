@@ -22,7 +22,7 @@ export class ModalWatchlistComponent implements OnInit{
   ngOnInit(){
     this.stockService.getStocks().subscribe((s: any) => {
       this.stocks = s.data
-      console.log(this.stocks)
+      console.log(s)
     })
     this.watchlistService.getWatchlist(this.selectedWatchlist).subscribe((w:any)=> {
       this.sWatchlist = w.data

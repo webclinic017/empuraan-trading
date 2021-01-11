@@ -13,7 +13,7 @@ const routes: Routes = [
   },
 
   {
-    path:'buy-sell/:id', 
+    path:'buy-sell/:id/:wId', 
     component: BuySellPage
   }
 ];
