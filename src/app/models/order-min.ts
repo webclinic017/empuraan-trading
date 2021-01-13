@@ -4,6 +4,7 @@ export interface OrderMin {
     orderCategory: string
     name: string
     price: number
+    isDeleted: boolean
     quantity: number
     ltp?: number
     status?: string

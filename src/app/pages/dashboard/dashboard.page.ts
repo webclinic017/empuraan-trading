@@ -110,6 +110,7 @@ export class DashboardPage implements OnInit{
         this.balanceLoaded = true
       })
     })
+    this.userService.getFundsChart().subscribe(r => console.log(r))
     this.userService.getLeaderboard().subscribe((r:any) => {
       this.leaderboard = r.data
       this.leaderboardLoaded = true

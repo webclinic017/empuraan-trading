@@ -25,6 +25,7 @@ export class PositionalPage implements OnInit {
     this.marubozuService.get('positional').subscribe((r: any) => {
       console.log('positional',r)
       this.positionalPsts = r.data
+      this.positionalPsts = this.positionalPsts.reverse()
     })
   }
 
@@ -45,5 +46,6 @@ export class PositionalPage implements OnInit {
 
   filter(e){
     this.filteredPositional = this.positionalPsts.filter(p => p.title.toLowerCase().includes(e.detail.value.toLowerCase()))
+    this.filteredPositional = this.filteredPositional.reverse()
   }
 }

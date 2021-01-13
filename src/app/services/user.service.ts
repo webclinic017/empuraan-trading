@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
   apiUrl: string = environment.apiUrl + "auth/"
-  apiSettingsUrl: string = environment.apiUrl + "settings"
+  apiSettingsUrl: string = environment.apiUrl + "settings/"
   user = new BehaviorSubject<User>(null)
   authenticated = new BehaviorSubject<any>(false)
   decodedToken
@@ -53,6 +53,10 @@ export class UserService {
 
   googleAuth(){
     return this.http.get(this.apiUrl + 'google')
+  }
+
+  getFundsChart(){
+    return this.http.get(this.apiSettingsUrl + 'funds/records')
   }
 
   getLeaderboard(){

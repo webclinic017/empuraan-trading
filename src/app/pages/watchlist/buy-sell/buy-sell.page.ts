@@ -76,13 +76,13 @@ export class BuySellPage implements OnInit, AfterViewInit {
     if(quantity != '' && order != '' && price != '' && quantity > 0 ){
       if(order == 'limit' && price > 0){
         this.isBuy 
-          ?  this.orderService.buy(this.company._id, quantity, stopLoss, target, order, price)
-          :  this.orderService.sell(this.company._id, quantity, stopLoss, target, order, price)
+          ?  this.orderService.buy(this.company._id, this.wId, quantity, stopLoss, target, order, price)
+          :  this.orderService.sell(this.company._id, this.wId, quantity, stopLoss, target, order, price)
         // this.router.navigate(['home','orders'])
       } else {
         this.isBuy 
-          ?  this.orderService.buy(this.company._id, quantity, stopLoss, target, order, this.company.ltp)
-          :  this.orderService.sell(this.company._id, quantity, stopLoss, target, order, this.company.ltp)
+          ?  this.orderService.buy(this.company._id, this.wId, quantity, stopLoss, target, order, this.company.ltp)
+          :  this.orderService.sell(this.company._id, this.wId, quantity, stopLoss, target, order, this.company.ltp)
         // this.router.navigate(['home','orders'])
       }
     }

@@ -91,7 +91,7 @@ export class ModalUploadPostComponent implements OnInit {
 
 	uploadFile(postForm: NgForm) {
     const image = this.images[0]
-		if (postForm.valid && image != null) {
+		if (postForm.valid) {
 			const title = postForm.value.title;
 			const content = postForm.value.content;
       const stockName = postForm.value.stockname;
@@ -128,10 +128,4 @@ export class ModalUploadPostComponent implements OnInit {
 		const blob = new Blob(byteArrays, { type: contentType });
 		return blob;
 	}
-
-	// blobToFile(theBlob: Blob, fileName:string): File{
-	//   var b: any = theBlob;
-	//   b.name = fileName;
-	//   return <File>theBlob;
-	// }
 }

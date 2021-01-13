@@ -7,6 +7,7 @@ export interface Order {
     orderCategory: string
     type: string
     price: number
+    isDeleted: boolean
     volume: number
     status: string
     stoploss: number

@@ -43,6 +43,7 @@ export class IntraDayPage implements OnInit {
 			if (n == 2) {
 				this.marubozuService.get("intraday").subscribe((r: any) => {
 					this.intraday = r.data;
+					this.intraday = this.intraday.reverse()
 				});
 			}
 		});
@@ -72,5 +73,6 @@ export class IntraDayPage implements OnInit {
 
 	filter(ev) {
 		this.filteredPosts = this.intraday.filter((p) => p.title.toLowerCase().includes(ev.detail.value.toLowerCase()));
+		this.filteredPosts = this.filteredPosts.reverse()
 	}
 }
