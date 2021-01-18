@@ -16,16 +16,19 @@ export class PositionalPage implements OnInit {
   positionalPosts: Post[]
   positionalPsts: Marubozu[]
   filteredPositional: Marubozu[]
+  dataLoaded: boolean
   constructor(private modalController: ModalController,
     private learningService: LearningService, 
     private marubozuService: MarubozuService) { }
 
   ngOnInit() {
+    this.dataLoaded = false
     this.positionalPosts = this.learningService.positional
     this.marubozuService.get('positional').subscribe((r: any) => {
       console.log('positional',r)
       this.positionalPsts = r.data
-      this.positionalPsts = this.positionalPsts.reverse()
+      this.positionalPsts.reverse()
+      this.dataLoaded = true
     })
   }
 
@@ -34,6 +37,14 @@ export class PositionalPage implements OnInit {
       component: ModalUploadPostComponent,
       componentProps: {positional: true}
     });
+    modal.onDidDismiss().then((d) => {
+			if (d.data == true) {
+				this.marubozuService.get("positional").subscribe((r: any) => {
+					this.positionalPsts = r.data;
+					this.positionalPsts.reverse()
+				});
+			}
+		});
     return await modal.present();
   }
   async openPostModal(positional) {
@@ -46,6 +57,6 @@ export class PositionalPage implements OnInit {
 
   filter(e){
     this.filteredPositional = this.positionalPsts.filter(p => p.title.toLowerCase().includes(e.detail.value.toLowerCase()))
-    this.filteredPositional = this.filteredPositional.reverse()
+    this.filteredPositional.reverse()
   }
 }

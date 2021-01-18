@@ -25,6 +25,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 	selectedWatchlistId: string;
 	dataLoaded: boolean;
 	isSimualted: boolean;
+	spinners: string[]
 	subscribedSockets: Subscription[] = [];
 	constructor(
 		private modalController: ModalController,

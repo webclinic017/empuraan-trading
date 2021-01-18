@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from "@angular/core";
-import { ActionSheetController, ModalController, Platform } from "@ionic/angular";
+import { ActionSheetController, ModalController, Platform, ToastController } from "@ionic/angular";
 import { MarubozuService } from "src/app/services/marubozu.service";
 import { CameraSource, CameraResultType, Plugins } from "@capacitor/core";
 import { NgForm } from "@angular/forms";
@@ -29,12 +29,11 @@ export class ModalUploadPostComponent implements OnInit {
 	images = [];
 	@ViewChild("fileInput", { static: false }) fileInput: ElementRef;
 
-	constructor(
-		private api: MarubozuService,
-		private plt: Platform,
-		private actionSheetCtrl: ActionSheetController,
-		private modalCtrl: ModalController
-	) {}
+	constructor(private api: MarubozuService, 
+		private plt: Platform, 
+		private actionSheetCtrl: ActionSheetController, 
+		private modalCtrl: ModalController,
+		private toastCtrl: ToastController) {}
 
 	ngOnInit() {}
 
@@ -84,24 +83,30 @@ export class ModalUploadPostComponent implements OnInit {
 			});
 			const blobData = this.b64toBlob(image.base64String, `image/${image.format}`);
 			const img = URL.createObjectURL(blobData);
-      this.images.push({blobData,name: 'img',format: image.format, url: img});
-      console.log(this.images)
+			this.images.push({ blobData, name: "img", format: image.format, url: img });
+			console.log(this.images);
 		}
 	}
 
 	uploadFile(postForm: NgForm) {
-    const image = this.images[0]
+		let image = this.images[0];
 		if (postForm.valid) {
 			const title = postForm.value.title;
 			const content = postForm.value.content;
-      const stockName = postForm.value.stockname;
+			const stockName = postForm.value.stockname;
 			let key = "";
 			if (this.intraDay == true) key = "intraday";
 			else if (this.positional == true) key = "positional";
 			else if (this.demoTrading == true) key = "demotrading";
-			this.api.createWithBlob(title, content, stockName, key, image.blobData, image.name, image.format).subscribe(() => {
-        this.dismissModal(true)
-      });
+			if(image == undefined || image == null){
+				this.api.createWithBlob(title, content, stockName, key).subscribe(() => {
+					this.dismissModal(true);
+				});
+			} else {
+				this.api.createWithBlob(title, content, stockName, key, image.blobData, image.name, image.format).subscribe(() => {
+					this.dismissModal(true);
+				});
+			}
 		} else console.log("something is missing!");
 	}
 

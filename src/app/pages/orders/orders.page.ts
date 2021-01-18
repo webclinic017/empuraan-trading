@@ -40,16 +40,19 @@ export class OrdersPage implements OnInit, OnDestroy {
 		this.position = [];
 		this.completed = [];
 		this.orderService.getAllUserOrders().subscribe((res: any) => {
-			console.log(res.data)
 			res.data.forEach((o: Order) => {
 				const order: OrderMin = {
 					id: o._id,
 					stockId: o.stockId,
 					orderCategory: o.orderCategory,
+					watchlistId: o.watchlistId,
 					name: o.companyName,
 					price: o.price,
-          quantity: o.volume,
-          isDeleted: o.isDeleted
+			        quantity: o.volume,
+					isDeleted: o.isDeleted,
+					stoploss: o.stoploss,
+					target: o.target,
+					createdDate: o.created_date
 				};
 				this.orderPlacement(o.transactionOne.status, order, o.transactionOne.price);
 				this.orderPlacement(o.transactionTwo.stoplossStatus, order, o.stoploss, "stoploss", o.orderCategory);
@@ -57,65 +60,45 @@ export class OrdersPage implements OnInit, OnDestroy {
 				if (o.status == "positioned" && o.transactionOne.status == "completed") {
 					order.stoploss = o.stoploss;
 					order.target = o.target;
-					this.position.push(Object.assign({}, order));
+					this.position.unshift(Object.assign({}, order));
 				} else if (o.status == "completed" && o.transactionTwo.stoplossStatus == "notFilled" && o.transactionTwo.targetStatus == "notFilled") {
 					const o = Object.assign({}, order);
 					o["status"] = "completed";
 					o.orderCategory = order.orderCategory == "buy" ? "sell" : "buy";
-					this.completed.push(o);
+					this.completed.unshift(o);
 				}
 			});
 			this.updateLtp();
 			// this.totalPandL = this.orderService.totalPandL()
 		});
 	}
-
-	// checkIfOrderIsCompleted(complete: Order){
-	//   if(complete.transactionOne.status == "completed"){
-	//     this.completed.push(complete)
-	//   }
-	//   else if(complete.transactionOne.status == "pending"){
-	//     this.pending.push(complete)
-	//   }
-	//   if(complete.transactionTwo.status == "pending"){
-	//     if(complete.stoploss){
-	//       let order = Object.assign({},complete)
-	//       order['isStopLoss'] = true
-	//       this.pending.push(order)
-	//     }
-	//     if(complete.target){
-	//       let order = Object.assign({},complete)
-	//       order['isStopLoss'] = false
-	//       this.pending.push(order)
-	//     }
-	//   }
-	// }
 	orderPlacement(status, order, price, key?, orderCategory?) {
-    price = "price";
-		const o = Object.assign({}, order);
-		if (!o.isDeleted) {
+		price = "price";
+		const date = new Date(order.createdDate).getDay()
+		const today = new Date().getDay()
+		const o = Object.assign({}, order)
+		if (today > date) {
 			switch (status) {
 				case "completed":
 					if (orderCategory != null) o.orderCategory = orderCategory == "buy" ? "sell" : "buy";
 					else o.orderCategory = order.orderCategory;
 					o.price = order.price;
 					o["status"] = status;
-					this.completed.push(o);
+					this.completed.unshift(o);
 					break;
 				case "pending":
 					if (orderCategory != null) o.orderCategory = orderCategory == "buy" ? "sell" : "buy";
 					else o.orderCategory = order.orderCategory;
 					key != null ? (o.key = key) : (o.key = "price");
-					// key == 'target' ? o.target = order.target : o.stoploss = order.stoploss
-					console.log("key not recognized as target nor stoploss");
-					this.pending.push(o);
+					key == 'target' ? o.target = order.target : o.stoploss = order.stoploss
+					this.pending.unshift(o);
 					break;
 				case "notFilled":
 					if (orderCategory != null) o.orderCategory = orderCategory == "buy" ? "sell" : "buy";
 					else o.orderCategory = order.orderCategory;
 					o.price = price;
 					o["status"] = "cancelled";
-					this.completed.push(o);
+					this.completed.unshift(o);
 					break;
 				default:
 					break;
@@ -126,18 +109,18 @@ export class OrdersPage implements OnInit, OnDestroy {
 	updateLtp() {
 		this.unsubscribeFromSockets();
 		this.position.forEach((s: any, i) => {
-			let stockSub: Subscription = this.stockService.listen(s.stockId).subscribe((res: any) => {
+			let stockSub: Subscription = this.stockService.listen(`${s.stockId}-${s.watchlistId}`).subscribe((res: any) => {
 				s.ltp = res[0].price;
 				if (i == this.pending.length - 1) this.dataLoaded = true;
 			});
-			this.subscribedPositionSockets.push(stockSub);
+			this.subscribedPositionSockets.unshift(stockSub);
 		});
 		this.pending.forEach((s: any, i) => {
-			let stockSub: Subscription = this.stockService.listen(s.stockId).subscribe((res: any) => {
+			let stockSub: Subscription = this.stockService.listen(`${s.stockId}-${s.watchlistId}`).subscribe((res: any) => {
 				s.ltp = res[0].price;
 				if (i == this.pending.length - 1) this.dataLoaded = true;
 			});
-			this.subscribedPendingSockets.push(stockSub);
+			this.subscribedPendingSockets.unshift(stockSub);
 		});
 		if ((this.position.length == 0 && this.pending.length == 0 && this.completed.length == 0) || this.completed.length > 0) this.dataLoaded = true;
 	}

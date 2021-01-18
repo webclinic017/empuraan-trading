@@ -9,7 +9,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss'],
+  styleUrls: ['./dashboard.page.sass'],
 })
 export class DashboardPage implements OnInit{
   data = [
@@ -92,12 +92,12 @@ export class DashboardPage implements OnInit{
   ionViewDidEnter(){
     this.checkIfItIsDashboard()
     this.platform.isLandscape() 
-      ? this.view = [this.platform.width(),this.platform.height() * 0.69]
-      : this.view = [this.platform.width(),this.platform.height() * 0.5]
+      ? this.view = [this.platform.width(),300]
+      : this.view = [this.platform.width(),300]
     this.screenOrientation.onChange().subscribe((r:any) => {
       this.platform.isPortrait() 
-        ? this.view = [r.path[0].innerHeight,r.path[0].innerWidth * 0.69]
-        : this.view = [r.path[0].innerHeight,r.path[0].innerWidth * 0.5]
+        ? this.view = [r.path[0].innerHeight,300]
+        : this.view = [r.path[0].innerHeight,300]
     })
     this.userService.authenticated.subscribe(u => {
       this.user = u.user

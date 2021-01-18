@@ -22,7 +22,12 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let user of leaderboard">
+							<tr *ngIf="!dataLoaded; else lb">
+								<td><ion-spinner name="lines-small"></ion-spinner></td>
+								<td><ion-spinner name="lines-small"></ion-spinner></td>
+								<td><ion-spinner name="lines-small"></ion-spinner></td>
+							</tr>
+							<tr #lb *ngFor="let user of leaderboard">
 								<td><ion-label>{{user?.rank}}</ion-label></td>
 								<td><ion-label>{{user?.userName}}</ion-label></td>
 								<td><ion-label>{{user?.gain | number:'1.1'}}%</ion-label></td>

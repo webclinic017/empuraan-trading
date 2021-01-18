@@ -138,12 +138,12 @@
 			<ion-row>
 				<ion-col class="footer" *ngIf="isBuy">
 					<ion-button class="footer-button" size="medium" color="tertiary" form="buySellForm" (click)="onSubmit()">
-						Confirm buy
+						Confirm buy <ion-spinner name="lines-small" *ngIf="transactionSpinner"></ion-spinner>
 					</ion-button>
 				</ion-col>
 				<ion-col class="footer" *ngIf="!isBuy">
 					<ion-button class="footer-button" size="medium" color="danger" form="buySellForm" (click)="onSubmit()">
-						Confirm Sell
+						Confirm Sell <ion-spinner name="lines-small" *ngIf="transactionSpinner"></ion-spinner>
 					</ion-button>
 				</ion-col>
 			</ion-row>

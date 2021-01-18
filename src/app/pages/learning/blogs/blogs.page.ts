@@ -12,17 +12,20 @@ import { MarubozuService } from 'src/app/services/marubozu.service';
   styleUrls: ['./blogs.page.scss'],
 })
 export class BlogsPage implements OnInit {
-  blogs: Blog[]
+  // blogs: Blog[]
   blgs: Marubozu[]
+  dataLoaded: boolean
   constructor(private learningService: LearningService, 
     private modalController: ModalController,
     private marubozuService: MarubozuService) { }
 
   ngOnInit() {
-    this.blogs = this.learningService.blogs
+    this.dataLoaded = false
     this.marubozuService.get('blog').subscribe((r:any) => {
       console.log('blog',r)
       this.blgs = r.data
+      this.blgs.reverse()
+      this.dataLoaded = true
     })
   }
 

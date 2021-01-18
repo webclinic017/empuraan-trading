@@ -8,6 +8,6 @@
 </ion-header>
 <ion-content style="display: flex; flex-direction: column">
 	<!-- <h4 class="ion-padding-horizontal"></h4> -->
-	<ion-img [src]="blog.image" class="ion-margin"></ion-img>
+	<ion-img *ngIf="blog.image != null || blog.image != undefined" [src]="blog.image" class="ion-margin"></ion-img>
 	<span class="ion-padding-horizontal">{{blog.content}}</span>
 </ion-content>

@@ -6,7 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { ModalFpEmailComponent } from 'src/app/modals/modal-fp-email/modal-fp-email.component';
 
 @Component({
@@ -17,18 +17,36 @@ import { ModalFpEmailComponent } from 'src/app/modals/modal-fp-email/modal-fp-em
 export class LoginPage implements OnInit {
   result: any
   userInfo: any
-  constructor(private router: Router, private userService: UserService, private modalCtrl: ModalController) { }
+  loginSpinner: boolean
+  constructor(private router: Router, 
+    private userService: UserService, 
+    private modalCtrl: ModalController,
+    private toastCtrl: ToastController
+    ) { }
 
   ngOnInit() {
+    this.loginSpinner = false
     this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url)
   }
 
   login(form: NgForm){
-    this.userService.logIn(form.value).subscribe(() => {}, () => {}, ()=> {
-      form.resetForm()
-      this.router.navigate(['home','dashboard'])
-      this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard')
-    })
+    this.loginSpinner = true
+    if(form.valid){
+      this.userService.logIn(form.value).subscribe(() => {}, 
+      (err) => {
+        this.loginSpinner = false
+        err.error.debug == 'ERR_AUTH_FAILED' && this.presentErrorToast('Email or password is incorrect.')
+      }, 
+      ()=> {
+        form.resetForm()
+        this.loginSpinner = false
+        this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard')
+        this.router.navigate(['home','dashboard'])
+      })
+    } else {
+      this.loginSpinner = false
+      this.presentErrorToast('Something is missing.')
+    }
   }
 
   async openForgotPasswordModal(){
@@ -40,11 +58,21 @@ export class LoginPage implements OnInit {
 
   async google(){
     const googleUser = await Plugins.GoogleAuth.signIn() as any;
-    // this.userService.googleAuth().subscribe()
+    console.log(googleUser)
+    this.userService.googleAuth(googleUser.authentication.idToken).subscribe(r => console.log(r))
   }
 
   forgotPassword(){
     this.openForgotPasswordModal()
+  }
+
+  async presentErrorToast(message){
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2500,
+      color: 'danger'
+    })
+    await toast.present()
   }
 
   // authentication:

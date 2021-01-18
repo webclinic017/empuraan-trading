@@ -179,7 +179,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar>\n    <ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <form #loginForm=\"ngForm\">\n    <!-- <ion-title class=\"ion-text-center ion-margin-vertical\" color=\"warning\"><h1>Welcome to Empuraan</h1></ion-title> -->\n    <ion-title class=\"ion-text-center ion-margin-vertical\"><h2>Login</h2></ion-title>\n    <ion-grid>\n      <ion-row>\n        <ion-col>\n          <ion-item>\n            <ion-label position=\"floating\">E-mail</ion-label>\n            <ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <ion-item>\n            <ion-label position=\"floating\">Password</ion-label>\n            <ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class=\"button-col\">\n          <button class=\"button login-button\" type=\"submit\" (click)=\"login(loginForm)\">Login</button>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <button class=\"button google-button\" color=\"danger\" (click)=\"google()\">\n            <ion-icon name=\"logo-google\"></ion-icon>\n            <span>Login with Google</span> \n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <div class=\"or-line\">\n            <hr>\n            <span>OR</span>\n          </div>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class=\"links-block\" size=12>\n          <button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"button new-user-button\" routerLink=\"/home/sign-up\">\n            Create new account\n          </button>\n          <button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"link-button ion-float-right\" (click)=\"forgotPassword(loginForm)\">\n            Forgot password?\n          </button>\n          <!-- {{ userInfo | json}} -->\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar>\n    <ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <form #loginForm=\"ngForm\">\n    <!-- <ion-title class=\"ion-text-center ion-margin-vertical\" color=\"warning\"><h1>Welcome to Empuraan</h1></ion-title> -->\n    <ion-grid>\n      <ion-row>\n        <ion-col>\n          <ion-title style=\"font-size: 25px\" class=\"ion-text-center\">Login</ion-title>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"ion-margin-top\">\n        <ion-col>\n          <ion-item class=\"ion-no-padding\">\n            <ion-label position=\"floating\">E-mail</ion-label>\n            <ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <ion-item class=\"ion-no-padding\">\n            <ion-label position=\"floating\">Password</ion-label>\n            <ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class=\"button-col\">\n          <button class=\"button login-button\" type=\"submit\" (click)=\"login(loginForm)\">Login</button>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <button class=\"button google-button\" color=\"danger\" (click)=\"google()\">\n            <ion-icon name=\"logo-google\"></ion-icon>\n            <span>Login with Google</span> \n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <div class=\"or-line\">\n            <hr>\n            <span>OR</span>\n          </div>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class=\"links-block\" size=12>\n          <button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"button new-user-button\" routerLink=\"/home/sign-up\">\n            Create new account\n          </button>\n          <button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"link-button ion-float-right\" (click)=\"forgotPassword(loginForm)\">\n            Forgot password?\n          </button>\n          <!-- {{ userInfo | json}} -->\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>\n";
       /***/
     },
 
@@ -301,29 +301,35 @@
       /* harmony import */
 
 
-      var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! @ionic-native/google-plus/ngx */
-      "up+p");
-      /* harmony import */
-
-
-      var _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @codetrix-studio/capacitor-google-auth */
       "OTqH");
       /* harmony import */
 
 
-      var _capacitor_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _capacitor_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @capacitor/core */
       "gcOT");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! @ionic/angular */
+      "TEn/");
+      /* harmony import */
+
+
+      var src_app_modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! src/app/modals/modal-fp-email/modal-fp-email.component */
+      "nJHT");
 
       var LoginPage = /*#__PURE__*/function () {
-        function LoginPage(router, userService, googlePlus) {
+        function LoginPage(router, userService, modalCtrl) {
           _classCallCheck(this, LoginPage);
 
           this.router = router;
           this.userService = userService;
-          this.googlePlus = googlePlus;
+          this.modalCtrl = modalCtrl;
         }
 
         _createClass(LoginPage, [{
@@ -345,35 +351,62 @@
             });
           }
         }, {
-          key: "google",
-          value: function google() {
+          key: "openForgotPasswordModal",
+          value: function openForgotPasswordModal() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var googleUser;
+              var modal;
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
                       _context.next = 2;
-                      return _capacitor_core__WEBPACK_IMPORTED_MODULE_8__["Plugins"].GoogleAuth.signIn();
+                      return this.modalCtrl.create({
+                        component: src_app_modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_9__["ModalFpEmailComponent"]
+                      });
 
                     case 2:
-                      googleUser = _context.sent;
+                      modal = _context.sent;
+                      _context.next = 5;
+                      return modal.present();
 
-                    case 3:
+                    case 5:
+                      return _context.abrupt("return", _context.sent);
+
+                    case 6:
                     case "end":
                       return _context.stop();
                   }
                 }
-              }, _callee);
+              }, _callee, this);
+            }));
+          }
+        }, {
+          key: "google",
+          value: function google() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var googleUser;
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return _capacitor_core__WEBPACK_IMPORTED_MODULE_7__["Plugins"].GoogleAuth.signIn();
+
+                    case 2:
+                      googleUser = _context2.sent;
+
+                    case 3:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2);
             }));
           }
         }, {
           key: "forgotPassword",
-          value: function forgotPassword(form) {
-            var email = form.value.email;
-            this.userService.emailExists(email).subscribe(function (r) {
-              return console.log(r);
-            });
+          value: function forgotPassword() {
+            this.openForgotPasswordModal();
           }
         }]);
 
@@ -386,7 +419,7 @@
         }, {
           type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]
         }, {
-          type: _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_6__["GooglePlus"]
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ModalController"]
         }];
       };
 
@@ -534,21 +567,21 @@
         }, {
           key: "signIn",
           value: function signIn() {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
               var _this3 = this;
 
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
-                  switch (_context3.prev = _context3.next) {
+                  switch (_context4.prev = _context4.next) {
                     case 0:
-                      return _context3.abrupt("return", new Promise(function (resolve, reject) {
-                        return __awaiter(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                      return _context4.abrupt("return", new Promise(function (resolve, reject) {
+                        return __awaiter(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
                           var serverAuthCode, needsOfflineAccess, offlineAccessResponse, googleUser, user;
-                          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                          return regeneratorRuntime.wrap(function _callee3$(_context3) {
                             while (1) {
-                              switch (_context2.prev = _context2.next) {
+                              switch (_context3.prev = _context3.next) {
                                 case 0:
-                                  _context2.prev = 0;
+                                  _context3.prev = 0;
                                   needsOfflineAccess = false;
 
                                   try {
@@ -556,83 +589,56 @@
                                   } catch (_a) {}
 
                                   if (!needsOfflineAccess) {
-                                    _context2.next = 10;
+                                    _context3.next = 10;
                                     break;
                                   }
 
-                                  _context2.next = 6;
+                                  _context3.next = 6;
                                   return gapi.auth2.getAuthInstance().grantOfflineAccess();
 
                                 case 6:
-                                  offlineAccessResponse = _context2.sent;
+                                  offlineAccessResponse = _context3.sent;
                                   serverAuthCode = offlineAccessResponse.code;
-                                  _context2.next = 12;
+                                  _context3.next = 12;
                                   break;
 
                                 case 10:
-                                  _context2.next = 12;
+                                  _context3.next = 12;
                                   return gapi.auth2.getAuthInstance().signIn();
 
                                 case 12:
                                   googleUser = gapi.auth2.getAuthInstance().currentUser.get();
 
                                   if (!needsOfflineAccess) {
-                                    _context2.next = 16;
+                                    _context3.next = 16;
                                     break;
                                   }
 
-                                  _context2.next = 16;
+                                  _context3.next = 16;
                                   return googleUser.reloadAuthResponse();
 
                                 case 16:
                                   user = this.getUserFrom(googleUser);
                                   user.serverAuthCode = serverAuthCode;
                                   resolve(user);
-                                  _context2.next = 24;
+                                  _context3.next = 24;
                                   break;
 
                                 case 21:
-                                  _context2.prev = 21;
-                                  _context2.t0 = _context2["catch"](0);
-                                  reject(_context2.t0);
+                                  _context3.prev = 21;
+                                  _context3.t0 = _context3["catch"](0);
+                                  reject(_context3.t0);
 
                                 case 24:
                                 case "end":
-                                  return _context2.stop();
+                                  return _context3.stop();
                               }
                             }
-                          }, _callee2, this, [[0, 21]]);
+                          }, _callee3, this, [[0, 21]]);
                         }));
                       }));
 
                     case 1:
-                    case "end":
-                      return _context3.stop();
-                  }
-                }
-              }, _callee3);
-            }));
-          }
-        }, {
-          key: "refresh",
-          value: function refresh() {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var authResponse;
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                while (1) {
-                  switch (_context4.prev = _context4.next) {
-                    case 0:
-                      _context4.next = 2;
-                      return gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
-
-                    case 2:
-                      authResponse = _context4.sent;
-                      return _context4.abrupt("return", {
-                        accessToken: authResponse.access_token,
-                        idToken: authResponse.id_token
-                      });
-
-                    case 4:
                     case "end":
                       return _context4.stop();
                   }
@@ -641,16 +647,25 @@
             }));
           }
         }, {
-          key: "signOut",
-          value: function signOut() {
+          key: "refresh",
+          value: function refresh() {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var authResponse;
               return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
                   switch (_context5.prev = _context5.next) {
                     case 0:
-                      return _context5.abrupt("return", gapi.auth2.getAuthInstance().signOut());
+                      _context5.next = 2;
+                      return gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
 
-                    case 1:
+                    case 2:
+                      authResponse = _context5.sent;
+                      return _context5.abrupt("return", {
+                        accessToken: authResponse.access_token,
+                        idToken: authResponse.id_token
+                      });
+
+                    case 4:
                     case "end":
                       return _context5.stop();
                   }
@@ -659,16 +674,34 @@
             }));
           }
         }, {
-          key: "addUserChangeListener",
-          value: function addUserChangeListener() {
+          key: "signOut",
+          value: function signOut() {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-              var _this4 = this;
-
               return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
                   switch (_context6.prev = _context6.next) {
                     case 0:
-                      _context6.next = 2;
+                      return _context6.abrupt("return", gapi.auth2.getAuthInstance().signOut());
+
+                    case 1:
+                    case "end":
+                      return _context6.stop();
+                  }
+                }
+              }, _callee6);
+            }));
+          }
+        }, {
+          key: "addUserChangeListener",
+          value: function addUserChangeListener() {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+              var _this4 = this;
+
+              return regeneratorRuntime.wrap(function _callee7$(_context7) {
+                while (1) {
+                  switch (_context7.prev = _context7.next) {
+                    case 0:
+                      _context7.next = 2;
                       return this.gapiLoaded;
 
                     case 2:
@@ -678,10 +711,10 @@
 
                     case 3:
                     case "end":
-                      return _context6.stop();
+                      return _context7.stop();
                   }
                 }
-              }, _callee6, this);
+              }, _callee7, this);
             }));
           }
         }, {

@@ -8,12 +8,16 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./leaderboard.page.scss'],
 })
 export class LeaderboardPage implements OnInit {
-
+  dataLoaded: boolean
   leaderboard
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getLeaderboard().subscribe((r:any) => this.leaderboard = r.data)
+    this.dataLoaded = false
+    this.userService.getLeaderboard().subscribe((r:any) => {
+      this.leaderboard = r.data
+      this.dataLoaded = true
+    })
   }
 
 }

@@ -1,66 +1,64 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-img src="/assets/logo_no_back.png" class="logo"></ion-img>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-img src="/assets/logo_no_back.png" class="logo"></ion-img>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form #loginForm="ngForm">
-    <!-- <ion-title class="ion-text-center ion-margin-vertical" color="warning"><h1>Welcome to Empuraan</h1></ion-title> -->
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-title style="font-size: 25px" class="ion-text-center">Login</ion-title>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-margin-top">
-        <ion-col>
-          <ion-item class="ion-no-padding">
-            <ion-label position="floating">E-mail</ion-label>
-            <ion-input type="email" required ngModel name="email"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item class="ion-no-padding">
-            <ion-label position="floating">Password</ion-label>
-            <ion-input type="password" required ngModel name="password"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="button-col">
-          <button class="button login-button" type="submit" (click)="login(loginForm)">Login</button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <button class="button google-button" color="danger" (click)="google()">
-            <ion-icon name="logo-google"></ion-icon>
-            <span>Login with Google</span> 
-          </button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <div class="or-line">
-            <hr>
-            <span>OR</span>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="links-block" size=12>
-          <button color="tertiary" size="small" fill="clear" class="button new-user-button" routerLink="/home/sign-up">
-            Create new account
-          </button>
-          <button color="tertiary" size="small" fill="clear" class="link-button ion-float-right" (click)="forgotPassword(loginForm)">
-            Forgot password?
-          </button>
-          <!-- {{ userInfo | json}} -->
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+	<form #loginForm="ngForm">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<ion-title style="font-size: 25px" class="ion-text-center">Login</ion-title>
+				</ion-col>
+			</ion-row>
+			<ion-row class="ion-margin-top">
+				<ion-col>
+					<ion-item class="ion-no-padding">
+						<ion-label position="floating">E-mail</ion-label>
+						<ion-input type="email" required ngModel name="email"></ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<ion-item class="ion-no-padding">
+						<ion-label position="floating">Password</ion-label>
+						<ion-input type="password" required ngModel name="password"></ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="button-col">
+					<button class="button login-button" type="submit" (click)="login(loginForm)">
+						Login
+						<ion-spinner color="light" name="lines-small" *ngIf="loginSpinner"></ion-spinner>
+					</button>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<button class="button google-button" color="danger" (click)="google()">
+						<ion-icon name="logo-google"></ion-icon>
+						<span>Login with Google</span>
+					</button>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="or-line">
+						<hr />
+						<span>OR</span>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="links-block" size="12">
+					<button color="tertiary" size="small" fill="clear" class="button new-user-button" routerLink="/home/sign-up">Create new account</button>
+					<button color="tertiary" size="small" fill="clear" class="link-button ion-float-right" (click)="forgotPassword(loginForm)">Forgot password?</button>
+					<!-- {{ userInfo | json}} -->
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
 </ion-content>

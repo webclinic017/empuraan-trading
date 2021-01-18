@@ -7,9 +7,12 @@
 	</ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-	<ion-item class="ion-margin-bottom">
+	<ion-item class="ion-margin-bottom ion-no-padding">
 		<ion-label>Email</ion-label>
 		<ion-input [(ngModel)]="email" type="email"></ion-input>
 	</ion-item>
-	<ion-button size="block" (click)="emailCheck(email)">Send me the code</ion-button>
+	<ion-button size="block" (click)="emailCheck(email)">
+		Send me the code
+		<ion-spinner name="lines-small" *ngIf="spinner"></ion-spinner>
+	</ion-button>
 </ion-content>

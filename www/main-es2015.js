@@ -208,6 +208,19 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
+/***/ "8E9K":
+/*!***************************************************************************!*\
+  !*** ./src/app/modals/modal-upload-post/modal-upload-post.component.scss ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("ion-title {\n  color: black;\n}\n\n@media screen and (max-width: 360px) {\n  ion-title, h3 {\n    font-size: 15px;\n  }\n\n  ion-label, ion-text, p, h5, ion-button, span {\n    font-size: 13px !important;\n  }\n}\n\n@media (prefers-color-scheme: dark) {\n  ion-title {\n    color: white;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kYWxzL21vZGFsLXVwbG9hZC1wb3N0L21vZGFsLXVwbG9hZC1wb3N0LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBQTtBQUNKOztBQUNBO0VBQ0k7SUFDRSxlQUFBO0VBRUo7O0VBQUU7SUFDRSwwQkFBQTtFQUdKO0FBQ0Y7O0FBREE7RUFDSTtJQUNJLFlBQUE7RUFHTjtBQUNGIiwiZmlsZSI6InNyYy9hcHAvbW9kYWxzL21vZGFsLXVwbG9hZC1wb3N0L21vZGFsLXVwbG9hZC1wb3N0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXRpdGxle1xuICAgIGNvbG9yOmJsYWNrO1xufVxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogMzYwcHgpIHtcbiAgICBpb24tdGl0bGUsIGgze1xuICAgICAgZm9udC1zaXplOjE1cHg7XG4gICAgfVxuICAgIGlvbi1sYWJlbCwgaW9uLXRleHQsIHAsIGg1LCBpb24tYnV0dG9uLCBzcGFue1xuICAgICAgZm9udC1zaXplOiAxM3B4ICFpbXBvcnRhbnQ7XG4gICAgfVxufVxuQG1lZGlhKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7XG4gICAgaW9uLXRpdGxle1xuICAgICAgICBjb2xvcjp3aGl0ZTtcbiAgICB9XG59Il19 */");
+
+/***/ }),
+
 /***/ "8hSh":
 /*!*******************************************!*\
   !*** ./src/app/services/stock.service.ts ***!
@@ -236,11 +249,12 @@ let StockService = class StockService {
         this.http = http;
         this.apiUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + "stocks/order/";
         this.apiGetStock = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + "stocks/";
+        this.apiStockStart = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + "stocks/start/emit/";
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_4__(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].socketUrl);
-        console.log('socket', this.socket);
+        console.log("socket", this.socket);
     }
     listen(eventName) {
-        return new rxjs__WEBPACK_IMPORTED_MODULE_5__["Observable"](subscriber => {
+        return new rxjs__WEBPACK_IMPORTED_MODULE_5__["Observable"]((subscriber) => {
             this.socket.on(eventName, (data) => {
                 subscriber.next(data);
             });
@@ -255,23 +269,26 @@ let StockService = class StockService {
     getStocks() {
         return this.http.get(this.apiGetStock);
     }
+    startStock(stockId, watchlistId) {
+        return this.http.post(this.apiStockStart, { stockId, watchlistId });
+    }
     initStocks() {
-        return this.http.post(this.apiUrl + 'init', {});
+        return this.http.post(this.apiUrl + "init", {});
     }
     orderStockLimitBuy(input) {
-        return this.http.post(this.apiUrl + 'limit/buy', input);
+        return this.http.post(this.apiUrl + "limit/buy", input);
     }
     orderStockLimitSell(input) {
-        return this.http.post(this.apiUrl + 'limit/sell', input);
+        return this.http.post(this.apiUrl + "limit/sell", input);
     }
     orderStockMarketBuy(input) {
-        return this.http.post(this.apiUrl + 'market/buy', input);
+        return this.http.post(this.apiUrl + "market/buy", input);
     }
     orderStockMarketSell(input) {
-        return this.http.post(this.apiUrl + 'market/sell', input);
+        return this.http.post(this.apiUrl + "market/sell", input);
     }
     createNewStocks(input) {
-        return this.http.post(this.apiUrl + 'new', input);
+        return this.http.post(this.apiUrl + "new", input);
     }
 };
 StockService.ctorParameters = () => [
@@ -279,7 +296,7 @@ StockService.ctorParameters = () => [
 ];
 StockService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
-        providedIn: 'root'
+        providedIn: "root",
     })
 ], StockService);
 
@@ -356,6 +373,95 @@ const environment = {
 
 /***/ }),
 
+/***/ "BCkd":
+/*!**********************************************!*\
+  !*** ./src/app/services/marubozu.service.ts ***!
+  \**********************************************/
+/*! exports provided: MarubozuService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarubozuService", function() { return MarubozuService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "AytR");
+
+
+
+
+
+let MarubozuService = class MarubozuService {
+    constructor(http) {
+        this.http = http;
+        this.apiUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl + "marbozzu/";
+        this.activeTab = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+    }
+    getAll() {
+        return this.http.get(this.apiUrl);
+    }
+    get(key) {
+        return this.http.get(this.apiUrl + key);
+    }
+    delete(id) {
+        return this.http.delete(this.apiUrl + `del/${id}`);
+    }
+    createBlogWithBlob(title, content, blobData, ext, image) {
+        const formData = new FormData();
+        formData.append("image", new Blob([blobData.url]), `img.${ext}`);
+        formData.append("title", title);
+        formData.append("content", content);
+        return this.http.post(`${this.apiUrl}blog`, formData);
+        // return this.http.post(this.apiUrl + 'blog', {title, content, image})
+    }
+    createBlogWithFile(title, content, file) {
+        const formData = new FormData();
+        const ext = file.name.split(".").pop();
+        formData.append("image", file, `${file.name}.${ext}`);
+        formData.append("title", title);
+        formData.append("content", content);
+        return this.http.post(`${this.apiUrl}blog`, formData);
+        // return this.http.post(this.apiUrl + 'blog', {title, content, image})
+    }
+    createTutorial(title, embededurl) {
+        return this.http.post(this.apiUrl + "tutorial", { title, embededurl });
+    }
+    createWithBlob(title, content, stockname, key, blobData, name, ext) {
+        const formData = new FormData();
+        if (blobData != null || blobData != undefined)
+            formData.append("image", blobData, `${name}.${ext}`);
+        formData.append("title", title);
+        formData.append("content", content);
+        formData.append("stockname", stockname);
+        return this.http.post(`${this.apiUrl}${key}`, formData);
+        // return this.http.post(this.apiUrl + 'blog', {title, content, image})
+    }
+    createWithFile(title, content, stockname, key, file) {
+        const formData = new FormData();
+        const ext = file.name.split(".").pop();
+        formData.append("image", file, `${file.name}.${ext}`);
+        formData.append("title", title);
+        formData.append("content", content);
+        formData.append("stockname", stockname);
+        return this.http.post(`${this.apiUrl}${key}`, formData);
+        // return this.http.post(this.apiUrl + key, {title, content, stockname, image})
+    }
+};
+MarubozuService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
+];
+MarubozuService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: "root",
+    })
+], MarubozuService);
+
+
+
+/***/ }),
+
 /***/ "Cd/a":
 /*!*************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/modal-watchlist/modal-watchlist.component.html ***!
@@ -392,6 +498,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (".drag-list {\n  width: 90%;\n  border-top: solid 1px #ccc;\n  min-height: 60px;\n  display: block;\n  background: white;\n  overflow: hidden;\n  margin: 0 auto;\n}\n\n.drag-box {\n  padding: 20px 10px;\n  border-bottom: solid 1px #ccc !important;\n  color: rgba(0, 0, 0, 0.87);\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: start;\n  box-sizing: border-box;\n  cursor: move;\n  background: white;\n  font-size: 14px;\n}\n\n.cdk-drag-preview {\n  box-sizing: border-box;\n  border-radius: 4px;\n  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);\n}\n\n.cdk-drag-placeholder {\n  opacity: 0;\n}\n\n.cdk-drag-animating {\n  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);\n}\n\n.drag-box:last-child {\n  border: none;\n}\n\n.drag-list.cdk-drop-list-dragging .drag-box:not(.cdk-drag-placeholder) {\n  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);\n}\n\nion-title {\n  color: black;\n}\n\nion-icon {\n  font-size: 20px;\n}\n\n@media screen and (max-width: 360px) {\n  ion-title, h3 {\n    font-size: 15px !important;\n  }\n\n  ion-label, ion-button, span, h5 {\n    font-size: 13px !important;\n  }\n}\n\n@media (prefers-color-scheme: dark) {\n  ion-title {\n    color: white;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kYWxzL21vZGFsLXdhdGNobGlzdC1jZS9tb2RhbC13YXRjaGxpc3QtY2UuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxVQUFBO0VBQ0EsMEJBQUE7RUFDQSxnQkFBQTtFQUNBLGNBQUE7RUFDQSxpQkFBQTtFQUNBLGdCQUFBO0VBQ0EsY0FBQTtBQUNGOztBQUVBO0VBQ0Usa0JBQUE7RUFDQSx3Q0FBQTtFQUNBLDBCQUFBO0VBQ0EsYUFBQTtFQUNBLG1CQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLHNCQUFBO0VBQ0EsWUFBQTtFQUNBLGlCQUFBO0VBQ0EsZUFBQTtBQUNGOztBQUVBO0VBQ0Usc0JBQUE7RUFDQSxrQkFBQTtFQUNBLHFIQUFBO0FBQ0Y7O0FBSUE7RUFDRSxVQUFBO0FBREY7O0FBSUE7RUFDRSxzREFBQTtBQURGOztBQUlBO0VBQ0UsWUFBQTtBQURGOztBQUlBO0VBQ0Usc0RBQUE7QUFERjs7QUFHQTtFQUNFLFlBQUE7QUFBRjs7QUFFQTtFQUNFLGVBQUE7QUFDRjs7QUFDQTtFQUNFO0lBQ0UsMEJBQUE7RUFFRjs7RUFBQTtJQUNFLDBCQUFBO0VBR0Y7QUFDRjs7QUFEQTtFQUNFO0lBQ0ksWUFBQTtFQUdKO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9tb2RhbHMvbW9kYWwtd2F0Y2hsaXN0LWNlL21vZGFsLXdhdGNobGlzdC1jZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5kcmFnLWxpc3Qge1xuICB3aWR0aDogOTAlO1xuICBib3JkZXItdG9wOiBzb2xpZCAxcHggI2NjYztcbiAgbWluLWhlaWdodDogNjBweDtcbiAgZGlzcGxheTogYmxvY2s7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICBtYXJnaW46IDAgYXV0bztcbn1cblxuLmRyYWctYm94IHtcbiAgcGFkZGluZzogMjBweCAxMHB4O1xuICBib3JkZXItYm90dG9tOiBzb2xpZCAxcHggI2NjYyAhaW1wb3J0YW50O1xuICBjb2xvcjogcmdiYSgwLCAwLCAwLCAwLjg3KTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzdGFydDtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgY3Vyc29yOiBtb3ZlO1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgZm9udC1zaXplOiAxNHB4O1xufVxuXG4uY2RrLWRyYWctcHJldmlldyB7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgYm94LXNoYWRvdzogMCA1cHggNXB4IC0zcHggcmdiYSgwLCAwLCAwLCAwLjIpLFxuICAgICAgICAgICAgICAwIDhweCAxMHB4IDFweCByZ2JhKDAsIDAsIDAsIDAuMTQpLFxuICAgICAgICAgICAgICAwIDNweCAxNHB4IDJweCByZ2JhKDAsIDAsIDAsIDAuMTIpO1xufVxuXG4uY2RrLWRyYWctcGxhY2Vob2xkZXIge1xuICBvcGFjaXR5OiAwO1xufVxuXG4uY2RrLWRyYWctYW5pbWF0aW5nIHtcbiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDI1MG1zIGN1YmljLWJlemllcigwLCAwLCAwLjIsIDEpO1xufVxuXG4uZHJhZy1ib3g6bGFzdC1jaGlsZCB7XG4gIGJvcmRlcjogbm9uZTtcbn1cblxuLmRyYWctbGlzdC5jZGstZHJvcC1saXN0LWRyYWdnaW5nIC5kcmFnLWJveDpub3QoLmNkay1kcmFnLXBsYWNlaG9sZGVyKSB7XG4gIHRyYW5zaXRpb246IHRyYW5zZm9ybSAyNTBtcyBjdWJpYy1iZXppZXIoMCwgMCwgMC4yLCAxKTtcbn1cbmlvbi10aXRsZXtcbiAgY29sb3I6YmxhY2s7XG59XG5pb24taWNvbntcbiAgZm9udC1zaXplOiAyMHB4O1xufVxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogMzYwcHgpIHtcbiAgaW9uLXRpdGxlLCBoM3tcbiAgICBmb250LXNpemU6MTVweCAhaW1wb3J0YW50O1xuICB9XG4gIGlvbi1sYWJlbCwgaW9uLWJ1dHRvbiwgc3BhbiwgaDV7XG4gICAgZm9udC1zaXplOiAxM3B4ICFpbXBvcnRhbnQ7XG4gIH1cbn1cbkBtZWRpYShwcmVmZXJzLWNvbG9yLXNjaGVtZTogZGFyaykge1xuICBpb24tdGl0bGV7XG4gICAgICBjb2xvcjp3aGl0ZTtcbiAgfVxufSJdfQ== */");
+
+/***/ }),
+
+/***/ "K/jU":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/modal-fp-email/modal-fp-email.component.html ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n\t<ion-toolbar>\n\t\t<ion-title>Forgot password</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n\t<ion-item class=\"ion-margin-bottom\">\n\t\t<ion-label>Email</ion-label>\n\t\t<ion-input [(ngModel)]=\"email\" type=\"email\"></ion-input>\n\t</ion-item>\n\t<ion-button size=\"block\" (click)=\"emailCheck(email)\">Send me the code</ion-button>\n</ion-content>\n");
 
 /***/ }),
 
@@ -452,6 +571,19 @@ ModalChangePasswordComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__deco
 ], ModalChangePasswordComponent);
 
 
+
+/***/ }),
+
+/***/ "Kmqd":
+/*!*********************************************************************!*\
+  !*** ./src/app/modals/modal-fp-email/modal-fp-email.component.scss ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9tb2RhbC1mcC1lbWFpbC9tb2RhbC1mcC1lbWFpbC5jb21wb25lbnQuc2NzcyJ9 */");
 
 /***/ }),
 
@@ -533,10 +665,7 @@ let ModalEditOrderComponent = class ModalEditOrderComponent {
         this.modalCtrl = modalCtrl;
         this.orderService = orderService;
     }
-    ngOnInit() {
-        console.log(this.position);
-        console.log(this.pending);
-    }
+    ngOnInit() { }
     dismissModal(change) {
         this.modalCtrl.dismiss(change);
     }
@@ -550,7 +679,7 @@ let ModalEditOrderComponent = class ModalEditOrderComponent {
         (this.position != null)
             && this.orderService
                 .exitPosition(this.position.id)
-                .subscribe(() => { }, () => { }, () => this.dismissModal());
+                .subscribe(() => { }, () => { }, () => this.dismissModal(true));
     }
     savePending() {
         (this.pending != null)
@@ -610,14 +739,12 @@ let ModalWatchlistComponent = class ModalWatchlistComponent {
         this.stockService = stockService;
     }
     ngOnInit() {
-        console.log(this.selectedWatchlist);
         this.stockService.getStocks().subscribe((s) => {
             this.stocks = s.data;
-            console.log(this.stocks);
+            console.log(s);
         });
         this.watchlistService.getWatchlist(this.selectedWatchlist).subscribe((w) => {
             this.sWatchlist = w.data;
-            console.log(this.sWatchlist);
         });
     }
     dismissModal() {
@@ -631,7 +758,6 @@ let ModalWatchlistComponent = class ModalWatchlistComponent {
             this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock._id).subscribe(() => this.changeOfWatchlist = true);
     }
     filter(filterValue) {
-        console.log(filterValue);
         this.filteredData = this.stocks.filter(stock => stock.companyName.toLowerCase().includes(filterValue.toLowerCase()));
     }
     seeIfChecked(stock) {
@@ -811,7 +937,7 @@ AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>{{ position != null ? \"Edit Position\" : \"Edit Pending\" }}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-title class=\"ion-padding\" *ngIf=\"position != null\">{{ position.name }}</ion-title>\n\t<ion-title class=\"ion-padding\" *ngIf=\"pending != null\">{{ pending.name }}</ion-title>\n\t<ion-grid>\n\t\t<ion-row *ngIf=\"position != null\">\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<ion-card-header>\n\t\t\t\t\t<ion-card-title>Stop-loss</ion-card-title>\n\t\t\t\t</ion-card-header>\n\t\t\t\t<ion-card-content>\n\t\t\t\t\t<ion-input\n\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\tname=\"stopLoss\"\n\t\t\t\t\t\t[(ngModel)]=\"position.stoploss\"\n\t\t\t\t\t\trequired\n\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t></ion-input>\n\t\t\t\t</ion-card-content>\n\t\t\t\t<!-- <ion-label>Stop-Loss</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" min=0 [(ngModel)]=\"position.stoploss\"></ion-input> -->\n\t\t\t</ion-col>\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<ion-card-header>\n\t\t\t\t\t<ion-card-title>Target</ion-card-title>\n\t\t\t\t</ion-card-header>\n\t\t\t\t<ion-card-content>\n\t\t\t\t\t<ion-input\n\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\tname=\"target\"\n\t\t\t\t\t\t[(ngModel)]=\"position.target\"\n\t\t\t\t\t\trequired\n\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t></ion-input>\n\t\t\t\t</ion-card-content>\n\t\t\t\t<!-- <ion-label>Target</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" min=0 [(ngModel)]=\"position.target\"></ion-input> -->\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<ion-row *ngIf=\"pending != null\">\n\t\t\t<ion-col>\n\t\t\t\t<div *ngIf=\"!pending.isStopLoss\">\n\t\t\t\t\t<ion-card-header>\n\t\t\t\t\t\t<ion-card-title>Target</ion-card-title>\n\t\t\t\t\t</ion-card-header>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\t\tname=\"target\"\n\t\t\t\t\t\t\t[(ngModel)]=\"pending.price\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t\t<!-- <ion-label>Target</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" [(ngModel)]=\"pending.target\"></ion-input> -->\n\t\t\t\t</div>\n\t\t\t\t<div *ngIf=\"pending.isStopLoss\">\n\t\t\t\t\t<ion-card-header>\n\t\t\t\t\t\t<ion-card-title>Stop-loss</ion-card-title>\n\t\t\t\t\t</ion-card-header>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\t\tname=\"stopLoss\"\n\t\t\t\t\t\t\t[(ngModel)]=\"pending.stoploss\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t\t<!-- <ion-label>Stop-loss</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" [(ngModel)]=\"pending.stoploss\"></ion-input> -->\n\t\t\t\t</div>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n</ion-content>\n<ion-footer class=\"ion-padding\">\n\t<div *ngIf=\"position != null\">\n\t\t<ion-button expand=\"block\" color=\"success\" (click)=\"savePosition()\">\n\t\t\t<ion-icon name=\"save-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSave\n\t\t</ion-button>\n\t\t<ion-button expand=\"block\" color=\"danger\" (click)=\"sellPosition()\">\n\t\t\t<ion-icon name=\"trash-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSell\n\t\t</ion-button>\n\t</div>\n\t<div *ngIf=\"pending != null\">\n\t\t<ion-button expand=\"block\" color=\"success\" (click)=\"savePending()\">\n\t\t\t<ion-icon name=\"save-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSave\n\t\t</ion-button>\n\t</div>\n</ion-footer>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>{{ position != null ? \"Edit Position\" : \"Edit Pending\" }}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-title class=\"ion-padding\" *ngIf=\"position != null\">{{ position.name }}</ion-title>\n\t<ion-title class=\"ion-padding\" *ngIf=\"pending != null\">{{ pending.name }}</ion-title>\n\t<ion-grid>\n\t\t<ion-row *ngIf=\"position != null\">\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<ion-card-header>\n\t\t\t\t\t<ion-card-title>Stop-loss</ion-card-title>\n\t\t\t\t</ion-card-header>\n\t\t\t\t<ion-card-content>\n\t\t\t\t\t<ion-input\n\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\tname=\"stopLoss\"\n\t\t\t\t\t\t[(ngModel)]=\"position.stoploss\"\n\t\t\t\t\t\trequired\n\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t></ion-input>\n\t\t\t\t</ion-card-content>\n\t\t\t\t<!-- <ion-label>Stop-Loss</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" min=0 [(ngModel)]=\"position.stoploss\"></ion-input> -->\n\t\t\t</ion-col>\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<ion-card-header>\n\t\t\t\t\t<ion-card-title>Target</ion-card-title>\n\t\t\t\t</ion-card-header>\n\t\t\t\t<ion-card-content>\n\t\t\t\t\t<ion-input\n\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\tname=\"target\"\n\t\t\t\t\t\t[(ngModel)]=\"position.target\"\n\t\t\t\t\t\trequired\n\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t></ion-input>\n\t\t\t\t</ion-card-content>\n\t\t\t\t<!-- <ion-label>Target</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" min=0 [(ngModel)]=\"position.target\"></ion-input> -->\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<ion-row *ngIf=\"pending != null\">\n\t\t\t<ion-col>\n\t\t\t\t<div *ngIf=\"!pending.isStopLoss\">\n\t\t\t\t\t<ion-card-header>\n\t\t\t\t\t\t<ion-card-title>Price</ion-card-title>\n\t\t\t\t\t</ion-card-header>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\t\tname=\"target\"\n\t\t\t\t\t\t\t[(ngModel)]=\"pending.price\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t\t<!-- <ion-label>Target</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" [(ngModel)]=\"pending.target\"></ion-input> -->\n\t\t\t\t</div>\n\t\t\t\t<div *ngIf=\"pending.isStopLoss\">\n\t\t\t\t\t<ion-card-header>\n\t\t\t\t\t\t<ion-card-title>Stop-loss</ion-card-title>\n\t\t\t\t\t</ion-card-header>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\t\tname=\"stopLoss\"\n\t\t\t\t\t\t\t[(ngModel)]=\"pending.stoploss\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t\t<!-- <ion-label>Stop-loss</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" [(ngModel)]=\"pending.stoploss\"></ion-input> -->\n\t\t\t\t</div>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n</ion-content>\n<ion-footer class=\"ion-padding\">\n\t<div *ngIf=\"position != null\">\n\t\t<ion-button expand=\"block\" color=\"success\" (click)=\"savePosition()\">\n\t\t\t<ion-icon name=\"save-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSave\n\t\t</ion-button>\n\t\t<ion-button expand=\"block\" color=\"danger\" (click)=\"sellPosition()\">\n\t\t\t<ion-icon name=\"trash-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSell\n\t\t</ion-button>\n\t</div>\n\t<div *ngIf=\"pending != null\">\n\t\t<ion-button expand=\"block\" color=\"success\" (click)=\"savePending()\">\n\t\t\t<ion-icon name=\"save-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSave\n\t\t</ion-button>\n\t</div>\n</ion-footer>\n");
 
 /***/ }),
 
@@ -963,6 +1089,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! src/environments/environment */ "AytR");
 /* harmony import */ var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @ionic-native/google-plus/ngx */ "up+p");
 /* harmony import */ var _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @ionic-native/screen-orientation/ngx */ "0QAI");
+/* harmony import */ var _modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./modals/modal-upload-post/modal-upload-post.component */ "x7KT");
+/* harmony import */ var _modals_modal_fp_code_check_modal_fp_code_check_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./modals/modal-fp-code-check/modal-fp-code-check.component */ "bzO4");
+/* harmony import */ var _modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./modals/modal-fp-email/modal-fp-email.component */ "nJHT");
+
+
+
 
 
 
@@ -1014,6 +1146,9 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_28__["ModalEditOrderComponent"],
             _modals_modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_29__["ModalChangePasswordComponent"],
             _modals_modal_withdraw_add_funds_modal_withdraw_add_funds_component__WEBPACK_IMPORTED_MODULE_30__["ModalWithdrawAddFundsComponent"],
+            _modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_35__["ModalUploadPostComponent"],
+            _modals_modal_fp_code_check_modal_fp_code_check_component__WEBPACK_IMPORTED_MODULE_36__["ModalFpCodeCheckComponent"],
+            _modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_37__["ModalFpEmailComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
@@ -1059,6 +1194,86 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "bzO4":
+/*!*****************************************************************************!*\
+  !*** ./src/app/modals/modal-fp-code-check/modal-fp-code-check.component.ts ***!
+  \*****************************************************************************/
+/*! exports provided: ModalFpCodeCheckComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalFpCodeCheckComponent", function() { return ModalFpCodeCheckComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_modal_fp_code_check_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./modal-fp-code-check.component.html */ "jYAL");
+/* harmony import */ var _modal_fp_code_check_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal-fp-code-check.component.scss */ "f0yJ");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/user.service */ "qfBg");
+/* harmony import */ var _modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modal-change-password/modal-change-password.component */ "K2jm");
+
+
+
+
+
+
+
+let ModalFpCodeCheckComponent = class ModalFpCodeCheckComponent {
+    constructor(modalCtrl, userService) {
+        this.modalCtrl = modalCtrl;
+        this.userService = userService;
+    }
+    ngOnInit() { }
+    dismissModal() {
+        this.modalCtrl.dismiss();
+    }
+    codeCheck(email, code) {
+        // this.userService.checkCodeValid(email, code).subscribe(r => {
+        this.dismissModal();
+        this.openChangePasswordModal();
+        // })
+    }
+    openChangePasswordModal() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const modal = yield this.modalCtrl.create({
+                component: _modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_6__["ModalChangePasswordComponent"]
+            });
+            return yield modal.present();
+        });
+    }
+};
+ModalFpCodeCheckComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
+    { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] }
+];
+ModalFpCodeCheckComponent.propDecorators = {
+    email: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['email',] }]
+};
+ModalFpCodeCheckComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-modal-fp-code-check',
+        template: _raw_loader_modal_fp_code_check_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_modal_fp_code_check_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], ModalFpCodeCheckComponent);
+
+
+
+/***/ }),
+
+/***/ "ck4M":
+/*!*****************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/modal-upload-post/modal-upload-post.component.html ***!
+  \*****************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Upload post</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<form #postForm=\"ngForm\">\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Post title</ion-label>\n\t\t\t\t\t\t<ion-input name=\"title\" ngModel required maxlength=100></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Stock Name</ion-label>\n\t\t\t\t\t\t<ion-input name=\"stockname\" ngModel required maxlength=100></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Content</ion-label>\n\t\t\t\t\t\t<ion-textarea name=\"content\" ngModel required maxlength=255></ion-textarea>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col size=\"6\">\n\t\t\t\t\t<ion-button color=\"success\" class=\"post-button\" expand=\"block\" (click)=\"selectImageSource()\">\n\t\t\t\t\t\t<ion-icon name=\"attach-outline\"></ion-icon>\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t\t<ion-col size=\"6\">\n\t\t\t\t\t<ion-button expand=\"block\" class=\"post-button\" (click)=\"uploadFile(postForm)\">Post</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col size=\"6\" *ngFor=\"let img of images; let i = index\" class=\"ion-text-center\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<!-- <p>{{ img.createdAt | date: \"short\" }}</p> -->\n\t\t\t\t\t</ion-label>\n\t\t\t\t\t<ion-img [src]=\"img.url\" [alt]=\"img\"></ion-img>\n\t\t\t\t\t<ion-fab vertical=\"bottom\" horizontal=\"end\">\n\t\t\t\t\t\t<ion-fab-button color=\"danger\" size=\"small\" (click)=\"deleteImage(i)\">\n\t\t\t\t\t\t\t<ion-icon name=\"trash-outline\"></ion-icon>\n\t\t\t\t\t\t</ion-fab-button>\n\t\t\t\t\t</ion-fab>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n");
+
+/***/ }),
+
 /***/ "dUkv":
 /*!***********************************************************************!*\
   !*** ./src/app/modals/modal-watchlist/modal-watchlist.component.scss ***!
@@ -1069,6 +1284,19 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9tb2RhbC13YXRjaGxpc3QvbW9kYWwtd2F0Y2hsaXN0LmNvbXBvbmVudC5zY3NzIn0= */");
+
+/***/ }),
+
+/***/ "f0yJ":
+/*!*******************************************************************************!*\
+  !*** ./src/app/modals/modal-fp-code-check/modal-fp-code-check.component.scss ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9tb2RhbC1mcC1jb2RlLWNoZWNrL21vZGFsLWZwLWNvZGUtY2hlY2suY29tcG9uZW50LnNjc3MifQ== */");
 
 /***/ }),
 
@@ -1130,6 +1358,19 @@ JwtInterceptor = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 ], JwtInterceptor);
 
 
+
+/***/ }),
+
+/***/ "jYAL":
+/*!*********************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/modal-fp-code-check/modal-fp-code-check.component.html ***!
+  \*********************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Code Validation</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"dismissModal()\">Close</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n  <ion-label class=\"ion-margin-vertical\">Enter the code that you've recieved on {{email}}</ion-label>\n  <ion-item class=\"ion-margin-bottom\">\n    <ion-label>Code</ion-label>\n    <ion-input [(ngModel)]=\"code\"></ion-input>\n  </ion-item>\n  <ion-button size=\"block\" (click)=\"codeCheck(email, code)\">Validate my code!</ion-button>\n</ion-content>");
 
 /***/ }),
 
@@ -1386,15 +1627,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stock_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stock.service */ "8hSh");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "AytR");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
 
 
 
 
 
 let OrderService = class OrderService {
-    constructor(stockService, http) {
+    constructor(stockService, http, router) {
         this.stockService = stockService;
         this.http = http;
+        this.router = router;
         this.apiUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl + 'stocks/';
     }
     getAllUserOrders() {
@@ -1415,42 +1659,35 @@ let OrderService = class OrderService {
     exitPosition(id) {
         return this.http.post(this.apiUrl + 'order/stop', { id });
     }
-    buy(cId, quantity, stopLoss, target, order, price) {
+    buy(cId, watchlistId, quantity, stopLoss, target, order, price) {
         let company;
         this.stockService.getStock(cId).subscribe((c) => {
             company = c.data;
             var pending;
-            pending = { stockId: cId, volume: quantity, stoploss: stopLoss, target, price };
+            pending = { stockId: cId, watchlistId, volume: quantity, stoploss: stopLoss, target, price };
             order == 'limit'
-                ? this.stockService.orderStockLimitBuy(pending).subscribe(r => console.log('buy', r))
-                : this.stockService.orderStockMarketBuy(pending).subscribe(r => console.log('buy', r));
+                ? this.stockService.orderStockLimitBuy(pending).subscribe(() => { }, () => { }, () => this.router.navigate(['home', 'orders']))
+                : this.stockService.orderStockMarketBuy(pending).subscribe(() => { }, () => { }, () => this.router.navigate(['home', 'orders']));
         });
     }
-    sell(cId, quantity, stopLoss, target, order, price) {
+    sell(cId, watchlistId, quantity, stopLoss, target, order, price) {
         let company;
         this.stockService.getStock(cId).subscribe((c) => {
             company = c.data;
             var pending;
-            pending = { stockId: cId, volume: quantity, stoploss: stopLoss, target, price };
+            pending = { stockId: cId, watchlistId, volume: quantity, stoploss: stopLoss, target, price };
             order == 'limit'
-                ? this.stockService.orderStockLimitSell(pending).subscribe(r => console.log('sell', r))
-                : this.stockService.orderStockMarketSell(pending).subscribe(r => console.log('sell', r));
+                ? this.stockService.orderStockLimitSell(pending).subscribe(() => { }, () => { }, () => this.router.navigate(['home', 'orders']))
+                : this.stockService.orderStockMarketSell(pending).subscribe(() => { }, () => { }, () => this.router.navigate(['home', 'orders']));
         });
     }
-    totalPandL() {
-        // const pos = this.position.map(p => p.pAndL)
-        // const val = pos.reduce((p, c) => p + c)
-        // return val
-    }
-    savePending(pending) {
-        // var pendingToUpdate = this.pending.find(p => p.code == pending.code)
-        // var indexOfPendingToUpdate = this.pending.indexOf(pendingToUpdate)
-        // this.pending.splice(indexOfPendingToUpdate,1,pending)
-    }
+    totalPandL() { }
+    savePending(pending) { }
 };
 OrderService.ctorParameters = () => [
     { type: _stock_service__WEBPACK_IMPORTED_MODULE_2__["StockService"] },
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
 ];
 OrderService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -1493,7 +1730,7 @@ let BuySellModalPopupComponent = class BuySellModalPopupComponent {
         this.router = router;
     }
     ngOnInit() {
-        this.stockService.listen(this.selectedStock.id).subscribe((res) => {
+        this.stockService.listen(`${this.selectedStock.id}-${this.selectedWatchlistId}`).subscribe((res) => {
             this.selectedStock.ltp = res[0].price;
         });
     }
@@ -1502,11 +1739,11 @@ let BuySellModalPopupComponent = class BuySellModalPopupComponent {
     }
     onClick(isBuy) {
         this.modalCtrl.dismiss();
-        this.router.navigate(['home', 'watchlist', 'buy-sell', this.selectedStock.id], { queryParams: { isBuy } });
+        this.router.navigate(["home", "watchlist", "buy-sell", this.selectedStock.id, this.selectedWatchlistId], { queryParams: { isBuy } });
     }
     navigateToChart() {
         this.modalCtrl.dismiss();
-        this.router.navigate(['chart']);
+        this.router.navigate(["chart"]);
     }
 };
 BuySellModalPopupComponent.ctorParameters = () => [
@@ -1515,15 +1752,88 @@ BuySellModalPopupComponent.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
 ];
 BuySellModalPopupComponent.propDecorators = {
-    selectedStock: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['selectedStock',] }]
+    selectedStock: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ["selectedStock",] }],
+    selectedWatchlistId: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ["selectedWatchlistId",] }]
 };
 BuySellModalPopupComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-buy-sell-modal-popup',
+        selector: "app-buy-sell-modal-popup",
         template: _raw_loader_buy_sell_modal_popup_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_buy_sell_modal_popup_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
     })
 ], BuySellModalPopupComponent);
+
+
+
+/***/ }),
+
+/***/ "nJHT":
+/*!*******************************************************************!*\
+  !*** ./src/app/modals/modal-fp-email/modal-fp-email.component.ts ***!
+  \*******************************************************************/
+/*! exports provided: ModalFpEmailComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalFpEmailComponent", function() { return ModalFpEmailComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_modal_fp_email_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./modal-fp-email.component.html */ "K/jU");
+/* harmony import */ var _modal_fp_email_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal-fp-email.component.scss */ "Kmqd");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/user.service */ "qfBg");
+/* harmony import */ var _modal_fp_code_check_modal_fp_code_check_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modal-fp-code-check/modal-fp-code-check.component */ "bzO4");
+
+
+
+
+
+
+
+let ModalFpEmailComponent = class ModalFpEmailComponent {
+    constructor(modalCtrl, userService) {
+        this.modalCtrl = modalCtrl;
+        this.userService = userService;
+    }
+    ngOnInit() { }
+    dismissModal() {
+        this.modalCtrl.dismiss();
+    }
+    emailCheck(email) {
+        if (this.checkIfEmailInString(email)) {
+            this.userService.emailExists(this.email).subscribe(r => {
+                console.log(r);
+                this.dismissModal();
+                this.openCodeCheckModal(email);
+            });
+        }
+    }
+    openCodeCheckModal(email) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const modal = yield this.modalCtrl.create({
+                component: _modal_fp_code_check_modal_fp_code_check_component__WEBPACK_IMPORTED_MODULE_6__["ModalFpCodeCheckComponent"],
+                componentProps: { email }
+            });
+            return yield modal.present();
+        });
+    }
+    checkIfEmailInString(text) {
+        var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+        return re.test(text);
+    }
+};
+ModalFpEmailComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
+    { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] }
+];
+ModalFpEmailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-modal-fp-email',
+        template: _raw_loader_modal_fp_email_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_modal_fp_email_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], ModalFpEmailComponent);
 
 
 
@@ -1563,7 +1873,7 @@ let UserService = class UserService {
         this.storage = storage;
         this.platform = platform;
         this.apiUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + "auth/";
-        this.apiSettingsUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + "settings";
+        this.apiSettingsUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + "settings/";
         this.user = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](null);
         this.authenticated = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
         this.isOnLoginOrSignUpPage = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
@@ -1595,6 +1905,9 @@ let UserService = class UserService {
     }
     googleAuth() {
         return this.http.get(this.apiUrl + 'google');
+    }
+    getFundsChart() {
+        return this.http.get(this.apiSettingsUrl + 'funds/records');
     }
     getLeaderboard() {
         return this.http.get(this.apiUrl + 'leaderboard');
@@ -1877,6 +2190,165 @@ ModalWithdrawAddFundsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__de
 
 /***/ }),
 
+/***/ "x7KT":
+/*!*************************************************************************!*\
+  !*** ./src/app/modals/modal-upload-post/modal-upload-post.component.ts ***!
+  \*************************************************************************/
+/*! exports provided: ModalUploadPostComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalUploadPostComponent", function() { return ModalUploadPostComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_modal_upload_post_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./modal-upload-post.component.html */ "ck4M");
+/* harmony import */ var _modal_upload_post_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal-upload-post.component.scss */ "8E9K");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/marubozu.service */ "BCkd");
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @capacitor/core */ "gcOT");
+
+
+
+
+
+
+
+const { Camera } = _capacitor_core__WEBPACK_IMPORTED_MODULE_6__["Plugins"];
+const STORAGE_KEY = "assets";
+let ModalUploadPostComponent = class ModalUploadPostComponent {
+    constructor(api, plt, actionSheetCtrl, modalCtrl) {
+        this.api = api;
+        this.plt = plt;
+        this.actionSheetCtrl = actionSheetCtrl;
+        this.modalCtrl = modalCtrl;
+        this.intraDay = false;
+        this.positional = false;
+        this.demoTrading = false;
+        this.images = [];
+    }
+    ngOnInit() { }
+    dismissModal(val) {
+        this.modalCtrl.dismiss(val);
+    }
+    selectImageSource() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const buttons = [
+                {
+                    text: "Select a Photo",
+                    icon: "image",
+                    handler: () => {
+                        this.addImage(_capacitor_core__WEBPACK_IMPORTED_MODULE_6__["CameraSource"].Photos);
+                    },
+                },
+            ];
+            if (!this.plt.is("hybrid")) {
+                buttons.push({
+                    text: "Choose a File",
+                    icon: "attach",
+                    handler: () => {
+                        this.fileInput.nativeElement.click();
+                    },
+                });
+            }
+            buttons.push({
+                text: "Close",
+                icon: "close",
+                handler: () => { },
+            });
+            const actionSheet = yield this.actionSheetCtrl.create({
+                header: "Select Image Source",
+                buttons,
+            });
+            yield actionSheet.present();
+        });
+    }
+    addImage(source) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            if (this.images.length == 0) {
+                const image = yield Camera.getPhoto({
+                    quality: 60,
+                    allowEditing: true,
+                    resultType: _capacitor_core__WEBPACK_IMPORTED_MODULE_6__["CameraResultType"].Base64,
+                    source,
+                });
+                const blobData = this.b64toBlob(image.base64String, `image/${image.format}`);
+                const img = URL.createObjectURL(blobData);
+                this.images.push({ blobData, name: "img", format: image.format, url: img });
+                console.log(this.images);
+            }
+        });
+    }
+    uploadFile(postForm) {
+        let image = this.images[0];
+        if (postForm.valid) {
+            const title = postForm.value.title;
+            const content = postForm.value.content;
+            const stockName = postForm.value.stockname;
+            let key = "";
+            if (this.intraDay == true)
+                key = "intraday";
+            else if (this.positional == true)
+                key = "positional";
+            else if (this.demoTrading == true)
+                key = "demotrading";
+            if (image == undefined || image == null) {
+                this.api.createWithBlob(title, content, stockName, key).subscribe(() => {
+                    this.dismissModal(true);
+                });
+            }
+            else {
+                this.api.createWithBlob(title, content, stockName, key, image.blobData, image.name, image.format).subscribe(() => {
+                    this.dismissModal(true);
+                });
+            }
+        }
+        else
+            console.log("something is missing!");
+    }
+    deleteImage(index) {
+        this.images.splice(index, 1);
+    }
+    b64toBlob(b64Data, contentType = "", sliceSize = 512) {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+        const blob = new Blob(byteArrays, { type: contentType });
+        return blob;
+    }
+};
+ModalUploadPostComponent.ctorParameters = () => [
+    { type: src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_5__["MarubozuService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["Platform"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ActionSheetController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] }
+];
+ModalUploadPostComponent.propDecorators = {
+    intraDay: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    positional: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    demoTrading: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    fileInput: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ["fileInput", { static: false },] }]
+};
+ModalUploadPostComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: "app-modal-upload-post",
+        template: _raw_loader_modal_upload_post_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_modal_upload_post_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], ModalUploadPostComponent);
+
+
+
+/***/ }),
+
 /***/ "x8NZ":
 /*!***********************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/buy-sell-modal-popup/buy-sell-modal-popup.component.html ***!
@@ -1899,7 +2371,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Change password</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n  <form #changePasswordForm=\"ngForm\" (ngSubmit)=\"changePassword(changePasswordForm.value)\">\n    <ion-item>\n      <ion-label>New password</ion-label>\n      <ion-input type=\"password\" required ngModel name=\"newPassword\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Confirm password</ion-label>\n      <ion-input type=\"password\" required ngModel name=\"confirmPassword\"></ion-input>\n    </ion-item>\n    <ion-button class=\"ion-margin\" expand=\"block\" type=\"submit\">Submit</ion-button>\n  </form>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Change password</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n  <form #changePasswordForm=\"ngForm\" (ngSubmit)=\"changePassword(changePasswordForm.value)\">\n    <ion-item>\n      <ion-label>New password</ion-label>\n      <ion-input type=\"password\" required ngModel name=\"newPassword\"></ion-input>\n    </ion-item>\n    <ion-item class=\"ion-margin-bottom\">\n      <ion-label>Confirm password</ion-label>\n      <ion-input type=\"password\" required ngModel name=\"confirmPassword\"></ion-input>\n    </ion-item>\n    <ion-button expand=\"block\" type=\"submit\">Submit</ion-button>\n  </form>\n</ion-content>");
 
 /***/ }),
 

@@ -13,12 +13,16 @@ import { ModalPostComponent } from 'src/app/modals/modal-post/modal-post.compone
 export class DemoTradingPage implements OnInit {
   demotrading: Marubozu[]
   filteredDemotrading: Marubozu[]
+  dataLoaded: boolean
   constructor(private modalController: ModalController, private marubozuService: MarubozuService) { }
 
   ngOnInit() {
+    this.dataLoaded = false
     this.marubozuService.get('demotrading').subscribe((r: any) => {
       console.log('demotrading',r)
       this.demotrading = r.data
+      this.demotrading.reverse()
+      this.dataLoaded = true
     })
   }
 
@@ -27,6 +31,14 @@ export class DemoTradingPage implements OnInit {
       component: ModalUploadPostComponent,
       componentProps: {demotrading: true}
     });
+    modal.onDidDismiss().then((d) => {
+			if (d.data == true) {
+				this.marubozuService.get("demotrading").subscribe((r: any) => {
+					this.demotrading = r.data;
+					this.demotrading.reverse()
+				});
+			}
+		});
     return await modal.present();
   }
 
@@ -40,6 +52,7 @@ export class DemoTradingPage implements OnInit {
 
   filter(e){
     this.filteredDemotrading = this.demotrading.filter(p => p.title.toLowerCase().includes(e.detail.value.toLowerCase()))
+    this.filteredDemotrading.reverse()
   }
 
 }

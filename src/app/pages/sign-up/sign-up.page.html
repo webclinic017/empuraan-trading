@@ -3,19 +3,17 @@
 		<ion-img src="/assets/logo_no_back.png" class="logo"></ion-img>
 	</ion-toolbar>
 </ion-header>
-<!-- 
-	123 pg, pitanja activity 6
-	105 pg tekst, pitanja sa strane, roze kockice
-
- -->
 <ion-content>
 	<form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
-		<!-- <ion-title class="ion-text-center ion-margin-vertical" color="warning"><h1>Welcome to Empuraan</h1></ion-title> -->
-		<ion-title class="ion-text-center ion-margin-vertical"><h2>Sign Up</h2></ion-title>
 		<ion-grid>
 			<ion-row>
 				<ion-col>
-					<ion-item>
+					<ion-title style="font-size: 25px" class="ion-text-center">Sign-up</ion-title>
+				</ion-col>
+			</ion-row>
+			<ion-row class="ion-margin-top">
+				<ion-col>
+					<ion-item class="ion-no-padding">
 						<ion-label position="floating">Username</ion-label>
 						<ion-input required ngModel name="username"></ion-input>
 					</ion-item>
@@ -23,7 +21,7 @@
 			</ion-row>
 			<ion-row>
 				<ion-col>
-					<ion-item>
+					<ion-item class="ion-no-padding">
 						<ion-label position="floating">Email</ion-label>
 						<ion-input type="email" required ngModel name="email"></ion-input>
 					</ion-item>
@@ -31,7 +29,7 @@
 			</ion-row>
 			<ion-row>
 				<ion-col>
-					<ion-item>
+					<ion-item class="ion-no-padding">
 						<ion-label position="floating">Password</ion-label>
 						<ion-input type="password" required ngModel name="password"></ion-input>
 					</ion-item>
@@ -39,7 +37,7 @@
 			</ion-row>
 			<ion-row>
 				<ion-col>
-					<ion-item>
+					<ion-item class="ion-no-padding">
 						<ion-label position="floating">Confirm Password</ion-label>
 						<ion-input type="password" required ngModel name="confirmPassword"></ion-input>
 					</ion-item>
@@ -47,21 +45,15 @@
 			</ion-row>
 			<ion-row>
 				<ion-col>
-					<button type="submit" class="button sign-up-button">Sign Up</button>
+					<button type="submit" class="button sign-up-button">
+						Sign Up
+						<ion-spinner color="light" name="lines-small" *ngIf="signupSpinner"></ion-spinner>
+					</button>
 				</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col>
-					<button
-						color="tertiary"
-						size="small"
-						expand="block"
-						fill="clear"
-						class="ion-float-left link-button"
-						routerLink="/home/login"
-					>
-						Already have an account?
-					</button>
+					<button color="tertiary" size="small" expand="block" fill="clear" class="ion-float-left link-button" routerLink="/home/login">Already have an account?</button>
 				</ion-col>
 			</ion-row>
 		</ion-grid>

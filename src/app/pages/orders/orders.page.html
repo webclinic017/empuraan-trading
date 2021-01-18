@@ -20,7 +20,7 @@
 		<super-tabs-container>
 			<super-tab>
 				<ion-searchbar showCancelButton="focus"></ion-searchbar>
-				<ion-card>
+				<!-- <ion-card>
 					<ion-card-content>
 						<ion-card-subtitle class="skeleton-row">
 							<ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
@@ -29,9 +29,9 @@
 							<ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
 						</ion-card-title>
 					</ion-card-content>
-				</ion-card>
+				</ion-card> -->
 				<ion-list>
-					<ion-item class="ion-no-padding" *ngFor="let item of [].constructor(6)">
+					<ion-item class="ion-no-padding" *ngFor="let item of [].constructor(7)">
 						<ion-grid class="ion-no-padding ion-padding-vertical">
 							<ion-row>
 								<ion-col col="6" class="ion-padding-start">
@@ -42,10 +42,10 @@
 										<ion-skeleton-text animated style="width: 25%;margin-right: 10px;"></ion-skeleton-text>
 										<ion-skeleton-text animated style="width: 15%"></ion-skeleton-text>
 									</span>
-									<!-- <span style="display: flex; flex-direction: row; justify-content: flex-start;">
-										<ion-skeleton-text animated style="width: 15%;margin-right: 10px;"></ion-skeleton-text>
-										<ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
-									</span> -->
+									<span style="display: flex; flex-direction: row; justify-content: flex-start;">
+										<ion-skeleton-text animated style="width: 28%;margin-right: 10px;"></ion-skeleton-text>
+										<ion-skeleton-text animated style="width: 10%"></ion-skeleton-text>
+									</span>
 								</ion-col>
 								<ion-col col="6" class="ion-padding-end">
 									<span style="display: flex; flex-direction: row; justify-content: flex-end;">
@@ -112,8 +112,11 @@
 												</td>
 												<td>
 													<p>
-														<ion-text [color]="+p.ltp - p.price >= 0 ? 'success' : 'danger'">
-															{{+p.ltp - p.price > 0 ? ' +' : ' '}}{{+(p.ltp - p.price)*p.quantity | number:'1.2'}}
+														<ion-text [color]="+p.ltp - p.price >= 0 ? 'success' : 'danger'" *ngIf="p.orderCategory == 'buy'">
+															{{+p.ltp - p.price > 0 ? ' +' : ''}}{{+(p.ltp - p.price)*p.quantity | number:'1.2'}}
+														</ion-text>
+														<ion-text [color]="+p.ltp - p.price >= 0 ? 'success' : 'danger'" *ngIf="p.orderCategory == 'sell'">
+															{{+p.ltp - p.price > 0 ? ' +' : ''}}{{+(p.price - p.ltp)*p.quantity | number:'1.2'}}
 														</ion-text>
 													</p>
 												</td>
@@ -197,7 +200,7 @@
 								</ion-col>
 								<ion-col col="6" class="ion-text-right column-centralise-text">
 									<p style="margin-bottom:0px"><strong>LTP</strong> {{p.ltp}}</p>
-									<p><strong>{{p.key | titlecase}}</strong> {{p.price}}</p>
+									<p><strong>{{p.key | titlecase}}</strong> {{p.key == 'stoploss' ? p.stoploss : p.target}}</p>
 								</ion-col>
 							</ion-row>
 						</ion-grid>

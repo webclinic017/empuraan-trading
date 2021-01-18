@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -51,8 +51,11 @@ export class UserService {
     return this.http.post(this.apiUrl + "signup", input)
   }
 
-  googleAuth(){
-    return this.http.get(this.apiUrl + 'google')
+  googleAuth(idToken){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${idToken}` })
+    };
+    return this.http.get(this.apiUrl + 'google', httpOptions)
   }
 
   getFundsChart(){

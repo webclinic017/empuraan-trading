@@ -15,11 +15,12 @@ ion-card-subtitle{
     margin-top: 0;
     font-size:14px;
     color:#ababab;
+    margin-bottom: 0;
 }
 .card-input{
     border: 1px solid rgb(184, 184, 184, 0.69);
     color: black;
-    padding: 11px 0;
+    padding: 0 11px !important;
     font-size:18px;
 }
 .bs-radio-group{

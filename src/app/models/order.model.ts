@@ -8,6 +8,7 @@ export interface Order {
     type: string
     price: number
     isDeleted: boolean
+    watchlistId: string
     volume: number
     status: string
     stoploss: number

@@ -5,6 +5,8 @@ export interface OrderMin {
     name: string
     price: number
     isDeleted: boolean
+    watchlistId: string
+    createdDate: string
     quantity: number
     ltp?: number
     status?: string

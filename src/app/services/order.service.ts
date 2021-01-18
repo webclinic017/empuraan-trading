@@ -36,29 +36,31 @@ export class OrderService {
     return this.http.post(this.apiUrl + 'order/stop',{id})
   }
   
-  buy(cId: string, watchlistId: string,quantity: number, stopLoss: number, target: number, order: string, price?: number){
-    let company
-    this.stockService.getStock(cId).subscribe((c:any) => {
-      company = c.data
-      var pending
-      pending = {stockId: cId, watchlistId, volume: quantity, stoploss: stopLoss, target, price}
-      order == 'limit'
-      ? this.stockService.orderStockLimitBuy(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
-      : this.stockService.orderStockMarketBuy(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
-    })
-  }
+  // buy(cId: string, watchlistId: string,quantity: number, stopLoss: number, target: number, order: string, availableBal: number, price?: number){
+  //   if(availableBal >= price){
+  //     let company
+  //     this.stockService.getStock(cId).subscribe((c:any) => {
+  //       company = c.data
+  //       var pending
+  //       pending = {stockId: cId, watchlistId, volume: quantity, stoploss: stopLoss, target, price}
+  //       order == 'limit'
+  //       ? this.stockService.orderStockLimitBuy(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
+  //       : this.stockService.orderStockMarketBuy(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
+  //     })
+  //   }
+  // }
 
-  sell(cId: string, watchlistId: string,quantity: number, stopLoss: number, target: number, order: string, price?: number){
-    let company
-    this.stockService.getStock(cId).subscribe((c:any) => {
-      company = c.data
-      var pending
-      pending = {stockId: cId, watchlistId, volume: quantity, stoploss: stopLoss, target, price}
-      order == 'limit'
-      ? this.stockService.orderStockLimitSell(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
-      : this.stockService.orderStockMarketSell(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
-    })
-  }
+  // sell(cId: string, watchlistId: string,quantity: number, stopLoss: number, target: number, order: string, availableBal: number, price?: number){
+  //   let company
+  //   this.stockService.getStock(cId).subscribe((c:any) => {
+  //     company = c.data
+  //     var pending
+  //     pending = {stockId: cId, watchlistId, volume: quantity, stoploss: stopLoss, target, price}
+  //     order == 'limit'
+  //     ? this.stockService.orderStockLimitSell(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
+  //     : this.stockService.orderStockMarketSell(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
+  //   })
+  // }
 
   totalPandL(){}
 

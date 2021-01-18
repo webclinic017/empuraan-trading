@@ -7,9 +7,14 @@
 	</ion-toolbar>
 </ion-header>
 <ion-content>
-	<ion-title class="ion-padding" *ngIf="position != null">{{ position.name }}</ion-title>
-	<ion-title class="ion-padding" *ngIf="pending != null">{{ pending.name }}</ion-title>
 	<ion-grid>
+		<ion-row>
+			<ion-col class="title-column">
+				<ion-label class="ion-padding" *ngIf="position != null">{{ position.name }}</ion-label>
+				<ion-label class="ion-padding" *ngIf="pending != null">{{ pending.name }}</ion-label>
+				<hr>
+			</ion-col>
+		</ion-row>
 		<ion-row *ngIf="position != null">
 			<ion-col size="6">
 				<ion-card-header>
@@ -25,8 +30,6 @@
 						min="0"
 					></ion-input>
 				</ion-card-content>
-				<!-- <ion-label>Stop-Loss</ion-label>
-					<ion-input type="number" min=0 [(ngModel)]="position.stoploss"></ion-input> -->
 			</ion-col>
 			<ion-col size="6">
 				<ion-card-header>
@@ -42,8 +45,6 @@
 						min="0"
 					></ion-input>
 				</ion-card-content>
-				<!-- <ion-label>Target</ion-label>
-					<ion-input type="number" min=0 [(ngModel)]="position.target"></ion-input> -->
 			</ion-col>
 		</ion-row>
 		<ion-row *ngIf="pending != null">
@@ -62,8 +63,6 @@
 							min="0"
 						></ion-input>
 					</ion-card-content>
-					<!-- <ion-label>Target</ion-label>
-					<ion-input type="number" [(ngModel)]="pending.target"></ion-input> -->
 				</div>
 				<div *ngIf="pending.isStopLoss">
 					<ion-card-header>
@@ -79,8 +78,6 @@
 							min="0"
 						></ion-input>
 					</ion-card-content>
-					<!-- <ion-label>Stop-loss</ion-label>
-					<ion-input type="number" [(ngModel)]="pending.stoploss"></ion-input> -->
 				</div>
 			</ion-col>
 		</ion-row>
