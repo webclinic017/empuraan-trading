@@ -25,15 +25,9 @@ export class WatchlistPage implements OnInit, OnDestroy {
 	selectedWatchlistId: string;
 	dataLoaded: boolean;
 	isSimualted: boolean;
-	spinners: string[]
+	spinners: string[];
 	subscribedSockets: Subscription[] = [];
-	constructor(
-		private modalController: ModalController,
-		private watchlistService: WatchlistService,
-		private actionSheetController: ActionSheetController,
-		private stockService: StockService,
-		private userService: UserService
-	) {}
+	constructor(private modalController: ModalController, private watchlistService: WatchlistService, private actionSheetController: ActionSheetController, private stockService: StockService, private userService: UserService) {}
 
 	ngOnInit() {
 		this.selectedWatchlist = 0;
@@ -54,20 +48,20 @@ export class WatchlistPage implements OnInit, OnDestroy {
 					this.isSimualted = true;
 					this.watchlists = r.data;
 					this.moveInArray();
-          this.updateLtp()
+					this.updateLtp();
 				});
 			if (datatype == "realtime")
 				this.watchlistService.getRealtimeWatchlists().subscribe((r: any) => {
 					this.isSimualted = false;
 					this.watchlists = r.data;
-          this.moveInArray();
-          this.updateLtp()
+					this.moveInArray();
+					this.updateLtp();
 				});
 		});
 	}
 
 	subscribeToStockSocket(wId, sId) {
-		this.dataLoaded = false
+		this.dataLoaded = false;
 		this.stockService.startStock(sId, wId).subscribe((r) => this.getWatchlists());
 	}
 
@@ -81,8 +75,8 @@ export class WatchlistPage implements OnInit, OnDestroy {
 						s.ltp = res[0].price;
 					});
 					this.subscribedSockets.push(socketSub);
-        }
-        if(i == w.stockIds.length - 1) this.dataLoaded = true
+				}
+				if (i == w.stockIds.length - 1) this.dataLoaded = true;
 			});
 		});
 	}
@@ -101,8 +95,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 		});
 		modal.onDidDismiss().then((d) => {
 			console.log(d);
-			if(!this.isSimualted)
-				d.data == true && this.getWatchlists();
+			if (!this.isSimualted) d.data == true && this.getWatchlists();
 		});
 		return await modal.present();
 	}
@@ -113,8 +106,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 			componentProps: { isEdit, selectedWatchlist: this.watchlists[this.selectedWatchlist] },
 		});
 		modal.onDidDismiss().then((d) => {
-			if(!this.isSimualted)
-				d.data == true && this.getWatchlists();
+			if (!this.isSimualted) d.data == true && this.getWatchlists();
 		});
 		return await modal.present();
 	}
@@ -132,8 +124,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 			component: ModalEditWatchlistsComponent,
 		});
 		modal.onDidDismiss().then((d) => {
-			if(!this.isSimualted)
-				d.data == true && this.getWatchlists();
+			if (!this.isSimualted) d.data == true && this.getWatchlists();
 		});
 		return await modal.present();
 	}
@@ -184,9 +175,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 					icon: "trash-outline",
 					handler: () => {
 						// this.removeWatchlist('')
-						this.watchlistService
-							.deleteWatchlist(this.watchlists[this.selectedWatchlist]._id)
-							.subscribe((r) => console.log("delete", r));
+						this.watchlistService.deleteWatchlist(this.watchlists[this.selectedWatchlist]._id).subscribe((r) => console.log("delete", r));
 					},
 				},
 				{
@@ -224,7 +213,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 	}
 
 	ionViewDidLeave() {
-    this.dataLoaded = false
+		this.dataLoaded = false;
 		this.unsubscribeFromSockets();
 	}
 
