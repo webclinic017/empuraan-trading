@@ -17,8 +17,6 @@ import { WatchlistService } from "src/app/services/watchlist.service";
 	styleUrls: ["./watchlist.page.scss"],
 })
 export class WatchlistPage implements OnInit, OnDestroy {
-	//5fe2f69dc47d337472943100 stock
-	//5feed4e5e865548ebf96fa2e watchlist
 	cccStock: Stock;
 	watchlists: Watchlist[];
 	selectedWatchlist: number;
