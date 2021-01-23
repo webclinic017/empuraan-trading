@@ -13,9 +13,12 @@ import { OrderMin } from "src/app/models/order-min";
 	styleUrls: ["./orders.page.scss"],
 })
 export class OrdersPage implements OnInit, OnDestroy {
-	position: OrderMin[];
-	completed: OrderMin[];
-	pending: OrderMin[];
+	position: OrderMin[] = [];
+	completed: OrderMin[] = [];
+	pending: OrderMin[] = [];
+	tempPosition: OrderMin[] = [];
+	tempCompleted: OrderMin[] = [];
+	tempPending: OrderMin[] = [];
 	filteredPosition: OrderMin[];
 	filteredCompleted: OrderMin[];
 	filteredPending: OrderMin[];
@@ -24,21 +27,24 @@ export class OrdersPage implements OnInit, OnDestroy {
 	pageIndex: number;
 	subscribedPositionSockets: Subscription[] = [];
 	subscribedPendingSockets: Subscription[] = [];
+	spinner: boolean
 	constructor(private orderService: OrderService, private modalCtrl: ModalController, private actionSheetController: ActionSheetController, private stockService: StockService) {}
 
 	ngOnInit() {
 		this.pageIndex = 0;
+		this.dataLoaded = false;
 	}
 
 	ionViewDidEnter() {
-		this.dataLoaded = false;
+		this.spinner = true
 		this.getOrders();
 	}
 
-	getOrders() {
-		this.pending = [];
-		this.position = [];
-		this.completed = [];
+	getOrders(spinner?: boolean) {
+		this.tempPending = [];
+		this.tempPosition = [];
+		this.tempCompleted = [];
+		if(spinner == true) this.spinner = true;
 		this.orderService.getAllUserOrders().subscribe((res: any) => {
 			res.data.forEach((o: Order) => {
 				const order: OrderMin = {
@@ -60,15 +66,21 @@ export class OrdersPage implements OnInit, OnDestroy {
 				if (o.status == "positioned" && o.transactionOne.status == "completed") {
 					order.stoploss = o.stoploss;
 					order.target = o.target;
-					this.position.unshift(Object.assign({}, order));
+					this.tempPosition.unshift(Object.assign({}, order));
 				} else if (o.status == "completed" && o.transactionTwo.stoplossStatus == "notFilled" && o.transactionTwo.targetStatus == "notFilled") {
 					const o = Object.assign({}, order);
 					o["status"] = "completed";
 					o.orderCategory = order.orderCategory == "buy" ? "sell" : "buy";
-					this.completed.unshift(o);
+					this.tempCompleted.unshift(o);
 				}
 			});
-			this.updateLtp();
+			this.updateLtp().finally(()=>{
+				this.pending = this.tempPending;
+				this.position = this.tempPosition;
+				this.completed = this.tempCompleted;
+				this.dataLoaded = true
+				this.spinner = false
+			});;
 			// this.totalPandL = this.orderService.totalPandL()
 		});
 	}
@@ -84,21 +96,21 @@ export class OrdersPage implements OnInit, OnDestroy {
 					else o.orderCategory = order.orderCategory;
 					o.price = order.price;
 					o["status"] = status;
-					this.completed.unshift(o);
+					this.tempCompleted.unshift(o);
 					break;
 				case "pending":
 					if (orderCategory != null) o.orderCategory = orderCategory == "buy" ? "sell" : "buy";
 					else o.orderCategory = order.orderCategory;
 					key != null ? (o.key = key) : (o.key = "price");
 					key == 'target' ? o.target = order.target : o.stoploss = order.stoploss
-					this.pending.unshift(o);
+					this.tempPending.unshift(o);
 					break;
 				case "notFilled":
 					if (orderCategory != null) o.orderCategory = orderCategory == "buy" ? "sell" : "buy";
 					else o.orderCategory = order.orderCategory;
 					o.price = price;
 					o["status"] = "cancelled";
-					this.completed.unshift(o);
+					this.tempCompleted.unshift(o);
 					break;
 				default:
 					break;
@@ -106,23 +118,20 @@ export class OrdersPage implements OnInit, OnDestroy {
 		}
 	}
 
-	updateLtp() {
+	async updateLtp() {
 		this.unsubscribeFromSockets();
-		this.position.forEach((s: any, i) => {
+		this.tempPosition.forEach((s: any, i) => {
 			let stockSub: Subscription = this.stockService.listen(`${s.stockId}-${s.watchlistId}`).subscribe((res: any) => {
 				s.ltp = res[0].price;
-				if (i == this.pending.length - 1) this.dataLoaded = true;
 			});
 			this.subscribedPositionSockets.unshift(stockSub);
 		});
-		this.pending.forEach((s: any, i) => {
+		this.tempPending.forEach((s: any, i) => {
 			let stockSub: Subscription = this.stockService.listen(`${s.stockId}-${s.watchlistId}`).subscribe((res: any) => {
 				s.ltp = res[0].price;
-				if (i == this.pending.length - 1) this.dataLoaded = true;
 			});
 			this.subscribedPendingSockets.unshift(stockSub);
 		});
-		if ((this.position.length == 0 && this.pending.length == 0 && this.completed.length == 0) || this.completed.length > 0) this.dataLoaded = true;
 	}
 
 	async ordersActionSheet(order) {
@@ -153,7 +162,7 @@ export class OrdersPage implements OnInit, OnDestroy {
 			componentProps: { position },
 		});
 		modal.onDidDismiss().then((d) => {
-			if (d.data == true) this.getOrders();
+			if (d.data == true) this.getOrders(true);
 		});
 		return await modal.present();
 	}
@@ -164,7 +173,7 @@ export class OrdersPage implements OnInit, OnDestroy {
 			componentProps: { pending },
 		});
 		modal.onDidDismiss().then((d) => {
-			if (d.data == true) this.getOrders();
+			if (d.data == true) this.getOrders(true);
 		});
 		return await modal.present();
 	}
@@ -183,7 +192,13 @@ export class OrdersPage implements OnInit, OnDestroy {
 	tabIndex(tab) {
 		if (typeof tab == "number") this.pageIndex = tab;
 		else this.pageIndex = tab.detail.index;
-		this.updateLtp();
+		this.updateLtp().finally(()=>{
+			this.pending = this.tempPending;
+			this.position = this.tempPosition;
+			this.completed = this.tempCompleted;
+			this.dataLoaded = true
+			this.spinner = false
+		});;
 	}
 
 	filterPosition(e) {

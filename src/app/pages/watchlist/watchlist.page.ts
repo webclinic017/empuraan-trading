@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { ActionSheetController, ModalController } from "@ionic/angular";
+import { ActionSheetController, ModalController, ToastController } from "@ionic/angular";
 import { Subscription } from "rxjs";
 import { BuySellModalPopupComponent } from "src/app/modals/buy-sell-modal-popup/buy-sell-modal-popup.component";
 import { ModalEditWatchlistsComponent } from "src/app/modals/modal-edit-watchlists/modal-edit-watchlists.component";
@@ -17,7 +17,6 @@ import { WatchlistService } from "src/app/services/watchlist.service";
 	styleUrls: ["./watchlist.page.scss"],
 })
 export class WatchlistPage implements OnInit, OnDestroy {
-	cccStock: Stock;
 	watchlists: Watchlist[];
 	selectedWatchlist: number;
 	selectedWatchlistId: string;
@@ -25,47 +24,62 @@ export class WatchlistPage implements OnInit, OnDestroy {
 	isSimualted: boolean;
 	spinners: string[];
 	subscribedSockets: Subscription[] = [];
-	constructor(private modalController: ModalController, private watchlistService: WatchlistService, private actionSheetController: ActionSheetController, private stockService: StockService, private userService: UserService) {}
+	spinner: boolean
+	constructor(private modalController: ModalController, private watchlistService: WatchlistService, private actionSheetController: ActionSheetController, private stockService: StockService, private userService: UserService, private toastCtrl: ToastController) {}
 
 	ngOnInit() {
+		this.dataLoaded = false;
 		this.selectedWatchlist = 0;
 		this.isSimualted = true;
 	}
 
 	ionViewDidEnter() {
+		this.spinner = true
 		this.getWatchlists();
 	}
 
-	getWatchlists() {
-		this.dataLoaded = false;
-		this.watchlists = [];
+	getWatchlists(spinner?: boolean) {
+		if(spinner == true) this.spinner = true;
 		this.userService.getSettings().subscribe((r: any) => {
 			const datatype = r.data.datatype;
 			if (datatype == "simulated")
 				this.watchlistService.getSimulatedWatchlists().subscribe((r: any) => {
 					this.isSimualted = true;
+					this.watchlists = [];
 					this.watchlists = r.data;
+					console.log('simulated',r)
 					this.moveInArray();
-					this.updateLtp();
+					this.updateLtp().finally(()=>{
+						this.dataLoaded = true
+						this.spinner = false
+					});
 				});
 			if (datatype == "realtime")
 				this.watchlistService.getRealtimeWatchlists().subscribe((r: any) => {
 					this.isSimualted = false;
+					this.watchlists = [];
 					this.watchlists = r.data;
+					console.log('realTime',r)
 					this.moveInArray();
-					this.updateLtp();
+					this.updateLtp().finally(()=>{
+						this.dataLoaded = true
+						this.spinner = false
+					});
 				});
 		});
 	}
 
 	subscribeToStockSocket(wId, sId) {
-		this.dataLoaded = false;
+		const wIndex = this.watchlists.indexOf(this.watchlists.find(w => w._id = wId))
+		const watchlist = this.watchlists[wIndex]
+		const sIndex = watchlist.stockIds.indexOf(watchlist.stockIds.find(s => s.id == sId))
+		this.watchlists[wIndex].stockIds[sIndex].isLoaded = false
 		this.stockService.startStock(sId, wId).subscribe((r) => this.getWatchlists());
 	}
 
-	updateLtp() {
+	async updateLtp() {
 		this.unsubscribeFromSockets();
-		this.selectedWatchlistId = this.watchlists[this.selectedWatchlist]._id;
+		this.selectedWatchlistId = this.watchlists[this.selectedWatchlist]?._id;
 		this.watchlists.forEach((w) => {
 			w.stockIds.forEach((s, i) => {
 				if (s.started) {
@@ -74,7 +88,6 @@ export class WatchlistPage implements OnInit, OnDestroy {
 					});
 					this.subscribedSockets.push(socketSub);
 				}
-				if (i == w.stockIds.length - 1) this.dataLoaded = true;
 			});
 		});
 	}
@@ -93,7 +106,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 		});
 		modal.onDidDismiss().then((d) => {
 			console.log(d);
-			if (!this.isSimualted) d.data == true && this.getWatchlists();
+			if (!this.isSimualted) d.data == true && this.getWatchlists(true);
 		});
 		return await modal.present();
 	}
@@ -104,7 +117,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 			componentProps: { isEdit, selectedWatchlist: this.watchlists[this.selectedWatchlist] },
 		});
 		modal.onDidDismiss().then((d) => {
-			if (!this.isSimualted) d.data == true && this.getWatchlists();
+			if (!this.isSimualted) d.data == true && this.getWatchlists(true);
 		});
 		return await modal.present();
 	}
@@ -122,7 +135,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 			component: ModalEditWatchlistsComponent,
 		});
 		modal.onDidDismiss().then((d) => {
-			if (!this.isSimualted) d.data == true && this.getWatchlists();
+			if (!this.isSimualted) d.data == true && this.getWatchlists(true);
 		});
 		return await modal.present();
 	}
@@ -172,8 +185,11 @@ export class WatchlistPage implements OnInit, OnDestroy {
 					role: "destructive",
 					icon: "trash-outline",
 					handler: () => {
-						// this.removeWatchlist('')
-						this.watchlistService.deleteWatchlist(this.watchlists[this.selectedWatchlist]._id).subscribe((r) => console.log("delete", r));
+						this.watchlistService.deleteWatchlist(this.watchlists[this.selectedWatchlist]._id).subscribe((r) => {
+							console.log("delete", r)
+							this.presentSuccessToast('Watchlist successfuly deleted')
+							this.getWatchlists(true)
+						});
 					},
 				},
 				{
@@ -185,6 +201,15 @@ export class WatchlistPage implements OnInit, OnDestroy {
 		});
 		await actionSheet.present();
 	}
+	
+	async presentSuccessToast(message) {
+		const toast = await this.toastCtrl.create({
+			message,
+			duration: 2500,
+			color: "success",
+		});
+		await toast.present();
+	}
 
 	removeWatchlist(id: string) {
 		this.watchlistService.deleteWatchlist(id);
@@ -194,7 +219,10 @@ export class WatchlistPage implements OnInit, OnDestroy {
 		if (typeof tab == "number") this.selectedWatchlist = tab;
 		else this.selectedWatchlist = tab.detail;
 		this.selectedWatchlistId = this.watchlists[this.selectedWatchlist]._id;
-		this.updateLtp();
+		this.updateLtp().finally(()=>{
+			this.dataLoaded = true
+			this.spinner = false
+		});;
 	}
 
 	moveInArray() {
@@ -211,7 +239,6 @@ export class WatchlistPage implements OnInit, OnDestroy {
 	}
 
 	ionViewDidLeave() {
-		this.dataLoaded = false;
 		this.unsubscribeFromSockets();
 	}
 

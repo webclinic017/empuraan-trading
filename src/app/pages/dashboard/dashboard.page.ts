@@ -102,7 +102,7 @@ export class DashboardPage implements OnInit {
 					this.user.balance.gain = this.user.balance.pAndL / this.user.balance.openBal;
 					this.user.balance.currency = r.account.currency;
 					this.balanceLoaded = true;
-          this.generateChartData(chart.data, r.account.initialAmount);
+					this.generateChartData(chart.data, r.account.initialAmount);
 				});
 			});
 		});
@@ -125,7 +125,7 @@ export class DashboardPage implements OnInit {
 	}
 
 	generateChartData(rawData, initBal: number) {
-    this.data = []
+		this.data = [];
 		const openBalTitle = "Open balance";
 		const initBalTitle = "Initial balance";
 		let openBalSeries: any = [];
@@ -141,8 +141,9 @@ export class DashboardPage implements OnInit {
 			initBalSeries.push({ name: new Date(el.createdAt), value: initBal });
 		});
 
-		this.data.push({series: openBalSeries, name: openBalTitle});
-    this.data.push({series: initBalSeries, name: initBalTitle});
-    this.chartLoaded = true
+		this.data.push({ series: openBalSeries, name: openBalTitle });
+		this.data.push({ series: initBalSeries, name: initBalTitle });
+		this.chartLoaded = true;
+		console.log(this.data)
 	}
 }

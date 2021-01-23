@@ -15,14 +15,16 @@ export class ModalWatchlistComponent implements OnInit{
   filteredData: Stock[]
   sWatchlist: Watchlist
   changeOfWatchlist: boolean
+  spinner: boolean
   @Input() selectedWatchlist: string
 
   constructor(private modalCtrl: ModalController, private watchlistService: WatchlistService, private stockService: StockService) { }
   
   ngOnInit(){
+    this.spinner = true
     this.stockService.getStocks().subscribe((s: any) => {
       this.stocks = s.data
-      console.log(s)
+      this.spinner = false
     })
     this.watchlistService.getWatchlist(this.selectedWatchlist).subscribe((w:any)=> {
       this.sWatchlist = w.data
@@ -35,10 +37,19 @@ export class ModalWatchlistComponent implements OnInit{
   }
 
   onSelect(event: boolean, stock){
-    if(event == true)
-      this.watchlistService.addToWatchlist(this.selectedWatchlist, stock._id).subscribe(() => this.changeOfWatchlist = true)
-    else if(event == false) 
-      this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock._id).subscribe(() => this.changeOfWatchlist = true)
+    const sIndex = this.stocks.indexOf(this.stocks.find(s => s._id == stock._id))
+    this.stocks[sIndex].isLoaded = false
+    if(event == true){
+      this.watchlistService.addToWatchlist(this.selectedWatchlist, stock._id).subscribe(()=>{
+        this.stocks[sIndex].isLoaded = true
+      })
+    }
+    else if(event == false) {
+      this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock._id).subscribe(()=>{
+        this.stocks[sIndex].isLoaded = true
+      })
+    }
+    this.changeOfWatchlist = true
   }
 
   filter(filterValue: string){

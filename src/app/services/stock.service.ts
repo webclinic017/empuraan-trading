@@ -2,8 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import * as io from "socket.io-client";
-import * as rx from "rxjs";
-import { Observable, Subject } from "rxjs";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable({
 	providedIn: "root",
@@ -16,7 +16,6 @@ export class StockService {
 
 	constructor(private http: HttpClient) {
 		this.socket = io(environment.socketUrl);
-		console.log("socket", this.socket);
 	}
 
 	listen(eventName) {
@@ -35,11 +34,18 @@ export class StockService {
 	}
 
 	getStocks() {
-		return this.http.get(this.apiGetStock);
+		return this.http.get(this.apiGetStock).pipe(
+			map((r: any) => {
+				r.data.forEach((c) => {
+					c.isLoaded = true
+				});
+				return r;
+			})
+		);
 	}
 
-	startStock(stockId, watchlistId){
-		return this.http.post(this.apiStockStart, {stockId, watchlistId})
+	startStock(stockId, watchlistId) {
+		return this.http.post(this.apiStockStart, { stockId, watchlistId });
 	}
 
 	initStocks() {

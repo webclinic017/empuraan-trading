@@ -7,4 +7,5 @@ export interface Stock {
 	ldp?: string
 	started?: boolean
 	position: number
+	isLoaded?: boolean
 }

@@ -31,8 +31,11 @@ export class BuySellPage implements OnInit, AfterViewInit {
     private router: Router,
     private userService: UserService) { }
 
-  ngOnInit() {
+  ngOnInit(){
     this.transactionSpinner = false
+  }
+  
+  ionViewDidEnter() {
     this.userService.getSettings().subscribe((r:any) => {
       this.leverage = r.data.leverage
       this.risk = r.data.risk
@@ -83,9 +86,10 @@ export class BuySellPage implements OnInit, AfterViewInit {
     const order = this.buySellForm.value.order
     const stopLoss = this.buySellForm.value.stopLoss
     const target = this.buySellForm.value.target
+    const risk = this.risk / 100 * this.availableBalance
     if(quantity != '' && order != '' && price != '' && quantity > 0){
       if(order == 'limit' && price > 0){
-        if(this.risk >= (price * quantity)){
+        if(risk >= (price * quantity)){
           this.isBuy 
             ?  this.buy(this.company._id, this.wId, quantity, stopLoss, target, order, this.availableBalance, +price)
             :  this.sell(this.company._id, this.wId, quantity, stopLoss, target, order, this.availableBalance, +price)
@@ -94,7 +98,7 @@ export class BuySellPage implements OnInit, AfterViewInit {
           this.presentErrorToast('Your price is higher than your risk.')
         }
       } else {
-        if(this.risk >= (price * quantity)){
+        if(risk >= (price * quantity)){
           this.isBuy 
             ?  this.buy(this.company._id, this.wId, quantity, stopLoss, target, order, this.availableBalance, +this.company.ltp)
             :  this.sell(this.company._id, this.wId, quantity, stopLoss, target, order, this.availableBalance, +this.company.ltp)

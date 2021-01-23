@@ -1,6 +1,11 @@
 <ion-header #header class="ion-no-border">
 	<ion-toolbar>
-		<ion-title>Orders</ion-title>
+		<ion-title>
+			<div style="display: flex; align-items: center; justify-content: center;">
+				<span>Orders</span>
+				<ion-spinner name="lines-small" class="ion-padding-start" *ngIf="spinner && dataLoaded"></ion-spinner>
+			</div>
+		</ion-title>
 		<ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
 	</ion-toolbar>
 </ion-header>

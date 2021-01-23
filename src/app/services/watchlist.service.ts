@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,11 +16,25 @@ export class WatchlistService {
   }
 
   getSimulatedWatchlists(){
-    return this.http.get(this.apiUrl + 'filter/simulated')
+    return this.http.get(this.apiUrl + 'filter/simulated').pipe(map((r:any)=>{
+      r.data.forEach(w => {
+        w.stockIds.forEach(s => {
+          s.isLoaded = true
+        })
+      })
+      return r
+    }))
   }
 
   getRealtimeWatchlists(){
-    return this.http.get(this.apiUrl + 'filter/realTime')
+    return this.http.get(this.apiUrl + 'filter/realTime').pipe(map((r:any)=>{
+      r.data.forEach(w => {
+        w.stockIds.forEach(s => {
+          s.isLoaded = true
+        })
+      })
+      return r
+    }))
   }
 
   addToWatchlist(watchlistId, stockId){
@@ -42,7 +57,8 @@ export class WatchlistService {
     return this.http.put(this.apiUrl + 'update/watchlist/stocks/positions', {watchlistId, stocks})
   }
 
-  editWatchlist(id: string, name: string){
+  editWatchlist(watchlistId: string, name: string){
+    return this.http.put(this.apiUrl + 'update/watchlist/name', {watchlistId, name})
   }
 
   deleteWatchlist(id: string){

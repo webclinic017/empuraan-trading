@@ -99,6 +99,7 @@
 			<ion-col style="display: flex; flex-direction: column; justify-content: center; align-items: center">
 				<ion-label class="title ion-margin-vertical ion-no-padding ion-text-left">Funds Chart</ion-label>
 				<ngx-charts-line-chart
+					*ngIf="chartLoaded && data[0]?.series.length > 1"
 					[legend]="false"
 					[showXAxisLabel]="false"
 					[showYAxisLabel]="false"
@@ -110,6 +111,10 @@
 					[view]="view"
 				>
 				</ngx-charts-line-chart>
+				<ion-spinner name="lines" style="height: 236px;" *ngIf="!chartLoaded"></ion-spinner>
+				<ion-label style="text-align: center;" *ngIf="chartLoaded && data[0]?.series.length == 1">
+					There is no data here for now, go on and trade to see the chart.
+				</ion-label>
 			</ion-col>
 		</ion-row>
 		<ion-row *ngIf="leaderboardLoaded" class="ion-margin-bottom">

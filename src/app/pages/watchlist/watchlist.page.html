@@ -1,7 +1,17 @@
 <ion-header class="ion-no-border">
-	<ion-toolbar>
-		<ion-title *ngIf="!isSimualted" (click)="onWatchlistTitleClick()">Watchlist</ion-title>
-		<ion-title *ngIf="isSimualted">Watchlist</ion-title>
+	<ion-toolbar style="display: flex; align-items: center; justify-content: center;">
+		<ion-title *ngIf="!isSimualted" (click)="onWatchlistTitleClick()">
+			<div style="display: flex; align-items: center; justify-content: center;">
+				<span>Watchlist</span>
+				<ion-spinner name="lines-small" *ngIf="spinner"></ion-spinner>
+			</div>
+		</ion-title>
+		<ion-title *ngIf="isSimualted">
+			<div style="display: flex; align-items: center; justify-content: center;">
+				<span>Watchlist</span>
+				<ion-spinner name="lines-small" *ngIf="spinner"></ion-spinner>
+			</div>
+		</ion-title>
 		<ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
 	</ion-toolbar>
 </ion-header>
@@ -9,20 +19,17 @@
 	<super-tabs *ngIf="!dataLoaded">
 		<super-tabs-toolbar slot="top" color="translucent">
 			<super-tab-button>
-				<ion-label
-					style="width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center"
-				>
+				<ion-label style="width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center">
 					<ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
 				</ion-label>
 			</super-tab-button>
 		</super-tabs-toolbar>
 		<super-tabs-container>
 			<super-tab>
-				<ion-list>
-					<ion-item *ngFor="let item of [].constructor(9)" class="ion-no-padding">
-						<ion-label class="ion-padding-start" style="display: flex; flex-direction: column; align-items: flex-start">
-							<ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
-							<ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+				<ion-list style="display: flex; flex-direction: column;padding-top:5px">
+					<ion-item *ngFor="let item of [].constructor(9)" class="ion-no-padding" style="width: 100%; height: 66px;">
+						<ion-label class="ion-padding-start" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; height: 12px;">
+							<ion-skeleton-text animated style="width: 40%; padding:11px"></ion-skeleton-text>
 						</ion-label>
 						<ion-label style="display: flex; flex-direction: column; align-items: flex-end">
 							<ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
@@ -37,19 +44,8 @@
 		</super-tabs-container>
 	</super-tabs>
 	<super-tabs *ngIf="watchlists?.length > 0 && dataLoaded">
-		<super-tabs-toolbar
-			*ngIf="!isSimualted"
-			slot="top"
-			color="translucent"
-			[scrollable]="watchlists?.length > 4"
-			[scrollablePadding]="watchlists?.length < 3"
-		>
-			<super-tab-button
-				*ngFor="let w of watchlists; let i = index"
-				(click)="tabIndex(i)"
-				appDoubleTap
-				(eventHandler)="onWatchlistTabClick()"
-			>
+		<super-tabs-toolbar *ngIf="!isSimualted" slot="top" color="translucent" [scrollable]="watchlists?.length > 4" [scrollablePadding]="watchlists?.length < 3">
+			<super-tab-button *ngFor="let w of watchlists; let i = index" (click)="tabIndex(i)" appDoubleTap (eventHandler)="onWatchlistTabClick()">
 				<ion-label>{{w.name?.length > 8 ? w.name.substring(0,8) + '...' : w.name}}</ion-label>
 			</super-tab-button>
 		</super-tabs-toolbar>
@@ -60,11 +56,11 @@
 		</super-tabs-toolbar>
 		<super-tabs-container (activeTabIndexChange)="tabIndex($event)">
 			<super-tab *ngFor="let w of watchlists">
-				<ion-list>
-					<div *ngFor="let c of w.stockIds" class="ion-no-padding" style="width: 100%">
-						<ion-item style="width: 100%" class="ion-no-padding">
+				<ion-list style="padding-bottom: 75px">
+					<div *ngFor="let c of w.stockIds">
+						<ion-item style="width: 100%; height: 66px;" class="ion-no-padding" *ngIf="c.started && c.isLoaded">
 							<ion-label class="ion-padding-start" (click)="openBuySellModal(c)">
-								<h3>{{c.name}}</h3>
+								<h3 style="padding:12px 0">{{c.name}}</h3>
 							</ion-label>
 							<ion-label class="ion-margin-start ion-text-right" *ngIf="+c.ltp - +c.ldp >= 0 && c.started" (click)="openBuySellModal(c)">
 								<ion-text color="success"><h3>{{c.ltp | number:'1.1-2'}}</h3></ion-text>
@@ -74,8 +70,21 @@
 								<ion-text color="danger"><h3>{{c.ltp | number:'1.1-2'}}</h3></ion-text>
 								<p>-{{+c.ltp - +c.ldp | number:'1.1-2'}} (-{{(+c.ltp - +c.ldp) / +c.ldp | percent:'1.1-2'}})</p>
 							</ion-label>
-							<ion-label (click)="subscribeToStockSocket(w._id, c.id)" class="ion-margin-start ion-text-right" *ngIf="!c.started" style="padding: 12px 0;">
+						</ion-item>
+						<ion-item style="width: 100%; height: 66px;" class="ion-no-padding" *ngIf="!c.started && c.isLoaded">
+							<ion-label class="ion-padding-start" (click)="openBuySellModal(c)">
+								<h3 style="padding:12px 0">{{c.name}}</h3>
+							</ion-label>
+							<ion-label (click)="subscribeToStockSocket(w._id, c.id)" class="ion-margin-start ion-text-right">
 								<ion-icon name="play-outline"></ion-icon>
+							</ion-label>
+						</ion-item>
+						<ion-item class="ion-no-padding" style="width: 100%; height: 66px;" *ngIf="!c.started && !c.isLoaded">
+							<ion-label class="ion-padding-start" (click)="openBuySellModal(c)">
+								<h3 style="padding:12px 0">{{c.name}}</h3>
+							</ion-label>
+							<ion-label class="ion-margin-start ion-text-right">
+								<ion-spinner name="lines-small"></ion-spinner>
 							</ion-label>
 						</ion-item>
 					</div>
@@ -92,7 +101,7 @@
 		</div>
 	</ion-content>
 </ion-content>
-<ion-fab *ngIf="!isSimualted" horizontal="end" vertical="bottom" style="position: absolute; bottom: 10px; right: 10px">
+<ion-fab *ngIf="!isSimualted && watchlists.length > 0" horizontal="end" vertical="bottom" style="position: absolute; bottom: 10px; right: 10px">
 	<ion-fab-button (click)="openCompaniesModal(selectedWatchlistId)">
 		<ion-icon name="add"></ion-icon>
 	</ion-fab-button>
