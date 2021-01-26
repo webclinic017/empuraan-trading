@@ -54,7 +54,7 @@ export class MarubozuService {
 		if (blobData != null || blobData != undefined) formData.append("image", blobData, `${name}.${ext}`);
 		formData.append("title", title);
 		formData.append("content", content);
-		formData.append("stockname", stockname);
+		if(key != 'blog') formData.append("stockname", stockname);
 
 		return this.http.post(`${this.apiUrl}${key}`, formData);
 		// return this.http.post(this.apiUrl + 'blog', {title, content, image})
@@ -66,7 +66,7 @@ export class MarubozuService {
 		formData.append("image", file, `${file.name}.${ext}`);
 		formData.append("title", title);
 		formData.append("content", content);
-		formData.append("stockname", stockname);
+		if(key != 'blog') formData.append("stockname", stockname);
 
 		return this.http.post(`${this.apiUrl}${key}`, formData);
 		// return this.http.post(this.apiUrl + key, {title, content, stockname, image})

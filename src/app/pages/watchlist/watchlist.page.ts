@@ -38,7 +38,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 		this.getWatchlists();
 	}
 
-	getWatchlists(spinner?: boolean) {
+	async getWatchlists(spinner?: boolean) {
 		if(spinner == true) this.spinner = true;
 		this.userService.getSettings().subscribe((r: any) => {
 			const datatype = r.data.datatype;
@@ -187,8 +187,9 @@ export class WatchlistPage implements OnInit, OnDestroy {
 					handler: () => {
 						this.watchlistService.deleteWatchlist(this.watchlists[this.selectedWatchlist]._id).subscribe((r) => {
 							console.log("delete", r)
-							this.presentSuccessToast('Watchlist successfuly deleted')
-							this.getWatchlists(true)
+							this.getWatchlists(true).then(()=>{
+								this.presentSuccessToast('Watchlist successfuly deleted')
+							})
 						});
 					},
 				},

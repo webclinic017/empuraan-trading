@@ -186,17 +186,19 @@
       "5+WD");
 
       var ModalWatchlistCeComponent = /*#__PURE__*/function () {
-        function ModalWatchlistCeComponent(modalCtrl, watchlistService) {
+        function ModalWatchlistCeComponent(modalCtrl, watchlistService, toastCtrl) {
           _classCallCheck(this, ModalWatchlistCeComponent);
 
           this.modalCtrl = modalCtrl;
           this.watchlistService = watchlistService;
+          this.toastCtrl = toastCtrl;
           this.stocks = [];
         }
 
         _createClass(ModalWatchlistCeComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
+            this.spinner = false;
             this.stocks = this.selectedWatchlist.stockIds;
             this.watchlistName = this.selectedWatchlist.name;
           }
@@ -208,23 +210,31 @@
         }, {
           key: "onEditWatchlist",
           value: function onEditWatchlist() {
+            var _this2 = this;
+
             if (this.watchlistName.trim() != '' && this.watchlistName != null && this.watchlistName != undefined) {
+              this.spinner = true;
               this.watchlistName = this.watchlistName.trim();
-              this.watchlistService.editWatchlist(this.selectedWatchlist._id, this.watchlistName);
-              console.log('update watchlist name editing');
-            }
+              this.watchlistService.editWatchlist(this.selectedWatchlist._id, this.watchlistName).subscribe(function (r) {
+                _this2.spinner = false;
+                _this2.changeInWatchlist = true;
+
+                _this2.presentSuccessToast("Watchlist's name changed to \"".concat(_this2.watchlistName, "\""));
+
+                console.log(r);
+              });
+            } else this.presentErrorToast('Input field is empty.');
           }
         }, {
           key: "drop",
           value: function drop(event) {
-            //needs to happen in backend
             Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_6__["moveItemInArray"])(this.stocks, event.previousIndex, event.currentIndex);
             this.changePosition();
           }
         }, {
           key: "changePosition",
           value: function changePosition() {
-            var _this2 = this;
+            var _this3 = this;
 
             var stocks = [];
 
@@ -237,8 +247,66 @@
             }
 
             this.watchlistService.updateWatchlistStocksPositions(this.selectedWatchlist._id, stocks).subscribe(function () {
-              return _this2.changeInWatchlist = true;
+              return _this3.changeInWatchlist = true;
             });
+          }
+        }, {
+          key: "presentErrorToast",
+          value: function presentErrorToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      _context.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        duration: 2500,
+                        color: "danger"
+                      });
+
+                    case 2:
+                      toast = _context.sent;
+                      _context.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+          }
+        }, {
+          key: "presentSuccessToast",
+          value: function presentSuccessToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        duration: 2500,
+                        color: "success"
+                      });
+
+                    case 2:
+                      toast = _context2.sent;
+                      _context2.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2, this);
+            }));
           }
         }]);
 
@@ -250,6 +318,8 @@
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]
         }, {
           type: src_app_services_watchlist_service__WEBPACK_IMPORTED_MODULE_5__["WatchlistService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"]
         }];
       };
 
@@ -406,6 +476,12 @@
       var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! rxjs */
       "qCKp");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
 
       var StockService = /*#__PURE__*/function () {
         function StockService(http) {
@@ -416,16 +492,15 @@
           this.apiGetStock = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + "stocks/";
           this.apiStockStart = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + "stocks/start/emit/";
           this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_4__(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].socketUrl);
-          console.log("socket", this.socket);
         }
 
         _createClass(StockService, [{
           key: "listen",
           value: function listen(eventName) {
-            var _this3 = this;
+            var _this4 = this;
 
             return new rxjs__WEBPACK_IMPORTED_MODULE_5__["Observable"](function (subscriber) {
-              _this3.socket.on(eventName, function (data) {
+              _this4.socket.on(eventName, function (data) {
                 subscriber.next(data);
               });
             });
@@ -443,7 +518,12 @@
         }, {
           key: "getStocks",
           value: function getStocks() {
-            return this.http.get(this.apiGetStock);
+            return this.http.get(this.apiGetStock).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (r) {
+              r.data.forEach(function (c) {
+                c.isLoaded = true;
+              });
+              return r;
+            }));
           }
         }, {
           key: "startStock",
@@ -516,7 +596,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "ion-card-header {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n}\n\nion-card-title {\n  font-size: 15px;\n}\n\nion-card-subtitle {\n  margin-top: 0;\n  font-size: 14px;\n  color: #ababab;\n}\n\n.card-input {\n  border: 1px solid rgba(184, 184, 184, 0.69);\n  color: black;\n  padding: 11px 0;\n  font-size: 18px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kYWxzL21vZGFsLWVkaXQtb3JkZXIvbW9kYWwtZWRpdC1vcmRlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQUE7RUFDQSxtQkFBQTtFQUNBLDhCQUFBO0VBQ0EsbUJBQUE7QUFDSjs7QUFDQTtFQUNJLGVBQUE7QUFFSjs7QUFBQTtFQUNJLGFBQUE7RUFDQSxlQUFBO0VBQ0EsY0FBQTtBQUdKOztBQURBO0VBQ0ksMkNBQUE7RUFDQSxZQUFBO0VBQ0EsZUFBQTtFQUNBLGVBQUE7QUFJSiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9tb2RhbC1lZGl0LW9yZGVyL21vZGFsLWVkaXQtb3JkZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tY2FyZC1oZWFkZXJ7XG4gICAgZGlzcGxheTpmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5pb24tY2FyZC10aXRsZXtcbiAgICBmb250LXNpemU6IDE1cHg7XG59XG5pb24tY2FyZC1zdWJ0aXRsZXtcbiAgICBtYXJnaW4tdG9wOiAwO1xuICAgIGZvbnQtc2l6ZToxNHB4O1xuICAgIGNvbG9yOiNhYmFiYWI7XG59XG4uY2FyZC1pbnB1dHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCByZ2IoMTg0LCAxODQsIDE4NCwgMC42OSk7XG4gICAgY29sb3I6IGJsYWNrO1xuICAgIHBhZGRpbmc6IDExcHggMDtcbiAgICBmb250LXNpemU6MThweDtcbn0iXX0= */";
+      __webpack_exports__["default"] = ".title-column {\n  font-weight: 700;\n  text-align: center;\n}\n\nion-card-header {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n}\n\nion-card-title {\n  font-size: 15px;\n}\n\nhr {\n  border-top: 1px solid rgba(167, 167, 167, 0.5) !important;\n  height: 1px !important;\n  width: 100% !important;\n  display: block !important;\n  font-size: 2em !important;\n  opacity: 1 !important;\n  visibility: visible !important;\n  margin-bottom: 0;\n}\n\nion-card-subtitle {\n  margin-top: 0;\n  font-size: 14px;\n  color: #ababab;\n}\n\n.card-input {\n  border: 1px solid rgba(184, 184, 184, 0.69);\n  color: black;\n  padding: 0 11px !important;\n  font-size: 18px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kYWxzL21vZGFsLWVkaXQtb3JkZXIvbW9kYWwtZWRpdC1vcmRlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFBO0VBQ0Esa0JBQUE7QUFDSjs7QUFDQTtFQUNJLGFBQUE7RUFDQSxtQkFBQTtFQUNBLDhCQUFBO0VBQ0EsbUJBQUE7QUFFSjs7QUFBQTtFQUNJLGVBQUE7QUFHSjs7QUFEQTtFQUNJLHlEQUFBO0VBQ0Esc0JBQUE7RUFDQSxzQkFBQTtFQUNBLHlCQUFBO0VBQ0EseUJBQUE7RUFDQSxxQkFBQTtFQUNBLDhCQUFBO0VBQ0EsZ0JBQUE7QUFJSjs7QUFGQTtFQUNJLGFBQUE7RUFDQSxlQUFBO0VBQ0EsY0FBQTtBQUtKOztBQUhBO0VBQ0ksMkNBQUE7RUFDQSxZQUFBO0VBQ0EsMEJBQUE7RUFDQSxlQUFBO0FBTUoiLCJmaWxlIjoic3JjL2FwcC9tb2RhbHMvbW9kYWwtZWRpdC1vcmRlci9tb2RhbC1lZGl0LW9yZGVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRpdGxlLWNvbHVtbntcbiAgICBmb250LXdlaWdodDogNzAwO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cbmlvbi1jYXJkLWhlYWRlcntcbiAgICBkaXNwbGF5OmZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cbmlvbi1jYXJkLXRpdGxle1xuICAgIGZvbnQtc2l6ZTogMTVweDtcbn1cbmhyIHtcbiAgICBib3JkZXItdG9wOiAxcHggc29saWQgcmdiYSgxNjcsIDE2NywgMTY3LCAwLjUpICFpbXBvcnRhbnQ7XG4gICAgaGVpZ2h0OiAxcHggIWltcG9ydGFudDtcbiAgICB3aWR0aDogMTAwJSAhaW1wb3J0YW50O1xuICAgIGRpc3BsYXk6IGJsb2NrICFpbXBvcnRhbnQ7XG4gICAgZm9udC1zaXplOiAyZW0gIWltcG9ydGFudDtcbiAgICBvcGFjaXR5OiAxICFpbXBvcnRhbnQ7XG4gICAgdmlzaWJpbGl0eTogdmlzaWJsZSAhaW1wb3J0YW50O1xuICAgIG1hcmdpbi1ib3R0b206IDA7XG59XG5pb24tY2FyZC1zdWJ0aXRsZXtcbiAgICBtYXJnaW4tdG9wOiAwO1xuICAgIGZvbnQtc2l6ZToxNHB4O1xuICAgIGNvbG9yOiNhYmFiYWI7XG59XG4uY2FyZC1pbnB1dHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCByZ2IoMTg0LCAxODQsIDE4NCwgMC42OSk7XG4gICAgY29sb3I6IGJsYWNrO1xuICAgIHBhZGRpbmc6IDAgMTFweCAhaW1wb3J0YW50O1xuICAgIGZvbnQtc2l6ZToxOHB4O1xufSJdfQ== */";
       /***/
     },
 
@@ -536,7 +616,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Create watchlist</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-item class=\"ion-margin-horizontal\">\n\t\t<ion-label position=\"floating\">Name of watchlist</ion-label>\n\t\t<ion-input [(ngModel)]=\"watchlistName\"></ion-input>\n\t</ion-item>\n\t<!-- <ion-label position=\"floating\" color=\"danger\" class=\"ion-padding\"\n\t\t\t*ngIf=\"createWatchlistForm.invalid && createWatchlistForm.touched\">\n\t\t\tPlease enter the name of watchlist\n\t\t</ion-label> -->\n\t<ion-button class=\"ion-margin\" expand=\"block\" (click)=\"onCreateWatchlist()\">Create watchlist</ion-button>\n\t<div cdkDropList class=\"drag-list\" (cdkDropListDropped)=\"drop($event)\" *ngIf=\"watchlists.length > 0\">\n\t\t<div class=\"drag-box\" *ngFor=\"let watchlist of watchlists\" cdkDrag>\n\t\t\t<ion-icon name=\"reorder-three-outline\" class=\"ion-margin-end\"></ion-icon>\n\t\t\t<span>{{ watchlist.name }}</span>\n\t\t</div>\n\t</div>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Create watchlist</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-item class=\"ion-margin-horizontal ion-no-padding\">\n\t\t<ion-label position=\"floating\">Name of watchlist</ion-label>\n\t\t<ion-input [(ngModel)]=\"watchlistName\"></ion-input>\n\t</ion-item>\n\t<ion-button class=\"ion-margin\" expand=\"block\" (click)=\"onCreateWatchlist()\">\n\t\tCreate watchlist\n\t\t<ion-spinner name=\"lines-small\" *ngIf=\"spinner\"></ion-spinner>\n\t</ion-button>\n\t<div cdkDropList class=\"drag-list\" (cdkDropListDropped)=\"drop($event)\" *ngIf=\"watchlists.length > 0\">\n\t\t<div class=\"drag-box\" *ngFor=\"let watchlist of watchlists\" cdkDrag>\n\t\t\t<ion-icon name=\"reorder-three-outline\" class=\"ion-margin-end\"></ion-icon>\n\t\t\t<span>{{ watchlist.name }}</span>\n\t\t</div>\n\t</div>\n\t<div style=\"width: 100%; display: flex; justify-content: center; align-items: center;\">\n\t\t<ion-spinner name=\"lines-small\" *ngIf=\"!dataLoaded\" class=\"ion-margin\"></ion-spinner>\n\t</div>\n</ion-content>\n";
       /***/
     },
 
@@ -556,7 +636,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n\t<ion-toolbar>\n\t\t<ion-title slot=\"start\">{{ isAdd ? \"Add funds\" : \"Withdraw funds\" }}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col>\n\t\t\t\t<form #fundsForm=\"ngForm\" (ngSubmit)=\"submitFundsRequest(fundsForm.value)\">\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label>Amount</ion-label>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t\tmax=\"{{ isAdd ? 999999 : user.balance.availableBal }}\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tngModel\n\t\t\t\t\t\t\tname=\"amount\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t\t<ion-button *ngIf=\"isAdd\" class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" color=\"success\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"add-outline\"></ion-icon>\n\t\t\t\t\t\tAdd funds\n          </ion-button>\n          <ion-button *ngIf=\"!isAdd\" class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"refresh-outline\"></ion-icon>\n\t\t\t\t\t\tWithdraw\n\t\t\t\t\t</ion-button>\n\t\t\t\t</form>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<!-- <ion-row *ngIf=\"isAdd\">\n\t\t\t<ion-col>\n\t\t\t\t<form #addForm=\"ngForm\" (ngSubmit)=\"add(addForm.value)\">\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label>Amount</ion-label>\n\t\t\t\t\t\t<ion-input type=\"number\" min=\"0\" max=\"9999999\" required ngModel name=\"amount\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t\t<ion-button class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" color=\"success\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"add-outline\"></ion-icon>\n\t\t\t\t\t\tAdd funds\n\t\t\t\t\t</ion-button>\n\t\t\t\t</form>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<ion-row *ngIf=\"!isAdd\">\n\t\t\t<ion-col>\n\t\t\t\t<form #withdrawForm=\"ngForm\" (ngSubmit)=\"withdraw(withdrawForm)\">\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label>Amount</ion-label>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t\tmax=\"{{ user.balance.availableBal }}\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tngModel\n\t\t\t\t\t\t\tname=\"amount\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t\t<ion-button class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"refresh-outline\"></ion-icon>\n\t\t\t\t\t\tWithdraw\n\t\t\t\t\t</ion-button>\n\t\t\t\t</form>\n\t\t\t</ion-col>\n\t\t</ion-row> -->\n\t</ion-grid>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header>\n\t<ion-toolbar>\n\t\t<ion-title slot=\"start\">{{ isAdd ? \"Add funds\" : \"Withdraw funds\" }}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col>\n\t\t\t\t<form #fundsForm=\"ngForm\" (ngSubmit)=\"submitFundsRequest(fundsForm.value)\">\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label>Amount</ion-label>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t\tmax=\"{{ isAdd ? 999999 : user.balance.availableBal }}\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tngModel\n\t\t\t\t\t\t\tname=\"amount\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t\t<ion-button *ngIf=\"isAdd\" class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" color=\"success\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"add-outline\"></ion-icon>\n\t\t\t\t\t\tAdd funds\n          </ion-button>\n          <ion-button *ngIf=\"!isAdd\" class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"refresh-outline\"></ion-icon>\n\t\t\t\t\t\tWithdraw\n\t\t\t\t\t</ion-button>\n\t\t\t\t</form>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<!-- <ion-row *ngIf=\"isAdd\">\n\t\t\t<ion-col>\n\t\t\t\t<form #addForm=\"ngForm\" (ngSubmit)=\"add(addForm.value)\">\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label>Amount</ion-label>\n\t\t\t\t\t\t<ion-input type=\"number\" min=\"0\" max=\"9999999\" required ngModel name=\"amount\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t\t<ion-button class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" color=\"success\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"add-outline\"></ion-icon>\n\t\t\t\t\t\tAdd funds\n\t\t\t\t\t</ion-button>\n\t\t\t\t</form>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<ion-row *ngIf=\"!isAdd\">\n\t\t\t<ion-col>\n\t\t\t\t<form #withdrawForm=\"ngForm\" (ngSubmit)=\"withdraw(withdrawForm)\">\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label>Amount</ion-label>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t\tmax=\"{{ user.balance.availableBal }}\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tngModel\n\t\t\t\t\t\t\tname=\"amount\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t\t<ion-button class=\"ion-margin-vertical\" style=\"height: 50px\" expand=\"block\" type=\"submit\">\n\t\t\t\t\t\t<ion-icon name=\"refresh-outline\"></ion-icon>\n\t\t\t\t\t\tWithdraw\n\t\t\t\t\t</ion-button>\n\t\t\t\t</form>\n\t\t\t</ion-col>\n\t\t</ion-row> -->\n\t</ion-grid>\n</ion-content>\n";
       /***/
     },
 
@@ -755,7 +835,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Search Companies</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content vertical=\"top\">\n\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filter($event.detail.value)\"></ion-searchbar>\n\t<ion-list>\n\t\t<ion-item *ngFor=\"let stock of filteredData || stocks\">\n\t\t\t<ion-label>{{ stock.companyName }}</ion-label>\n\t\t\t<ion-checkbox\n\t\t\t\tslot=\"end\"\n\t\t\t\t[checked]=\"seeIfChecked(stock)\"\n\t\t\t\t(ionChange)=\"onSelect($event.detail.checked, stock)\"\n\t\t\t></ion-checkbox>\n\t\t</ion-item>\n\t</ion-list>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Search Companies</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content vertical=\"top\" style=\"display: flex; flex-direction: column; align-items: center;\">\n\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filter($event.detail.value)\"></ion-searchbar>\n\t<ion-list>\n\t\t<ion-item *ngFor=\"let s of filteredData || stocks\">\n\t\t\t<ion-label>\n\t\t\t\t<div style=\"display: flex; align-items: center;\">\n\t\t\t\t\t<span style=\"padding:5px 0\">{{ s.companyName }}</span>\n\t\t\t\t\t<ion-spinner *ngIf=\"!s.isLoaded\" name=\"lines-small\" class=\"ion-padding-start\"></ion-spinner>\n\t\t\t\t</div>\n\t\t\t</ion-label>\n\t\t\t<ion-checkbox\n\t\t\t\tslot=\"end\"\n\t\t\t\t[checked]=\"seeIfChecked(s)\"\n\t\t\t\t(ionChange)=\"onSelect($event.detail.checked, s)\"\n\t\t\t></ion-checkbox>\n\t\t</ion-item>\n\t</ion-list>\n\t<div style=\"width: 100%; display: flex; align-items: center; justify-content: center;\">\n\t\t<ion-spinner *ngIf=\"spinner\" name=\"lines-small\" class=\"ion-margin\"></ion-spinner>\n\t</div>\n</ion-content>\n";
       /***/
     },
 
@@ -815,7 +895,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n\t<ion-toolbar>\n\t\t<ion-title>Forgot password</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n\t<ion-item class=\"ion-margin-bottom\">\n\t\t<ion-label>Email</ion-label>\n\t\t<ion-input [(ngModel)]=\"email\" type=\"email\"></ion-input>\n\t</ion-item>\n\t<ion-button size=\"block\" (click)=\"emailCheck(email)\">Send me the code</ion-button>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header>\n\t<ion-toolbar>\n\t\t<ion-title>Forgot password</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n\t<ion-item class=\"ion-margin-bottom ion-no-padding\">\n\t\t<ion-label>Email</ion-label>\n\t\t<ion-input [(ngModel)]=\"email\" type=\"email\"></ion-input>\n\t</ion-item>\n\t<ion-button size=\"block\" (click)=\"emailCheck(email)\">\n\t\tSend me the code\n\t\t<ion-spinner name=\"lines-small\" *ngIf=\"spinner\"></ion-spinner>\n\t</ion-button>\n</ion-content>\n";
       /***/
     },
 
@@ -876,20 +956,22 @@
       "qfBg");
 
       var ModalChangePasswordComponent = /*#__PURE__*/function () {
-        function ModalChangePasswordComponent(modalCtrl, userService) {
+        function ModalChangePasswordComponent(modalCtrl, userService, toastCtrl) {
           _classCallCheck(this, ModalChangePasswordComponent);
 
           this.modalCtrl = modalCtrl;
           this.userService = userService;
+          this.toastCtrl = toastCtrl;
         }
 
         _createClass(ModalChangePasswordComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this4 = this;
+            var _this5 = this;
 
+            this.spinner = false;
             this.userService.authenticated.subscribe(function (u) {
-              return _this4.user = u.user;
+              return _this5.user = u.user;
             });
           }
         }, {
@@ -900,13 +982,90 @@
         }, {
           key: "changePassword",
           value: function changePassword(input) {
-            if (input.newPassword == input.confirmPassword) {
-              this.userService.changePassword(this.user.email, input.newPassword).subscribe(function (res) {});
-            } // if(this.userService.changePassword(input.newPassword, input.confirmPassword)) {
-            //   this.userService.changePassword(input.newPassword, input.confirmPassword)
-            //   this.dismissModal() 
-            // } else this.passwordsDontMatch = false
+            var _this6 = this;
 
+            this.spinner = true;
+
+            if (input.newPassword != "" || input.confirmPassword != "") {
+              if (input.newPassword == input.confirmPassword) {
+                this.userService.changePassword(this.user.email, input.newPassword).subscribe(function () {}, function (err) {
+                  _this6.spinner = false;
+                  console.log(err);
+
+                  _this6.presentErrorToast(err);
+                }, function () {
+                  _this6.spinner = false;
+
+                  _this6.presentSuccessToast('Password changed successfuly.');
+
+                  _this6.dismissModal();
+                });
+              } else {
+                this.spinner = false;
+                this.presentErrorToast('New passwords don\'t match.');
+              }
+            } else {
+              this.spinner = false;
+              this.presentErrorToast('Something is missing.');
+            }
+          }
+        }, {
+          key: "presentErrorToast",
+          value: function presentErrorToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      _context3.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        duration: 2500,
+                        color: "danger"
+                      });
+
+                    case 2:
+                      toast = _context3.sent;
+                      _context3.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
+          }
+        }, {
+          key: "presentSuccessToast",
+          value: function presentSuccessToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      _context4.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        duration: 2500,
+                        color: "success"
+                      });
+
+                    case 2:
+                      toast = _context4.sent;
+                      _context4.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4, this);
+            }));
           }
         }]);
 
@@ -918,11 +1077,13 @@
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]
         }, {
           type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"]
         }];
       };
 
       ModalChangePasswordComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-modal-change-password',
+        selector: "app-modal-change-password",
         template: _raw_loader_modal_change_password_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_modal_change_password_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
       })], ModalChangePasswordComponent);
@@ -1067,28 +1228,28 @@
         }, {
           key: "savePosition",
           value: function savePosition() {
-            var _this5 = this;
+            var _this7 = this;
 
             this.position != null && this.orderService.updateOrder(this.position.id, this.position.target, this.position.stoploss).subscribe(function () {}, function () {}, function () {
-              return _this5.dismissModal(true);
+              return _this7.dismissModal(true);
             });
           }
         }, {
           key: "sellPosition",
           value: function sellPosition() {
-            var _this6 = this;
+            var _this8 = this;
 
             this.position != null && this.orderService.exitPosition(this.position.id).subscribe(function () {}, function () {}, function () {
-              return _this6.dismissModal(true);
+              return _this8.dismissModal(true);
             });
           }
         }, {
           key: "savePending",
           value: function savePending() {
-            var _this7 = this;
+            var _this9 = this;
 
             this.pending != null && this.orderService.updateOrder(this.pending.id, this.pending.target, this.pending.stoploss).subscribe(function () {}, function () {}, function () {
-              return _this7.dismissModal(true);
+              return _this9.dismissModal(true);
             });
           }
         }]);
@@ -1194,14 +1355,15 @@
         _createClass(ModalWatchlistComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this8 = this;
+            var _this10 = this;
 
+            this.spinner = true;
             this.stockService.getStocks().subscribe(function (s) {
-              _this8.stocks = s.data;
-              console.log(s);
+              _this10.stocks = s.data;
+              _this10.spinner = false;
             });
             this.watchlistService.getWatchlist(this.selectedWatchlist).subscribe(function (w) {
-              _this8.sWatchlist = w.data;
+              _this10.sWatchlist = w.data;
             });
           }
         }, {
@@ -1213,13 +1375,24 @@
         }, {
           key: "onSelect",
           value: function onSelect(event, stock) {
-            var _this9 = this;
+            var _this11 = this;
 
-            if (event == true) this.watchlistService.addToWatchlist(this.selectedWatchlist, stock._id).subscribe(function () {
-              return _this9.changeOfWatchlist = true;
-            });else if (event == false) this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock._id).subscribe(function () {
-              return _this9.changeOfWatchlist = true;
-            });
+            var sIndex = this.stocks.indexOf(this.stocks.find(function (s) {
+              return s._id == stock._id;
+            }));
+            this.stocks[sIndex].isLoaded = false;
+
+            if (event == true) {
+              this.watchlistService.addToWatchlist(this.selectedWatchlist, stock._id).subscribe(function () {
+                _this11.stocks[sIndex].isLoaded = true;
+              });
+            } else if (event == false) {
+              this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock._id).subscribe(function () {
+                _this11.stocks[sIndex].isLoaded = true;
+              });
+            }
+
+            this.changeOfWatchlist = true;
           }
         }, {
           key: "filter",
@@ -1392,10 +1565,10 @@
         _createClass(AppComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              return regeneratorRuntime.wrap(function _callee$(_context) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
-                  switch (_context.prev = _context.next) {
+                  switch (_context5.prev = _context5.next) {
                     case 0:
                       this.initializeApp();
                       this.connectionLostEvent();
@@ -1403,61 +1576,61 @@
 
                     case 3:
                     case "end":
-                      return _context.stop();
+                      return _context5.stop();
                   }
                 }
-              }, _callee, this);
+              }, _callee5, this);
             }));
           }
         }, {
           key: "connectionLostEvent",
           value: function connectionLostEvent() {
-            var _this10 = this;
+            var _this12 = this;
 
             this.networkListener = Network.addListener('networkStatusChange', function (status) {
-              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this10, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this12, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+                return regeneratorRuntime.wrap(function _callee6$(_context6) {
                   while (1) {
-                    switch (_context2.prev = _context2.next) {
+                    switch (_context6.prev = _context6.next) {
                       case 0:
                         this.networkStatus = status;
 
                         if (this.networkStatus.connected) {
-                          _context2.next = 4;
+                          _context6.next = 4;
                           break;
                         }
 
-                        _context2.next = 4;
+                        _context6.next = 4;
                         return this.connectionLostNotification();
 
                       case 4:
                       case "end":
-                        return _context2.stop();
+                        return _context6.stop();
                     }
                   }
-                }, _callee2, this);
+                }, _callee6, this);
               }));
             });
           }
         }, {
           key: "backButtonEvent",
           value: function backButtonEvent() {
-            var _this11 = this;
+            var _this13 = this;
 
             this.platform.backButton.subscribeWithPriority(10, function () {
-              if (_this11.router.url == "/home/dashboard") _this11.backButtonAlert();else _this11.location.back();
+              if (_this13.router.url == "/home/dashboard") _this13.backButtonAlert();else _this13.location.back();
             });
           }
         }, {
           key: "backButtonAlert",
           value: function backButtonAlert() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              return regeneratorRuntime.wrap(function _callee7$(_context7) {
                 while (1) {
-                  switch (_context3.prev = _context3.next) {
+                  switch (_context7.prev = _context7.next) {
                     case 0:
-                      _context3.next = 2;
+                      _context7.next = 2;
                       return this.alertController.create({
                         message: 'You\'ve just pressed the back button',
                         buttons: [{
@@ -1472,27 +1645,27 @@
                       });
 
                     case 2:
-                      alert = _context3.sent;
-                      _context3.next = 5;
+                      alert = _context7.sent;
+                      _context7.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context3.stop();
+                      return _context7.stop();
                   }
                 }
-              }, _callee3, this);
+              }, _callee7, this);
             }));
           }
         }, {
           key: "connectionLostNotification",
           value: function connectionLostNotification() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+              return regeneratorRuntime.wrap(function _callee8$(_context8) {
                 while (1) {
-                  switch (_context4.prev = _context4.next) {
+                  switch (_context8.prev = _context8.next) {
                     case 0:
-                      _context4.next = 2;
+                      _context8.next = 2;
                       return LocalNotifications.schedule({
                         notifications: [{
                           id: 1,
@@ -1503,24 +1676,24 @@
 
                     case 2:
                     case "end":
-                      return _context4.stop();
+                      return _context8.stop();
                   }
                 }
-              }, _callee4);
+              }, _callee8);
             }));
           }
         }, {
           key: "initializeApp",
           value: function initializeApp() {
-            var _this12 = this;
+            var _this14 = this;
 
             this.platform.ready().then(function () {
-              _this12.statusBar.styleDefault();
+              _this14.statusBar.styleDefault();
 
-              _this12.splashScreen.hide();
+              _this14.splashScreen.hide();
 
-              _this12.userService.authenticated.subscribe(function (a) {
-                a ? _this12.router.navigate(['home', 'dashboard']) : _this12.router.navigate(['home', 'login']);
+              _this14.userService.authenticated.subscribe(function (a) {
+                a ? _this14.router.navigate(['home', 'dashboard']) : _this14.router.navigate(['home', 'login']);
               });
             });
           }
@@ -1579,7 +1752,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>{{ position != null ? \"Edit Position\" : \"Edit Pending\" }}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-title class=\"ion-padding\" *ngIf=\"position != null\">{{ position.name }}</ion-title>\n\t<ion-title class=\"ion-padding\" *ngIf=\"pending != null\">{{ pending.name }}</ion-title>\n\t<ion-grid>\n\t\t<ion-row *ngIf=\"position != null\">\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<ion-card-header>\n\t\t\t\t\t<ion-card-title>Stop-loss</ion-card-title>\n\t\t\t\t</ion-card-header>\n\t\t\t\t<ion-card-content>\n\t\t\t\t\t<ion-input\n\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\tname=\"stopLoss\"\n\t\t\t\t\t\t[(ngModel)]=\"position.stoploss\"\n\t\t\t\t\t\trequired\n\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t></ion-input>\n\t\t\t\t</ion-card-content>\n\t\t\t\t<!-- <ion-label>Stop-Loss</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" min=0 [(ngModel)]=\"position.stoploss\"></ion-input> -->\n\t\t\t</ion-col>\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<ion-card-header>\n\t\t\t\t\t<ion-card-title>Target</ion-card-title>\n\t\t\t\t</ion-card-header>\n\t\t\t\t<ion-card-content>\n\t\t\t\t\t<ion-input\n\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\tname=\"target\"\n\t\t\t\t\t\t[(ngModel)]=\"position.target\"\n\t\t\t\t\t\trequired\n\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t></ion-input>\n\t\t\t\t</ion-card-content>\n\t\t\t\t<!-- <ion-label>Target</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" min=0 [(ngModel)]=\"position.target\"></ion-input> -->\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<ion-row *ngIf=\"pending != null\">\n\t\t\t<ion-col>\n\t\t\t\t<div *ngIf=\"!pending.isStopLoss\">\n\t\t\t\t\t<ion-card-header>\n\t\t\t\t\t\t<ion-card-title>Price</ion-card-title>\n\t\t\t\t\t</ion-card-header>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\t\tname=\"target\"\n\t\t\t\t\t\t\t[(ngModel)]=\"pending.price\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t\t<!-- <ion-label>Target</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" [(ngModel)]=\"pending.target\"></ion-input> -->\n\t\t\t\t</div>\n\t\t\t\t<div *ngIf=\"pending.isStopLoss\">\n\t\t\t\t\t<ion-card-header>\n\t\t\t\t\t\t<ion-card-title>Stop-loss</ion-card-title>\n\t\t\t\t\t</ion-card-header>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\t\tname=\"stopLoss\"\n\t\t\t\t\t\t\t[(ngModel)]=\"pending.stoploss\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t\t<!-- <ion-label>Stop-loss</ion-label>\n\t\t\t\t\t<ion-input type=\"number\" [(ngModel)]=\"pending.stoploss\"></ion-input> -->\n\t\t\t\t</div>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n</ion-content>\n<ion-footer class=\"ion-padding\">\n\t<div *ngIf=\"position != null\">\n\t\t<ion-button expand=\"block\" color=\"success\" (click)=\"savePosition()\">\n\t\t\t<ion-icon name=\"save-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSave\n\t\t</ion-button>\n\t\t<ion-button expand=\"block\" color=\"danger\" (click)=\"sellPosition()\">\n\t\t\t<ion-icon name=\"trash-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSell\n\t\t</ion-button>\n\t</div>\n\t<div *ngIf=\"pending != null\">\n\t\t<ion-button expand=\"block\" color=\"success\" (click)=\"savePending()\">\n\t\t\t<ion-icon name=\"save-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSave\n\t\t</ion-button>\n\t</div>\n</ion-footer>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>{{ position != null ? \"Edit Position\" : \"Edit Pending\" }}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col class=\"title-column\">\n\t\t\t\t<ion-label class=\"ion-padding\" *ngIf=\"position != null\">{{ position.name }}</ion-label>\n\t\t\t\t<ion-label class=\"ion-padding\" *ngIf=\"pending != null\">{{ pending.name }}</ion-label>\n\t\t\t\t<hr>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<ion-row *ngIf=\"position != null\">\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<ion-card-header>\n\t\t\t\t\t<ion-card-title>Stop-loss</ion-card-title>\n\t\t\t\t</ion-card-header>\n\t\t\t\t<ion-card-content>\n\t\t\t\t\t<ion-input\n\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\tname=\"stopLoss\"\n\t\t\t\t\t\t[(ngModel)]=\"position.stoploss\"\n\t\t\t\t\t\trequired\n\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t></ion-input>\n\t\t\t\t</ion-card-content>\n\t\t\t</ion-col>\n\t\t\t<ion-col size=\"6\">\n\t\t\t\t<ion-card-header>\n\t\t\t\t\t<ion-card-title>Target</ion-card-title>\n\t\t\t\t</ion-card-header>\n\t\t\t\t<ion-card-content>\n\t\t\t\t\t<ion-input\n\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\tname=\"target\"\n\t\t\t\t\t\t[(ngModel)]=\"position.target\"\n\t\t\t\t\t\trequired\n\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t></ion-input>\n\t\t\t\t</ion-card-content>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t\t<ion-row *ngIf=\"pending != null\">\n\t\t\t<ion-col>\n\t\t\t\t<div *ngIf=\"!pending.isStopLoss\">\n\t\t\t\t\t<ion-card-header>\n\t\t\t\t\t\t<ion-card-title>Price</ion-card-title>\n\t\t\t\t\t</ion-card-header>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\t\tname=\"target\"\n\t\t\t\t\t\t\t[(ngModel)]=\"pending.price\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t</div>\n\t\t\t\t<div *ngIf=\"pending.isStopLoss\">\n\t\t\t\t\t<ion-card-header>\n\t\t\t\t\t\t<ion-card-title>Stop-loss</ion-card-title>\n\t\t\t\t\t</ion-card-header>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-input\n\t\t\t\t\t\t\ttype=\"number\"\n\t\t\t\t\t\t\tclass=\"card-input\"\n\t\t\t\t\t\t\tname=\"stopLoss\"\n\t\t\t\t\t\t\t[(ngModel)]=\"pending.stoploss\"\n\t\t\t\t\t\t\trequired\n\t\t\t\t\t\t\tmin=\"0\"\n\t\t\t\t\t\t></ion-input>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t</div>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n</ion-content>\n<ion-footer class=\"ion-padding\">\n\t<div *ngIf=\"position != null\">\n\t\t<ion-button expand=\"block\" color=\"success\" (click)=\"savePosition()\">\n\t\t\t<ion-icon name=\"save-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSave\n\t\t</ion-button>\n\t\t<ion-button expand=\"block\" color=\"danger\" (click)=\"sellPosition()\">\n\t\t\t<ion-icon name=\"trash-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSell\n\t\t</ion-button>\n\t</div>\n\t<div *ngIf=\"pending != null\">\n\t\t<ion-button expand=\"block\" color=\"success\" (click)=\"savePending()\">\n\t\t\t<ion-icon name=\"save-outline\" style=\"padding-right: 5px\"></ion-icon>\n\t\t\tSave\n\t\t</ion-button>\n\t</div>\n</ion-footer>\n";
       /***/
     },
 
@@ -1623,7 +1796,13 @@
       /* harmony import */
 
 
-      var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
+      /* harmony import */
+
+
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! src/environments/environment */
       "AytR");
 
@@ -1632,7 +1811,7 @@
           _classCallCheck(this, WatchlistService);
 
           this.http = http;
-          this.apiUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + 'watchlist/';
+          this.apiUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl + 'watchlist/';
         }
 
         _createClass(WatchlistService, [{
@@ -1643,12 +1822,26 @@
         }, {
           key: "getSimulatedWatchlists",
           value: function getSimulatedWatchlists() {
-            return this.http.get(this.apiUrl + 'filter/simulated');
+            return this.http.get(this.apiUrl + 'filter/simulated').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (r) {
+              r.data.forEach(function (w) {
+                w.stockIds.forEach(function (s) {
+                  s.isLoaded = true;
+                });
+              });
+              return r;
+            }));
           }
         }, {
           key: "getRealtimeWatchlists",
           value: function getRealtimeWatchlists() {
-            return this.http.get(this.apiUrl + 'filter/realTime');
+            return this.http.get(this.apiUrl + 'filter/realTime').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (r) {
+              r.data.forEach(function (w) {
+                w.stockIds.forEach(function (s) {
+                  s.isLoaded = true;
+                });
+              });
+              return r;
+            }));
           }
         }, {
           key: "addToWatchlist",
@@ -1690,7 +1883,12 @@
           }
         }, {
           key: "editWatchlist",
-          value: function editWatchlist(id, name) {}
+          value: function editWatchlist(watchlistId, name) {
+            return this.http.put(this.apiUrl + 'update/watchlist/name', {
+              watchlistId: watchlistId,
+              name: name
+            });
+          }
         }, {
           key: "deleteWatchlist",
           value: function deleteWatchlist(id) {
@@ -2140,31 +2338,31 @@
         }, {
           key: "openChangePasswordModal",
           value: function openChangePasswordModal() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
               var modal;
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              return regeneratorRuntime.wrap(function _callee9$(_context9) {
                 while (1) {
-                  switch (_context5.prev = _context5.next) {
+                  switch (_context9.prev = _context9.next) {
                     case 0:
-                      _context5.next = 2;
+                      _context9.next = 2;
                       return this.modalCtrl.create({
                         component: _modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_6__["ModalChangePasswordComponent"]
                       });
 
                     case 2:
-                      modal = _context5.sent;
-                      _context5.next = 5;
+                      modal = _context9.sent;
+                      _context9.next = 5;
                       return modal.present();
 
                     case 5:
-                      return _context5.abrupt("return", _context5.sent);
+                      return _context9.abrupt("return", _context9.sent);
 
                     case 6:
                     case "end":
-                      return _context5.stop();
+                      return _context9.stop();
                   }
                 }
-              }, _callee5, this);
+              }, _callee9, this);
             }));
           }
         }]);
@@ -2270,7 +2468,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Edit watchlist</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-item class=\"ion-margin-horizontal\">\n\t\t<ion-label position=\"floating\">Name of watchlist</ion-label>\n\t\t<ion-input [(ngModel)]=\"watchlistName\"></ion-input>\n\t</ion-item>\n\t<!-- <ion-label position=\"floating\" color=\"danger\" class=\"ion-padding\"\n\t\t\t*ngIf=\"editWatchlistForm.invalid && editWatchlistForm.touched\">\n\t\t\tPlease enter the name of watchlist\n\t\t</ion-label> -->\n\t<ion-button (click)=\"onEditWatchlist()\" class=\"ion-margin\" expand=\"block\">Save watchlist</ion-button>\n\t<div cdkDropList class=\"drag-list\" (cdkDropListDropped)=\"drop($event)\" *ngIf=\"stocks.length > 0\">\n\t\t<div *ngFor=\"let stock of stocks\" style=\"width: 100%;\" cdkDrag class=\"drag-box\">\n\t\t\t<div *ngIf=\"stock != undefined\">\n\t\t\t\t<ion-icon name=\"reorder-three-outline\" class=\"ion-margin-end\"></ion-icon>\n\t\t\t\t<span>{{ stock.name }}</span>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Edit watchlist</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<ion-item class=\"ion-margin-horizontal ion-no-padding\">\n\t\t<ion-label position=\"floating\">Name of watchlist</ion-label>\n\t\t<ion-input [(ngModel)]=\"watchlistName\"></ion-input>\n\t</ion-item>\n\t<ion-button (click)=\"onEditWatchlist()\" class=\"ion-margin\" expand=\"block\">\n\t\tSave watchlist\n\t\t<ion-spinner name=\"lines-small\" *ngIf=\"spinner\"></ion-spinner>\n\t</ion-button>\n\t<div cdkDropList class=\"drag-list\" (cdkDropListDropped)=\"drop($event)\" *ngIf=\"stocks.length > 0\">\n\t\t<div *ngFor=\"let stock of stocks\" style=\"width: 100%;\" cdkDrag class=\"drag-box\">\n\t\t\t<div *ngIf=\"stock != undefined\">\n\t\t\t\t<ion-icon name=\"reorder-three-outline\" class=\"ion-margin-end\"></ion-icon>\n\t\t\t\t<span>{{ stock.name }}</span>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</ion-content>\n";
       /***/
     },
 
@@ -2373,7 +2571,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Code Validation</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"dismissModal()\">Close</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n  <ion-label class=\"ion-margin-vertical\">Enter the code that you've recieved on {{email}}</ion-label>\n  <ion-item class=\"ion-margin-bottom\">\n    <ion-label>Code</ion-label>\n    <ion-input [(ngModel)]=\"code\"></ion-input>\n  </ion-item>\n  <ion-button size=\"block\" (click)=\"codeCheck(email, code)\">Validate my code!</ion-button>\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Code Validation</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"dismissModal()\">Close</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n  <ion-label class=\"ion-margin-vertical ion-no-padding\">Enter the code that you've recieved on {{email}}</ion-label>\n  <ion-item class=\"ion-no-padding ion-margin-vertical\">\n    <ion-label>Code</ion-label>\n    <ion-input [(ngModel)]=\"code\"></ion-input>\n  </ion-item>\n  <ion-button size=\"block\" (click)=\"codeCheck(email, code)\">Validate my code</ion-button>\n</ion-content>";
       /***/
     },
 
@@ -2565,55 +2763,31 @@
             return this.http.post(this.apiUrl + 'order/stop', {
               id: id
             });
-          }
-        }, {
-          key: "buy",
-          value: function buy(cId, watchlistId, quantity, stopLoss, target, order, price) {
-            var _this13 = this;
+          } // buy(cId: string, watchlistId: string,quantity: number, stopLoss: number, target: number, order: string, availableBal: number, price?: number){
+          //   if(availableBal >= price){
+          //     let company
+          //     this.stockService.getStock(cId).subscribe((c:any) => {
+          //       company = c.data
+          //       var pending
+          //       pending = {stockId: cId, watchlistId, volume: quantity, stoploss: stopLoss, target, price}
+          //       order == 'limit'
+          //       ? this.stockService.orderStockLimitBuy(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
+          //       : this.stockService.orderStockMarketBuy(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
+          //     })
+          //   }
+          // }
+          // sell(cId: string, watchlistId: string,quantity: number, stopLoss: number, target: number, order: string, availableBal: number, price?: number){
+          //   let company
+          //   this.stockService.getStock(cId).subscribe((c:any) => {
+          //     company = c.data
+          //     var pending
+          //     pending = {stockId: cId, watchlistId, volume: quantity, stoploss: stopLoss, target, price}
+          //     order == 'limit'
+          //     ? this.stockService.orderStockLimitSell(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
+          //     : this.stockService.orderStockMarketSell(pending).subscribe(()=>{},()=>{},()=>this.router.navigate(['home','orders']))
+          //   })
+          // }
 
-            var company;
-            this.stockService.getStock(cId).subscribe(function (c) {
-              company = c.data;
-              var pending;
-              pending = {
-                stockId: cId,
-                watchlistId: watchlistId,
-                volume: quantity,
-                stoploss: stopLoss,
-                target: target,
-                price: price
-              };
-              order == 'limit' ? _this13.stockService.orderStockLimitBuy(pending).subscribe(function () {}, function () {}, function () {
-                return _this13.router.navigate(['home', 'orders']);
-              }) : _this13.stockService.orderStockMarketBuy(pending).subscribe(function () {}, function () {}, function () {
-                return _this13.router.navigate(['home', 'orders']);
-              });
-            });
-          }
-        }, {
-          key: "sell",
-          value: function sell(cId, watchlistId, quantity, stopLoss, target, order, price) {
-            var _this14 = this;
-
-            var company;
-            this.stockService.getStock(cId).subscribe(function (c) {
-              company = c.data;
-              var pending;
-              pending = {
-                stockId: cId,
-                watchlistId: watchlistId,
-                volume: quantity,
-                stoploss: stopLoss,
-                target: target,
-                price: price
-              };
-              order == 'limit' ? _this14.stockService.orderStockLimitSell(pending).subscribe(function () {}, function () {}, function () {
-                return _this14.router.navigate(['home', 'orders']);
-              }) : _this14.stockService.orderStockMarketSell(pending).subscribe(function () {}, function () {}, function () {
-                return _this14.router.navigate(['home', 'orders']);
-              });
-            });
-          }
         }, {
           key: "totalPandL",
           value: function totalPandL() {}
@@ -2838,16 +3012,19 @@
       "bzO4");
 
       var ModalFpEmailComponent = /*#__PURE__*/function () {
-        function ModalFpEmailComponent(modalCtrl, userService) {
+        function ModalFpEmailComponent(modalCtrl, userService, toastCtrl) {
           _classCallCheck(this, ModalFpEmailComponent);
 
           this.modalCtrl = modalCtrl;
           this.userService = userService;
+          this.toastCtrl = toastCtrl;
         }
 
         _createClass(ModalFpEmailComponent, [{
           key: "ngOnInit",
-          value: function ngOnInit() {}
+          value: function ngOnInit() {
+            this.spinner = false;
+          }
         }, {
           key: "dismissModal",
           value: function dismissModal() {
@@ -2858,26 +3035,37 @@
           value: function emailCheck(email) {
             var _this16 = this;
 
-            if (this.checkIfEmailInString(email)) {
-              this.userService.emailExists(this.email).subscribe(function (r) {
-                console.log(r);
+            this.spinner = true;
 
-                _this16.dismissModal();
+            if (email != '') {
+              if (this.checkIfEmailInString(email)) {
+                this.userService.emailExists(this.email).subscribe(function (r) {
+                  _this16.spinner = false;
+                  console.log(r);
 
-                _this16.openCodeCheckModal(email);
-              });
+                  _this16.dismissModal();
+
+                  _this16.openCodeCheckModal(email);
+                });
+              } else {
+                this.spinner = false;
+                this.presentErrorToast('Enter your email in the correct format.');
+              }
+            } else {
+              this.spinner = false;
+              this.presentErrorToast('Enter your email.');
             }
           }
         }, {
           key: "openCodeCheckModal",
           value: function openCodeCheckModal(email) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
               var modal;
-              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+              return regeneratorRuntime.wrap(function _callee10$(_context10) {
                 while (1) {
-                  switch (_context6.prev = _context6.next) {
+                  switch (_context10.prev = _context10.next) {
                     case 0:
-                      _context6.next = 2;
+                      _context10.next = 2;
                       return this.modalCtrl.create({
                         component: _modal_fp_code_check_modal_fp_code_check_component__WEBPACK_IMPORTED_MODULE_6__["ModalFpCodeCheckComponent"],
                         componentProps: {
@@ -2886,19 +3074,19 @@
                       });
 
                     case 2:
-                      modal = _context6.sent;
-                      _context6.next = 5;
+                      modal = _context10.sent;
+                      _context10.next = 5;
                       return modal.present();
 
                     case 5:
-                      return _context6.abrupt("return", _context6.sent);
+                      return _context10.abrupt("return", _context10.sent);
 
                     case 6:
                     case "end":
-                      return _context6.stop();
+                      return _context10.stop();
                   }
                 }
-              }, _callee6, this);
+              }, _callee10, this);
             }));
           }
         }, {
@@ -2906,6 +3094,35 @@
           value: function checkIfEmailInString(text) {
             var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
             return re.test(text);
+          }
+        }, {
+          key: "presentErrorToast",
+          value: function presentErrorToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee11$(_context11) {
+                while (1) {
+                  switch (_context11.prev = _context11.next) {
+                    case 0:
+                      _context11.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        duration: 2500,
+                        color: "danger"
+                      });
+
+                    case 2:
+                      toast = _context11.sent;
+                      _context11.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context11.stop();
+                  }
+                }
+              }, _callee11, this);
+            }));
           }
         }]);
 
@@ -2917,11 +3134,13 @@
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]
         }, {
           type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"]
         }];
       };
 
       ModalFpEmailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-modal-fp-email',
+        selector: "app-modal-fp-email",
         template: _raw_loader_modal_fp_email_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_modal_fp_email_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
       })], ModalFpEmailComponent);
@@ -3056,8 +3275,13 @@
           }
         }, {
           key: "googleAuth",
-          value: function googleAuth() {
-            return this.http.get(this.apiUrl + 'google');
+          value: function googleAuth(idToken) {
+            var httpOptions = {
+              headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Authorization': "Bearer ".concat(idToken)
+              })
+            };
+            return this.http.get(this.apiUrl + 'google', httpOptions);
           }
         }, {
           key: "getFundsChart",
@@ -3273,12 +3497,13 @@
       "Tl0h");
 
       var ModalEditWatchlistsComponent = /*#__PURE__*/function () {
-        function ModalEditWatchlistsComponent(modalCtrl, watchlistService, userService) {
+        function ModalEditWatchlistsComponent(modalCtrl, watchlistService, userService, toastCtrl) {
           _classCallCheck(this, ModalEditWatchlistsComponent);
 
           this.modalCtrl = modalCtrl;
           this.watchlistService = watchlistService;
           this.userService = userService;
+          this.toastCtrl = toastCtrl;
           this.watchlists = [];
         }
 
@@ -3287,14 +3512,18 @@
           value: function ngOnInit() {
             var _this22 = this;
 
+            this.spinner = false;
+            this.dataLoaded = false;
             this.userService.getSettings().subscribe(function (r) {
               var datatype = r.data.datatype;
-              if (datatype == 'simulated') _this22.watchlistService.getSimulatedWatchlists().subscribe(function (r) {
-                console.log('simulated', r);
+              if (datatype == "simulated") _this22.watchlistService.getSimulatedWatchlists().subscribe(function (r) {
+                console.log("simulated", r);
+                _this22.dataLoaded = true;
               });
-              if (datatype == 'realtime') _this22.watchlistService.getRealtimeWatchlists().subscribe(function (r) {
-                console.log('realtime', r);
+              if (datatype == "realtime") _this22.watchlistService.getRealtimeWatchlists().subscribe(function (r) {
+                console.log("realtime", r);
                 _this22.watchlists = r.data;
+                _this22.dataLoaded = true;
               });
             });
           }
@@ -3305,21 +3534,27 @@
           }
         }, {
           key: "onCreateWatchlist",
-          value: function onCreateWatchlist(createWatchlistForm) {
+          value: function onCreateWatchlist() {
             var _this23 = this;
 
-            if (this.watchlistName.trim() != '' && this.watchlistName != null && this.watchlistName != undefined) {
+            var _a;
+
+            if (((_a = this.watchlistName) === null || _a === void 0 ? void 0 : _a.trim()) != "" && this.watchlistName != null && this.watchlistName != undefined) {
+              this.spinner = true;
               this.watchlistName = this.watchlistName.trim();
               this.watchlistService.createWatchlist(this.watchlistName).subscribe(function () {
-                return _this23.changeInWatchlist = true;
+                _this23.changeInWatchlist = true;
+                _this23.spinner = false;
+
+                _this23.presentSuccessToast("\"".concat(_this23.watchlistName, "\" was successfuly created."));
+
+                _this23.watchlistName = "";
               });
-              this.watchlistName = '';
-            }
+            } else this.presentErrorToast('Input field is empty.');
           }
         }, {
           key: "drop",
           value: function drop(event) {
-            //needs to happen in backend
             Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_3__["moveItemInArray"])(this.watchlists, event.previousIndex, event.currentIndex);
             this.changePosition();
           }
@@ -3328,7 +3563,6 @@
           value: function changePosition() {
             var _this24 = this;
 
-            // this.watchlists = this.watchlistService.moveInArray(this.watchlists, event.previousIndex, event.currentIndex)
             var positions = [];
 
             for (var i = 0; i < this.watchlists.length; i++) {
@@ -3343,6 +3577,64 @@
               return _this24.changeInWatchlist = true;
             });
           }
+        }, {
+          key: "presentErrorToast",
+          value: function presentErrorToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee12$(_context12) {
+                while (1) {
+                  switch (_context12.prev = _context12.next) {
+                    case 0:
+                      _context12.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        duration: 2500,
+                        color: "danger"
+                      });
+
+                    case 2:
+                      toast = _context12.sent;
+                      _context12.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context12.stop();
+                  }
+                }
+              }, _callee12, this);
+            }));
+          }
+        }, {
+          key: "presentSuccessToast",
+          value: function presentSuccessToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee13$(_context13) {
+                while (1) {
+                  switch (_context13.prev = _context13.next) {
+                    case 0:
+                      _context13.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        duration: 2500,
+                        color: "success"
+                      });
+
+                    case 2:
+                      toast = _context13.sent;
+                      _context13.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context13.stop();
+                  }
+                }
+              }, _callee13, this);
+            }));
+          }
         }]);
 
         return ModalEditWatchlistsComponent;
@@ -3355,11 +3647,13 @@
           type: src_app_services_watchlist_service__WEBPACK_IMPORTED_MODULE_7__["WatchlistService"]
         }, {
           type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"]
         }];
       };
 
       ModalEditWatchlistsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
-        selector: 'app-modal-edit-watchlists',
+        selector: "app-modal-edit-watchlists",
         template: _raw_loader_modal_edit_watchlists_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_modal_edit_watchlists_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
       })], ModalEditWatchlistsComponent);
@@ -3630,13 +3924,14 @@
       var STORAGE_KEY = "assets";
 
       var ModalUploadPostComponent = /*#__PURE__*/function () {
-        function ModalUploadPostComponent(api, plt, actionSheetCtrl, modalCtrl) {
+        function ModalUploadPostComponent(api, plt, actionSheetCtrl, modalCtrl, toastCtrl) {
           _classCallCheck(this, ModalUploadPostComponent);
 
           this.api = api;
           this.plt = plt;
           this.actionSheetCtrl = actionSheetCtrl;
           this.modalCtrl = modalCtrl;
+          this.toastCtrl = toastCtrl;
           this.intraDay = false;
           this.positional = false;
           this.demoTrading = false;
@@ -3654,13 +3949,13 @@
         }, {
           key: "selectImageSource",
           value: function selectImageSource() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
               var _this26 = this;
 
               var buttons, actionSheet;
-              return regeneratorRuntime.wrap(function _callee7$(_context7) {
+              return regeneratorRuntime.wrap(function _callee14$(_context14) {
                 while (1) {
-                  switch (_context7.prev = _context7.next) {
+                  switch (_context14.prev = _context14.next) {
                     case 0:
                       buttons = [{
                         text: "Select a Photo",
@@ -3685,40 +3980,40 @@
                         icon: "close",
                         handler: function handler() {}
                       });
-                      _context7.next = 5;
+                      _context14.next = 5;
                       return this.actionSheetCtrl.create({
                         header: "Select Image Source",
                         buttons: buttons
                       });
 
                     case 5:
-                      actionSheet = _context7.sent;
-                      _context7.next = 8;
+                      actionSheet = _context14.sent;
+                      _context14.next = 8;
                       return actionSheet.present();
 
                     case 8:
                     case "end":
-                      return _context7.stop();
+                      return _context14.stop();
                   }
                 }
-              }, _callee7, this);
+              }, _callee14, this);
             }));
           }
         }, {
           key: "addImage",
           value: function addImage(source) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
               var image, blobData, img;
-              return regeneratorRuntime.wrap(function _callee8$(_context8) {
+              return regeneratorRuntime.wrap(function _callee15$(_context15) {
                 while (1) {
-                  switch (_context8.prev = _context8.next) {
+                  switch (_context15.prev = _context15.next) {
                     case 0:
                       if (!(this.images.length == 0)) {
-                        _context8.next = 8;
+                        _context15.next = 8;
                         break;
                       }
 
-                      _context8.next = 3;
+                      _context15.next = 3;
                       return Camera.getPhoto({
                         quality: 60,
                         allowEditing: true,
@@ -3727,7 +4022,7 @@
                       });
 
                     case 3:
-                      image = _context8.sent;
+                      image = _context15.sent;
                       blobData = this.b64toBlob(image.base64String, "image/".concat(image.format));
                       img = URL.createObjectURL(blobData);
                       this.images.push({
@@ -3740,10 +4035,10 @@
 
                     case 8:
                     case "end":
-                      return _context8.stop();
+                      return _context15.stop();
                   }
                 }
-              }, _callee8, this);
+              }, _callee15, this);
             }));
           }
         }, {
@@ -3815,6 +4110,8 @@
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ActionSheetController"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"]
         }];
       };
 
@@ -3879,7 +4176,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Change password</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n  <form #changePasswordForm=\"ngForm\" (ngSubmit)=\"changePassword(changePasswordForm.value)\">\n    <ion-item>\n      <ion-label>New password</ion-label>\n      <ion-input type=\"password\" required ngModel name=\"newPassword\"></ion-input>\n    </ion-item>\n    <ion-item class=\"ion-margin-bottom\">\n      <ion-label>Confirm password</ion-label>\n      <ion-input type=\"password\" required ngModel name=\"confirmPassword\"></ion-input>\n    </ion-item>\n    <ion-button expand=\"block\" type=\"submit\">Submit</ion-button>\n  </form>\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Change password</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n  <form #changePasswordForm=\"ngForm\" (ngSubmit)=\"changePassword(changePasswordForm.value)\">\n    <ion-grid>\n      <ion-row>\n        <ion-col>\n          <ion-item class=\"ion-no-padding\">\n            <ion-label>New password</ion-label>\n            <ion-input type=\"password\" required ngModel name=\"newPassword\"></ion-input>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <ion-item class=\"ion-no-padding ion-margin-bottom\">\n            <ion-label>Confirm password</ion-label>\n            <ion-input type=\"password\" required ngModel name=\"confirmPassword\"></ion-input>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n      <ion-button expand=\"block\" type=\"submit\">\n        Submit\n        <ion-spinner name=\"lines-small\" *ngIf=\"spinner\"></ion-spinner>\n      </ion-button>\n    </ion-grid>\n  </form>\n</ion-content>";
       /***/
     },
 

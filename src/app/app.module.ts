@@ -40,6 +40,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { ModalUploadPostComponent } from './modals/modal-upload-post/modal-upload-post.component';
 import { ModalFpCodeCheckComponent } from './modals/modal-fp-code-check/modal-fp-code-check.component';
 import { ModalFpEmailComponent } from './modals/modal-fp-email/modal-fp-email.component';
+import { ModalPostComponent } from './modals/modal-post/modal-post.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -57,7 +58,8 @@ export function tokenGetter() {
     ModalWithdrawAddFundsComponent,
     ModalUploadPostComponent,
     ModalFpCodeCheckComponent,
-    ModalFpEmailComponent
+    ModalFpEmailComponent,
+    ModalPostComponent
   ],
   imports: [
     BrowserModule, 

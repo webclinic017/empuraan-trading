@@ -5,7 +5,7 @@
 	</ion-toolbar>
 </ion-header>
 <ion-content>
-	<ion-card class="ion-padding-horizontal">
+	<ion-card class="ion-padding-horizontal" [routerLink]="['profile']">
 		<ion-grid>
 			<ion-row class="ion-align-items-center">
 				<ion-col size="8">
@@ -21,7 +21,7 @@
 		</ion-grid>
 	</ion-card>
 	<hr />
-	<div class="ion-no-border ion-padding account-card-link" [routerLink]="['funds']">
+	<div class="ion-no-border ion-padding account-card-link">
 		<ion-text>Funds</ion-text>
 		<ion-icon name="cash-outline" class="ion-margin-end icon"></ion-icon>
 	</div>

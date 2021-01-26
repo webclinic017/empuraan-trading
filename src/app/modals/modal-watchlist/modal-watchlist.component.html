@@ -13,13 +13,13 @@
 			<ion-label>
 				<div style="display: flex; align-items: center;">
 					<span style="padding:5px 0">{{ s.companyName }}</span>
-					<ion-spinner *ngIf="!s.isLoaded" name="lines-small" class="ion-padding-start"></ion-spinner>
+					<ion-spinner *ngIf="s.isLoaded == false" name="lines-small" class="ion-padding-start"></ion-spinner>
 				</div>
 			</ion-label>
 			<ion-checkbox
 				slot="end"
 				[checked]="seeIfChecked(s)"
-				(ionChange)="onSelect($event.detail.checked, s)"
+				(click)="onSelect($event, s)"
 			></ion-checkbox>
 		</ion-item>
 	</ion-list>

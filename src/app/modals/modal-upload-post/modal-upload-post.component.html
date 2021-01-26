@@ -17,7 +17,7 @@
 					</ion-item>
 				</ion-col>
 			</ion-row>
-			<ion-row>
+			<ion-row *ngIf="blog == false">
 				<ion-col>
 					<ion-item class="ion-no-padding">
 						<ion-label position="floating">Stock Name</ion-label>
@@ -40,7 +40,10 @@
 					</ion-button>
 				</ion-col>
 				<ion-col size="6">
-					<ion-button expand="block" class="post-button" (click)="uploadFile(postForm)">Post</ion-button>
+					<ion-button expand="block" class="post-button" (click)="uploadFile(postForm)">
+						Post
+						<ion-spinner name="lines-small" class="ion-padding-start" *ngIf="spinner"></ion-spinner>
+					</ion-button>
 				</ion-col>
 			</ion-row>
 			<ion-row>

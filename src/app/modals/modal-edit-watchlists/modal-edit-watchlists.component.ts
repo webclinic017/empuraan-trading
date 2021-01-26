@@ -16,26 +16,30 @@ export class ModalEditWatchlistsComponent implements OnInit {
 	watchlists: Watchlist[] = [];
 	watchlistName: string;
 	changeInWatchlist: boolean;
-  spinner: boolean;
-  dataLoaded: boolean
+	spinner: boolean;
+	dataLoaded: boolean;
 
 	constructor(private modalCtrl: ModalController, private watchlistService: WatchlistService, private userService: UserService, private toastCtrl: ToastController) {}
 
 	ngOnInit() {
-    this.spinner = false;
-    this.dataLoaded = false
+		this.spinner = false;
+		this.dataLoaded = false;
+		this.getWatchlists();
+	}
+
+	getWatchlists() {
 		this.userService.getSettings().subscribe((r: any) => {
 			const datatype = r.data.datatype;
 			if (datatype == "simulated")
 				this.watchlistService.getSimulatedWatchlists().subscribe((r) => {
-          console.log("simulated", r);
-          this.dataLoaded = true
+					console.log("simulated", r);
+					this.dataLoaded = true;
 				});
 			if (datatype == "realtime")
 				this.watchlistService.getRealtimeWatchlists().subscribe((r: any) => {
 					console.log("realtime", r);
-          this.watchlists = r.data;
-          this.dataLoaded = true
+					this.watchlists = r.data;
+					this.dataLoaded = true;
 				});
 		});
 	}
@@ -46,15 +50,16 @@ export class ModalEditWatchlistsComponent implements OnInit {
 
 	onCreateWatchlist() {
 		if (this.watchlistName?.trim() != "" && this.watchlistName != null && this.watchlistName != undefined) {
-      this.spinner = true;
+			this.spinner = true;
 			this.watchlistName = this.watchlistName.trim();
 			this.watchlistService.createWatchlist(this.watchlistName).subscribe(() => {
 				this.changeInWatchlist = true;
-        this.spinner = false;
-        this.presentSuccessToast(`"${this.watchlistName}" was successfuly created.`)
-        this.watchlistName = "";
+				this.spinner = false;
+				this.presentSuccessToast(`"${this.watchlistName}" was successfuly created.`);
+				this.watchlistName = "";
+				this.getWatchlists()
 			});
-		} else this.presentErrorToast('Input field is empty.')
+		} else this.presentErrorToast("Input field is empty.");
 	}
 
 	drop(event: CdkDragDrop<string[]>) {

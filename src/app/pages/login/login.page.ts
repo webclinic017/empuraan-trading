@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
   result: any
   userInfo: any
   loginSpinner: boolean
+  googleSpinner: boolean
   constructor(private router: Router, 
     private userService: UserService, 
     private modalCtrl: ModalController,
@@ -26,6 +27,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loginSpinner = false
+    this.googleSpinner = false
     this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url)
   }
 
@@ -49,17 +51,22 @@ export class LoginPage implements OnInit {
     }
   }
 
+  async google(){
+    this.googleSpinner = true
+    const googleUser = await Plugins.GoogleAuth.signIn() as any;
+    console.log(googleUser)
+    this.userService.googleAuth(googleUser).finally(() => {
+      this.googleSpinner = false
+      this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard')
+      this.router.navigate(['home','dashboard'])
+    })
+  }
+
   async openForgotPasswordModal(){
     const modal = await this.modalCtrl.create({
       component: ModalFpEmailComponent
     });
     return await modal.present()
-  }
-
-  async google(){
-    const googleUser = await Plugins.GoogleAuth.signIn() as any;
-    console.log(googleUser)
-    this.userService.googleAuth(googleUser.authentication.idToken).subscribe(r => console.log(r))
   }
 
   forgotPassword(){

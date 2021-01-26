@@ -179,7 +179,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar>\n    <ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <form #loginForm=\"ngForm\">\n    <!-- <ion-title class=\"ion-text-center ion-margin-vertical\" color=\"warning\"><h1>Welcome to Empuraan</h1></ion-title> -->\n    <ion-grid>\n      <ion-row>\n        <ion-col>\n          <ion-title style=\"font-size: 25px\" class=\"ion-text-center\">Login</ion-title>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"ion-margin-top\">\n        <ion-col>\n          <ion-item class=\"ion-no-padding\">\n            <ion-label position=\"floating\">E-mail</ion-label>\n            <ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <ion-item class=\"ion-no-padding\">\n            <ion-label position=\"floating\">Password</ion-label>\n            <ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class=\"button-col\">\n          <button class=\"button login-button\" type=\"submit\" (click)=\"login(loginForm)\">Login</button>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <button class=\"button google-button\" color=\"danger\" (click)=\"google()\">\n            <ion-icon name=\"logo-google\"></ion-icon>\n            <span>Login with Google</span> \n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <div class=\"or-line\">\n            <hr>\n            <span>OR</span>\n          </div>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class=\"links-block\" size=12>\n          <button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"button new-user-button\" routerLink=\"/home/sign-up\">\n            Create new account\n          </button>\n          <button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"link-button ion-float-right\" (click)=\"forgotPassword(loginForm)\">\n            Forgot password?\n          </button>\n          <!-- {{ userInfo | json}} -->\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<form #loginForm=\"ngForm\">\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-title style=\"font-size: 25px\" class=\"ion-text-center\">Login</ion-title>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row class=\"ion-margin-top\">\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">E-mail</ion-label>\n\t\t\t\t\t\t<ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col class=\"button-col\">\n\t\t\t\t\t<button class=\"button login-button\" type=\"submit\" (click)=\"login(loginForm)\">\n\t\t\t\t\t\tLogin\n\t\t\t\t\t\t<ion-spinner color=\"light\" name=\"lines-small\" *ngIf=\"loginSpinner\"></ion-spinner>\n\t\t\t\t\t</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<button class=\"button google-button\" color=\"danger\" (click)=\"google()\">\n\t\t\t\t\t\t<ion-icon name=\"logo-google\"></ion-icon>\n\t\t\t\t\t\t<span>Login with Google</span>\n\t\t\t\t\t</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<div class=\"or-line\">\n\t\t\t\t\t\t<hr />\n\t\t\t\t\t\t<span>OR</span>\n\t\t\t\t\t</div>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col class=\"links-block\" size=\"12\">\n\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"button new-user-button\" routerLink=\"/home/sign-up\">Create new account</button>\n\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"link-button ion-float-right\" (click)=\"forgotPassword(loginForm)\">Forgot password?</button>\n\t\t\t\t\t<!-- {{ userInfo | json}} -->\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n";
       /***/
     },
 
@@ -324,17 +324,19 @@
       "nJHT");
 
       var LoginPage = /*#__PURE__*/function () {
-        function LoginPage(router, userService, modalCtrl) {
+        function LoginPage(router, userService, modalCtrl, toastCtrl) {
           _classCallCheck(this, LoginPage);
 
           this.router = router;
           this.userService = userService;
           this.modalCtrl = modalCtrl;
+          this.toastCtrl = toastCtrl;
         }
 
         _createClass(LoginPage, [{
           key: "ngOnInit",
           value: function ngOnInit() {
+            this.loginSpinner = false;
             this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url);
           }
         }, {
@@ -342,13 +344,24 @@
           value: function login(form) {
             var _this = this;
 
-            this.userService.logIn(form.value).subscribe(function () {}, function () {}, function () {
-              form.resetForm();
+            this.loginSpinner = true;
 
-              _this.router.navigate(['home', 'dashboard']);
+            if (form.valid) {
+              this.userService.logIn(form.value).subscribe(function () {}, function (err) {
+                _this.loginSpinner = false;
+                err.error.debug == 'ERR_AUTH_FAILED' && _this.presentErrorToast('Email or password is incorrect.');
+              }, function () {
+                form.resetForm();
+                _this.loginSpinner = false;
 
-              _this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard');
-            });
+                _this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard');
+
+                _this.router.navigate(['home', 'dashboard']);
+              });
+            } else {
+              this.loginSpinner = false;
+              this.presentErrorToast('Something is missing.');
+            }
           }
         }, {
           key: "openForgotPasswordModal",
@@ -394,19 +407,52 @@
 
                     case 2:
                       googleUser = _context2.sent;
+                      console.log(googleUser);
+                      this.userService.googleAuth(googleUser.authentication.idToken).subscribe(function (r) {
+                        return console.log(r);
+                      });
 
-                    case 3:
+                    case 5:
                     case "end":
                       return _context2.stop();
                   }
                 }
-              }, _callee2);
+              }, _callee2, this);
             }));
           }
         }, {
           key: "forgotPassword",
           value: function forgotPassword() {
             this.openForgotPasswordModal();
+          }
+        }, {
+          key: "presentErrorToast",
+          value: function presentErrorToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      _context3.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        duration: 2500,
+                        color: 'danger'
+                      });
+
+                    case 2:
+                      toast = _context3.sent;
+                      _context3.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
           }
         }]);
 
@@ -420,6 +466,8 @@
           type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ModalController"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ToastController"]
         }];
       };
 
@@ -567,21 +615,21 @@
         }, {
           key: "signIn",
           value: function signIn() {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
               var _this3 = this;
 
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
-                  switch (_context4.prev = _context4.next) {
+                  switch (_context5.prev = _context5.next) {
                     case 0:
-                      return _context4.abrupt("return", new Promise(function (resolve, reject) {
-                        return __awaiter(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                      return _context5.abrupt("return", new Promise(function (resolve, reject) {
+                        return __awaiter(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
                           var serverAuthCode, needsOfflineAccess, offlineAccessResponse, googleUser, user;
-                          return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                          return regeneratorRuntime.wrap(function _callee4$(_context4) {
                             while (1) {
-                              switch (_context3.prev = _context3.next) {
+                              switch (_context4.prev = _context4.next) {
                                 case 0:
-                                  _context3.prev = 0;
+                                  _context4.prev = 0;
                                   needsOfflineAccess = false;
 
                                   try {
@@ -589,83 +637,56 @@
                                   } catch (_a) {}
 
                                   if (!needsOfflineAccess) {
-                                    _context3.next = 10;
+                                    _context4.next = 10;
                                     break;
                                   }
 
-                                  _context3.next = 6;
+                                  _context4.next = 6;
                                   return gapi.auth2.getAuthInstance().grantOfflineAccess();
 
                                 case 6:
-                                  offlineAccessResponse = _context3.sent;
+                                  offlineAccessResponse = _context4.sent;
                                   serverAuthCode = offlineAccessResponse.code;
-                                  _context3.next = 12;
+                                  _context4.next = 12;
                                   break;
 
                                 case 10:
-                                  _context3.next = 12;
+                                  _context4.next = 12;
                                   return gapi.auth2.getAuthInstance().signIn();
 
                                 case 12:
                                   googleUser = gapi.auth2.getAuthInstance().currentUser.get();
 
                                   if (!needsOfflineAccess) {
-                                    _context3.next = 16;
+                                    _context4.next = 16;
                                     break;
                                   }
 
-                                  _context3.next = 16;
+                                  _context4.next = 16;
                                   return googleUser.reloadAuthResponse();
 
                                 case 16:
                                   user = this.getUserFrom(googleUser);
                                   user.serverAuthCode = serverAuthCode;
                                   resolve(user);
-                                  _context3.next = 24;
+                                  _context4.next = 24;
                                   break;
 
                                 case 21:
-                                  _context3.prev = 21;
-                                  _context3.t0 = _context3["catch"](0);
-                                  reject(_context3.t0);
+                                  _context4.prev = 21;
+                                  _context4.t0 = _context4["catch"](0);
+                                  reject(_context4.t0);
 
                                 case 24:
                                 case "end":
-                                  return _context3.stop();
+                                  return _context4.stop();
                               }
                             }
-                          }, _callee3, this, [[0, 21]]);
+                          }, _callee4, this, [[0, 21]]);
                         }));
                       }));
 
                     case 1:
-                    case "end":
-                      return _context4.stop();
-                  }
-                }
-              }, _callee4);
-            }));
-          }
-        }, {
-          key: "refresh",
-          value: function refresh() {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var authResponse;
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
-                while (1) {
-                  switch (_context5.prev = _context5.next) {
-                    case 0:
-                      _context5.next = 2;
-                      return gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
-
-                    case 2:
-                      authResponse = _context5.sent;
-                      return _context5.abrupt("return", {
-                        accessToken: authResponse.access_token,
-                        idToken: authResponse.id_token
-                      });
-
-                    case 4:
                     case "end":
                       return _context5.stop();
                   }
@@ -674,16 +695,25 @@
             }));
           }
         }, {
-          key: "signOut",
-          value: function signOut() {
+          key: "refresh",
+          value: function refresh() {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              var authResponse;
               return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
                   switch (_context6.prev = _context6.next) {
                     case 0:
-                      return _context6.abrupt("return", gapi.auth2.getAuthInstance().signOut());
+                      _context6.next = 2;
+                      return gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
 
-                    case 1:
+                    case 2:
+                      authResponse = _context6.sent;
+                      return _context6.abrupt("return", {
+                        accessToken: authResponse.access_token,
+                        idToken: authResponse.id_token
+                      });
+
+                    case 4:
                     case "end":
                       return _context6.stop();
                   }
@@ -692,16 +722,34 @@
             }));
           }
         }, {
-          key: "addUserChangeListener",
-          value: function addUserChangeListener() {
+          key: "signOut",
+          value: function signOut() {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-              var _this4 = this;
-
               return regeneratorRuntime.wrap(function _callee7$(_context7) {
                 while (1) {
                   switch (_context7.prev = _context7.next) {
                     case 0:
-                      _context7.next = 2;
+                      return _context7.abrupt("return", gapi.auth2.getAuthInstance().signOut());
+
+                    case 1:
+                    case "end":
+                      return _context7.stop();
+                  }
+                }
+              }, _callee7);
+            }));
+          }
+        }, {
+          key: "addUserChangeListener",
+          value: function addUserChangeListener() {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+              var _this4 = this;
+
+              return regeneratorRuntime.wrap(function _callee8$(_context8) {
+                while (1) {
+                  switch (_context8.prev = _context8.next) {
+                    case 0:
+                      _context8.next = 2;
                       return this.gapiLoaded;
 
                     case 2:
@@ -711,10 +759,10 @@
 
                     case 3:
                     case "end":
-                      return _context7.stop();
+                      return _context8.stop();
                   }
                 }
-              }, _callee7, this);
+              }, _callee8, this);
             }));
           }
         }, {

@@ -69,7 +69,7 @@ export class IntraDayPage implements OnInit {
 	async openPostModal(intraDay) {
 		const modal = await this.modalController.create({
 			component: ModalPostComponent,
-			componentProps: { blog: intraDay },
+			componentProps: { post: intraDay },
 		});
 		return await modal.present();
 	}

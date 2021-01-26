@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar>\n    <ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <form #loginForm=\"ngForm\">\n    <!-- <ion-title class=\"ion-text-center ion-margin-vertical\" color=\"warning\"><h1>Welcome to Empuraan</h1></ion-title> -->\n    <ion-grid>\n      <ion-row>\n        <ion-col>\n          <ion-title style=\"font-size: 25px\" class=\"ion-text-center\">Login</ion-title>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"ion-margin-top\">\n        <ion-col>\n          <ion-item class=\"ion-no-padding\">\n            <ion-label position=\"floating\">E-mail</ion-label>\n            <ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <ion-item class=\"ion-no-padding\">\n            <ion-label position=\"floating\">Password</ion-label>\n            <ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n          </ion-item>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class=\"button-col\">\n          <button class=\"button login-button\" type=\"submit\" (click)=\"login(loginForm)\">Login</button>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <button class=\"button google-button\" color=\"danger\" (click)=\"google()\">\n            <ion-icon name=\"logo-google\"></ion-icon>\n            <span>Login with Google</span> \n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <div class=\"or-line\">\n            <hr>\n            <span>OR</span>\n          </div>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class=\"links-block\" size=12>\n          <button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"button new-user-button\" routerLink=\"/home/sign-up\">\n            Create new account\n          </button>\n          <button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"link-button ion-float-right\" (click)=\"forgotPassword(loginForm)\">\n            Forgot password?\n          </button>\n          <!-- {{ userInfo | json}} -->\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<form #loginForm=\"ngForm\">\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-title style=\"font-size: 25px\" class=\"ion-text-center\">Login</ion-title>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row class=\"ion-margin-top\">\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">E-mail</ion-label>\n\t\t\t\t\t\t<ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col class=\"button-col\">\n\t\t\t\t\t<button class=\"button login-button\" type=\"submit\" (click)=\"login(loginForm)\">\n\t\t\t\t\t\tLogin\n\t\t\t\t\t\t<ion-spinner color=\"light\" name=\"lines-small\" *ngIf=\"loginSpinner\"></ion-spinner>\n\t\t\t\t\t</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<button class=\"button google-button\" color=\"danger\" (click)=\"google()\">\n\t\t\t\t\t\t<ion-icon name=\"logo-google\"></ion-icon>\n\t\t\t\t\t\t<span>Login with Google</span>\n\t\t\t\t\t</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<div class=\"or-line\">\n\t\t\t\t\t\t<hr />\n\t\t\t\t\t\t<span>OR</span>\n\t\t\t\t\t</div>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col class=\"links-block\" size=\"12\">\n\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"button new-user-button\" routerLink=\"/home/sign-up\">Create new account</button>\n\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"link-button ion-float-right\" (click)=\"forgotPassword(loginForm)\">Forgot password?</button>\n\t\t\t\t\t<!-- {{ userInfo | json}} -->\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n");
 
 /***/ }),
 
@@ -166,20 +166,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let LoginPage = class LoginPage {
-    constructor(router, userService, modalCtrl) {
+    constructor(router, userService, modalCtrl, toastCtrl) {
         this.router = router;
         this.userService = userService;
         this.modalCtrl = modalCtrl;
+        this.toastCtrl = toastCtrl;
     }
     ngOnInit() {
+        this.loginSpinner = false;
         this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url);
     }
     login(form) {
-        this.userService.logIn(form.value).subscribe(() => { }, () => { }, () => {
-            form.resetForm();
-            this.router.navigate(['home', 'dashboard']);
-            this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard');
-        });
+        this.loginSpinner = true;
+        if (form.valid) {
+            this.userService.logIn(form.value).subscribe(() => { }, (err) => {
+                this.loginSpinner = false;
+                err.error.debug == 'ERR_AUTH_FAILED' && this.presentErrorToast('Email or password is incorrect.');
+            }, () => {
+                form.resetForm();
+                this.loginSpinner = false;
+                this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard');
+                this.router.navigate(['home', 'dashboard']);
+            });
+        }
+        else {
+            this.loginSpinner = false;
+            this.presentErrorToast('Something is missing.');
+        }
     }
     openForgotPasswordModal() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -192,17 +205,29 @@ let LoginPage = class LoginPage {
     google() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const googleUser = yield _capacitor_core__WEBPACK_IMPORTED_MODULE_7__["Plugins"].GoogleAuth.signIn();
-            // this.userService.googleAuth().subscribe()
+            console.log(googleUser);
+            this.userService.googleAuth(googleUser.authentication.idToken).subscribe(r => console.log(r));
         });
     }
     forgotPassword() {
         this.openForgotPasswordModal();
     }
+    presentErrorToast(message) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const toast = yield this.toastCtrl.create({
+                message,
+                duration: 2500,
+                color: 'danger'
+            });
+            yield toast.present();
+        });
+    }
 };
 LoginPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
     { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ModalController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ModalController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ToastController"] }
 ];
 LoginPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({

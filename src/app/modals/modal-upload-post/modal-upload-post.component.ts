@@ -22,7 +22,9 @@ export interface ApiImage {
 export class ModalUploadPostComponent implements OnInit {
 	@Input() intraDay: boolean = false;
 	@Input() positional: boolean = false;
+	@Input() blog: boolean = false;
 	@Input() demoTrading: boolean = false;
+	spinner: boolean
 	title: string;
 	stockName: string;
 	content: string;
@@ -35,7 +37,9 @@ export class ModalUploadPostComponent implements OnInit {
 		private modalCtrl: ModalController,
 		private toastCtrl: ToastController) {}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.spinner = false
+	}
 
 	dismissModal(val?) {
 		this.modalCtrl.dismiss(val);
@@ -91,6 +95,7 @@ export class ModalUploadPostComponent implements OnInit {
 	uploadFile(postForm: NgForm) {
 		let image = this.images[0];
 		if (postForm.valid) {
+			this.spinner = true
 			const title = postForm.value.title;
 			const content = postForm.value.content;
 			const stockName = postForm.value.stockname;
@@ -98,16 +103,19 @@ export class ModalUploadPostComponent implements OnInit {
 			if (this.intraDay == true) key = "intraday";
 			else if (this.positional == true) key = "positional";
 			else if (this.demoTrading == true) key = "demotrading";
+			else if (this.blog == true) key = "blog";
 			if(image == undefined || image == null){
 				this.api.createWithBlob(title, content, stockName, key).subscribe(() => {
 					this.dismissModal(true);
+					this.spinner = false
 				});
 			} else {
 				this.api.createWithBlob(title, content, stockName, key, image.blobData, image.name, image.format).subscribe(() => {
 					this.dismissModal(true);
+					this.spinner = false
 				});
 			}
-		} else console.log("something is missing!");
+		} else this.presentErrorToast('Something is missing.')
 	}
 
 	deleteImage(index) {
@@ -132,5 +140,15 @@ export class ModalUploadPostComponent implements OnInit {
 
 		const blob = new Blob(byteArrays, { type: contentType });
 		return blob;
+	}
+
+	async presentErrorToast(message){
+		const toast = await this.toastCtrl.create({
+			header: message,
+			color: 'danger',
+			duration: 2500
+		})
+
+		await toast.present()
 	}
 }

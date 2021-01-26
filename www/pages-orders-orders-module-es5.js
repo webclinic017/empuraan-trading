@@ -142,6 +142,12 @@
           this.modalCtrl = modalCtrl;
           this.actionSheetController = actionSheetController;
           this.stockService = stockService;
+          this.position = [];
+          this.completed = [];
+          this.pending = [];
+          this.tempPosition = [];
+          this.tempCompleted = [];
+          this.tempPending = [];
           this.subscribedPositionSockets = [];
           this.subscribedPendingSockets = [];
         }
@@ -150,23 +156,24 @@
           key: "ngOnInit",
           value: function ngOnInit() {
             this.pageIndex = 0;
+            this.dataLoaded = false;
           }
         }, {
           key: "ionViewDidEnter",
           value: function ionViewDidEnter() {
-            this.dataLoaded = false;
+            this.spinner = true;
             this.getOrders();
           }
         }, {
           key: "getOrders",
-          value: function getOrders() {
+          value: function getOrders(spinner) {
             var _this = this;
 
-            this.pending = [];
-            this.position = [];
-            this.completed = [];
+            this.tempPending = [];
+            this.tempPosition = [];
+            this.tempCompleted = [];
+            if (spinner == true) this.spinner = true;
             this.orderService.getAllUserOrders().subscribe(function (res) {
-              console.log(res.data);
               res.data.forEach(function (o) {
                 var order = {
                   id: o._id,
@@ -176,7 +183,10 @@
                   name: o.companyName,
                   price: o.price,
                   quantity: o.volume,
-                  isDeleted: o.isDeleted
+                  isDeleted: o.isDeleted,
+                  stoploss: o.stoploss,
+                  target: o.target,
+                  createdDate: o.created_date
                 };
 
                 _this.orderPlacement(o.transactionOne.status, order, o.transactionOne.price);
@@ -189,69 +199,57 @@
                   order.stoploss = o.stoploss;
                   order.target = o.target;
 
-                  _this.position.unshift(Object.assign({}, order));
+                  _this.tempPosition.unshift(Object.assign({}, order));
                 } else if (o.status == "completed" && o.transactionTwo.stoplossStatus == "notFilled" && o.transactionTwo.targetStatus == "notFilled") {
                   var _o = Object.assign({}, order);
 
                   _o["status"] = "completed";
                   _o.orderCategory = order.orderCategory == "buy" ? "sell" : "buy";
 
-                  _this.completed.unshift(_o);
+                  _this.tempCompleted.unshift(_o);
                 }
               });
 
-              _this.updateLtp(); // this.totalPandL = this.orderService.totalPandL()
+              _this.updateLtp()["finally"](function () {
+                _this.pending = _this.tempPending;
+                _this.position = _this.tempPosition;
+                _this.completed = _this.tempCompleted;
+                _this.dataLoaded = true;
+                _this.spinner = false;
+              });
 
+              ; // this.totalPandL = this.orderService.totalPandL()
             });
-          } // checkIfOrderIsCompleted(complete: Order){
-          //   if(complete.transactionOne.status == "completed"){
-          //     this.completed.unshift(complete)
-          //   }
-          //   else if(complete.transactionOne.status == "pending"){
-          //     this.pending.unshift(complete)
-          //   }
-          //   if(complete.transactionTwo.status == "pending"){
-          //     if(complete.stoploss){
-          //       let order = Object.assign({},complete)
-          //       order['isStopLoss'] = true
-          //       this.pending.unshift(order)
-          //     }
-          //     if(complete.target){
-          //       let order = Object.assign({},complete)
-          //       order['isStopLoss'] = false
-          //       this.pending.unshift(order)
-          //     }
-          //   }
-          // }
-
+          }
         }, {
           key: "orderPlacement",
           value: function orderPlacement(status, order, price, key, orderCategory) {
             price = "price";
+            var date = new Date(order.createdDate).getDay();
+            var today = new Date().getDay();
             var o = Object.assign({}, order);
 
-            if (!o.isDeleted) {
+            if (today > date) {
               switch (status) {
                 case "completed":
                   if (orderCategory != null) o.orderCategory = orderCategory == "buy" ? "sell" : "buy";else o.orderCategory = order.orderCategory;
                   o.price = order.price;
                   o["status"] = status;
-                  this.completed.unshift(o);
+                  this.tempCompleted.unshift(o);
                   break;
 
                 case "pending":
                   if (orderCategory != null) o.orderCategory = orderCategory == "buy" ? "sell" : "buy";else o.orderCategory = order.orderCategory;
-                  key != null ? o.key = key : o.key = "price"; // key == 'target' ? o.target = order.target : o.stoploss = order.stoploss
-
-                  console.log("key not recognized as target nor stoploss");
-                  this.pending.unshift(o);
+                  key != null ? o.key = key : o.key = "price";
+                  key == 'target' ? o.target = order.target : o.stoploss = order.stoploss;
+                  this.tempPending.unshift(o);
                   break;
 
                 case "notFilled":
                   if (orderCategory != null) o.orderCategory = orderCategory == "buy" ? "sell" : "buy";else o.orderCategory = order.orderCategory;
                   o.price = price;
                   o["status"] = "cancelled";
-                  this.completed.unshift(o);
+                  this.tempCompleted.unshift(o);
                   break;
 
                 default:
@@ -262,39 +260,49 @@
         }, {
           key: "updateLtp",
           value: function updateLtp() {
-            var _this2 = this;
-
-            this.unsubscribeFromSockets();
-            this.position.forEach(function (s, i) {
-              var stockSub = _this2.stockService.listen("".concat(s.stockId, "-").concat(s.watchlistId)).subscribe(function (res) {
-                s.ltp = res[0].price;
-                if (i == _this2.pending.length - 1) _this2.dataLoaded = true;
-              });
-
-              _this2.subscribedPositionSockets.unshift(stockSub);
-            });
-            this.pending.forEach(function (s, i) {
-              var stockSub = _this2.stockService.listen("".concat(s.stockId, "-").concat(s.watchlistId)).subscribe(function (res) {
-                s.ltp = res[0].price;
-                if (i == _this2.pending.length - 1) _this2.dataLoaded = true;
-              });
-
-              _this2.subscribedPendingSockets.unshift(stockSub);
-            });
-            if (this.position.length == 0 && this.pending.length == 0 && this.completed.length == 0 || this.completed.length > 0) this.dataLoaded = true;
-          }
-        }, {
-          key: "ordersActionSheet",
-          value: function ordersActionSheet(order) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var _this3 = this;
+              var _this2 = this;
 
-              var actionSheet;
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
-                      _context.next = 2;
+                      this.unsubscribeFromSockets();
+                      this.tempPosition.forEach(function (s, i) {
+                        var stockSub = _this2.stockService.listen("".concat(s.stockId, "-").concat(s.watchlistId)).subscribe(function (res) {
+                          s.ltp = res[0].price;
+                        });
+
+                        _this2.subscribedPositionSockets.unshift(stockSub);
+                      });
+                      this.tempPending.forEach(function (s, i) {
+                        var stockSub = _this2.stockService.listen("".concat(s.stockId, "-").concat(s.watchlistId)).subscribe(function (res) {
+                          s.ltp = res[0].price;
+                        });
+
+                        _this2.subscribedPendingSockets.unshift(stockSub);
+                      });
+
+                    case 3:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+          }
+        }, {
+          key: "ordersActionSheet",
+          value: function ordersActionSheet(order) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var _this3 = this;
+
+              var actionSheet;
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
                       return this.actionSheetController.create({
                         header: "Order control panel",
                         buttons: [{
@@ -311,49 +319,11 @@
                       });
 
                     case 2:
-                      actionSheet = _context.sent;
-                      _context.next = 5;
+                      actionSheet = _context2.sent;
+                      _context2.next = 5;
                       return actionSheet.present();
 
                     case 5:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee, this);
-            }));
-          }
-        }, {
-          key: "openModalEditOrderPosition",
-          value: function openModalEditOrderPosition(position) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var _this4 = this;
-
-              var modal;
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      _context2.next = 2;
-                      return this.modalCtrl.create({
-                        component: src_app_modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_6__["ModalEditOrderComponent"],
-                        componentProps: {
-                          position: position
-                        }
-                      });
-
-                    case 2:
-                      modal = _context2.sent;
-                      modal.onDidDismiss().then(function (d) {
-                        if (d.data == true) _this4.getOrders();
-                      });
-                      _context2.next = 6;
-                      return modal.present();
-
-                    case 6:
-                      return _context2.abrupt("return", _context2.sent);
-
-                    case 7:
                     case "end":
                       return _context2.stop();
                   }
@@ -362,10 +332,10 @@
             }));
           }
         }, {
-          key: "openModalEditOrderPending",
-          value: function openModalEditOrderPending(pending) {
+          key: "openModalEditOrderPosition",
+          value: function openModalEditOrderPosition(position) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              var _this5 = this;
+              var _this4 = this;
 
               var modal;
               return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -376,14 +346,14 @@
                       return this.modalCtrl.create({
                         component: src_app_modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_6__["ModalEditOrderComponent"],
                         componentProps: {
-                          pending: pending
+                          position: position
                         }
                       });
 
                     case 2:
                       modal = _context3.sent;
                       modal.onDidDismiss().then(function (d) {
-                        if (d.data == true) _this5.getOrders();
+                        if (d.data == true) _this4.getOrders(true);
                       });
                       _context3.next = 6;
                       return modal.present();
@@ -397,6 +367,44 @@
                   }
                 }
               }, _callee3, this);
+            }));
+          }
+        }, {
+          key: "openModalEditOrderPending",
+          value: function openModalEditOrderPending(pending) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              var _this5 = this;
+
+              var modal;
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      _context4.next = 2;
+                      return this.modalCtrl.create({
+                        component: src_app_modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_6__["ModalEditOrderComponent"],
+                        componentProps: {
+                          pending: pending
+                        }
+                      });
+
+                    case 2:
+                      modal = _context4.sent;
+                      modal.onDidDismiss().then(function (d) {
+                        if (d.data == true) _this5.getOrders(true);
+                      });
+                      _context4.next = 6;
+                      return modal.present();
+
+                    case 6:
+                      return _context4.abrupt("return", _context4.sent);
+
+                    case 7:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4, this);
             }));
           }
         }, {
@@ -414,8 +422,17 @@
         }, {
           key: "tabIndex",
           value: function tabIndex(tab) {
+            var _this6 = this;
+
             if (typeof tab == "number") this.pageIndex = tab;else this.pageIndex = tab.detail.index;
-            this.updateLtp();
+            this.updateLtp()["finally"](function () {
+              _this6.pending = _this6.tempPending;
+              _this6.position = _this6.tempPosition;
+              _this6.completed = _this6.tempCompleted;
+              _this6.dataLoaded = true;
+              _this6.spinner = false;
+            });
+            ;
           }
         }, {
           key: "filterPosition",
@@ -588,7 +605,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header #header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Orders</ion-title>\n\t\t<ion-img slot=\"end\" src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<super-tabs *ngIf=\"!dataLoaded\">\n\t\t<super-tabs-toolbar slot=\"top\" color=\"translucent\">\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Position</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Completed</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Pending</ion-label>\n\t\t\t</super-tab-button>\n\t\t</super-tabs-toolbar>\n\t\t<super-tabs-container>\n\t\t\t<super-tab>\n\t\t\t\t<ion-searchbar showCancelButton=\"focus\"></ion-searchbar>\n\t\t\t\t<!-- <ion-card>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-card-subtitle class=\"skeleton-row\">\n\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t\t</ion-card-subtitle>\n\t\t\t\t\t\t<ion-card-title class=\"skeleton-row\">\n\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 40%\"></ion-skeleton-text>\n\t\t\t\t\t\t</ion-card-title>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t</ion-card> -->\n\t\t\t\t<ion-list>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\" *ngFor=\"let item of [].constructor(7)\">\n\t\t\t\t\t\t<ion-grid class=\"ion-no-padding ion-padding-vertical\">\n\t\t\t\t\t\t\t<ion-row>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-padding-start\">\n\t\t\t\t\t\t\t\t\t<span style=\"display: flex; flex-direction: row; justify-content: flex-start;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t<span style=\"display: flex; flex-direction: row; justify-content: flex-start;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 25%;margin-right: 10px;\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t<!-- <span style=\"display: flex; flex-direction: row; justify-content: flex-start;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%;margin-right: 10px;\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 25%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span> -->\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-padding-end\">\n\t\t\t\t\t\t\t\t\t<span style=\"display: flex; flex-direction: row; justify-content: flex-end;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%;margin-right: 10px;\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t<span style=\"display: flex; flex-direction: row; justify-content: flex-end;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%;margin-right: 10px;\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t<!-- <span style=\"display: flex; flex-direction: row; justify-content: flex-end;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%;margin-right: 10px;\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span> -->\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t</ion-row>\n\t\t\t\t\t\t</ion-grid>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-list>\n\t\t\t</super-tab>\n\t\t</super-tabs-container>\n\t</super-tabs>\n\t<super-tabs (tabChange)=\"tabIndex($event)\" *ngIf=\"dataLoaded\">\n\t\t<super-tabs-toolbar slot=\"top\" color=\"translucent\">\n\t\t\t<super-tab-button (click)=\"tabIndex(0)\">\n\t\t\t\t<ion-label>Position</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button (click)=\"tabIndex(1)\">\n\t\t\t\t<ion-label>Completed</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button (click)=\"tabIndex(2)\">\n\t\t\t\t<ion-label>Pending</ion-label>\n\t\t\t</super-tab-button>\n\t\t</super-tabs-toolbar>\n\t\t<super-tabs-container (activeTabIndexChange)=\"tabIndex($event)\">\n\t\t\t<super-tab>\n\t\t\t\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filterPosition($event)\"></ion-searchbar>\n\t\t\t\t<!-- <ion-card>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-card-subtitle>Total P&L</ion-card-subtitle>\n\t\t\t\t\t\t<ion-card-title [ngClass]=\"{'success': totalPandL > 0, 'failure': totalPandL < 0}\">\n\t\t\t\t\t\t\t{{totalPandL > 0 ? '+' : ''}}{{totalPandL}}\n\t\t\t\t\t\t</ion-card-title>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t</ion-card> -->\n\t\t\t\t<ion-list>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\" *ngFor=\"let p of filteredPosition || position\" (click)=\"ordersActionSheet(p)\">\n\t\t\t\t\t\t<ion-grid class=\"ion-no-padding ion-padding-vertical\">\n\t\t\t\t\t\t\t<ion-row>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-padding-start\">\n\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t<span [ngClass]=\"{'buy': p.orderCategory == 'buy', 'sell': p.orderCategory == 'sell'}\"> {{p.name}} </span>\n\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t<p>Price: {{p.price}}</p>\n\t\t\t\t\t\t\t\t\t<p>Quantity: {{p?.orderCategory == 'sell' ? '-' : '+'}}{{p.quantity}}</p>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-text-right ion-no-padding\">\n\t\t\t\t\t\t\t\t\t<!-- todo : CENTRALIZE -->\n\t\t\t\t\t\t\t\t\t<table class=\"ion-float-right\">\n\t\t\t\t\t\t\t\t\t\t<tbody>\n\t\t\t\t\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p><strong>P&L</strong></p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ion-text [color]=\"+p.ltp - p.price >= 0 ? 'success' : 'danger'\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{{+p.ltp - p.price > 0 ? ' +' : ' '}}{{+(p.ltp - p.price)*p.quantity | number:'1.2'}}\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ion-text>\n\t\t\t\t\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p><strong>LTP</strong></p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p>{{p.ltp}}</p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t\t\t<!-- <tr>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p><strong>SL</strong></p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p>{{p.stoploss}}</p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t</tr> -->\n\t\t\t\t\t\t\t\t\t\t</tbody>\n\t\t\t\t\t\t\t\t\t</table>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t</ion-row>\n\t\t\t\t\t\t</ion-grid>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-list>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filterCompleted($event)\"></ion-searchbar>\n\t\t\t\t<ion-list>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\" *ngFor=\"let c of filteredCompleted || completed\">\n\t\t\t\t\t\t<ion-grid class=\"ion-no-padding ion-padding-vertical\">\n\t\t\t\t\t\t\t<ion-row>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-padding-start\">\n\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t<span [ngClass]=\"{'buy': c.orderCategory == 'buy', 'sell': c.orderCategory == 'sell'}\"> {{c.name}} </span>\n\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t<!-- <p>Price: {{c.price}}</p> -->\n\t\t\t\t\t\t\t\t\t<p>Quantity: {{c?.orderCategory == 'sell' ? '-' : '+'}}{{c.quantity}}</p>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-text-right\">\n\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t<span [ngClass]=\"{'cancelled': c.status == 'cancelled', 'complete': c.status == 'completed'}\">\n\t\t\t\t\t\t\t\t\t\t\t{{c.status | uppercase}}\n\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t<strong>Price</strong>\n\t\t\t\t\t\t\t\t\t\t{{c.price}}\n\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t<!-- <p>\n\t\t\t\t\t\t\t\t\t\t<strong>P&L</strong>\n\t\t\t\t\t\t\t\t\t\t<span [ngClass]=\"{'success': c.pAndL > 0, 'failure':c.pAndL < 0}\">\n\t\t\t\t\t\t\t\t\t\t\t{{c.pAndL > 0 ? ' +' : ' '}}{{c.pAndL}}\n\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t\t0\n\t\t\t\t\t\t\t\t\t</p> -->\n\t\t\t\t\t\t\t\t\t<!-- <p>\n\t\t\t\t\t\t\t\t\t\t<strong>Exit Price</strong>\n\t\t\t\t\t\t\t\t\t\t{{c.exitPrice}}\n\t\t\t\t\t\t\t\t\t\t0\n\t\t\t\t\t\t\t\t\t</p> -->\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t</ion-row>\n\t\t\t\t\t\t</ion-grid>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-list>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filterPending($event)\"></ion-searchbar>\n\t\t\t\t<ion-list>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\" *ngFor=\"let p of filteredPending || pending\" (click)=\"ordersActionSheet(p)\">\n\t\t\t\t\t\t<ion-grid class=\"ion-no-padding ion-padding-vertical\">\n\t\t\t\t\t\t\t<ion-row>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-padding-start\">\n\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t<span [ngClass]=\"{'buy': p.orderCategory == 'buy', 'sell': p.orderCategory == 'sell'}\"> {{p.name}} </span>\n\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t<p>Quantity: {{p?.orderCategory == 'sell' ? '-' : '+'}}{{p.quantity}}</p>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-text-right column-centralise-text\">\n\t\t\t\t\t\t\t\t\t<p style=\"margin-bottom:0px\"><strong>LTP</strong> {{p.ltp}}</p>\n\t\t\t\t\t\t\t\t\t<p><strong>{{p.key | titlecase}}</strong> {{p.price}}</p>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t</ion-row>\n\t\t\t\t\t\t</ion-grid>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-list>\n\t\t\t</super-tab>\n\t\t</super-tabs-container>\n\t</super-tabs>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header #header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>\n\t\t\t<div style=\"display: flex; align-items: center; justify-content: center;\">\n\t\t\t\t<span>Orders</span>\n\t\t\t\t<ion-spinner name=\"lines-small\" class=\"ion-padding-start\" *ngIf=\"spinner && dataLoaded\"></ion-spinner>\n\t\t\t</div>\n\t\t</ion-title>\n\t\t<ion-img slot=\"end\" src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<super-tabs *ngIf=\"!dataLoaded\">\n\t\t<super-tabs-toolbar slot=\"top\" color=\"translucent\">\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Position</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Completed</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Pending</ion-label>\n\t\t\t</super-tab-button>\n\t\t</super-tabs-toolbar>\n\t\t<super-tabs-container>\n\t\t\t<super-tab>\n\t\t\t\t<ion-searchbar showCancelButton=\"focus\"></ion-searchbar>\n\t\t\t\t<!-- <ion-card>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-card-subtitle class=\"skeleton-row\">\n\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t\t</ion-card-subtitle>\n\t\t\t\t\t\t<ion-card-title class=\"skeleton-row\">\n\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 40%\"></ion-skeleton-text>\n\t\t\t\t\t\t</ion-card-title>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t</ion-card> -->\n\t\t\t\t<ion-list>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\" *ngFor=\"let item of [].constructor(7)\">\n\t\t\t\t\t\t<ion-grid class=\"ion-no-padding ion-padding-vertical\">\n\t\t\t\t\t\t\t<ion-row>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-padding-start\">\n\t\t\t\t\t\t\t\t\t<span style=\"display: flex; flex-direction: row; justify-content: flex-start;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t<span style=\"display: flex; flex-direction: row; justify-content: flex-start;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 25%;margin-right: 10px;\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t<span style=\"display: flex; flex-direction: row; justify-content: flex-start;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 28%;margin-right: 10px;\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 10%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-padding-end\">\n\t\t\t\t\t\t\t\t\t<span style=\"display: flex; flex-direction: row; justify-content: flex-end;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%;margin-right: 10px;\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t<span style=\"display: flex; flex-direction: row; justify-content: flex-end;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%;margin-right: 10px;\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t<!-- <span style=\"display: flex; flex-direction: row; justify-content: flex-end;\">\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 15%;margin-right: 10px;\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t\t\t\t\t\t</span> -->\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t</ion-row>\n\t\t\t\t\t\t</ion-grid>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-list>\n\t\t\t</super-tab>\n\t\t</super-tabs-container>\n\t</super-tabs>\n\t<super-tabs (tabChange)=\"tabIndex($event)\" *ngIf=\"dataLoaded\">\n\t\t<super-tabs-toolbar slot=\"top\" color=\"translucent\">\n\t\t\t<super-tab-button (click)=\"tabIndex(0)\">\n\t\t\t\t<ion-label>Position</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button (click)=\"tabIndex(1)\">\n\t\t\t\t<ion-label>Completed</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button (click)=\"tabIndex(2)\">\n\t\t\t\t<ion-label>Pending</ion-label>\n\t\t\t</super-tab-button>\n\t\t</super-tabs-toolbar>\n\t\t<super-tabs-container (activeTabIndexChange)=\"tabIndex($event)\">\n\t\t\t<super-tab>\n\t\t\t\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filterPosition($event)\"></ion-searchbar>\n\t\t\t\t<!-- <ion-card>\n\t\t\t\t\t<ion-card-content>\n\t\t\t\t\t\t<ion-card-subtitle>Total P&L</ion-card-subtitle>\n\t\t\t\t\t\t<ion-card-title [ngClass]=\"{'success': totalPandL > 0, 'failure': totalPandL < 0}\">\n\t\t\t\t\t\t\t{{totalPandL > 0 ? '+' : ''}}{{totalPandL}}\n\t\t\t\t\t\t</ion-card-title>\n\t\t\t\t\t</ion-card-content>\n\t\t\t\t</ion-card> -->\n\t\t\t\t<ion-list>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\" *ngFor=\"let p of filteredPosition || position\" (click)=\"ordersActionSheet(p)\">\n\t\t\t\t\t\t<ion-grid class=\"ion-no-padding ion-padding-vertical\">\n\t\t\t\t\t\t\t<ion-row>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-padding-start\">\n\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t<span [ngClass]=\"{'buy': p.orderCategory == 'buy', 'sell': p.orderCategory == 'sell'}\"> {{p.name}} </span>\n\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t<p>Price: {{p.price}}</p>\n\t\t\t\t\t\t\t\t\t<p>Quantity: {{p?.orderCategory == 'sell' ? '-' : '+'}}{{p.quantity}}</p>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-text-right ion-no-padding\">\n\t\t\t\t\t\t\t\t\t<!-- todo : CENTRALIZE -->\n\t\t\t\t\t\t\t\t\t<table class=\"ion-float-right\">\n\t\t\t\t\t\t\t\t\t\t<tbody>\n\t\t\t\t\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p><strong>P&L</strong></p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ion-text [color]=\"+p.ltp - p.price >= 0 ? 'success' : 'danger'\" *ngIf=\"p.orderCategory == 'buy'\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{{+p.ltp - p.price > 0 ? ' +' : ''}}{{+(p.ltp - p.price)*p.quantity | number:'1.2'}}\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ion-text>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ion-text [color]=\"+p.ltp - p.price >= 0 ? 'success' : 'danger'\" *ngIf=\"p.orderCategory == 'sell'\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{{+p.ltp - p.price > 0 ? ' +' : ''}}{{+(p.price - p.ltp)*p.quantity | number:'1.2'}}\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ion-text>\n\t\t\t\t\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p><strong>LTP</strong></p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p>{{p.ltp}}</p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t\t\t<!-- <tr>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p><strong>SL</strong></p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<p>{{p.stoploss}}</p>\n\t\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t\t</tr> -->\n\t\t\t\t\t\t\t\t\t\t</tbody>\n\t\t\t\t\t\t\t\t\t</table>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t</ion-row>\n\t\t\t\t\t\t</ion-grid>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-list>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filterCompleted($event)\"></ion-searchbar>\n\t\t\t\t<ion-list>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\" *ngFor=\"let c of filteredCompleted || completed\">\n\t\t\t\t\t\t<ion-grid class=\"ion-no-padding ion-padding-vertical\">\n\t\t\t\t\t\t\t<ion-row>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-padding-start\">\n\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t<span [ngClass]=\"{'buy': c.orderCategory == 'buy', 'sell': c.orderCategory == 'sell'}\"> {{c.name}} </span>\n\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t<!-- <p>Price: {{c.price}}</p> -->\n\t\t\t\t\t\t\t\t\t<p>Quantity: {{c?.orderCategory == 'sell' ? '-' : '+'}}{{c.quantity}}</p>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-text-right\">\n\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t<span [ngClass]=\"{'cancelled': c.status == 'cancelled', 'complete': c.status == 'completed'}\">\n\t\t\t\t\t\t\t\t\t\t\t{{c.status | uppercase}}\n\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t<strong>Price</strong>\n\t\t\t\t\t\t\t\t\t\t{{c.price}}\n\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t<!-- <p>\n\t\t\t\t\t\t\t\t\t\t<strong>P&L</strong>\n\t\t\t\t\t\t\t\t\t\t<span [ngClass]=\"{'success': c.pAndL > 0, 'failure':c.pAndL < 0}\">\n\t\t\t\t\t\t\t\t\t\t\t{{c.pAndL > 0 ? ' +' : ' '}}{{c.pAndL}}\n\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t\t0\n\t\t\t\t\t\t\t\t\t</p> -->\n\t\t\t\t\t\t\t\t\t<!-- <p>\n\t\t\t\t\t\t\t\t\t\t<strong>Exit Price</strong>\n\t\t\t\t\t\t\t\t\t\t{{c.exitPrice}}\n\t\t\t\t\t\t\t\t\t\t0\n\t\t\t\t\t\t\t\t\t</p> -->\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t</ion-row>\n\t\t\t\t\t\t</ion-grid>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-list>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filterPending($event)\"></ion-searchbar>\n\t\t\t\t<ion-list>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\" *ngFor=\"let p of filteredPending || pending\" (click)=\"ordersActionSheet(p)\">\n\t\t\t\t\t\t<ion-grid class=\"ion-no-padding ion-padding-vertical\">\n\t\t\t\t\t\t\t<ion-row>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-padding-start\">\n\t\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\t<span [ngClass]=\"{'buy': p.orderCategory == 'buy', 'sell': p.orderCategory == 'sell'}\"> {{p.name}} </span>\n\t\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t\t<p>Quantity: {{p?.orderCategory == 'sell' ? '-' : '+'}}{{p.quantity}}</p>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t\t<ion-col col=\"6\" class=\"ion-text-right column-centralise-text\">\n\t\t\t\t\t\t\t\t\t<p style=\"margin-bottom:0px\"><strong>LTP</strong> {{p.ltp}}</p>\n\t\t\t\t\t\t\t\t\t<p><strong>{{p.key | titlecase}}</strong> {{p.key == 'stoploss' ? p.stoploss : p.target}}</p>\n\t\t\t\t\t\t\t\t</ion-col>\n\t\t\t\t\t\t\t</ion-row>\n\t\t\t\t\t\t</ion-grid>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-list>\n\t\t\t</super-tab>\n\t\t</super-tabs-container>\n\t</super-tabs>\n</ion-content>\n";
       /***/
     }
   }]);

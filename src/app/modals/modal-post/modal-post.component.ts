@@ -9,10 +9,12 @@ import { Marubozu } from 'src/app/models/marubozu.model';
   styleUrls: ['./modal-post.component.scss'],
 })
 export class ModalPostComponent implements OnInit {
-  @Input() blog: Marubozu
+  @Input() post: Marubozu
   constructor(private modalCtrl: ModalController){}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.post.image)
+  }
 
   dismissModal(){
     this.modalCtrl.dismiss()

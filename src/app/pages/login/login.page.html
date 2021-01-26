@@ -41,6 +41,7 @@
 					<button class="button google-button" color="danger" (click)="google()">
 						<ion-icon name="logo-google"></ion-icon>
 						<span>Login with Google</span>
+						<ion-spinner name="lines-small" class="ion-padding-start" *ngIf="googleSpinner" color="light"></ion-spinner>
 					</button>
 				</ion-col>
 			</ion-row>

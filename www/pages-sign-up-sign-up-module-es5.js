@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n<!-- \n\t123 pg, pitanja activity 6\n\t105 pg tekst, pitanja sa strane, roze kockice\n\n -->\n<ion-content>\n\t<form #signUpForm=\"ngForm\" (ngSubmit)=\"signUp(signUpForm)\">\n\t\t<!-- <ion-title class=\"ion-text-center ion-margin-vertical\" color=\"warning\"><h1>Welcome to Empuraan</h1></ion-title> -->\n\t\t<ion-title class=\"ion-text-center ion-margin-vertical\"><h2>Sign Up</h2></ion-title>\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label position=\"floating\">Username</ion-label>\n\t\t\t\t\t\t<ion-input required ngModel name=\"username\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label position=\"floating\">Email</ion-label>\n\t\t\t\t\t\t<ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label position=\"floating\">Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item>\n\t\t\t\t\t\t<ion-label position=\"floating\">Confirm Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\" required ngModel name=\"confirmPassword\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<button type=\"submit\" class=\"button sign-up-button\">Sign Up</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<button\n\t\t\t\t\t\tcolor=\"tertiary\"\n\t\t\t\t\t\tsize=\"small\"\n\t\t\t\t\t\texpand=\"block\"\n\t\t\t\t\t\tfill=\"clear\"\n\t\t\t\t\t\tclass=\"ion-float-left link-button\"\n\t\t\t\t\t\trouterLink=\"/home/login\"\n\t\t\t\t\t>\n\t\t\t\t\t\tAlready have an account?\n\t\t\t\t\t</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<form #signUpForm=\"ngForm\" (ngSubmit)=\"signUp(signUpForm)\">\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-title style=\"font-size: 25px\" class=\"ion-text-center\">Sign-up</ion-title>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row class=\"ion-margin-top\">\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Username</ion-label>\n\t\t\t\t\t\t<ion-input required ngModel name=\"username\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Email</ion-label>\n\t\t\t\t\t\t<ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Confirm Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\" required ngModel name=\"confirmPassword\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<button type=\"submit\" class=\"button sign-up-button\">\n\t\t\t\t\t\tSign Up\n\t\t\t\t\t\t<ion-spinner color=\"light\" name=\"lines-small\" *ngIf=\"signupSpinner\"></ion-spinner>\n\t\t\t\t\t</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<button color=\"tertiary\" size=\"small\" expand=\"block\" fill=\"clear\" class=\"ion-float-left link-button\" routerLink=\"/home/login\">Already have an account?</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n";
       /***/
     },
 
@@ -231,21 +231,29 @@
       /* harmony import */
 
 
-      var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! @ionic/angular */
+      "TEn/");
+      /* harmony import */
+
+
+      var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! src/app/services/user.service */
       "qfBg");
 
       var SignUpPage = /*#__PURE__*/function () {
-        function SignUpPage(router, userService) {
+        function SignUpPage(router, userService, toastCtrl) {
           _classCallCheck(this, SignUpPage);
 
           this.router = router;
           this.userService = userService;
+          this.toastCtrl = toastCtrl;
         }
 
         _createClass(SignUpPage, [{
           key: "ngOnInit",
           value: function ngOnInit() {
+            this.signupSpinner = false;
             this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url);
           }
         }, {
@@ -253,44 +261,83 @@
           value: function signUp(form) {
             var _this = this;
 
-            if (this.checkIfPasswordsMatch(form.value.password, form.value.confirmPassword)) {
-              delete form.value.confirmPassword;
-              this.userService.signUp(form.value).subscribe(function (res) {
-                _this.generateUser(res);
+            this.signupSpinner = true;
 
-                form.resetForm();
+            if (form.valid) {
+              if (this.checkIfPasswordsMatch(form.value.password, form.value.confirmPassword)) {
+                delete form.value.confirmPassword;
+                this.userService.signUp(form.value).subscribe(function (res) {}, function (err) {
+                  _this.signupSpinner = false;
+                  err.error.debug == 'ERR_USER_ALREADY_EXISTS' && _this.presentErrorToast('Email is already in use.');
+                }, function () {
+                  _this.signupSpinner = false;
+                  form.resetForm();
 
-                _this.router.navigate(['home', 'login']);
+                  _this.router.navigate(["home", "login"]);
 
-                _this.userService.checkIfIsOnLoginOrSignUpPage('/home/login');
-              });
-            }
-          }
-        }, {
-          key: "generateUser",
-          value: function generateUser(res) {
-            var _this2 = this;
-
-            var user = {
-              email: res.user.email,
-              username: res.user.username,
-              balance: {
-                availableBal: 0,
-                openBal: 0
+                  _this.userService.checkIfIsOnLoginOrSignUpPage("/home/login");
+                });
+              } else {
+                this.signupSpinner = false;
+                this.presentErrorToast("Passwords dont match.");
               }
-            };
-            this.userService.accountDetails().subscribe(function (res) {
-              user.balance.availableBal = res.account.initialValue;
-              user.balance.openBal = parseFloat(res.account.currentBalance);
-              user.balance.currency = res.account.currency;
-            }, function () {}, function () {
-              return _this2.userService.user.next(user);
-            });
-          }
+            } else {
+              this.signupSpinner = false;
+              this.presentErrorToast("Something is missing.");
+            }
+          } // generateUser(res) {
+          // 	let user: User = {
+          // 		email: res.user.email,
+          // 		username: res.user.username,
+          // 		balance: {
+          // 			availableBal: 0,
+          // 			openBal: 0,
+          // 		},
+          // 	};
+          // 	this.userService.accountDetails().subscribe(
+          // 		(res: any) => {
+          // 			user.balance.availableBal = res.account.initialValue;
+          // 			user.balance.openBal = parseFloat(res.account.currentBalance);
+          // 			user.balance.currency = res.account.currency;
+          // 		},
+          // 		() => {},
+          // 		() => this.userService.user.next(user)
+          // 	);
+          // }
+
         }, {
           key: "checkIfPasswordsMatch",
           value: function checkIfPasswordsMatch(password, confirmPassword) {
             if (password === confirmPassword) return true;else return false;
+          }
+        }, {
+          key: "presentErrorToast",
+          value: function presentErrorToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      _context.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        duration: 2500,
+                        color: "danger"
+                      });
+
+                    case 2:
+                      toast = _context.sent;
+                      _context.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
           }
         }]);
 
@@ -301,12 +348,14 @@
         return [{
           type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
         }, {
-          type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]
+          type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"]
         }];
       };
 
       SignUpPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-sign-up',
+        selector: "app-sign-up",
         template: _raw_loader_sign_up_page_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_sign_up_page_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
       })], SignUpPage);

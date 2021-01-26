@@ -1,13 +1,13 @@
 <ion-header class="ion-no-border">
 	<ion-toolbar>
-		<ion-title>{{blog.title}}</ion-title>
+		<ion-title>{{ post.title }}</ion-title>
 		<ion-buttons slot="end">
 			<ion-button (click)="dismissModal()">Close</ion-button>
 		</ion-buttons>
-  </ion-toolbar>
+	</ion-toolbar>
 </ion-header>
 <ion-content style="display: flex; flex-direction: column">
 	<!-- <h4 class="ion-padding-horizontal"></h4> -->
-	<ion-img *ngIf="blog.image != null || blog.image != undefined" [src]="blog.image" class="ion-margin"></ion-img>
-	<span class="ion-padding-horizontal">{{blog.content}}</span>
+	<ion-img *ngIf="post.image != null || post.image != undefined" [src]="post.image" class="ion-margin"></ion-img>
+	<span class="ion-padding">{{ post.content }}</span>
 </ion-content>
