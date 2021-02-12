@@ -27,7 +27,7 @@ export class OrdersPage implements OnInit, OnDestroy {
 	pageIndex: number;
 	subscribedPositionSockets: Subscription[] = [];
 	subscribedPendingSockets: Subscription[] = [];
-	spinner: boolean
+	spinner: boolean;
 	constructor(private orderService: OrderService, private modalCtrl: ModalController, private actionSheetController: ActionSheetController, private stockService: StockService) {}
 
 	ngOnInit() {
@@ -36,7 +36,7 @@ export class OrdersPage implements OnInit, OnDestroy {
 	}
 
 	ionViewDidEnter() {
-		this.spinner = true
+		this.spinner = true;
 		this.getOrders();
 	}
 
@@ -44,7 +44,7 @@ export class OrdersPage implements OnInit, OnDestroy {
 		this.tempPending = [];
 		this.tempPosition = [];
 		this.tempCompleted = [];
-		if(spinner == true) this.spinner = true;
+		if (spinner == true) this.spinner = true;
 		this.orderService.getAllUserOrders().subscribe((res: any) => {
 			res.data.forEach((o: Order) => {
 				const order: OrderMin = {
@@ -54,42 +54,54 @@ export class OrdersPage implements OnInit, OnDestroy {
 					watchlistId: o.watchlistId,
 					name: o.companyName,
 					price: o.price,
-			        quantity: o.volume,
+					quantity: o.volume,
 					isDeleted: o.isDeleted,
 					stoploss: o.stoploss,
 					target: o.target,
-					createdDate: o.created_date
+					createdDate: o.created_date,
 				};
 				this.orderPlacement(o.transactionOne.status, order, o.transactionOne.price);
 				this.orderPlacement(o.transactionTwo.stoplossStatus, order, o.stoploss, "stoploss", o.orderCategory);
 				this.orderPlacement(o.transactionTwo.targetStatus, order, o.target, "target", o.orderCategory);
 				if (o.status == "positioned" && o.transactionOne.status == "completed") {
-					order.stoploss = o.stoploss;
-					order.target = o.target;
-					this.tempPosition.unshift(Object.assign({}, order));
+					var date = new Date(order.createdDate);
+					date.setDate(date.getDate() + 1);
+					var today = new Date();
+					if (date > today) {
+						order.stoploss = o.stoploss;
+						order.target = o.target;
+						this.tempPosition.unshift(Object.assign({}, order));
+					}
 				} else if (o.status == "completed" && o.transactionTwo.stoplossStatus == "notFilled" && o.transactionTwo.targetStatus == "notFilled") {
-					const o = Object.assign({}, order);
-					o["status"] = "completed";
-					o.orderCategory = order.orderCategory == "buy" ? "sell" : "buy";
-					this.tempCompleted.unshift(o);
+					var date = new Date(order.createdDate);
+					date.setDate(date.getDate() + 1);
+					var today = new Date();
+					if (date > today) {
+						const o = Object.assign({}, order);
+						o["status"] = "completed";
+						o.orderCategory = order.orderCategory == "buy" ? "sell" : "buy";
+						this.tempCompleted.unshift(o);
+					}
 				}
 			});
-			this.updateLtp().finally(()=>{
+			this.updateLtp().finally(() => {
 				this.pending = this.tempPending;
 				this.position = this.tempPosition;
 				this.completed = this.tempCompleted;
-				this.dataLoaded = true
-				this.spinner = false
-			});;
+				console.log({pos: this.position, pen: this.pending, com: this.completed})
+				this.dataLoaded = true;
+				this.spinner = false;
+			});
 			// this.totalPandL = this.orderService.totalPandL()
 		});
 	}
 	orderPlacement(status, order, price, key?, orderCategory?) {
 		price = "price";
-		const date = new Date(order.createdDate).getDay()
-		const today = new Date().getDay()
-		const o = Object.assign({}, order)
-		if (today > date) {
+		var date = new Date(order.createdDate);
+		date.setDate(date.getDate() + 1);
+		var today = new Date();
+		const o = Object.assign({}, order);
+		if (date > today) {
 			switch (status) {
 				case "completed":
 					if (orderCategory != null) o.orderCategory = orderCategory == "buy" ? "sell" : "buy";
@@ -102,7 +114,7 @@ export class OrdersPage implements OnInit, OnDestroy {
 					if (orderCategory != null) o.orderCategory = orderCategory == "buy" ? "sell" : "buy";
 					else o.orderCategory = order.orderCategory;
 					key != null ? (o.key = key) : (o.key = "price");
-					key == 'target' ? o.target = order.target : o.stoploss = order.stoploss
+					key == "target" ? (o.target = order.target) : (o.stoploss = order.stoploss);
 					this.tempPending.unshift(o);
 					break;
 				case "notFilled":
@@ -192,13 +204,13 @@ export class OrdersPage implements OnInit, OnDestroy {
 	tabIndex(tab) {
 		if (typeof tab == "number") this.pageIndex = tab;
 		else this.pageIndex = tab.detail.index;
-		this.updateLtp().finally(()=>{
+		this.updateLtp().finally(() => {
 			this.pending = this.tempPending;
 			this.position = this.tempPosition;
 			this.completed = this.tempCompleted;
-			this.dataLoaded = true
-			this.spinner = false
-		});;
+			this.dataLoaded = true;
+			this.spinner = false;
+		});
 	}
 
 	filterPosition(e) {

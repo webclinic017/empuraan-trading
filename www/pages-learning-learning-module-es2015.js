@@ -26,19 +26,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "1fgy":
-/*!*************************************************************!*\
-  !*** ./src/app/modals/modal-post/modal-post.component.scss ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("@media screen and (max-width: 360px) {\n  ion-title {\n    font-size: 15px !important;\n  }\n\n  ion-text {\n    font-size: 13px !important;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kYWxzL21vZGFsLXBvc3QvbW9kYWwtcG9zdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJO0lBQ0UsMEJBQUE7RUFDSjs7RUFDRTtJQUNFLDBCQUFBO0VBRUo7QUFDRiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9tb2RhbC1wb3N0L21vZGFsLXBvc3QuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAzNjBweCkge1xuICAgIGlvbi10aXRsZXtcbiAgICAgIGZvbnQtc2l6ZToxNXB4ICFpbXBvcnRhbnQ7XG4gICAgfVxuICAgIGlvbi10ZXh0e1xuICAgICAgZm9udC1zaXplOiAxM3B4ICFpbXBvcnRhbnQ7XG4gICAgfVxufSJdfQ== */");
-
-/***/ }),
-
 /***/ "3Gte":
 /*!****************************************************!*\
   !*** ./src/app/pages/learning/blogs/blogs.page.ts ***!
@@ -55,8 +42,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
 /* harmony import */ var src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/modals/modal-post/modal-post.component */ "N+8n");
-/* harmony import */ var src_app_services_learning_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/learning.service */ "uetY");
-/* harmony import */ var src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/marubozu.service */ "BCkd");
+/* harmony import */ var src_app_modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/modals/modal-upload-post/modal-upload-post.component */ "x7KT");
+/* harmony import */ var src_app_services_learning_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/learning.service */ "uetY");
+/* harmony import */ var src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/marubozu.service */ "BCkd");
+
 
 
 
@@ -73,31 +62,48 @@ let BlogsPage = class BlogsPage {
     }
     ngOnInit() {
         this.dataLoaded = false;
-        this.marubozuService.get('blog').subscribe((r) => {
-            console.log('blog', r);
+        this.marubozuService.get("blog").subscribe((r) => {
+            console.log("blog", r);
             this.blgs = r.data;
             this.blgs.reverse();
             this.dataLoaded = true;
         });
     }
-    openPostModal(blog) {
+    openUploadPostModal(id) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const modal = yield this.modalController.create({
+                component: src_app_modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_6__["ModalUploadPostComponent"],
+                componentProps: { blog: true },
+            });
+            modal.onDidDismiss().then((d) => {
+                if (d.data == true) {
+                    this.marubozuService.get("blog").subscribe((r) => {
+                        this.blgs = r.data;
+                        this.blgs.reverse();
+                    });
+                }
+            });
+            return yield modal.present();
+        });
+    }
+    openPostModal(post) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const modal = yield this.modalController.create({
                 component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_5__["ModalPostComponent"],
-                componentProps: { blog }
+                componentProps: { post },
             });
             return yield modal.present();
         });
     }
 };
 BlogsPage.ctorParameters = () => [
-    { type: src_app_services_learning_service__WEBPACK_IMPORTED_MODULE_6__["LearningService"] },
+    { type: src_app_services_learning_service__WEBPACK_IMPORTED_MODULE_7__["LearningService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
-    { type: src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_7__["MarubozuService"] }
+    { type: src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_8__["MarubozuService"] }
 ];
 BlogsPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-blogs',
+        selector: "app-blogs",
         template: _raw_loader_blogs_page_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_blogs_page_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
     })
@@ -168,7 +174,7 @@ let DemoTradingPage = class DemoTradingPage {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const modal = yield this.modalController.create({
                 component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_7__["ModalPostComponent"],
-                componentProps: { blog: demotrading }
+                componentProps: { post: demotrading }
             });
             return yield modal.present();
         });
@@ -278,19 +284,6 @@ VideoSwiperDirective = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])(
 
 /***/ }),
 
-/***/ "EqF1":
-/*!***************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/modal-post/modal-post.component.html ***!
-  \***************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>{{blog.title}}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content style=\"display: flex; flex-direction: column\">\n\t<!-- <h4 class=\"ion-padding-horizontal\"></h4> -->\n\t<ion-img *ngIf=\"blog.image != null || blog.image != undefined\" [src]=\"blog.image\" class=\"ion-margin\"></ion-img>\n\t<span class=\"ion-padding-horizontal\">{{blog.content}}</span>\n</ion-content>\n");
-
-/***/ }),
-
 /***/ "Kdie":
 /*!*****************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/learning/learning.page.html ***!
@@ -301,53 +294,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Marubozu</ion-title>\n\t\t<ion-img slot=\"end\" src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<super-tabs [config]=\"config\" (tabChange)=\"tabIndex($event)\" >\n\t\t<super-tabs-toolbar slot=\"top\" color=\"translucent\" scrollable=\"true\" scrollable-padding=\"false\">\n\t\t\t<super-tab-button><ion-label>Tutorials</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Blogs</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Intra-day</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Positional</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Demo-trading</ion-label></super-tab-button>\n\t\t</super-tabs-toolbar>\n\t\t<super-tabs-container>\n\t\t\t<super-tab>\n\t\t\t\t<app-tutorials></app-tutorials>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-blogs></app-blogs>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-intra-day></app-intra-day>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-positional></app-positional>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-demo-trading></app-demo-trading>\n\t\t\t</super-tab>\n\t\t</super-tabs-container>\n\t</super-tabs>\n</ion-content>\n");
-
-/***/ }),
-
-/***/ "N+8n":
-/*!***********************************************************!*\
-  !*** ./src/app/modals/modal-post/modal-post.component.ts ***!
-  \***********************************************************/
-/*! exports provided: ModalPostComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalPostComponent", function() { return ModalPostComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _raw_loader_modal_post_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./modal-post.component.html */ "EqF1");
-/* harmony import */ var _modal_post_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal-post.component.scss */ "1fgy");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
-
-
-
-
-
-let ModalPostComponent = class ModalPostComponent {
-    constructor(modalCtrl) {
-        this.modalCtrl = modalCtrl;
-    }
-    ngOnInit() { }
-    dismissModal() {
-        this.modalCtrl.dismiss();
-    }
-};
-ModalPostComponent.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] }
-];
-ModalPostComponent.propDecorators = {
-    blog: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }]
-};
-ModalPostComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-modal-post',
-        template: _raw_loader_modal_post_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
-        styles: [_modal_post_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
-    })
-], ModalPostComponent);
-
-
 
 /***/ }),
 
@@ -505,7 +451,7 @@ let PositionalPage = class PositionalPage {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const modal = yield this.modalController.create({
                 component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_7__["ModalPostComponent"],
-                componentProps: { blog: positional }
+                componentProps: { post: positional }
             });
             return yield modal.present();
         });
@@ -682,7 +628,7 @@ LearningPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content class=\"ion-padding-top\">\n  <ion-spinner name=\"lines\" *ngIf=\"!dataLoaded;else list\"></ion-spinner>\n  <ion-list>\n    <ion-item #list class=\"ion-no-padding\" *ngFor=\"let blog of blgs\">\n      <h5 class=\"blog-link\" (click)=\"openPostModal(blog)\">- {{blog.title}}</h5>\n    </ion-item>\n  </ion-list>\n\t<ion-label class=\"ion-padding\" *ngIf=\"blgs?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n  <ion-spinner name=\"lines\" *ngIf=\"!dataLoaded;else list\"></ion-spinner>\n  <ion-list>\n    <ion-item #list class=\"ion-no-padding\" *ngFor=\"let blog of blgs\">\n      <h5 class=\"blog-link\" (click)=\"openPostModal(blog)\">- {{blog.title}}</h5>\n    </ion-item>\n  </ion-list>\n\t<ion-label class=\"ion-padding\" *ngIf=\"blgs?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n<ion-fab horizontal=\"end\" vertical=\"bottom\" style=\"position: absolute; bottom: 10px; right: 10px\">\n\t<ion-fab-button (click)=\"openUploadPostModal()\">\n\t\t<ion-icon name=\"add\"></ion-icon>\n\t</ion-fab-button>\n</ion-fab>\n");
 
 /***/ }),
 
@@ -851,7 +797,7 @@ let IntraDayPage = class IntraDayPage {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const modal = yield this.modalController.create({
                 component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_6__["ModalPostComponent"],
-                componentProps: { blog: intraDay },
+                componentProps: { post: intraDay },
             });
             return yield modal.present();
         });

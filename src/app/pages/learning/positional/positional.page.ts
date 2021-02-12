@@ -50,7 +50,7 @@ export class PositionalPage implements OnInit {
   async openPostModal(positional) {
     const modal = await this.modalController.create({
       component: ModalPostComponent,
-      componentProps: {blog: positional}
+      componentProps: {post: positional}
     });
     return await modal.present();
   }

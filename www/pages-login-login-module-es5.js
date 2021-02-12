@@ -30,7 +30,7 @@
 
     /***/
     function Como(module) {
-      module.exports = JSON.parse("{\"appId\":\"com.empuraanTradingApp.app\",\"appName\":\"Empuraan Trading App\",\"webDir\":\"www\",\"npmClient\":\"npm\",\"plugins\":{\"SplashScreen\":{\"launchShowDuration\":0},\"GoogleAuth\":{\"scopes\":[\"profile\",\"email\"],\"serverClientId\":\"946184960632-f8auts9jv84qr05sijh3tki2608u5sef.apps.googleusercontent.com\",\"forceCodeForRefreshToken\":true}},\"cordova\":{\"preferences\":{\"ScrollEnabled\":\"true\",\"BackupWebStorage\":\"none\",\"SplashMaintainAspectRatio\":\"true\",\"FadeSplashScreenDuration\":\"300\",\"SplashShowOnlyFirstTime\":\"false\",\"SplashScreen\":\"screen\",\"SplashScreenDelay\":\"3000\"}}}");
+      module.exports = JSON.parse("{\"appId\":\"com.empuraanTradingApp.app\",\"appName\":\"Empuraan Trading App\",\"webDir\":\"www\",\"npmClient\":\"npm\",\"plugins\":{\"SplashScreen\":{\"launchShowDuration\":0},\"GoogleAuth\":{\"scopes\":[\"profile\",\"email\"],\"serverClientId\":\"142774913706-4qu129d7tuu8pm504lq51md0f6n0aluc.apps.googleusercontent.com\",\"forceCodeForRefreshToken\":true}},\"cordova\":{\"preferences\":{\"ScrollEnabled\":\"true\",\"BackupWebStorage\":\"none\",\"SplashMaintainAspectRatio\":\"true\",\"FadeSplashScreenDuration\":\"300\",\"SplashShowOnlyFirstTime\":\"false\",\"SplashScreen\":\"screen\",\"SplashScreenDelay\":\"3000\"}}}");
       /***/
     },
 
@@ -179,7 +179,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<form #loginForm=\"ngForm\">\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-title style=\"font-size: 25px\" class=\"ion-text-center\">Login</ion-title>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row class=\"ion-margin-top\">\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">E-mail</ion-label>\n\t\t\t\t\t\t<ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col class=\"button-col\">\n\t\t\t\t\t<button class=\"button login-button\" type=\"submit\" (click)=\"login(loginForm)\">\n\t\t\t\t\t\tLogin\n\t\t\t\t\t\t<ion-spinner color=\"light\" name=\"lines-small\" *ngIf=\"loginSpinner\"></ion-spinner>\n\t\t\t\t\t</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<button class=\"button google-button\" color=\"danger\" (click)=\"google()\">\n\t\t\t\t\t\t<ion-icon name=\"logo-google\"></ion-icon>\n\t\t\t\t\t\t<span>Login with Google</span>\n\t\t\t\t\t</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<div class=\"or-line\">\n\t\t\t\t\t\t<hr />\n\t\t\t\t\t\t<span>OR</span>\n\t\t\t\t\t</div>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col class=\"links-block\" size=\"12\">\n\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"button new-user-button\" routerLink=\"/home/sign-up\">Create new account</button>\n\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"link-button ion-float-right\" (click)=\"forgotPassword(loginForm)\">Forgot password?</button>\n\t\t\t\t\t<!-- {{ userInfo | json}} -->\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<form #loginForm=\"ngForm\">\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-title style=\"font-size: 25px\" class=\"ion-text-center\">Login</ion-title>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row class=\"ion-margin-top\">\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">E-mail</ion-label>\n\t\t\t\t\t\t<ion-input type=\"email\" required ngModel name=\"email\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Password</ion-label>\n\t\t\t\t\t\t<ion-input type=\"password\" required ngModel name=\"password\"></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col class=\"button-col\">\n\t\t\t\t\t<button class=\"button login-button\" type=\"submit\" (click)=\"login(loginForm)\">\n\t\t\t\t\t\tLogin\n\t\t\t\t\t\t<ion-spinner color=\"light\" name=\"lines-small\" *ngIf=\"loginSpinner\"></ion-spinner>\n\t\t\t\t\t</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<button class=\"button google-button\" color=\"danger\" (click)=\"google()\">\n\t\t\t\t\t\t<ion-icon name=\"logo-google\"></ion-icon>\n\t\t\t\t\t\t<span>Login with Google</span>\n\t\t\t\t\t\t<ion-spinner name=\"lines-small\" class=\"ion-padding-start\" *ngIf=\"googleSpinner\" color=\"light\"></ion-spinner>\n\t\t\t\t\t</button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<div class=\"or-line\">\n\t\t\t\t\t\t<hr />\n\t\t\t\t\t\t<span>OR</span>\n\t\t\t\t\t</div>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col class=\"links-block\" size=\"12\">\n\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"button new-user-button\" routerLink=\"/home/sign-up\">Create new account</button>\n\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"link-button ion-float-right\" (click)=\"forgotPassword(loginForm)\">Forgot password?</button>\n\t\t\t\t\t<!-- {{ userInfo | json}} -->\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n";
       /***/
     },
 
@@ -337,6 +337,7 @@
           key: "ngOnInit",
           value: function ngOnInit() {
             this.loginSpinner = false;
+            this.googleSpinner = false;
             this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url);
           }
         }, {
@@ -364,26 +365,30 @@
             }
           }
         }, {
-          key: "openForgotPasswordModal",
-          value: function openForgotPasswordModal() {
+          key: "google",
+          value: function google() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var modal;
+              var _this2 = this;
+
+              var googleUser;
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
-                      _context.next = 2;
-                      return this.modalCtrl.create({
-                        component: src_app_modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_9__["ModalFpEmailComponent"]
+                      this.googleSpinner = true;
+                      _context.next = 3;
+                      return _capacitor_core__WEBPACK_IMPORTED_MODULE_7__["Plugins"].GoogleAuth.signIn();
+
+                    case 3:
+                      googleUser = _context.sent;
+                      console.log(googleUser);
+                      this.userService.googleAuth(googleUser)["finally"](function () {
+                        _this2.googleSpinner = false;
+
+                        _this2.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard');
+
+                        _this2.router.navigate(['home', 'dashboard']);
                       });
-
-                    case 2:
-                      modal = _context.sent;
-                      _context.next = 5;
-                      return modal.present();
-
-                    case 5:
-                      return _context.abrupt("return", _context.sent);
 
                     case 6:
                     case "end":
@@ -394,25 +399,28 @@
             }));
           }
         }, {
-          key: "google",
-          value: function google() {
+          key: "openForgotPasswordModal",
+          value: function openForgotPasswordModal() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var googleUser;
+              var modal;
               return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
                   switch (_context2.prev = _context2.next) {
                     case 0:
                       _context2.next = 2;
-                      return _capacitor_core__WEBPACK_IMPORTED_MODULE_7__["Plugins"].GoogleAuth.signIn();
-
-                    case 2:
-                      googleUser = _context2.sent;
-                      console.log(googleUser);
-                      this.userService.googleAuth(googleUser.authentication.idToken).subscribe(function (r) {
-                        return console.log(r);
+                      return this.modalCtrl.create({
+                        component: src_app_modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_9__["ModalFpEmailComponent"]
                       });
 
+                    case 2:
+                      modal = _context2.sent;
+                      _context2.next = 5;
+                      return modal.present();
+
                     case 5:
+                      return _context2.abrupt("return", _context2.sent);
+
+                    case 6:
                     case "end":
                       return _context2.stop();
                   }
@@ -563,25 +571,25 @@
         }]);
 
         function GoogleAuthWeb() {
-          var _this2;
+          var _this3;
 
           _classCallCheck(this, GoogleAuthWeb);
 
-          _this2 = _super.call(this, {
+          _this3 = _super.call(this, {
             name: 'GoogleAuth',
             platforms: ['web']
           });
-          if (!_this2.webConfigured) return _possibleConstructorReturn(_this2);
-          _this2.gapiLoaded = new Promise(function (resolve) {
+          if (!_this3.webConfigured) return _possibleConstructorReturn(_this3);
+          _this3.gapiLoaded = new Promise(function (resolve) {
             // HACK: Relying on window object, can't get property in gapi.load callback
             window.gapiResolve = resolve;
 
-            _this2.initialize();
+            _this3.initialize();
           });
 
-          _this2.addUserChangeListener();
+          _this3.addUserChangeListener();
 
-          return _this2;
+          return _this3;
         }
 
         _createClass(GoogleAuthWeb, [{
@@ -616,14 +624,14 @@
           key: "signIn",
           value: function signIn() {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var _this3 = this;
+              var _this4 = this;
 
               return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
                   switch (_context5.prev = _context5.next) {
                     case 0:
                       return _context5.abrupt("return", new Promise(function (resolve, reject) {
-                        return __awaiter(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+                        return __awaiter(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
                           var serverAuthCode, needsOfflineAccess, offlineAccessResponse, googleUser, user;
                           return regeneratorRuntime.wrap(function _callee4$(_context4) {
                             while (1) {
@@ -743,7 +751,7 @@
           key: "addUserChangeListener",
           value: function addUserChangeListener() {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-              var _this4 = this;
+              var _this5 = this;
 
               return regeneratorRuntime.wrap(function _callee8$(_context8) {
                 while (1) {
@@ -754,7 +762,7 @@
 
                     case 2:
                       gapi.auth2.getAuthInstance().currentUser.listen(function (googleUser) {
-                        _this4.notifyListeners("userChange", googleUser.isSignedIn() ? _this4.getUserFrom(googleUser) : null);
+                        _this5.notifyListeners("userChange", googleUser.isSignedIn() ? _this5.getUserFrom(googleUser) : null);
                       });
 
                     case 3:

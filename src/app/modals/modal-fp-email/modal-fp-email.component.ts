@@ -30,10 +30,12 @@ export class ModalFpEmailComponent implements OnInit {
       if (this.checkIfEmailInString(email)) {
         this.userService.emailExists(this.email).subscribe((r) => {
           this.spinner = false
-          console.log(r);
           this.dismissModal();
           this.openCodeCheckModal(email);
-        });
+        }, () =>{
+			this.spinner = false
+			this.presentErrorToast('Email does not exist.')
+		});
       } else {
         this.spinner = false
         this.presentErrorToast('Enter your email in the correct format.')

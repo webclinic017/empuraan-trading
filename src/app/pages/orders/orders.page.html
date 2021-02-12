@@ -96,7 +96,10 @@
 						</ion-card-title>
 					</ion-card-content>
 				</ion-card> -->
-				<ion-list>
+				<ion-text class="ion-padding-start ion-padding-top" *ngIf="filteredPosition?.length == 0 || position?.length == 0 && dataLoaded">
+					There are no position orders currently.
+				</ion-text>
+				<ion-list *ngIf="filteredPosition?.length > 0 || position?.length > 0 && dataLoaded">
 					<ion-item class="ion-no-padding" *ngFor="let p of filteredPosition || position" (click)="ordersActionSheet(p)">
 						<ion-grid class="ion-no-padding ion-padding-vertical">
 							<ion-row>
@@ -152,7 +155,10 @@
 			</super-tab>
 			<super-tab>
 				<ion-searchbar showCancelButton="focus" (ionChange)="filterCompleted($event)"></ion-searchbar>
-				<ion-list>
+				<ion-text class="ion-padding-start ion-padding-top" *ngIf="filteredCompleted?.length == 0 || completed?.length == 0 && dataLoaded">
+					There are no completed orders currently.
+				</ion-text>
+				<ion-list *ngIf="filteredCompleted?.length > 0 || completed?.length > 0 && dataLoaded">
 					<ion-item class="ion-no-padding" *ngFor="let c of filteredCompleted || completed">
 						<ion-grid class="ion-no-padding ion-padding-vertical">
 							<ion-row>
@@ -193,7 +199,10 @@
 			</super-tab>
 			<super-tab>
 				<ion-searchbar showCancelButton="focus" (ionChange)="filterPending($event)"></ion-searchbar>
-				<ion-list>
+				<ion-text class="ion-padding-start ion-padding-top" *ngIf="filteredPending?.length == 0 || pending?.length == 0 && dataLoaded">
+					There are no pending orders currently.
+				</ion-text>
+				<ion-list *ngIf="filteredPending?.length > 0 || pending?.length > 0 && dataLoaded">
 					<ion-item class="ion-no-padding" *ngFor="let p of filteredPending || pending" (click)="ordersActionSheet(p)">
 						<ion-grid class="ion-no-padding ion-padding-vertical">
 							<ion-row>

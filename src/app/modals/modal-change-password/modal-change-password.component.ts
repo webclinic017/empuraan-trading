@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ModalController, ToastController } from "@ionic/angular";
 import { User } from "src/app/models/user.model";
 import { UserService } from "src/app/services/user.service";
@@ -9,9 +9,11 @@ import { UserService } from "src/app/services/user.service";
 	styleUrls: ["./modal-change-password.component.scss"],
 })
 export class ModalChangePasswordComponent implements OnInit {
+  @Input('email') email: string
 	passwordsDontMatch: boolean;
   user: User;
   spinner: boolean
+
 	constructor(private modalCtrl: ModalController, private userService: UserService, private toastCtrl: ToastController) {}
 
 	ngOnInit() {
@@ -27,11 +29,11 @@ export class ModalChangePasswordComponent implements OnInit {
     this.spinner = true
     if(input.newPassword != "" || input.confirmPassword != ""){
       if (input.newPassword == input.confirmPassword) {
-        this.userService.changePassword(this.user.email, input.newPassword).subscribe(
+        const email = this.email != null ? this.email : this.user.email
+        this.userService.changePassword(email, input.newPassword).subscribe(
           () => {},
           (err) => {
             this.spinner = false
-            console.log(err)
             this.presentErrorToast(err)
           }, 
           () => {

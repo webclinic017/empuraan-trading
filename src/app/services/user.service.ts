@@ -53,7 +53,7 @@ export class UserService {
 		return this.http.post(this.apiUrl + "signup", input);
 	}
 
-  async	googleAuth(idToken) {
+	async googleAuth(idToken) {
 		const user: User = {
 			email: idToken.email,
 			username: idToken.name,
@@ -62,10 +62,10 @@ export class UserService {
 				openBal: 0,
 			},
 		};
-    this.authenticate(user, idToken.authentication.idToken);
-    console.log({user, idToken: idToken.authentication.idToken});
+		this.authenticate(user, idToken.authentication.idToken);
+		console.log({ user, idToken: idToken.authentication.idToken });
 		this.decodedToken = this.decodeToken(idToken.authentication.idToken);
-    this.checkToken();
+		this.checkToken();
 	}
 
 	getFundsChart() {

@@ -106,34 +106,36 @@ let WatchlistPage = class WatchlistPage {
         this.getWatchlists();
     }
     getWatchlists(spinner) {
-        if (spinner == true)
-            this.spinner = true;
-        this.userService.getSettings().subscribe((r) => {
-            const datatype = r.data.datatype;
-            if (datatype == "simulated")
-                this.watchlistService.getSimulatedWatchlists().subscribe((r) => {
-                    this.isSimualted = true;
-                    this.watchlists = [];
-                    this.watchlists = r.data;
-                    console.log('simulated', r);
-                    this.moveInArray();
-                    this.updateLtp().finally(() => {
-                        this.dataLoaded = true;
-                        this.spinner = false;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            if (spinner == true)
+                this.spinner = true;
+            this.userService.getSettings().subscribe((r) => {
+                const datatype = r.data.datatype;
+                if (datatype == "simulated")
+                    this.watchlistService.getSimulatedWatchlists().subscribe((r) => {
+                        this.isSimualted = true;
+                        this.watchlists = [];
+                        this.watchlists = r.data;
+                        console.log('simulated', r);
+                        this.moveInArray();
+                        this.updateLtp().finally(() => {
+                            this.dataLoaded = true;
+                            this.spinner = false;
+                        });
                     });
-                });
-            if (datatype == "realtime")
-                this.watchlistService.getRealtimeWatchlists().subscribe((r) => {
-                    this.isSimualted = false;
-                    this.watchlists = [];
-                    this.watchlists = r.data;
-                    console.log('realTime', r);
-                    this.moveInArray();
-                    this.updateLtp().finally(() => {
-                        this.dataLoaded = true;
-                        this.spinner = false;
+                if (datatype == "realtime")
+                    this.watchlistService.getRealtimeWatchlists().subscribe((r) => {
+                        this.isSimualted = false;
+                        this.watchlists = [];
+                        this.watchlists = r.data;
+                        console.log('realTime', r);
+                        this.moveInArray();
+                        this.updateLtp().finally(() => {
+                            this.dataLoaded = true;
+                            this.spinner = false;
+                        });
                     });
-                });
+            });
         });
     }
     subscribeToStockSocket(wId, sId) {
@@ -261,8 +263,9 @@ let WatchlistPage = class WatchlistPage {
                         handler: () => {
                             this.watchlistService.deleteWatchlist(this.watchlists[this.selectedWatchlist]._id).subscribe((r) => {
                                 console.log("delete", r);
-                                this.presentSuccessToast('Watchlist successfuly deleted');
-                                this.getWatchlists(true);
+                                this.getWatchlists(true).then(() => {
+                                    this.presentSuccessToast('Watchlist successfuly deleted');
+                                });
                             });
                         },
                     },

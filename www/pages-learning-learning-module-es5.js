@@ -47,26 +47,6 @@
     },
 
     /***/
-    "1fgy":
-    /*!*************************************************************!*\
-      !*** ./src/app/modals/modal-post/modal-post.component.scss ***!
-      \*************************************************************/
-
-    /*! exports provided: default */
-
-    /***/
-    function fgy(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony default export */
-
-
-      __webpack_exports__["default"] = "@media screen and (max-width: 360px) {\n  ion-title {\n    font-size: 15px !important;\n  }\n\n  ion-text {\n    font-size: 13px !important;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kYWxzL21vZGFsLXBvc3QvbW9kYWwtcG9zdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJO0lBQ0UsMEJBQUE7RUFDSjs7RUFDRTtJQUNFLDBCQUFBO0VBRUo7QUFDRiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9tb2RhbC1wb3N0L21vZGFsLXBvc3QuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAzNjBweCkge1xuICAgIGlvbi10aXRsZXtcbiAgICAgIGZvbnQtc2l6ZToxNXB4ICFpbXBvcnRhbnQ7XG4gICAgfVxuICAgIGlvbi10ZXh0e1xuICAgICAgZm9udC1zaXplOiAxM3B4ICFpbXBvcnRhbnQ7XG4gICAgfVxufSJdfQ== */";
-      /***/
-    },
-
-    /***/
     "3Gte":
     /*!****************************************************!*\
       !*** ./src/app/pages/learning/blogs/blogs.page.ts ***!
@@ -124,13 +104,19 @@
       /* harmony import */
 
 
-      var src_app_services_learning_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var src_app_modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! src/app/modals/modal-upload-post/modal-upload-post.component */
+      "x7KT");
+      /* harmony import */
+
+
+      var src_app_services_learning_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! src/app/services/learning.service */
       "uetY");
       /* harmony import */
 
 
-      var src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! src/app/services/marubozu.service */
       "BCkd");
 
@@ -149,8 +135,8 @@
             var _this = this;
 
             this.dataLoaded = false;
-            this.marubozuService.get('blog').subscribe(function (r) {
-              console.log('blog', r);
+            this.marubozuService.get("blog").subscribe(function (r) {
+              console.log("blog", r);
               _this.blgs = r.data;
 
               _this.blgs.reverse();
@@ -159,9 +145,11 @@
             });
           }
         }, {
-          key: "openPostModal",
-          value: function openPostModal(blog) {
+          key: "openUploadPostModal",
+          value: function openUploadPostModal(id) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var _this2 = this;
+
               var modal;
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
@@ -169,26 +157,68 @@
                     case 0:
                       _context.next = 2;
                       return this.modalController.create({
-                        component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_5__["ModalPostComponent"],
+                        component: src_app_modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_6__["ModalUploadPostComponent"],
                         componentProps: {
-                          blog: blog
+                          blog: true
                         }
                       });
 
                     case 2:
                       modal = _context.sent;
-                      _context.next = 5;
+                      modal.onDidDismiss().then(function (d) {
+                        if (d.data == true) {
+                          _this2.marubozuService.get("blog").subscribe(function (r) {
+                            _this2.blgs = r.data;
+
+                            _this2.blgs.reverse();
+                          });
+                        }
+                      });
+                      _context.next = 6;
                       return modal.present();
 
-                    case 5:
+                    case 6:
                       return _context.abrupt("return", _context.sent);
 
-                    case 6:
+                    case 7:
                     case "end":
                       return _context.stop();
                   }
                 }
               }, _callee, this);
+            }));
+          }
+        }, {
+          key: "openPostModal",
+          value: function openPostModal(post) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var modal;
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return this.modalController.create({
+                        component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_5__["ModalPostComponent"],
+                        componentProps: {
+                          post: post
+                        }
+                      });
+
+                    case 2:
+                      modal = _context2.sent;
+                      _context2.next = 5;
+                      return modal.present();
+
+                    case 5:
+                      return _context2.abrupt("return", _context2.sent);
+
+                    case 6:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2, this);
             }));
           }
         }]);
@@ -198,16 +228,16 @@
 
       BlogsPage.ctorParameters = function () {
         return [{
-          type: src_app_services_learning_service__WEBPACK_IMPORTED_MODULE_6__["LearningService"]
+          type: src_app_services_learning_service__WEBPACK_IMPORTED_MODULE_7__["LearningService"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]
         }, {
-          type: src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_7__["MarubozuService"]
+          type: src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_8__["MarubozuService"]
         }];
       };
 
       BlogsPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-blogs',
+        selector: "app-blogs",
         template: _raw_loader_blogs_page_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_blogs_page_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
       })], BlogsPage);
@@ -293,30 +323,30 @@
         _createClass(DemoTradingPage, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.dataLoaded = false;
             this.marubozuService.get('demotrading').subscribe(function (r) {
               console.log('demotrading', r);
-              _this2.demotrading = r.data;
+              _this3.demotrading = r.data;
 
-              _this2.demotrading.reverse();
+              _this3.demotrading.reverse();
 
-              _this2.dataLoaded = true;
+              _this3.dataLoaded = true;
             });
           }
         }, {
           key: "openUploadPostModal",
           value: function openUploadPostModal(id) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var _this3 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              var _this4 = this;
 
               var modal;
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
-                  switch (_context2.prev = _context2.next) {
+                  switch (_context3.prev = _context3.next) {
                     case 0:
-                      _context2.next = 2;
+                      _context3.next = 2;
                       return this.modalController.create({
                         component: src_app_modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_5__["ModalUploadPostComponent"],
                         componentProps: {
@@ -325,61 +355,61 @@
                       });
 
                     case 2:
-                      modal = _context2.sent;
+                      modal = _context3.sent;
                       modal.onDidDismiss().then(function (d) {
                         if (d.data == true) {
-                          _this3.marubozuService.get("demotrading").subscribe(function (r) {
-                            _this3.demotrading = r.data;
+                          _this4.marubozuService.get("demotrading").subscribe(function (r) {
+                            _this4.demotrading = r.data;
 
-                            _this3.demotrading.reverse();
+                            _this4.demotrading.reverse();
                           });
                         }
                       });
-                      _context2.next = 6;
+                      _context3.next = 6;
                       return modal.present();
 
                     case 6:
-                      return _context2.abrupt("return", _context2.sent);
-
-                    case 7:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2, this);
-            }));
-          }
-        }, {
-          key: "openPostModal",
-          value: function openPostModal(demotrading) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              var modal;
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                while (1) {
-                  switch (_context3.prev = _context3.next) {
-                    case 0:
-                      _context3.next = 2;
-                      return this.modalController.create({
-                        component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_7__["ModalPostComponent"],
-                        componentProps: {
-                          blog: demotrading
-                        }
-                      });
-
-                    case 2:
-                      modal = _context3.sent;
-                      _context3.next = 5;
-                      return modal.present();
-
-                    case 5:
                       return _context3.abrupt("return", _context3.sent);
 
-                    case 6:
+                    case 7:
                     case "end":
                       return _context3.stop();
                   }
                 }
               }, _callee3, this);
+            }));
+          }
+        }, {
+          key: "openPostModal",
+          value: function openPostModal(demotrading) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              var modal;
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      _context4.next = 2;
+                      return this.modalController.create({
+                        component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_7__["ModalPostComponent"],
+                        componentProps: {
+                          post: demotrading
+                        }
+                      });
+
+                    case 2:
+                      modal = _context4.sent;
+                      _context4.next = 5;
+                      return modal.present();
+
+                    case 5:
+                      return _context4.abrupt("return", _context4.sent);
+
+                    case 6:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4, this);
             }));
           }
         }, {
@@ -501,22 +531,22 @@
         _createClass(VideoSwiperDirective, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this4 = this;
+            var _this5 = this;
 
             var gesture = this.gestureCtrl.create({
               gestureName: 'video-swiper',
               el: this.el.nativeElement,
               canStart: function canStart() {
-                _this4.onStart();
+                _this5.onStart();
               },
               onStart: function onStart() {
-                _this4.onStart();
+                _this5.onStart();
               },
               onMove: function onMove() {
-                _this4.onMove();
+                _this5.onMove();
               },
               onEnd: function onEnd() {
-                _this4.onUp();
+                _this5.onUp();
               }
             });
             gesture.enable();
@@ -558,26 +588,6 @@
     },
 
     /***/
-    "EqF1":
-    /*!***************************************************************************************************!*\
-      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/modal-post/modal-post.component.html ***!
-      \***************************************************************************************************/
-
-    /*! exports provided: default */
-
-    /***/
-    function EqF1(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony default export */
-
-
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>{{blog.title}}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content style=\"display: flex; flex-direction: column\">\n\t<!-- <h4 class=\"ion-padding-horizontal\"></h4> -->\n\t<ion-img *ngIf=\"blog.image != null || blog.image != undefined\" [src]=\"blog.image\" class=\"ion-margin\"></ion-img>\n\t<span class=\"ion-padding-horizontal\">{{blog.content}}</span>\n</ion-content>\n";
-      /***/
-    },
-
-    /***/
     "Kdie":
     /*!*****************************************************************************************!*\
       !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/learning/learning.page.html ***!
@@ -594,95 +604,6 @@
 
 
       __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Marubozu</ion-title>\n\t\t<ion-img slot=\"end\" src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<super-tabs [config]=\"config\" (tabChange)=\"tabIndex($event)\" >\n\t\t<super-tabs-toolbar slot=\"top\" color=\"translucent\" scrollable=\"true\" scrollable-padding=\"false\">\n\t\t\t<super-tab-button><ion-label>Tutorials</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Blogs</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Intra-day</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Positional</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Demo-trading</ion-label></super-tab-button>\n\t\t</super-tabs-toolbar>\n\t\t<super-tabs-container>\n\t\t\t<super-tab>\n\t\t\t\t<app-tutorials></app-tutorials>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-blogs></app-blogs>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-intra-day></app-intra-day>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-positional></app-positional>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-demo-trading></app-demo-trading>\n\t\t\t</super-tab>\n\t\t</super-tabs-container>\n\t</super-tabs>\n</ion-content>\n";
-      /***/
-    },
-
-    /***/
-    "N+8n":
-    /*!***********************************************************!*\
-      !*** ./src/app/modals/modal-post/modal-post.component.ts ***!
-      \***********************************************************/
-
-    /*! exports provided: ModalPostComponent */
-
-    /***/
-    function N8n(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "ModalPostComponent", function () {
-        return ModalPostComponent;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _raw_loader_modal_post_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! raw-loader!./modal-post.component.html */
-      "EqF1");
-      /* harmony import */
-
-
-      var _modal_post_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! ./modal-post.component.scss */
-      "1fgy");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! @ionic/angular */
-      "TEn/");
-
-      var ModalPostComponent = /*#__PURE__*/function () {
-        function ModalPostComponent(modalCtrl) {
-          _classCallCheck(this, ModalPostComponent);
-
-          this.modalCtrl = modalCtrl;
-        }
-
-        _createClass(ModalPostComponent, [{
-          key: "ngOnInit",
-          value: function ngOnInit() {}
-        }, {
-          key: "dismissModal",
-          value: function dismissModal() {
-            this.modalCtrl.dismiss();
-          }
-        }]);
-
-        return ModalPostComponent;
-      }();
-
-      ModalPostComponent.ctorParameters = function () {
-        return [{
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]
-        }];
-      };
-
-      ModalPostComponent.propDecorators = {
-        blog: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"]
-        }]
-      };
-      ModalPostComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-modal-post',
-        template: _raw_loader_modal_post_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
-        styles: [_modal_post_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      })], ModalPostComponent);
       /***/
     },
 
@@ -927,31 +848,31 @@
         _createClass(PositionalPage, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this5 = this;
+            var _this6 = this;
 
             this.dataLoaded = false;
             this.positionalPosts = this.learningService.positional;
             this.marubozuService.get('positional').subscribe(function (r) {
               console.log('positional', r);
-              _this5.positionalPsts = r.data;
+              _this6.positionalPsts = r.data;
 
-              _this5.positionalPsts.reverse();
+              _this6.positionalPsts.reverse();
 
-              _this5.dataLoaded = true;
+              _this6.dataLoaded = true;
             });
           }
         }, {
           key: "openUploadPostModal",
           value: function openUploadPostModal(id) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var _this6 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var _this7 = this;
 
               var modal;
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
-                  switch (_context4.prev = _context4.next) {
+                  switch (_context5.prev = _context5.next) {
                     case 0:
-                      _context4.next = 2;
+                      _context5.next = 2;
                       return this.modalController.create({
                         component: src_app_modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_3__["ModalUploadPostComponent"],
                         componentProps: {
@@ -960,61 +881,61 @@
                       });
 
                     case 2:
-                      modal = _context4.sent;
+                      modal = _context5.sent;
                       modal.onDidDismiss().then(function (d) {
                         if (d.data == true) {
-                          _this6.marubozuService.get("positional").subscribe(function (r) {
-                            _this6.positionalPsts = r.data;
+                          _this7.marubozuService.get("positional").subscribe(function (r) {
+                            _this7.positionalPsts = r.data;
 
-                            _this6.positionalPsts.reverse();
+                            _this7.positionalPsts.reverse();
                           });
                         }
                       });
-                      _context4.next = 6;
+                      _context5.next = 6;
                       return modal.present();
 
                     case 6:
-                      return _context4.abrupt("return", _context4.sent);
-
-                    case 7:
-                    case "end":
-                      return _context4.stop();
-                  }
-                }
-              }, _callee4, this);
-            }));
-          }
-        }, {
-          key: "openPostModal",
-          value: function openPostModal(positional) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var modal;
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
-                while (1) {
-                  switch (_context5.prev = _context5.next) {
-                    case 0:
-                      _context5.next = 2;
-                      return this.modalController.create({
-                        component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_7__["ModalPostComponent"],
-                        componentProps: {
-                          blog: positional
-                        }
-                      });
-
-                    case 2:
-                      modal = _context5.sent;
-                      _context5.next = 5;
-                      return modal.present();
-
-                    case 5:
                       return _context5.abrupt("return", _context5.sent);
 
-                    case 6:
+                    case 7:
                     case "end":
                       return _context5.stop();
                   }
                 }
               }, _callee5, this);
+            }));
+          }
+        }, {
+          key: "openPostModal",
+          value: function openPostModal(positional) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              var modal;
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                while (1) {
+                  switch (_context6.prev = _context6.next) {
+                    case 0:
+                      _context6.next = 2;
+                      return this.modalController.create({
+                        component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_7__["ModalPostComponent"],
+                        componentProps: {
+                          post: positional
+                        }
+                      });
+
+                    case 2:
+                      modal = _context6.sent;
+                      _context6.next = 5;
+                      return modal.present();
+
+                    case 5:
+                      return _context6.abrupt("return", _context6.sent);
+
+                    case 6:
+                    case "end":
+                      return _context6.stop();
+                  }
+                }
+              }, _callee6, this);
             }));
           }
         }, {
@@ -1122,19 +1043,19 @@
         _createClass(TutorialsPage, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this7 = this;
+            var _this8 = this;
 
             this.sanitizedVideos = [];
             this.videos = this.learningService.videos;
             this.marubozuService.get('tutorial').subscribe(function (r) {
-              _this7.vids = r.data;
+              _this8.vids = r.data;
             });
             this.videos.forEach(function (v) {
-              var video = _this7.sanitizeUrl(v.url);
+              var video = _this8.sanitizeUrl(v.url);
 
               video.name = v.name;
 
-              _this7.sanitizedVideos.push(video);
+              _this8.sanitizedVideos.push(video);
             });
           }
         }, {
@@ -1316,7 +1237,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-content class=\"ion-padding-top\">\n  <ion-spinner name=\"lines\" *ngIf=\"!dataLoaded;else list\"></ion-spinner>\n  <ion-list>\n    <ion-item #list class=\"ion-no-padding\" *ngFor=\"let blog of blgs\">\n      <h5 class=\"blog-link\" (click)=\"openPostModal(blog)\">- {{blog.title}}</h5>\n    </ion-item>\n  </ion-list>\n\t<ion-label class=\"ion-padding\" *ngIf=\"blgs?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-content>\n  <ion-spinner name=\"lines\" *ngIf=\"!dataLoaded;else list\"></ion-spinner>\n  <ion-list>\n    <ion-item #list class=\"ion-no-padding\" *ngFor=\"let blog of blgs\">\n      <h5 class=\"blog-link\" (click)=\"openPostModal(blog)\">- {{blog.title}}</h5>\n    </ion-item>\n  </ion-list>\n\t<ion-label class=\"ion-padding\" *ngIf=\"blgs?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n<ion-fab horizontal=\"end\" vertical=\"bottom\" style=\"position: absolute; bottom: 10px; right: 10px\">\n\t<ion-fab-button (click)=\"openUploadPostModal()\">\n\t\t<ion-icon name=\"add\"></ion-icon>\n\t</ion-fab-button>\n</ion-fab>\n";
       /***/
     },
 
@@ -1583,16 +1504,16 @@
         }, {
           key: "getIntraday",
           value: function getIntraday() {
-            var _this8 = this;
+            var _this9 = this;
 
             this.marubozuService.activeTab.subscribe(function (n) {
               if (n == 2) {
-                _this8.marubozuService.get("intraday").subscribe(function (r) {
-                  _this8.intraday = r.data;
+                _this9.marubozuService.get("intraday").subscribe(function (r) {
+                  _this9.intraday = r.data;
 
-                  _this8.intraday.reverse();
+                  _this9.intraday.reverse();
 
-                  _this8.dataLoaded = true;
+                  _this9.dataLoaded = true;
                 });
               }
             });
@@ -1600,15 +1521,15 @@
         }, {
           key: "openUploadPostModal",
           value: function openUploadPostModal(id) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-              var _this9 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+              var _this10 = this;
 
               var modal;
-              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+              return regeneratorRuntime.wrap(function _callee7$(_context7) {
                 while (1) {
-                  switch (_context6.prev = _context6.next) {
+                  switch (_context7.prev = _context7.next) {
                     case 0:
-                      _context6.next = 2;
+                      _context7.next = 2;
                       return this.modalController.create({
                         component: src_app_modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_5__["ModalUploadPostComponent"],
                         componentProps: {
@@ -1617,61 +1538,61 @@
                       });
 
                     case 2:
-                      modal = _context6.sent;
+                      modal = _context7.sent;
                       modal.onDidDismiss().then(function (d) {
                         if (d.data == true) {
-                          _this9.marubozuService.get("intraday").subscribe(function (r) {
-                            _this9.intraday = r.data;
+                          _this10.marubozuService.get("intraday").subscribe(function (r) {
+                            _this10.intraday = r.data;
 
-                            _this9.intraday.reverse();
+                            _this10.intraday.reverse();
                           });
                         }
                       });
-                      _context6.next = 6;
+                      _context7.next = 6;
                       return modal.present();
 
                     case 6:
-                      return _context6.abrupt("return", _context6.sent);
-
-                    case 7:
-                    case "end":
-                      return _context6.stop();
-                  }
-                }
-              }, _callee6, this);
-            }));
-          }
-        }, {
-          key: "openPostModal",
-          value: function openPostModal(intraDay) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-              var modal;
-              return regeneratorRuntime.wrap(function _callee7$(_context7) {
-                while (1) {
-                  switch (_context7.prev = _context7.next) {
-                    case 0:
-                      _context7.next = 2;
-                      return this.modalController.create({
-                        component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_6__["ModalPostComponent"],
-                        componentProps: {
-                          blog: intraDay
-                        }
-                      });
-
-                    case 2:
-                      modal = _context7.sent;
-                      _context7.next = 5;
-                      return modal.present();
-
-                    case 5:
                       return _context7.abrupt("return", _context7.sent);
 
-                    case 6:
+                    case 7:
                     case "end":
                       return _context7.stop();
                   }
                 }
               }, _callee7, this);
+            }));
+          }
+        }, {
+          key: "openPostModal",
+          value: function openPostModal(intraDay) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+              var modal;
+              return regeneratorRuntime.wrap(function _callee8$(_context8) {
+                while (1) {
+                  switch (_context8.prev = _context8.next) {
+                    case 0:
+                      _context8.next = 2;
+                      return this.modalController.create({
+                        component: src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_6__["ModalPostComponent"],
+                        componentProps: {
+                          post: intraDay
+                        }
+                      });
+
+                    case 2:
+                      modal = _context8.sent;
+                      _context8.next = 5;
+                      return modal.present();
+
+                    case 5:
+                      return _context8.abrupt("return", _context8.sent);
+
+                    case 6:
+                    case "end":
+                      return _context8.stop();
+                  }
+                }
+              }, _callee8, this);
             }));
           }
         }, {

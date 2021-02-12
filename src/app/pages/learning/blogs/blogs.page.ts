@@ -42,10 +42,10 @@ export class BlogsPage implements OnInit {
 		});
 		return await modal.present();
 	}
-	async openPostModal(blog) {
+	async openPostModal(post) {
 		const modal = await this.modalController.create({
 			component: ModalPostComponent,
-			componentProps: { blog },
+			componentProps: { post },
 		});
 		return await modal.present();
 	}

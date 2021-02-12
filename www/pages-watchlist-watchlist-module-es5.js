@@ -224,38 +224,51 @@
         }, {
           key: "getWatchlists",
           value: function getWatchlists(spinner) {
-            var _this = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var _this = this;
 
-            if (spinner == true) this.spinner = true;
-            this.userService.getSettings().subscribe(function (r) {
-              var datatype = r.data.datatype;
-              if (datatype == "simulated") _this.watchlistService.getSimulatedWatchlists().subscribe(function (r) {
-                _this.isSimualted = true;
-                _this.watchlists = [];
-                _this.watchlists = r.data;
-                console.log('simulated', r);
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      if (spinner == true) this.spinner = true;
+                      this.userService.getSettings().subscribe(function (r) {
+                        var datatype = r.data.datatype;
+                        if (datatype == "simulated") _this.watchlistService.getSimulatedWatchlists().subscribe(function (r) {
+                          _this.isSimualted = true;
+                          _this.watchlists = [];
+                          _this.watchlists = r.data;
+                          console.log('simulated', r);
 
-                _this.moveInArray();
+                          _this.moveInArray();
 
-                _this.updateLtp()["finally"](function () {
-                  _this.dataLoaded = true;
-                  _this.spinner = false;
-                });
-              });
-              if (datatype == "realtime") _this.watchlistService.getRealtimeWatchlists().subscribe(function (r) {
-                _this.isSimualted = false;
-                _this.watchlists = [];
-                _this.watchlists = r.data;
-                console.log('realTime', r);
+                          _this.updateLtp()["finally"](function () {
+                            _this.dataLoaded = true;
+                            _this.spinner = false;
+                          });
+                        });
+                        if (datatype == "realtime") _this.watchlistService.getRealtimeWatchlists().subscribe(function (r) {
+                          _this.isSimualted = false;
+                          _this.watchlists = [];
+                          _this.watchlists = r.data;
+                          console.log('realTime', r);
 
-                _this.moveInArray();
+                          _this.moveInArray();
 
-                _this.updateLtp()["finally"](function () {
-                  _this.dataLoaded = true;
-                  _this.spinner = false;
-                });
-              });
-            });
+                          _this.updateLtp()["finally"](function () {
+                            _this.dataLoaded = true;
+                            _this.spinner = false;
+                          });
+                        });
+                      });
+
+                    case 2:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
           }
         }, {
           key: "subscribeToStockSocket",
@@ -279,12 +292,12 @@
           value: function updateLtp() {
             var _a;
 
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
               var _this3 = this;
 
-              return regeneratorRuntime.wrap(function _callee$(_context) {
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
-                  switch (_context.prev = _context.next) {
+                  switch (_context2.prev = _context2.next) {
                     case 0:
                       this.unsubscribeFromSockets();
                       this.selectedWatchlistId = (_a = this.watchlists[this.selectedWatchlist]) === null || _a === void 0 ? void 0 : _a._id;
@@ -302,10 +315,10 @@
 
                     case 3:
                     case "end":
-                      return _context.stop();
+                      return _context2.stop();
                   }
                 }
-              }, _callee, this);
+              }, _callee2, this);
             }));
           }
         }, {
@@ -319,47 +332,8 @@
         }, {
           key: "openCompaniesModal",
           value: function openCompaniesModal(id) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var _this4 = this;
-
-              var modal;
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      _context2.next = 2;
-                      return this.modalController.create({
-                        component: src_app_modals_modal_watchlist_modal_watchlist_component__WEBPACK_IMPORTED_MODULE_8__["ModalWatchlistComponent"],
-                        componentProps: {
-                          selectedWatchlist: id
-                        }
-                      });
-
-                    case 2:
-                      modal = _context2.sent;
-                      modal.onDidDismiss().then(function (d) {
-                        console.log(d);
-                        if (!_this4.isSimualted) d.data == true && _this4.getWatchlists(true);
-                      });
-                      _context2.next = 6;
-                      return modal.present();
-
-                    case 6:
-                      return _context2.abrupt("return", _context2.sent);
-
-                    case 7:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2, this);
-            }));
-          }
-        }, {
-          key: "openWatchlistModal",
-          value: function openWatchlistModal(isEdit) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              var _this5 = this;
+              var _this4 = this;
 
               var modal;
               return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -368,17 +342,17 @@
                     case 0:
                       _context3.next = 2;
                       return this.modalController.create({
-                        component: src_app_modals_modal_watchlist_ce_modal_watchlist_ce_component__WEBPACK_IMPORTED_MODULE_7__["ModalWatchlistCeComponent"],
+                        component: src_app_modals_modal_watchlist_modal_watchlist_component__WEBPACK_IMPORTED_MODULE_8__["ModalWatchlistComponent"],
                         componentProps: {
-                          isEdit: isEdit,
-                          selectedWatchlist: this.watchlists[this.selectedWatchlist]
+                          selectedWatchlist: id
                         }
                       });
 
                     case 2:
                       modal = _context3.sent;
                       modal.onDidDismiss().then(function (d) {
-                        if (!_this5.isSimualted) d.data == true && _this5.getWatchlists(true);
+                        console.log(d);
+                        if (!_this4.isSimualted) d.data == true && _this4.getWatchlists(true);
                       });
                       _context3.next = 6;
                       return modal.present();
@@ -395,15 +369,54 @@
             }));
           }
         }, {
-          key: "openBuySellModal",
-          value: function openBuySellModal(stock) {
+          key: "openWatchlistModal",
+          value: function openWatchlistModal(isEdit) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              var _this5 = this;
+
               var modal;
               return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
                   switch (_context4.prev = _context4.next) {
                     case 0:
                       _context4.next = 2;
+                      return this.modalController.create({
+                        component: src_app_modals_modal_watchlist_ce_modal_watchlist_ce_component__WEBPACK_IMPORTED_MODULE_7__["ModalWatchlistCeComponent"],
+                        componentProps: {
+                          isEdit: isEdit,
+                          selectedWatchlist: this.watchlists[this.selectedWatchlist]
+                        }
+                      });
+
+                    case 2:
+                      modal = _context4.sent;
+                      modal.onDidDismiss().then(function (d) {
+                        if (!_this5.isSimualted) d.data == true && _this5.getWatchlists(true);
+                      });
+                      _context4.next = 6;
+                      return modal.present();
+
+                    case 6:
+                      return _context4.abrupt("return", _context4.sent);
+
+                    case 7:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4, this);
+            }));
+          }
+        }, {
+          key: "openBuySellModal",
+          value: function openBuySellModal(stock) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var modal;
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                while (1) {
+                  switch (_context5.prev = _context5.next) {
+                    case 0:
+                      _context5.next = 2;
                       return this.modalController.create({
                         component: src_app_modals_buy_sell_modal_popup_buy_sell_modal_popup_component__WEBPACK_IMPORTED_MODULE_5__["BuySellModalPopupComponent"],
                         componentProps: {
@@ -413,54 +426,54 @@
                       });
 
                     case 2:
-                      modal = _context4.sent;
-                      _context4.next = 5;
+                      modal = _context5.sent;
+                      _context5.next = 5;
                       return modal.present();
 
                     case 5:
-                      return _context4.abrupt("return", _context4.sent);
-
-                    case 6:
-                    case "end":
-                      return _context4.stop();
-                  }
-                }
-              }, _callee4, this);
-            }));
-          }
-        }, {
-          key: "openManageWatchlists",
-          value: function openManageWatchlists() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var _this6 = this;
-
-              var modal;
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
-                while (1) {
-                  switch (_context5.prev = _context5.next) {
-                    case 0:
-                      _context5.next = 2;
-                      return this.modalController.create({
-                        component: src_app_modals_modal_edit_watchlists_modal_edit_watchlists_component__WEBPACK_IMPORTED_MODULE_6__["ModalEditWatchlistsComponent"]
-                      });
-
-                    case 2:
-                      modal = _context5.sent;
-                      modal.onDidDismiss().then(function (d) {
-                        if (!_this6.isSimualted) d.data == true && _this6.getWatchlists(true);
-                      });
-                      _context5.next = 6;
-                      return modal.present();
-
-                    case 6:
                       return _context5.abrupt("return", _context5.sent);
 
-                    case 7:
+                    case 6:
                     case "end":
                       return _context5.stop();
                   }
                 }
               }, _callee5, this);
+            }));
+          }
+        }, {
+          key: "openManageWatchlists",
+          value: function openManageWatchlists() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              var _this6 = this;
+
+              var modal;
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                while (1) {
+                  switch (_context6.prev = _context6.next) {
+                    case 0:
+                      _context6.next = 2;
+                      return this.modalController.create({
+                        component: src_app_modals_modal_edit_watchlists_modal_edit_watchlists_component__WEBPACK_IMPORTED_MODULE_6__["ModalEditWatchlistsComponent"]
+                      });
+
+                    case 2:
+                      modal = _context6.sent;
+                      modal.onDidDismiss().then(function (d) {
+                        if (!_this6.isSimualted) d.data == true && _this6.getWatchlists(true);
+                      });
+                      _context6.next = 6;
+                      return modal.present();
+
+                    case 6:
+                      return _context6.abrupt("return", _context6.sent);
+
+                    case 7:
+                    case "end":
+                      return _context6.stop();
+                  }
+                }
+              }, _callee6, this);
             }));
           }
         }, {
@@ -476,48 +489,8 @@
         }, {
           key: "watchlistTitleActionSheet",
           value: function watchlistTitleActionSheet() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-              var _this7 = this;
-
-              var actionSheet;
-              return regeneratorRuntime.wrap(function _callee6$(_context6) {
-                while (1) {
-                  switch (_context6.prev = _context6.next) {
-                    case 0:
-                      _context6.next = 2;
-                      return this.actionSheetController.create({
-                        header: "Watchlist control panel",
-                        buttons: [{
-                          text: "Manage",
-                          icon: "cog",
-                          handler: function handler() {
-                            _this7.openManageWatchlists();
-                          }
-                        }, {
-                          text: "Cancel",
-                          icon: "close",
-                          role: "cancel"
-                        }]
-                      });
-
-                    case 2:
-                      actionSheet = _context6.sent;
-                      _context6.next = 5;
-                      return actionSheet.present();
-
-                    case 5:
-                    case "end":
-                      return _context6.stop();
-                  }
-                }
-              }, _callee6, this);
-            }));
-          }
-        }, {
-          key: "watchlistEditActionSheet",
-          value: function watchlistEditActionSheet() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-              var _this8 = this;
+              var _this7 = this;
 
               var actionSheet;
               return regeneratorRuntime.wrap(function _callee7$(_context7) {
@@ -526,25 +499,12 @@
                     case 0:
                       _context7.next = 2;
                       return this.actionSheetController.create({
-                        header: "Watchlist manage panel",
+                        header: "Watchlist control panel",
                         buttons: [{
-                          text: "Edit",
-                          icon: "create-outline",
+                          text: "Manage",
+                          icon: "cog",
                           handler: function handler() {
-                            _this8.openWatchlistModal(true);
-                          }
-                        }, {
-                          text: "Delete",
-                          role: "destructive",
-                          icon: "trash-outline",
-                          handler: function handler() {
-                            _this8.watchlistService.deleteWatchlist(_this8.watchlists[_this8.selectedWatchlist]._id).subscribe(function (r) {
-                              console.log("delete", r);
-
-                              _this8.presentSuccessToast('Watchlist successfuly deleted');
-
-                              _this8.getWatchlists(true);
-                            });
+                            _this7.openManageWatchlists();
                           }
                         }, {
                           text: "Cancel",
@@ -567,25 +527,49 @@
             }));
           }
         }, {
-          key: "presentSuccessToast",
-          value: function presentSuccessToast(message) {
+          key: "watchlistEditActionSheet",
+          value: function watchlistEditActionSheet() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-              var toast;
+              var _this8 = this;
+
+              var actionSheet;
               return regeneratorRuntime.wrap(function _callee8$(_context8) {
                 while (1) {
                   switch (_context8.prev = _context8.next) {
                     case 0:
                       _context8.next = 2;
-                      return this.toastCtrl.create({
-                        message: message,
-                        duration: 2500,
-                        color: "success"
+                      return this.actionSheetController.create({
+                        header: "Watchlist manage panel",
+                        buttons: [{
+                          text: "Edit",
+                          icon: "create-outline",
+                          handler: function handler() {
+                            _this8.openWatchlistModal(true);
+                          }
+                        }, {
+                          text: "Delete",
+                          role: "destructive",
+                          icon: "trash-outline",
+                          handler: function handler() {
+                            _this8.watchlistService.deleteWatchlist(_this8.watchlists[_this8.selectedWatchlist]._id).subscribe(function (r) {
+                              console.log("delete", r);
+
+                              _this8.getWatchlists(true).then(function () {
+                                _this8.presentSuccessToast('Watchlist successfuly deleted');
+                              });
+                            });
+                          }
+                        }, {
+                          text: "Cancel",
+                          icon: "close",
+                          role: "cancel"
+                        }]
                       });
 
                     case 2:
-                      toast = _context8.sent;
+                      actionSheet = _context8.sent;
                       _context8.next = 5;
-                      return toast.present();
+                      return actionSheet.present();
 
                     case 5:
                     case "end":
@@ -593,6 +577,35 @@
                   }
                 }
               }, _callee8, this);
+            }));
+          }
+        }, {
+          key: "presentSuccessToast",
+          value: function presentSuccessToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee9$(_context9) {
+                while (1) {
+                  switch (_context9.prev = _context9.next) {
+                    case 0:
+                      _context9.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        duration: 2500,
+                        color: "success"
+                      });
+
+                    case 2:
+                      toast = _context9.sent;
+                      _context9.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context9.stop();
+                  }
+                }
+              }, _callee9, this);
             }));
           }
         }, {
@@ -1213,13 +1226,13 @@
         }, {
           key: "presentErrorToast",
           value: function presentErrorToast(message) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
               var toast;
-              return regeneratorRuntime.wrap(function _callee9$(_context9) {
+              return regeneratorRuntime.wrap(function _callee10$(_context10) {
                 while (1) {
-                  switch (_context9.prev = _context9.next) {
+                  switch (_context10.prev = _context10.next) {
                     case 0:
-                      _context9.next = 2;
+                      _context10.next = 2;
                       return this.toastCtrl.create({
                         message: message,
                         color: 'danger',
@@ -1227,15 +1240,15 @@
                       });
 
                     case 2:
-                      toast = _context9.sent;
+                      toast = _context10.sent;
                       toast.present();
 
                     case 4:
                     case "end":
-                      return _context9.stop();
+                      return _context10.stop();
                   }
                 }
-              }, _callee9, this);
+              }, _callee10, this);
             }));
           }
         }]);

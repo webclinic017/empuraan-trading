@@ -12,5 +12,8 @@
     <ion-label>Code</ion-label>
     <ion-input [(ngModel)]="code"></ion-input>
   </ion-item>
-  <ion-button size="block" (click)="codeCheck(email, code)">Validate my code</ion-button>
+  <ion-button size="block" (click)="codeCheck(email, code)">
+    Validate my code
+    <ion-spinner name="lines-small" color="light" *ngIf="spinner"></ion-spinner>
+  </ion-button>
 </ion-content>

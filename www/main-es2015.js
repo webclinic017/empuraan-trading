@@ -73,6 +73,19 @@ AuthGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "1fgy":
+/*!*************************************************************!*\
+  !*** ./src/app/modals/modal-post/modal-post.component.scss ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("@media screen and (max-width: 360px) {\n  ion-title {\n    font-size: 15px !important;\n  }\n\n  ion-text {\n    font-size: 13px !important;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kYWxzL21vZGFsLXBvc3QvbW9kYWwtcG9zdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJO0lBQ0UsMEJBQUE7RUFDSjs7RUFDRTtJQUNFLDBCQUFBO0VBRUo7QUFDRiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9tb2RhbC1wb3N0L21vZGFsLXBvc3QuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAzNjBweCkge1xuICAgIGlvbi10aXRsZXtcbiAgICAgIGZvbnQtc2l6ZToxNXB4ICFpbXBvcnRhbnQ7XG4gICAgfVxuICAgIGlvbi10ZXh0e1xuICAgICAgZm9udC1zaXplOiAxM3B4ICFpbXBvcnRhbnQ7XG4gICAgfVxufSJdfQ== */");
+
+/***/ }),
+
 /***/ "1r9f":
 /*!***************************************************************************!*\
   !*** ./src/app/modals/modal-watchlist-ce/modal-watchlist-ce.component.ts ***!
@@ -469,7 +482,8 @@ let MarubozuService = class MarubozuService {
             formData.append("image", blobData, `${name}.${ext}`);
         formData.append("title", title);
         formData.append("content", content);
-        formData.append("stockname", stockname);
+        if (key != 'blog')
+            formData.append("stockname", stockname);
         return this.http.post(`${this.apiUrl}${key}`, formData);
         // return this.http.post(this.apiUrl + 'blog', {title, content, image})
     }
@@ -479,7 +493,8 @@ let MarubozuService = class MarubozuService {
         formData.append("image", file, `${file.name}.${ext}`);
         formData.append("title", title);
         formData.append("content", content);
-        formData.append("stockname", stockname);
+        if (key != 'blog')
+            formData.append("stockname", stockname);
         return this.http.post(`${this.apiUrl}${key}`, formData);
         // return this.http.post(this.apiUrl + key, {title, content, stockname, image})
     }
@@ -506,7 +521,20 @@ MarubozuService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Search Companies</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content vertical=\"top\" style=\"display: flex; flex-direction: column; align-items: center;\">\n\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filter($event.detail.value)\"></ion-searchbar>\n\t<ion-list>\n\t\t<ion-item *ngFor=\"let s of filteredData || stocks\">\n\t\t\t<ion-label>\n\t\t\t\t<div style=\"display: flex; align-items: center;\">\n\t\t\t\t\t<span style=\"padding:5px 0\">{{ s.companyName }}</span>\n\t\t\t\t\t<ion-spinner *ngIf=\"!s.isLoaded\" name=\"lines-small\" class=\"ion-padding-start\"></ion-spinner>\n\t\t\t\t</div>\n\t\t\t</ion-label>\n\t\t\t<ion-checkbox\n\t\t\t\tslot=\"end\"\n\t\t\t\t[checked]=\"seeIfChecked(s)\"\n\t\t\t\t(ionChange)=\"onSelect($event.detail.checked, s)\"\n\t\t\t></ion-checkbox>\n\t\t</ion-item>\n\t</ion-list>\n\t<div style=\"width: 100%; display: flex; align-items: center; justify-content: center;\">\n\t\t<ion-spinner *ngIf=\"spinner\" name=\"lines-small\" class=\"ion-margin\"></ion-spinner>\n\t</div>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Search Companies</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content vertical=\"top\" style=\"display: flex; flex-direction: column; align-items: center;\">\n\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filter($event.detail.value)\"></ion-searchbar>\n\t<ion-list>\n\t\t<ion-item *ngFor=\"let s of filteredData || stocks\">\n\t\t\t<ion-label>\n\t\t\t\t<div style=\"display: flex; align-items: center;\">\n\t\t\t\t\t<span style=\"padding:5px 0\">{{ s.companyName }}</span>\n\t\t\t\t\t<ion-spinner *ngIf=\"s.isLoaded == false\" name=\"lines-small\" class=\"ion-padding-start\"></ion-spinner>\n\t\t\t\t</div>\n\t\t\t</ion-label>\n\t\t\t<ion-checkbox\n\t\t\t\tslot=\"end\"\n\t\t\t\t[checked]=\"seeIfChecked(s)\"\n\t\t\t\t(click)=\"onSelect($event, s)\"\n\t\t\t></ion-checkbox>\n\t\t</ion-item>\n\t</ion-list>\n\t<div style=\"width: 100%; display: flex; align-items: center; justify-content: center;\">\n\t\t<ion-spinner *ngIf=\"spinner\" name=\"lines-small\" class=\"ion-margin\"></ion-spinner>\n\t</div>\n</ion-content>\n");
+
+/***/ }),
+
+/***/ "EqF1":
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/modal-post/modal-post.component.html ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>{{ post.title }}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content style=\"display: flex; flex-direction: column\">\n\t<!-- <h4 class=\"ion-padding-horizontal\"></h4> -->\n\t<ion-img *ngIf=\"post.image != null || post.image != undefined\" [src]=\"post.image\" class=\"ion-margin\"></ion-img>\n\t<span class=\"ion-padding\">{{ post.content }}</span>\n</ion-content>\n");
 
 /***/ }),
 
@@ -588,9 +616,9 @@ let ModalChangePasswordComponent = class ModalChangePasswordComponent {
         this.spinner = true;
         if (input.newPassword != "" || input.confirmPassword != "") {
             if (input.newPassword == input.confirmPassword) {
-                this.userService.changePassword(this.user.email, input.newPassword).subscribe(() => { }, (err) => {
+                const email = this.email != null ? this.email : this.user.email;
+                this.userService.changePassword(email, input.newPassword).subscribe(() => { }, (err) => {
                     this.spinner = false;
-                    console.log(err);
                     this.presentErrorToast(err);
                 }, () => {
                     this.spinner = false;
@@ -634,6 +662,9 @@ ModalChangePasswordComponent.ctorParameters = () => [
     { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"] }
 ];
+ModalChangePasswordComponent.propDecorators = {
+    email: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['email',] }]
+};
 ModalChangePasswordComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: "app-modal-change-password",
@@ -780,6 +811,55 @@ ModalEditOrderComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
 
 /***/ }),
 
+/***/ "N+8n":
+/*!***********************************************************!*\
+  !*** ./src/app/modals/modal-post/modal-post.component.ts ***!
+  \***********************************************************/
+/*! exports provided: ModalPostComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalPostComponent", function() { return ModalPostComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_modal_post_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./modal-post.component.html */ "EqF1");
+/* harmony import */ var _modal_post_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal-post.component.scss */ "1fgy");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+
+
+
+
+
+let ModalPostComponent = class ModalPostComponent {
+    constructor(modalCtrl) {
+        this.modalCtrl = modalCtrl;
+    }
+    ngOnInit() {
+        console.log(this.post.image);
+    }
+    dismissModal() {
+        this.modalCtrl.dismiss();
+    }
+};
+ModalPostComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] }
+];
+ModalPostComponent.propDecorators = {
+    post: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }]
+};
+ModalPostComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-modal-post',
+        template: _raw_loader_modal_post_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_modal_post_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], ModalPostComponent);
+
+
+
+/***/ }),
+
 /***/ "Nbj3":
 /*!*********************************************************************!*\
   !*** ./src/app/modals/modal-watchlist/modal-watchlist.component.ts ***!
@@ -811,6 +891,7 @@ let ModalWatchlistComponent = class ModalWatchlistComponent {
         this.stockService = stockService;
     }
     ngOnInit() {
+        this.i = 0;
         this.spinner = true;
         this.stockService.getStocks().subscribe((s) => {
             this.stocks = s.data;
@@ -821,33 +902,41 @@ let ModalWatchlistComponent = class ModalWatchlistComponent {
         });
     }
     dismissModal() {
-        this.modalCtrl.dismiss(this.changeOfWatchlist);
+        const v = this.changeOfWatchlist;
         this.changeOfWatchlist = false;
+        this.modalCtrl.dismiss(v);
     }
     onSelect(event, stock) {
-        const sIndex = this.stocks.indexOf(this.stocks.find(s => s._id == stock._id));
-        this.stocks[sIndex].isLoaded = false;
-        if (event == true) {
-            this.watchlistService.addToWatchlist(this.selectedWatchlist, stock._id).subscribe(() => {
-                this.stocks[sIndex].isLoaded = true;
-            });
+        const e = event.detail.checked;
+        if (e != null || e != undefined) {
+            const sIndex = this.stocks.indexOf(this.stocks.find((s) => s._id == stock._id));
+            this.stocks[sIndex].isLoaded = false;
+            if (e == true) {
+                this.watchlistService.addToWatchlist(this.selectedWatchlist, stock._id).subscribe(() => {
+                    this.stocks[sIndex].isLoaded = true;
+                });
+            }
+            else if (e == false) {
+                this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock._id).subscribe(() => {
+                    this.stocks[sIndex].isLoaded = true;
+                });
+            }
+            this.changeOfWatchlist = true;
         }
-        else if (event == false) {
-            this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock._id).subscribe(() => {
-                this.stocks[sIndex].isLoaded = true;
-            });
-        }
-        this.changeOfWatchlist = true;
     }
     filter(filterValue) {
-        this.filteredData = this.stocks.filter(stock => stock.companyName.toLowerCase().includes(filterValue.toLowerCase()));
+        this.filteredData = this.stocks.filter((stock) => stock.companyName.toLowerCase().includes(filterValue.toLowerCase()));
     }
     seeIfChecked(stock) {
         var _a, _b;
-        if (((_a = this.sWatchlist) === null || _a === void 0 ? void 0 : _a.stockIds.length) > 0)
-            return (_b = this.sWatchlist) === null || _b === void 0 ? void 0 : _b.stockIds.find(s => s.id == stock._id);
+        if (((_a = this.sWatchlist) === null || _a === void 0 ? void 0 : _a.stockIds.length) > 0) {
+            const v = (_b = this.sWatchlist) === null || _b === void 0 ? void 0 : _b.stockIds.find((s) => s.id == stock._id);
+            if (v != null || v != undefined) {
+                return true;
+            }
+        }
         else
-            false;
+            return false;
     }
 };
 ModalWatchlistComponent.ctorParameters = () => [
@@ -860,7 +949,7 @@ ModalWatchlistComponent.propDecorators = {
 };
 ModalWatchlistComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-modal-watchlist',
+        selector: "app-modal-watchlist",
         template: _raw_loader_modal_watchlist_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_modal_watchlist_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
     })
@@ -1191,6 +1280,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./modals/modal-upload-post/modal-upload-post.component */ "x7KT");
 /* harmony import */ var _modals_modal_fp_code_check_modal_fp_code_check_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./modals/modal-fp-code-check/modal-fp-code-check.component */ "bzO4");
 /* harmony import */ var _modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./modals/modal-fp-email/modal-fp-email.component */ "nJHT");
+/* harmony import */ var _modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./modals/modal-post/modal-post.component */ "N+8n");
+
 
 
 
@@ -1247,7 +1338,8 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _modals_modal_withdraw_add_funds_modal_withdraw_add_funds_component__WEBPACK_IMPORTED_MODULE_30__["ModalWithdrawAddFundsComponent"],
             _modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_35__["ModalUploadPostComponent"],
             _modals_modal_fp_code_check_modal_fp_code_check_component__WEBPACK_IMPORTED_MODULE_36__["ModalFpCodeCheckComponent"],
-            _modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_37__["ModalFpEmailComponent"]
+            _modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_37__["ModalFpEmailComponent"],
+            _modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_38__["ModalPostComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
@@ -1318,39 +1410,66 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ModalFpCodeCheckComponent = class ModalFpCodeCheckComponent {
-    constructor(modalCtrl, userService) {
+    constructor(modalCtrl, userService, toastCtrl) {
         this.modalCtrl = modalCtrl;
         this.userService = userService;
+        this.toastCtrl = toastCtrl;
     }
-    ngOnInit() { }
+    ngOnInit() {
+        this.spinner = false;
+        this.code = "";
+    }
     dismissModal() {
         this.modalCtrl.dismiss();
     }
     codeCheck(email, code) {
-        // this.userService.checkCodeValid(email, code).subscribe(r => {
-        this.dismissModal();
-        this.openChangePasswordModal();
-        // })
+        this.spinner = true;
+        if (typeof code != "undefined" && code) {
+            this.userService.checkCodeValid(email, code).subscribe((r) => {
+                this.openChangePasswordModal(email);
+                this.dismissModal();
+                this.spinner = false;
+            }, () => {
+                this.presentErrorToast("Code is incorrect.");
+                this.spinner = false;
+            });
+        }
+        else {
+            this.presentErrorToast("Enter the code you've received.");
+            this.spinner = false;
+        }
     }
-    openChangePasswordModal() {
+    openChangePasswordModal(email) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const modal = yield this.modalCtrl.create({
-                component: _modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_6__["ModalChangePasswordComponent"]
+                component: _modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_6__["ModalChangePasswordComponent"],
+                componentProps: { email }
             });
             return yield modal.present();
+        });
+    }
+    presentErrorToast(message) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const modal = yield this.toastCtrl.create({
+                message,
+                color: "danger",
+                duration: 2500,
+            });
+            yield modal.present();
         });
     }
 };
 ModalFpCodeCheckComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
-    { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] }
+    { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"] }
 ];
 ModalFpCodeCheckComponent.propDecorators = {
-    email: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['email',] }]
+    email: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ["email",] }]
 };
 ModalFpCodeCheckComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-modal-fp-code-check',
+        selector: "app-modal-fp-code-check",
         template: _raw_loader_modal_fp_code_check_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_modal_fp_code_check_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
     })
@@ -1369,7 +1488,7 @@ ModalFpCodeCheckComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorat
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Upload post</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<form #postForm=\"ngForm\">\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Post title</ion-label>\n\t\t\t\t\t\t<ion-input name=\"title\" ngModel required maxlength=100></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Stock Name</ion-label>\n\t\t\t\t\t\t<ion-input name=\"stockname\" ngModel required maxlength=100></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Content</ion-label>\n\t\t\t\t\t\t<ion-textarea name=\"content\" ngModel required maxlength=255></ion-textarea>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col size=\"6\">\n\t\t\t\t\t<ion-button color=\"success\" class=\"post-button\" expand=\"block\" (click)=\"selectImageSource()\">\n\t\t\t\t\t\t<ion-icon name=\"attach-outline\"></ion-icon>\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t\t<ion-col size=\"6\">\n\t\t\t\t\t<ion-button expand=\"block\" class=\"post-button\" (click)=\"uploadFile(postForm)\">Post</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col size=\"6\" *ngFor=\"let img of images; let i = index\" class=\"ion-text-center\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<!-- <p>{{ img.createdAt | date: \"short\" }}</p> -->\n\t\t\t\t\t</ion-label>\n\t\t\t\t\t<ion-img [src]=\"img.url\" [alt]=\"img\"></ion-img>\n\t\t\t\t\t<ion-fab vertical=\"bottom\" horizontal=\"end\">\n\t\t\t\t\t\t<ion-fab-button color=\"danger\" size=\"small\" (click)=\"deleteImage(i)\">\n\t\t\t\t\t\t\t<ion-icon name=\"trash-outline\"></ion-icon>\n\t\t\t\t\t\t</ion-fab-button>\n\t\t\t\t\t</ion-fab>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Upload post</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<form #postForm=\"ngForm\">\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Post title</ion-label>\n\t\t\t\t\t\t<ion-input name=\"title\" ngModel required maxlength=100></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row *ngIf=\"blog == false\">\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Stock Name</ion-label>\n\t\t\t\t\t\t<ion-input name=\"stockname\" ngModel required maxlength=100></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Content</ion-label>\n\t\t\t\t\t\t<ion-textarea name=\"content\" ngModel required maxlength=255></ion-textarea>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col size=\"6\">\n\t\t\t\t\t<ion-button color=\"success\" class=\"post-button\" expand=\"block\" (click)=\"selectImageSource()\">\n\t\t\t\t\t\t<ion-icon name=\"attach-outline\"></ion-icon>\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t\t<ion-col size=\"6\">\n\t\t\t\t\t<ion-button expand=\"block\" class=\"post-button\" (click)=\"uploadFile(postForm)\">\n\t\t\t\t\t\tPost\n\t\t\t\t\t\t<ion-spinner name=\"lines-small\" class=\"ion-padding-start\" *ngIf=\"spinner\"></ion-spinner>\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col size=\"6\" *ngFor=\"let img of images; let i = index\" class=\"ion-text-center\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<!-- <p>{{ img.createdAt | date: \"short\" }}</p> -->\n\t\t\t\t\t</ion-label>\n\t\t\t\t\t<ion-img [src]=\"img.url\" [alt]=\"img\"></ion-img>\n\t\t\t\t\t<ion-fab vertical=\"bottom\" horizontal=\"end\">\n\t\t\t\t\t\t<ion-fab-button color=\"danger\" size=\"small\" (click)=\"deleteImage(i)\">\n\t\t\t\t\t\t\t<ion-icon name=\"trash-outline\"></ion-icon>\n\t\t\t\t\t\t</ion-fab-button>\n\t\t\t\t\t</ion-fab>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n");
 
 /***/ }),
 
@@ -1469,7 +1588,7 @@ JwtInterceptor = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Code Validation</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"dismissModal()\">Close</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n  <ion-label class=\"ion-margin-vertical ion-no-padding\">Enter the code that you've recieved on {{email}}</ion-label>\n  <ion-item class=\"ion-no-padding ion-margin-vertical\">\n    <ion-label>Code</ion-label>\n    <ion-input [(ngModel)]=\"code\"></ion-input>\n  </ion-item>\n  <ion-button size=\"block\" (click)=\"codeCheck(email, code)\">Validate my code</ion-button>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Code Validation</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"dismissModal()\">Close</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n  <ion-label class=\"ion-margin-vertical ion-no-padding\">Enter the code that you've recieved on {{email}}</ion-label>\n  <ion-item class=\"ion-no-padding ion-margin-vertical\">\n    <ion-label>Code</ion-label>\n    <ion-input [(ngModel)]=\"code\"></ion-input>\n  </ion-item>\n  <ion-button size=\"block\" (click)=\"codeCheck(email, code)\">\n    Validate my code\n    <ion-spinner name=\"lines-small\" color=\"light\" *ngIf=\"spinner\"></ion-spinner>\n  </ion-button>\n</ion-content>");
 
 /***/ }),
 
@@ -1910,9 +2029,11 @@ let ModalFpEmailComponent = class ModalFpEmailComponent {
             if (this.checkIfEmailInString(email)) {
                 this.userService.emailExists(this.email).subscribe((r) => {
                     this.spinner = false;
-                    console.log(r);
                     this.dismissModal();
                     this.openCodeCheckModal(email);
+                }, () => {
+                    this.spinner = false;
+                    this.presentErrorToast('Email does not exist.');
                 });
             }
             else {
@@ -2020,7 +2141,7 @@ let UserService = class UserService {
                 balance: {
                     availableBal: 0,
                     openBal: 0,
-                }
+                },
             };
             this.authenticate(user, res.jwt);
             this.decodedToken = this.decodeToken(res.jwt);
@@ -2031,28 +2152,38 @@ let UserService = class UserService {
         return this.http.post(this.apiUrl + "signup", input);
     }
     googleAuth(idToken) {
-        const httpOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Authorization': `Bearer ${idToken}` })
-        };
-        return this.http.get(this.apiUrl + 'google', httpOptions);
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const user = {
+                email: idToken.email,
+                username: idToken.name,
+                balance: {
+                    availableBal: 0,
+                    openBal: 0,
+                },
+            };
+            this.authenticate(user, idToken.authentication.idToken);
+            console.log({ user, idToken: idToken.authentication.idToken });
+            this.decodedToken = this.decodeToken(idToken.authentication.idToken);
+            this.checkToken();
+        });
     }
     getFundsChart() {
-        return this.http.get(this.apiSettingsUrl + 'funds/records');
+        return this.http.get(this.apiSettingsUrl + "funds/records");
     }
     getLeaderboard() {
-        return this.http.get(this.apiUrl + 'leaderboard');
+        return this.http.get(this.apiUrl + "leaderboard");
     }
     accountDetails() {
-        return this.http.get(this.apiUrl + 'account');
+        return this.http.get(this.apiUrl + "account");
     }
     changePassword(email, password) {
-        return this.http.post(this.apiUrl + 'password/change', { email, password });
+        return this.http.post(this.apiUrl + "password/change", { email, password });
     }
     emailExists(email) {
-        return this.http.post(this.apiUrl + 'password/reset/emailcheck', { email });
+        return this.http.post(this.apiUrl + "password/reset/emailcheck", { email });
     }
     checkCodeValid(email, code) {
-        return this.http.post(this.apiUrl + 'password/code/check', { email, code });
+        return this.http.post(this.apiUrl + "password/code/check", { email, code });
     }
     getSettings() {
         return this.http.get(this.apiSettingsUrl);
@@ -2061,21 +2192,21 @@ let UserService = class UserService {
         return this.http.put(this.apiSettingsUrl, { id, datatype, risk, leverage: +leverage });
     }
     authenticate(user, token) {
-        return this.storage.set('token', { user, token }).then(r => {
-            localStorage.setItem('token', token);
+        return this.storage.set("token", { user, token }).then((r) => {
+            localStorage.setItem("token", token);
             this.authenticated.next({ user, token });
         });
     }
     getUserFromToken() {
         let user;
-        this.storage.get('token').then(r => {
+        this.storage.get("token").then((r) => {
             if (r)
                 user = r.user;
         });
         return user;
     }
     checkToken() {
-        return this.storage.get('token').then(r => {
+        return this.storage.get("token").then((r) => {
             if (r) {
                 this.authenticated.next(r);
                 this.user.next(r.user);
@@ -2084,27 +2215,25 @@ let UserService = class UserService {
     }
     logout() {
         this.user.next(null);
-        localStorage.removeItem('token');
-        return this.storage.remove('token').then(r => this.authenticated.next(false));
+        localStorage.removeItem("token");
+        return this.storage.remove("token").then((r) => this.authenticated.next(false));
     }
     add(amount) {
-        this.user.subscribe(u => {
+        this.user.subscribe((u) => {
             u.balance.openBal += amount;
             u.balance.availableBal += amount;
         });
     }
     withdraw(amount) {
-        this.user.subscribe(u => {
-            if ((u.balance.openBal - amount) >= 0)
+        this.user.subscribe((u) => {
+            if (u.balance.openBal - amount >= 0)
                 u.balance.openBal -= amount;
-            if ((u.balance.availableBal - amount) >= 0)
+            if (u.balance.availableBal - amount >= 0)
                 u.balance.availableBal -= amount;
         });
     }
     checkIfIsOnLoginOrSignUpPage(link) {
-        link.includes('login') || link.includes('sign-up')
-            ? this.isOnLoginOrSignUpPage.next(true)
-            : this.isOnLoginOrSignUpPage.next(false);
+        link.includes("login") || link.includes("sign-up") ? this.isOnLoginOrSignUpPage.next(true) : this.isOnLoginOrSignUpPage.next(false);
     }
 };
 UserService.ctorParameters = () => [
@@ -2114,7 +2243,7 @@ UserService.ctorParameters = () => [
 ];
 UserService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
-        providedIn: 'root'
+        providedIn: "root",
     })
 ], UserService);
 
@@ -2159,6 +2288,9 @@ let ModalEditWatchlistsComponent = class ModalEditWatchlistsComponent {
     ngOnInit() {
         this.spinner = false;
         this.dataLoaded = false;
+        this.getWatchlists();
+    }
+    getWatchlists() {
         this.userService.getSettings().subscribe((r) => {
             const datatype = r.data.datatype;
             if (datatype == "simulated")
@@ -2187,10 +2319,11 @@ let ModalEditWatchlistsComponent = class ModalEditWatchlistsComponent {
                 this.spinner = false;
                 this.presentSuccessToast(`"${this.watchlistName}" was successfuly created.`);
                 this.watchlistName = "";
+                this.getWatchlists();
             });
         }
         else
-            this.presentErrorToast('Input field is empty.');
+            this.presentErrorToast("Input field is empty.");
     }
     drop(event) {
         Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_3__["moveItemInArray"])(this.watchlists, event.previousIndex, event.currentIndex);
@@ -2387,10 +2520,13 @@ let ModalUploadPostComponent = class ModalUploadPostComponent {
         this.toastCtrl = toastCtrl;
         this.intraDay = false;
         this.positional = false;
+        this.blog = false;
         this.demoTrading = false;
         this.images = [];
     }
-    ngOnInit() { }
+    ngOnInit() {
+        this.spinner = false;
+    }
     dismissModal(val) {
         this.modalCtrl.dismiss(val);
     }
@@ -2445,6 +2581,7 @@ let ModalUploadPostComponent = class ModalUploadPostComponent {
     uploadFile(postForm) {
         let image = this.images[0];
         if (postForm.valid) {
+            this.spinner = true;
             const title = postForm.value.title;
             const content = postForm.value.content;
             const stockName = postForm.value.stockname;
@@ -2455,19 +2592,23 @@ let ModalUploadPostComponent = class ModalUploadPostComponent {
                 key = "positional";
             else if (this.demoTrading == true)
                 key = "demotrading";
+            else if (this.blog == true)
+                key = "blog";
             if (image == undefined || image == null) {
                 this.api.createWithBlob(title, content, stockName, key).subscribe(() => {
                     this.dismissModal(true);
+                    this.spinner = false;
                 });
             }
             else {
                 this.api.createWithBlob(title, content, stockName, key, image.blobData, image.name, image.format).subscribe(() => {
                     this.dismissModal(true);
+                    this.spinner = false;
                 });
             }
         }
         else
-            console.log("something is missing!");
+            this.presentErrorToast('Something is missing.');
     }
     deleteImage(index) {
         this.images.splice(index, 1);
@@ -2487,6 +2628,16 @@ let ModalUploadPostComponent = class ModalUploadPostComponent {
         const blob = new Blob(byteArrays, { type: contentType });
         return blob;
     }
+    presentErrorToast(message) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const toast = yield this.toastCtrl.create({
+                header: message,
+                color: 'danger',
+                duration: 2500
+            });
+            yield toast.present();
+        });
+    }
 };
 ModalUploadPostComponent.ctorParameters = () => [
     { type: src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_5__["MarubozuService"] },
@@ -2498,6 +2649,7 @@ ModalUploadPostComponent.ctorParameters = () => [
 ModalUploadPostComponent.propDecorators = {
     intraDay: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
     positional: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    blog: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
     demoTrading: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
     fileInput: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ["fileInput", { static: false },] }]
 };

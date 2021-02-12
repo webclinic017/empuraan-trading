@@ -45,7 +45,7 @@ export class DemoTradingPage implements OnInit {
   async openPostModal(demotrading) {
     const modal = await this.modalController.create({
       component: ModalPostComponent,
-      componentProps: {blog: demotrading}
+      componentProps: {post: demotrading}
     });
     return await modal.present();
   }

@@ -124,6 +124,26 @@
     },
 
     /***/
+    "1fgy":
+    /*!*************************************************************!*\
+      !*** ./src/app/modals/modal-post/modal-post.component.scss ***!
+      \*************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function fgy(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "@media screen and (max-width: 360px) {\n  ion-title {\n    font-size: 15px !important;\n  }\n\n  ion-text {\n    font-size: 13px !important;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kYWxzL21vZGFsLXBvc3QvbW9kYWwtcG9zdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJO0lBQ0UsMEJBQUE7RUFDSjs7RUFDRTtJQUNFLDBCQUFBO0VBRUo7QUFDRiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9tb2RhbC1wb3N0L21vZGFsLXBvc3QuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAzNjBweCkge1xuICAgIGlvbi10aXRsZXtcbiAgICAgIGZvbnQtc2l6ZToxNXB4ICFpbXBvcnRhbnQ7XG4gICAgfVxuICAgIGlvbi10ZXh0e1xuICAgICAgZm9udC1zaXplOiAxM3B4ICFpbXBvcnRhbnQ7XG4gICAgfVxufSJdfQ== */";
+      /***/
+    },
+
+    /***/
     "1r9f":
     /*!***************************************************************************!*\
       !*** ./src/app/modals/modal-watchlist-ce/modal-watchlist-ce.component.ts ***!
@@ -788,7 +808,7 @@
             if (blobData != null || blobData != undefined) formData.append("image", blobData, "".concat(name, ".").concat(ext));
             formData.append("title", title);
             formData.append("content", content);
-            formData.append("stockname", stockname);
+            if (key != 'blog') formData.append("stockname", stockname);
             return this.http.post("".concat(this.apiUrl).concat(key), formData); // return this.http.post(this.apiUrl + 'blog', {title, content, image})
           }
         }, {
@@ -799,7 +819,7 @@
             formData.append("image", file, "".concat(file.name, ".").concat(ext));
             formData.append("title", title);
             formData.append("content", content);
-            formData.append("stockname", stockname);
+            if (key != 'blog') formData.append("stockname", stockname);
             return this.http.post("".concat(this.apiUrl).concat(key), formData); // return this.http.post(this.apiUrl + key, {title, content, stockname, image})
           }
         }]);
@@ -835,7 +855,27 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Search Companies</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content vertical=\"top\" style=\"display: flex; flex-direction: column; align-items: center;\">\n\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filter($event.detail.value)\"></ion-searchbar>\n\t<ion-list>\n\t\t<ion-item *ngFor=\"let s of filteredData || stocks\">\n\t\t\t<ion-label>\n\t\t\t\t<div style=\"display: flex; align-items: center;\">\n\t\t\t\t\t<span style=\"padding:5px 0\">{{ s.companyName }}</span>\n\t\t\t\t\t<ion-spinner *ngIf=\"!s.isLoaded\" name=\"lines-small\" class=\"ion-padding-start\"></ion-spinner>\n\t\t\t\t</div>\n\t\t\t</ion-label>\n\t\t\t<ion-checkbox\n\t\t\t\tslot=\"end\"\n\t\t\t\t[checked]=\"seeIfChecked(s)\"\n\t\t\t\t(ionChange)=\"onSelect($event.detail.checked, s)\"\n\t\t\t></ion-checkbox>\n\t\t</ion-item>\n\t</ion-list>\n\t<div style=\"width: 100%; display: flex; align-items: center; justify-content: center;\">\n\t\t<ion-spinner *ngIf=\"spinner\" name=\"lines-small\" class=\"ion-margin\"></ion-spinner>\n\t</div>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Search Companies</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content vertical=\"top\" style=\"display: flex; flex-direction: column; align-items: center;\">\n\t<ion-searchbar showCancelButton=\"focus\" (ionChange)=\"filter($event.detail.value)\"></ion-searchbar>\n\t<ion-list>\n\t\t<ion-item *ngFor=\"let s of filteredData || stocks\">\n\t\t\t<ion-label>\n\t\t\t\t<div style=\"display: flex; align-items: center;\">\n\t\t\t\t\t<span style=\"padding:5px 0\">{{ s.companyName }}</span>\n\t\t\t\t\t<ion-spinner *ngIf=\"s.isLoaded == false\" name=\"lines-small\" class=\"ion-padding-start\"></ion-spinner>\n\t\t\t\t</div>\n\t\t\t</ion-label>\n\t\t\t<ion-checkbox\n\t\t\t\tslot=\"end\"\n\t\t\t\t[checked]=\"seeIfChecked(s)\"\n\t\t\t\t(click)=\"onSelect($event, s)\"\n\t\t\t></ion-checkbox>\n\t\t</ion-item>\n\t</ion-list>\n\t<div style=\"width: 100%; display: flex; align-items: center; justify-content: center;\">\n\t\t<ion-spinner *ngIf=\"spinner\" name=\"lines-small\" class=\"ion-margin\"></ion-spinner>\n\t</div>\n</ion-content>\n";
+      /***/
+    },
+
+    /***/
+    "EqF1":
+    /*!***************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/modal-post/modal-post.component.html ***!
+      \***************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function EqF1(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>{{ post.title }}</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content style=\"display: flex; flex-direction: column\">\n\t<!-- <h4 class=\"ion-padding-horizontal\"></h4> -->\n\t<ion-img *ngIf=\"post.image != null || post.image != undefined\" [src]=\"post.image\" class=\"ion-margin\"></ion-img>\n\t<span class=\"ion-padding\">{{ post.content }}</span>\n</ion-content>\n";
       /***/
     },
 
@@ -988,9 +1028,9 @@
 
             if (input.newPassword != "" || input.confirmPassword != "") {
               if (input.newPassword == input.confirmPassword) {
-                this.userService.changePassword(this.user.email, input.newPassword).subscribe(function () {}, function (err) {
+                var email = this.email != null ? this.email : this.user.email;
+                this.userService.changePassword(email, input.newPassword).subscribe(function () {}, function (err) {
                   _this6.spinner = false;
-                  console.log(err);
 
                   _this6.presentErrorToast(err);
                 }, function () {
@@ -1082,6 +1122,12 @@
         }];
       };
 
+      ModalChangePasswordComponent.propDecorators = {
+        email: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"],
+          args: ['email']
+        }]
+      };
       ModalChangePasswordComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: "app-modal-change-password",
         template: _raw_loader_modal_change_password_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -1282,6 +1328,97 @@
     },
 
     /***/
+    "N+8n":
+    /*!***********************************************************!*\
+      !*** ./src/app/modals/modal-post/modal-post.component.ts ***!
+      \***********************************************************/
+
+    /*! exports provided: ModalPostComponent */
+
+    /***/
+    function N8n(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ModalPostComponent", function () {
+        return ModalPostComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_modal_post_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./modal-post.component.html */
+      "EqF1");
+      /* harmony import */
+
+
+      var _modal_post_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./modal-post.component.scss */
+      "1fgy");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @ionic/angular */
+      "TEn/");
+
+      var ModalPostComponent = /*#__PURE__*/function () {
+        function ModalPostComponent(modalCtrl) {
+          _classCallCheck(this, ModalPostComponent);
+
+          this.modalCtrl = modalCtrl;
+        }
+
+        _createClass(ModalPostComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            console.log(this.post.image);
+          }
+        }, {
+          key: "dismissModal",
+          value: function dismissModal() {
+            this.modalCtrl.dismiss();
+          }
+        }]);
+
+        return ModalPostComponent;
+      }();
+
+      ModalPostComponent.ctorParameters = function () {
+        return [{
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]
+        }];
+      };
+
+      ModalPostComponent.propDecorators = {
+        post: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"]
+        }]
+      };
+      ModalPostComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-modal-post',
+        template: _raw_loader_modal_post_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_modal_post_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+      })], ModalPostComponent);
+      /***/
+    },
+
+    /***/
     "Nbj3":
     /*!*********************************************************************!*\
       !*** ./src/app/modals/modal-watchlist/modal-watchlist.component.ts ***!
@@ -1357,6 +1494,7 @@
           value: function ngOnInit() {
             var _this10 = this;
 
+            this.i = 0;
             this.spinner = true;
             this.stockService.getStocks().subscribe(function (s) {
               _this10.stocks = s.data;
@@ -1369,30 +1507,35 @@
         }, {
           key: "dismissModal",
           value: function dismissModal() {
-            this.modalCtrl.dismiss(this.changeOfWatchlist);
+            var v = this.changeOfWatchlist;
             this.changeOfWatchlist = false;
+            this.modalCtrl.dismiss(v);
           }
         }, {
           key: "onSelect",
           value: function onSelect(event, stock) {
             var _this11 = this;
 
-            var sIndex = this.stocks.indexOf(this.stocks.find(function (s) {
-              return s._id == stock._id;
-            }));
-            this.stocks[sIndex].isLoaded = false;
+            var e = event.detail.checked;
 
-            if (event == true) {
-              this.watchlistService.addToWatchlist(this.selectedWatchlist, stock._id).subscribe(function () {
-                _this11.stocks[sIndex].isLoaded = true;
-              });
-            } else if (event == false) {
-              this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock._id).subscribe(function () {
-                _this11.stocks[sIndex].isLoaded = true;
-              });
+            if (e != null || e != undefined) {
+              var sIndex = this.stocks.indexOf(this.stocks.find(function (s) {
+                return s._id == stock._id;
+              }));
+              this.stocks[sIndex].isLoaded = false;
+
+              if (e == true) {
+                this.watchlistService.addToWatchlist(this.selectedWatchlist, stock._id).subscribe(function () {
+                  _this11.stocks[sIndex].isLoaded = true;
+                });
+              } else if (e == false) {
+                this.watchlistService.removeFromWatchlist(this.selectedWatchlist, stock._id).subscribe(function () {
+                  _this11.stocks[sIndex].isLoaded = true;
+                });
+              }
+
+              this.changeOfWatchlist = true;
             }
-
-            this.changeOfWatchlist = true;
           }
         }, {
           key: "filter",
@@ -1406,9 +1549,15 @@
           value: function seeIfChecked(stock) {
             var _a, _b;
 
-            if (((_a = this.sWatchlist) === null || _a === void 0 ? void 0 : _a.stockIds.length) > 0) return (_b = this.sWatchlist) === null || _b === void 0 ? void 0 : _b.stockIds.find(function (s) {
-              return s.id == stock._id;
-            });else false;
+            if (((_a = this.sWatchlist) === null || _a === void 0 ? void 0 : _a.stockIds.length) > 0) {
+              var v = (_b = this.sWatchlist) === null || _b === void 0 ? void 0 : _b.stockIds.find(function (s) {
+                return s.id == stock._id;
+              });
+
+              if (v != null || v != undefined) {
+                return true;
+              }
+            } else return false;
           }
         }]);
 
@@ -1431,7 +1580,7 @@
         }]
       };
       ModalWatchlistComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-modal-watchlist',
+        selector: "app-modal-watchlist",
         template: _raw_loader_modal_watchlist_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_modal_watchlist_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
       })], ModalWatchlistComponent);
@@ -2218,6 +2367,12 @@
       var _modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(
       /*! ./modals/modal-fp-email/modal-fp-email.component */
       "nJHT");
+      /* harmony import */
+
+
+      var _modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(
+      /*! ./modals/modal-post/modal-post.component */
+      "N+8n");
 
       function tokenGetter() {
         return localStorage.getItem("token");
@@ -2228,7 +2383,7 @@
       };
 
       AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"], _modals_modal_watchlist_modal_watchlist_component__WEBPACK_IMPORTED_MODULE_14__["ModalWatchlistComponent"], _modals_modal_watchlist_ce_modal_watchlist_ce_component__WEBPACK_IMPORTED_MODULE_15__["ModalWatchlistCeComponent"], _modals_buy_sell_modal_popup_buy_sell_modal_popup_component__WEBPACK_IMPORTED_MODULE_17__["BuySellModalPopupComponent"], _modals_modal_edit_watchlists_modal_edit_watchlists_component__WEBPACK_IMPORTED_MODULE_27__["ModalEditWatchlistsComponent"], _modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_28__["ModalEditOrderComponent"], _modals_modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_29__["ModalChangePasswordComponent"], _modals_modal_withdraw_add_funds_modal_withdraw_add_funds_component__WEBPACK_IMPORTED_MODULE_30__["ModalWithdrawAddFundsComponent"], _modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_35__["ModalUploadPostComponent"], _modals_modal_fp_code_check_modal_fp_code_check_component__WEBPACK_IMPORTED_MODULE_36__["ModalFpCodeCheckComponent"], _modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_37__["ModalFpEmailComponent"]],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"], _modals_modal_watchlist_modal_watchlist_component__WEBPACK_IMPORTED_MODULE_14__["ModalWatchlistComponent"], _modals_modal_watchlist_ce_modal_watchlist_ce_component__WEBPACK_IMPORTED_MODULE_15__["ModalWatchlistCeComponent"], _modals_buy_sell_modal_popup_buy_sell_modal_popup_component__WEBPACK_IMPORTED_MODULE_17__["BuySellModalPopupComponent"], _modals_modal_edit_watchlists_modal_edit_watchlists_component__WEBPACK_IMPORTED_MODULE_27__["ModalEditWatchlistsComponent"], _modals_modal_edit_order_modal_edit_order_component__WEBPACK_IMPORTED_MODULE_28__["ModalEditOrderComponent"], _modals_modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_29__["ModalChangePasswordComponent"], _modals_modal_withdraw_add_funds_modal_withdraw_add_funds_component__WEBPACK_IMPORTED_MODULE_30__["ModalWithdrawAddFundsComponent"], _modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_35__["ModalUploadPostComponent"], _modals_modal_fp_code_check_modal_fp_code_check_component__WEBPACK_IMPORTED_MODULE_36__["ModalFpCodeCheckComponent"], _modals_modal_fp_email_modal_fp_email_component__WEBPACK_IMPORTED_MODULE_37__["ModalFpEmailComponent"], _modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_38__["ModalPostComponent"]],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_11__["AppRoutingModule"], _ionic_super_tabs_angular__WEBPACK_IMPORTED_MODULE_12__["SuperTabsModule"].forRoot(), _angular_common__WEBPACK_IMPORTED_MODULE_13__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_18__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_26__["DragDropModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_19__["NgxChartsModule"], _ionic_storage__WEBPACK_IMPORTED_MODULE_24__["IonicStorageModule"].forRoot(), _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_9__["JwtModule"].forRoot({
           config: {
             tokenGetter: tokenGetter,
@@ -2313,16 +2468,20 @@
       "K2jm");
 
       var ModalFpCodeCheckComponent = /*#__PURE__*/function () {
-        function ModalFpCodeCheckComponent(modalCtrl, userService) {
+        function ModalFpCodeCheckComponent(modalCtrl, userService, toastCtrl) {
           _classCallCheck(this, ModalFpCodeCheckComponent);
 
           this.modalCtrl = modalCtrl;
           this.userService = userService;
+          this.toastCtrl = toastCtrl;
         }
 
         _createClass(ModalFpCodeCheckComponent, [{
           key: "ngOnInit",
-          value: function ngOnInit() {}
+          value: function ngOnInit() {
+            this.spinner = false;
+            this.code = "";
+          }
         }, {
           key: "dismissModal",
           value: function dismissModal() {
@@ -2331,13 +2490,30 @@
         }, {
           key: "codeCheck",
           value: function codeCheck(email, code) {
-            // this.userService.checkCodeValid(email, code).subscribe(r => {
-            this.dismissModal();
-            this.openChangePasswordModal(); // })
+            var _this15 = this;
+
+            this.spinner = true;
+
+            if (typeof code != "undefined" && code) {
+              this.userService.checkCodeValid(email, code).subscribe(function (r) {
+                _this15.openChangePasswordModal(email);
+
+                _this15.dismissModal();
+
+                _this15.spinner = false;
+              }, function () {
+                _this15.presentErrorToast("Code is incorrect.");
+
+                _this15.spinner = false;
+              });
+            } else {
+              this.presentErrorToast("Enter the code you've received.");
+              this.spinner = false;
+            }
           }
         }, {
           key: "openChangePasswordModal",
-          value: function openChangePasswordModal() {
+          value: function openChangePasswordModal(email) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
               var modal;
               return regeneratorRuntime.wrap(function _callee9$(_context9) {
@@ -2346,7 +2522,10 @@
                     case 0:
                       _context9.next = 2;
                       return this.modalCtrl.create({
-                        component: _modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_6__["ModalChangePasswordComponent"]
+                        component: _modal_change_password_modal_change_password_component__WEBPACK_IMPORTED_MODULE_6__["ModalChangePasswordComponent"],
+                        componentProps: {
+                          email: email
+                        }
                       });
 
                     case 2:
@@ -2365,6 +2544,35 @@
               }, _callee9, this);
             }));
           }
+        }, {
+          key: "presentErrorToast",
+          value: function presentErrorToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+              var modal;
+              return regeneratorRuntime.wrap(function _callee10$(_context10) {
+                while (1) {
+                  switch (_context10.prev = _context10.next) {
+                    case 0:
+                      _context10.next = 2;
+                      return this.toastCtrl.create({
+                        message: message,
+                        color: "danger",
+                        duration: 2500
+                      });
+
+                    case 2:
+                      modal = _context10.sent;
+                      _context10.next = 5;
+                      return modal.present();
+
+                    case 5:
+                    case "end":
+                      return _context10.stop();
+                  }
+                }
+              }, _callee10, this);
+            }));
+          }
         }]);
 
         return ModalFpCodeCheckComponent;
@@ -2375,17 +2583,19 @@
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]
         }, {
           type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"]
         }];
       };
 
       ModalFpCodeCheckComponent.propDecorators = {
         email: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"],
-          args: ['email']
+          args: ["email"]
         }]
       };
       ModalFpCodeCheckComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-modal-fp-code-check',
+        selector: "app-modal-fp-code-check",
         template: _raw_loader_modal_fp_code_check_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_modal_fp_code_check_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
       })], ModalFpCodeCheckComponent);
@@ -2408,7 +2618,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Upload post</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<form #postForm=\"ngForm\">\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Post title</ion-label>\n\t\t\t\t\t\t<ion-input name=\"title\" ngModel required maxlength=100></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Stock Name</ion-label>\n\t\t\t\t\t\t<ion-input name=\"stockname\" ngModel required maxlength=100></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Content</ion-label>\n\t\t\t\t\t\t<ion-textarea name=\"content\" ngModel required maxlength=255></ion-textarea>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col size=\"6\">\n\t\t\t\t\t<ion-button color=\"success\" class=\"post-button\" expand=\"block\" (click)=\"selectImageSource()\">\n\t\t\t\t\t\t<ion-icon name=\"attach-outline\"></ion-icon>\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t\t<ion-col size=\"6\">\n\t\t\t\t\t<ion-button expand=\"block\" class=\"post-button\" (click)=\"uploadFile(postForm)\">Post</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col size=\"6\" *ngFor=\"let img of images; let i = index\" class=\"ion-text-center\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<!-- <p>{{ img.createdAt | date: \"short\" }}</p> -->\n\t\t\t\t\t</ion-label>\n\t\t\t\t\t<ion-img [src]=\"img.url\" [alt]=\"img\"></ion-img>\n\t\t\t\t\t<ion-fab vertical=\"bottom\" horizontal=\"end\">\n\t\t\t\t\t\t<ion-fab-button color=\"danger\" size=\"small\" (click)=\"deleteImage(i)\">\n\t\t\t\t\t\t\t<ion-icon name=\"trash-outline\"></ion-icon>\n\t\t\t\t\t\t</ion-fab-button>\n\t\t\t\t\t</ion-fab>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Upload post</ion-title>\n\t\t<ion-buttons slot=\"end\">\n\t\t\t<ion-button (click)=\"dismissModal()\">Close</ion-button>\n\t\t</ion-buttons>\n\t</ion-toolbar>\n</ion-header>\n<ion-content>\n\t<form #postForm=\"ngForm\">\n\t\t<ion-grid>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Post title</ion-label>\n\t\t\t\t\t\t<ion-input name=\"title\" ngModel required maxlength=100></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row *ngIf=\"blog == false\">\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Stock Name</ion-label>\n\t\t\t\t\t\t<ion-input name=\"stockname\" ngModel required maxlength=100></ion-input>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col>\n\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t<ion-label position=\"floating\">Content</ion-label>\n\t\t\t\t\t\t<ion-textarea name=\"content\" ngModel required maxlength=255></ion-textarea>\n\t\t\t\t\t</ion-item>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col size=\"6\">\n\t\t\t\t\t<ion-button color=\"success\" class=\"post-button\" expand=\"block\" (click)=\"selectImageSource()\">\n\t\t\t\t\t\t<ion-icon name=\"attach-outline\"></ion-icon>\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t\t<ion-col size=\"6\">\n\t\t\t\t\t<ion-button expand=\"block\" class=\"post-button\" (click)=\"uploadFile(postForm)\">\n\t\t\t\t\t\tPost\n\t\t\t\t\t\t<ion-spinner name=\"lines-small\" class=\"ion-padding-start\" *ngIf=\"spinner\"></ion-spinner>\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t\t<ion-row>\n\t\t\t\t<ion-col size=\"6\" *ngFor=\"let img of images; let i = index\" class=\"ion-text-center\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<!-- <p>{{ img.createdAt | date: \"short\" }}</p> -->\n\t\t\t\t\t</ion-label>\n\t\t\t\t\t<ion-img [src]=\"img.url\" [alt]=\"img\"></ion-img>\n\t\t\t\t\t<ion-fab vertical=\"bottom\" horizontal=\"end\">\n\t\t\t\t\t\t<ion-fab-button color=\"danger\" size=\"small\" (click)=\"deleteImage(i)\">\n\t\t\t\t\t\t\t<ion-icon name=\"trash-outline\"></ion-icon>\n\t\t\t\t\t\t</ion-fab-button>\n\t\t\t\t\t</ion-fab>\n\t\t\t\t</ion-col>\n\t\t\t</ion-row>\n\t\t</ion-grid>\n\t</form>\n</ion-content>\n";
       /***/
     },
 
@@ -2571,7 +2781,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Code Validation</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"dismissModal()\">Close</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n  <ion-label class=\"ion-margin-vertical ion-no-padding\">Enter the code that you've recieved on {{email}}</ion-label>\n  <ion-item class=\"ion-no-padding ion-margin-vertical\">\n    <ion-label>Code</ion-label>\n    <ion-input [(ngModel)]=\"code\"></ion-input>\n  </ion-item>\n  <ion-button size=\"block\" (click)=\"codeCheck(email, code)\">Validate my code</ion-button>\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Code Validation</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"dismissModal()\">Close</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n  <ion-label class=\"ion-margin-vertical ion-no-padding\">Enter the code that you've recieved on {{email}}</ion-label>\n  <ion-item class=\"ion-no-padding ion-margin-vertical\">\n    <ion-label>Code</ion-label>\n    <ion-input [(ngModel)]=\"code\"></ion-input>\n  </ion-item>\n  <ion-button size=\"block\" (click)=\"codeCheck(email, code)\">\n    Validate my code\n    <ion-spinner name=\"lines-small\" color=\"light\" *ngIf=\"spinner\"></ion-spinner>\n  </ion-button>\n</ion-content>";
       /***/
     },
 
@@ -2889,10 +3099,10 @@
         _createClass(BuySellModalPopupComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this15 = this;
+            var _this16 = this;
 
             this.stockService.listen("".concat(this.selectedStock.id, "-").concat(this.selectedWatchlistId)).subscribe(function (res) {
-              _this15.selectedStock.ltp = res[0].price;
+              _this16.selectedStock.ltp = res[0].price;
             });
           }
         }, {
@@ -3033,19 +3243,22 @@
         }, {
           key: "emailCheck",
           value: function emailCheck(email) {
-            var _this16 = this;
+            var _this17 = this;
 
             this.spinner = true;
 
             if (email != '') {
               if (this.checkIfEmailInString(email)) {
                 this.userService.emailExists(this.email).subscribe(function (r) {
-                  _this16.spinner = false;
-                  console.log(r);
+                  _this17.spinner = false;
 
-                  _this16.dismissModal();
+                  _this17.dismissModal();
 
-                  _this16.openCodeCheckModal(email);
+                  _this17.openCodeCheckModal(email);
+                }, function () {
+                  _this17.spinner = false;
+
+                  _this17.presentErrorToast('Email does not exist.');
                 });
               } else {
                 this.spinner = false;
@@ -3059,13 +3272,13 @@
         }, {
           key: "openCodeCheckModal",
           value: function openCodeCheckModal(email) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
               var modal;
-              return regeneratorRuntime.wrap(function _callee10$(_context10) {
+              return regeneratorRuntime.wrap(function _callee11$(_context11) {
                 while (1) {
-                  switch (_context10.prev = _context10.next) {
+                  switch (_context11.prev = _context11.next) {
                     case 0:
-                      _context10.next = 2;
+                      _context11.next = 2;
                       return this.modalCtrl.create({
                         component: _modal_fp_code_check_modal_fp_code_check_component__WEBPACK_IMPORTED_MODULE_6__["ModalFpCodeCheckComponent"],
                         componentProps: {
@@ -3074,19 +3287,19 @@
                       });
 
                     case 2:
-                      modal = _context10.sent;
-                      _context10.next = 5;
+                      modal = _context11.sent;
+                      _context11.next = 5;
                       return modal.present();
 
                     case 5:
-                      return _context10.abrupt("return", _context10.sent);
+                      return _context11.abrupt("return", _context11.sent);
 
                     case 6:
                     case "end":
-                      return _context10.stop();
+                      return _context11.stop();
                   }
                 }
-              }, _callee10, this);
+              }, _callee11, this);
             }));
           }
         }, {
@@ -3098,13 +3311,13 @@
         }, {
           key: "presentErrorToast",
           value: function presentErrorToast(message) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
               var toast;
-              return regeneratorRuntime.wrap(function _callee11$(_context11) {
+              return regeneratorRuntime.wrap(function _callee12$(_context12) {
                 while (1) {
-                  switch (_context11.prev = _context11.next) {
+                  switch (_context12.prev = _context12.next) {
                     case 0:
-                      _context11.next = 2;
+                      _context12.next = 2;
                       return this.toastCtrl.create({
                         message: message,
                         duration: 2500,
@@ -3112,16 +3325,16 @@
                       });
 
                     case 2:
-                      toast = _context11.sent;
-                      _context11.next = 5;
+                      toast = _context12.sent;
+                      _context12.next = 5;
                       return toast.present();
 
                     case 5:
                     case "end":
-                      return _context11.stop();
+                      return _context12.stop();
                   }
                 }
-              }, _callee11, this);
+              }, _callee12, this);
             }));
           }
         }]);
@@ -3223,7 +3436,7 @@
 
       var UserService = /*#__PURE__*/function () {
         function UserService(http, storage, platform) {
-          var _this17 = this;
+          var _this18 = this;
 
           _classCallCheck(this, UserService);
 
@@ -3236,7 +3449,7 @@
           this.authenticated = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
           this.isOnLoginOrSignUpPage = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
           this.platform.ready().then(function () {
-            _this17.checkToken();
+            _this18.checkToken();
           });
         }
 
@@ -3249,7 +3462,7 @@
         }, {
           key: "logIn",
           value: function logIn(input) {
-            var _this18 = this;
+            var _this19 = this;
 
             return this.http.post(this.apiUrl + "login", input).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (res) {
               var user = {
@@ -3261,11 +3474,11 @@
                 }
               };
 
-              _this18.authenticate(user, res.jwt);
+              _this19.authenticate(user, res.jwt);
 
-              _this18.decodedToken = _this18.decodeToken(res.jwt);
+              _this19.decodedToken = _this19.decodeToken(res.jwt);
 
-              _this18.checkToken();
+              _this19.checkToken();
             }));
           }
         }, {
@@ -3276,32 +3489,55 @@
         }, {
           key: "googleAuth",
           value: function googleAuth(idToken) {
-            var httpOptions = {
-              headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
-                'Authorization': "Bearer ".concat(idToken)
-              })
-            };
-            return this.http.get(this.apiUrl + 'google', httpOptions);
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+              var user;
+              return regeneratorRuntime.wrap(function _callee13$(_context13) {
+                while (1) {
+                  switch (_context13.prev = _context13.next) {
+                    case 0:
+                      user = {
+                        email: idToken.email,
+                        username: idToken.name,
+                        balance: {
+                          availableBal: 0,
+                          openBal: 0
+                        }
+                      };
+                      this.authenticate(user, idToken.authentication.idToken);
+                      console.log({
+                        user: user,
+                        idToken: idToken.authentication.idToken
+                      });
+                      this.decodedToken = this.decodeToken(idToken.authentication.idToken);
+                      this.checkToken();
+
+                    case 5:
+                    case "end":
+                      return _context13.stop();
+                  }
+                }
+              }, _callee13, this);
+            }));
           }
         }, {
           key: "getFundsChart",
           value: function getFundsChart() {
-            return this.http.get(this.apiSettingsUrl + 'funds/records');
+            return this.http.get(this.apiSettingsUrl + "funds/records");
           }
         }, {
           key: "getLeaderboard",
           value: function getLeaderboard() {
-            return this.http.get(this.apiUrl + 'leaderboard');
+            return this.http.get(this.apiUrl + "leaderboard");
           }
         }, {
           key: "accountDetails",
           value: function accountDetails() {
-            return this.http.get(this.apiUrl + 'account');
+            return this.http.get(this.apiUrl + "account");
           }
         }, {
           key: "changePassword",
           value: function changePassword(email, password) {
-            return this.http.post(this.apiUrl + 'password/change', {
+            return this.http.post(this.apiUrl + "password/change", {
               email: email,
               password: password
             });
@@ -3309,14 +3545,14 @@
         }, {
           key: "emailExists",
           value: function emailExists(email) {
-            return this.http.post(this.apiUrl + 'password/reset/emailcheck', {
+            return this.http.post(this.apiUrl + "password/reset/emailcheck", {
               email: email
             });
           }
         }, {
           key: "checkCodeValid",
           value: function checkCodeValid(email, code) {
-            return this.http.post(this.apiUrl + 'password/code/check', {
+            return this.http.post(this.apiUrl + "password/code/check", {
               email: email,
               code: code
             });
@@ -3339,15 +3575,15 @@
         }, {
           key: "authenticate",
           value: function authenticate(user, token) {
-            var _this19 = this;
+            var _this20 = this;
 
-            return this.storage.set('token', {
+            return this.storage.set("token", {
               user: user,
               token: token
             }).then(function (r) {
-              localStorage.setItem('token', token);
+              localStorage.setItem("token", token);
 
-              _this19.authenticated.next({
+              _this20.authenticated.next({
                 user: user,
                 token: token
               });
@@ -3357,7 +3593,7 @@
           key: "getUserFromToken",
           value: function getUserFromToken() {
             var user;
-            this.storage.get('token').then(function (r) {
+            this.storage.get("token").then(function (r) {
               if (r) user = r.user;
             });
             return user;
@@ -3365,25 +3601,25 @@
         }, {
           key: "checkToken",
           value: function checkToken() {
-            var _this20 = this;
+            var _this21 = this;
 
-            return this.storage.get('token').then(function (r) {
+            return this.storage.get("token").then(function (r) {
               if (r) {
-                _this20.authenticated.next(r);
+                _this21.authenticated.next(r);
 
-                _this20.user.next(r.user);
+                _this21.user.next(r.user);
               }
             });
           }
         }, {
           key: "logout",
           value: function logout() {
-            var _this21 = this;
+            var _this22 = this;
 
             this.user.next(null);
-            localStorage.removeItem('token');
-            return this.storage.remove('token').then(function (r) {
-              return _this21.authenticated.next(false);
+            localStorage.removeItem("token");
+            return this.storage.remove("token").then(function (r) {
+              return _this22.authenticated.next(false);
             });
           }
         }, {
@@ -3405,7 +3641,7 @@
         }, {
           key: "checkIfIsOnLoginOrSignUpPage",
           value: function checkIfIsOnLoginOrSignUpPage(link) {
-            link.includes('login') || link.includes('sign-up') ? this.isOnLoginOrSignUpPage.next(true) : this.isOnLoginOrSignUpPage.next(false);
+            link.includes("login") || link.includes("sign-up") ? this.isOnLoginOrSignUpPage.next(true) : this.isOnLoginOrSignUpPage.next(false);
           }
         }]);
 
@@ -3423,7 +3659,7 @@
       };
 
       UserService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
-        providedIn: 'root'
+        providedIn: "root"
       })], UserService);
       /***/
     },
@@ -3510,20 +3746,25 @@
         _createClass(ModalEditWatchlistsComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this22 = this;
-
             this.spinner = false;
             this.dataLoaded = false;
+            this.getWatchlists();
+          }
+        }, {
+          key: "getWatchlists",
+          value: function getWatchlists() {
+            var _this23 = this;
+
             this.userService.getSettings().subscribe(function (r) {
               var datatype = r.data.datatype;
-              if (datatype == "simulated") _this22.watchlistService.getSimulatedWatchlists().subscribe(function (r) {
+              if (datatype == "simulated") _this23.watchlistService.getSimulatedWatchlists().subscribe(function (r) {
                 console.log("simulated", r);
-                _this22.dataLoaded = true;
+                _this23.dataLoaded = true;
               });
-              if (datatype == "realtime") _this22.watchlistService.getRealtimeWatchlists().subscribe(function (r) {
+              if (datatype == "realtime") _this23.watchlistService.getRealtimeWatchlists().subscribe(function (r) {
                 console.log("realtime", r);
-                _this22.watchlists = r.data;
-                _this22.dataLoaded = true;
+                _this23.watchlists = r.data;
+                _this23.dataLoaded = true;
               });
             });
           }
@@ -3535,7 +3776,7 @@
         }, {
           key: "onCreateWatchlist",
           value: function onCreateWatchlist() {
-            var _this23 = this;
+            var _this24 = this;
 
             var _a;
 
@@ -3543,14 +3784,16 @@
               this.spinner = true;
               this.watchlistName = this.watchlistName.trim();
               this.watchlistService.createWatchlist(this.watchlistName).subscribe(function () {
-                _this23.changeInWatchlist = true;
-                _this23.spinner = false;
+                _this24.changeInWatchlist = true;
+                _this24.spinner = false;
 
-                _this23.presentSuccessToast("\"".concat(_this23.watchlistName, "\" was successfuly created."));
+                _this24.presentSuccessToast("\"".concat(_this24.watchlistName, "\" was successfuly created."));
 
-                _this23.watchlistName = "";
+                _this24.watchlistName = "";
+
+                _this24.getWatchlists();
               });
-            } else this.presentErrorToast('Input field is empty.');
+            } else this.presentErrorToast("Input field is empty.");
           }
         }, {
           key: "drop",
@@ -3561,7 +3804,7 @@
         }, {
           key: "changePosition",
           value: function changePosition() {
-            var _this24 = this;
+            var _this25 = this;
 
             var positions = [];
 
@@ -3574,19 +3817,19 @@
             }
 
             this.watchlistService.updateWatchlistPositions(positions).subscribe(function () {
-              return _this24.changeInWatchlist = true;
+              return _this25.changeInWatchlist = true;
             });
           }
         }, {
           key: "presentErrorToast",
           value: function presentErrorToast(message) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
               var toast;
-              return regeneratorRuntime.wrap(function _callee12$(_context12) {
+              return regeneratorRuntime.wrap(function _callee14$(_context14) {
                 while (1) {
-                  switch (_context12.prev = _context12.next) {
+                  switch (_context14.prev = _context14.next) {
                     case 0:
-                      _context12.next = 2;
+                      _context14.next = 2;
                       return this.toastCtrl.create({
                         message: message,
                         duration: 2500,
@@ -3594,28 +3837,28 @@
                       });
 
                     case 2:
-                      toast = _context12.sent;
-                      _context12.next = 5;
+                      toast = _context14.sent;
+                      _context14.next = 5;
                       return toast.present();
 
                     case 5:
                     case "end":
-                      return _context12.stop();
+                      return _context14.stop();
                   }
                 }
-              }, _callee12, this);
+              }, _callee14, this);
             }));
           }
         }, {
           key: "presentSuccessToast",
           value: function presentSuccessToast(message) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
               var toast;
-              return regeneratorRuntime.wrap(function _callee13$(_context13) {
+              return regeneratorRuntime.wrap(function _callee15$(_context15) {
                 while (1) {
-                  switch (_context13.prev = _context13.next) {
+                  switch (_context15.prev = _context15.next) {
                     case 0:
-                      _context13.next = 2;
+                      _context15.next = 2;
                       return this.toastCtrl.create({
                         message: message,
                         duration: 2500,
@@ -3623,16 +3866,16 @@
                       });
 
                     case 2:
-                      toast = _context13.sent;
-                      _context13.next = 5;
+                      toast = _context15.sent;
+                      _context15.next = 5;
                       return toast.present();
 
                     case 5:
                     case "end":
-                      return _context13.stop();
+                      return _context15.stop();
                   }
                 }
-              }, _callee13, this);
+              }, _callee15, this);
             }));
           }
         }]);
@@ -3814,10 +4057,10 @@
         _createClass(ModalWithdrawAddFundsComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this25 = this;
+            var _this26 = this;
 
             this.userService.authenticated.subscribe(function (u) {
-              return _this25.user = u.user;
+              return _this26.user = u.user;
             });
           }
         }, {
@@ -3934,13 +4177,16 @@
           this.toastCtrl = toastCtrl;
           this.intraDay = false;
           this.positional = false;
+          this.blog = false;
           this.demoTrading = false;
           this.images = [];
         }
 
         _createClass(ModalUploadPostComponent, [{
           key: "ngOnInit",
-          value: function ngOnInit() {}
+          value: function ngOnInit() {
+            this.spinner = false;
+          }
         }, {
           key: "dismissModal",
           value: function dismissModal(val) {
@@ -3949,19 +4195,19 @@
         }, {
           key: "selectImageSource",
           value: function selectImageSource() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
-              var _this26 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
+              var _this27 = this;
 
               var buttons, actionSheet;
-              return regeneratorRuntime.wrap(function _callee14$(_context14) {
+              return regeneratorRuntime.wrap(function _callee16$(_context16) {
                 while (1) {
-                  switch (_context14.prev = _context14.next) {
+                  switch (_context16.prev = _context16.next) {
                     case 0:
                       buttons = [{
                         text: "Select a Photo",
                         icon: "image",
                         handler: function handler() {
-                          _this26.addImage(_capacitor_core__WEBPACK_IMPORTED_MODULE_6__["CameraSource"].Photos);
+                          _this27.addImage(_capacitor_core__WEBPACK_IMPORTED_MODULE_6__["CameraSource"].Photos);
                         }
                       }];
 
@@ -3970,7 +4216,7 @@
                           text: "Choose a File",
                           icon: "attach",
                           handler: function handler() {
-                            _this26.fileInput.nativeElement.click();
+                            _this27.fileInput.nativeElement.click();
                           }
                         });
                       }
@@ -3980,40 +4226,40 @@
                         icon: "close",
                         handler: function handler() {}
                       });
-                      _context14.next = 5;
+                      _context16.next = 5;
                       return this.actionSheetCtrl.create({
                         header: "Select Image Source",
                         buttons: buttons
                       });
 
                     case 5:
-                      actionSheet = _context14.sent;
-                      _context14.next = 8;
+                      actionSheet = _context16.sent;
+                      _context16.next = 8;
                       return actionSheet.present();
 
                     case 8:
                     case "end":
-                      return _context14.stop();
+                      return _context16.stop();
                   }
                 }
-              }, _callee14, this);
+              }, _callee16, this);
             }));
           }
         }, {
           key: "addImage",
           value: function addImage(source) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee17() {
               var image, blobData, img;
-              return regeneratorRuntime.wrap(function _callee15$(_context15) {
+              return regeneratorRuntime.wrap(function _callee17$(_context17) {
                 while (1) {
-                  switch (_context15.prev = _context15.next) {
+                  switch (_context17.prev = _context17.next) {
                     case 0:
                       if (!(this.images.length == 0)) {
-                        _context15.next = 8;
+                        _context17.next = 8;
                         break;
                       }
 
-                      _context15.next = 3;
+                      _context17.next = 3;
                       return Camera.getPhoto({
                         quality: 60,
                         allowEditing: true,
@@ -4022,7 +4268,7 @@
                       });
 
                     case 3:
-                      image = _context15.sent;
+                      image = _context17.sent;
                       blobData = this.b64toBlob(image.base64String, "image/".concat(image.format));
                       img = URL.createObjectURL(blobData);
                       this.images.push({
@@ -4035,36 +4281,41 @@
 
                     case 8:
                     case "end":
-                      return _context15.stop();
+                      return _context17.stop();
                   }
                 }
-              }, _callee15, this);
+              }, _callee17, this);
             }));
           }
         }, {
           key: "uploadFile",
           value: function uploadFile(postForm) {
-            var _this27 = this;
+            var _this28 = this;
 
             var image = this.images[0];
 
             if (postForm.valid) {
+              this.spinner = true;
               var title = postForm.value.title;
               var content = postForm.value.content;
               var stockName = postForm.value.stockname;
               var key = "";
-              if (this.intraDay == true) key = "intraday";else if (this.positional == true) key = "positional";else if (this.demoTrading == true) key = "demotrading";
+              if (this.intraDay == true) key = "intraday";else if (this.positional == true) key = "positional";else if (this.demoTrading == true) key = "demotrading";else if (this.blog == true) key = "blog";
 
               if (image == undefined || image == null) {
                 this.api.createWithBlob(title, content, stockName, key).subscribe(function () {
-                  _this27.dismissModal(true);
+                  _this28.dismissModal(true);
+
+                  _this28.spinner = false;
                 });
               } else {
                 this.api.createWithBlob(title, content, stockName, key, image.blobData, image.name, image.format).subscribe(function () {
-                  _this27.dismissModal(true);
+                  _this28.dismissModal(true);
+
+                  _this28.spinner = false;
                 });
               }
-            } else console.log("something is missing!");
+            } else this.presentErrorToast('Something is missing.');
           }
         }, {
           key: "deleteImage",
@@ -4096,6 +4347,35 @@
             });
             return blob;
           }
+        }, {
+          key: "presentErrorToast",
+          value: function presentErrorToast(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee18() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee18$(_context18) {
+                while (1) {
+                  switch (_context18.prev = _context18.next) {
+                    case 0:
+                      _context18.next = 2;
+                      return this.toastCtrl.create({
+                        header: message,
+                        color: 'danger',
+                        duration: 2500
+                      });
+
+                    case 2:
+                      toast = _context18.sent;
+                      _context18.next = 5;
+                      return toast.present();
+
+                    case 5:
+                    case "end":
+                      return _context18.stop();
+                  }
+                }
+              }, _callee18, this);
+            }));
+          }
         }]);
 
         return ModalUploadPostComponent;
@@ -4120,6 +4400,9 @@
           type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"]
         }],
         positional: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"]
+        }],
+        blog: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"]
         }],
         demoTrading: [{
