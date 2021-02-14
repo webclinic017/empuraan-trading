@@ -1,0 +1,38 @@
+*:focus{
+    outline: none;
+}
+.wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    form{
+        width: 100%;
+        height: 60%;
+    }
+}
+.title{
+    padding-bottom: 25px;
+    ion-label{
+        font-size: 35px;
+        font-weight:700;
+    }
+}
+ion-list{
+    margin-top:50px;
+}
+ion-input, ion-select{
+    font-size: 15px;
+}
+ion-item {
+    --border-color: #c2c2c2;
+    --border-bottom-width: 2px;
+    margin-top:10px;
+    ion-label{
+        color:#C99A4C;
+    }
+}
+ion-back-button{
+    --color:#E0B64A;
+}

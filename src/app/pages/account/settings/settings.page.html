@@ -1,7 +1,7 @@
 <ion-header>
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-back-button [defaultHref]="['home','watchlist']" (click)="navigateToAccount()"></ion-back-button>
+			<ion-back-button defaultHref="/home/account"></ion-back-button>
 		</ion-buttons>
 		<ion-title>Settings</ion-title>
 	</ion-toolbar>
@@ -9,18 +9,18 @@
 
 <ion-content>
 	<ion-list>
-		<ion-item>
+		<ion-item class="ion-padding-horizontal">
 			<ion-label>Data type</ion-label>
 			<ion-select value="simulated" (ionChange)="dataChange()" [(ngModel)]="datatype">
 				<ion-select-option value="realtime" disabled>Real-time</ion-select-option>
 				<ion-select-option value="simulated">Simulated</ion-select-option>
 			</ion-select>
 		</ion-item>
-		<ion-item>
+		<ion-item class="ion-padding-horizontal">
 		  <ion-label>Risk %</ion-label>
 		  <ion-input class="ion-text-right" type="number" [(ngModel)]="risk" (ionChange)="dataChange()"></ion-input>
 		</ion-item>
-		<ion-item>
+		<ion-item class="ion-padding-horizontal">
 		  <ion-label>Leverage</ion-label>
 		  <ion-select value="0" [(ngModel)]="leverage" (ionChange)="dataChange()">
 			  <ion-select-option value="1">1</ion-select-option>

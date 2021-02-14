@@ -1,18 +1,17 @@
-<ion-header>
-	<ion-toolbar>
-		<ion-title>Forgot password</ion-title>
-		<ion-buttons slot="end">
-			<ion-button (click)="dismissModal()">Close</ion-button>
-		</ion-buttons>
-	</ion-toolbar>
-</ion-header>
-<ion-content class="ion-padding">
-	<ion-item class="ion-margin-bottom ion-no-padding">
-		<ion-label>Email</ion-label>
-		<ion-input [(ngModel)]="email" type="email"></ion-input>
-	</ion-item>
-	<ion-button size="block" (click)="emailCheck(email)">
-		Send me the code
-		<ion-spinner name="lines-small" *ngIf="spinner"></ion-spinner>
-	</ion-button>
+<ion-content>
+	<ion-icon name="arrow-back-outline" (click)="dismissModal()"></ion-icon>
+	<div class="wrap">
+		<div class="form ion-padding-horizontal ion-text-center">
+			<ion-img src="/assets/logo_no_back.png" class="logo"></ion-img>
+			<ion-label class="title">Password<br />Recovery</ion-label>
+			<ion-item class="ion-no-padding">
+				<ion-input placeholder="Email address" [(ngModel)]="email" type="email"></ion-input>
+			</ion-item>
+			<button (click)="emailCheck(email)" class="send button">
+				Send me the code
+				<ion-spinner name="lines-small" *ngIf="spinner" color="light"></ion-spinner>
+			</button>
+			<button (click)="dismissModal()" class="cancel button">Cancel</button>
+		</div>
+	</div>
 </ion-content>

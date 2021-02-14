@@ -3,12 +3,12 @@
   --st-label-text-transform: capitalize;
   --st-indicator-color: #000000;
   /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary: #C99A4C;
+  --ion-color-primary-rgb: 201, 154, 76;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-shade: #bd852b;
+  --ion-color-primary-tint: #f3bb60;
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
   --ion-color-secondary-rgb: 61, 194, 255;

@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
+import { StockService } from './services/stock.service';
 
 const { Network, LocalNotifications, App } = Plugins;
 
@@ -27,7 +28,8 @@ export class AppComponent implements OnInit{
     private alertController: AlertController,
     private location: Location,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private stockService: StockService
   ) {}
 
   async ngOnInit(){
@@ -86,6 +88,7 @@ export class AppComponent implements OnInit{
       this.userService.authenticated.subscribe(a => {
         a ? this.router.navigate(['home', 'dashboard']) : this.router.navigate(['home','login'])
       })
+      this.stockService.initStocks().subscribe()
     });
   }
 }

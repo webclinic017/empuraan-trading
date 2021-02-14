@@ -4,46 +4,49 @@
 		<ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
 	</ion-toolbar>
 </ion-header>
-<ion-content>
-	<ion-card class="ion-padding-horizontal" [routerLink]="['profile']">
-		<ion-grid>
-			<ion-row class="ion-align-items-center">
-				<ion-col size="8">
-					<ion-card-title type="md">{{user.username}}</ion-card-title>
-					<ion-card-subtitle type="md">{{user.email | uppercase}}</ion-card-subtitle>
-				</ion-col>
-				<ion-col size="4">
-					<div class="ion-float-right account-img">
-						<span>{{user.username[0]+user.username[1]}}</span>
-					</div>
-				</ion-col>
-			</ion-row>
-		</ion-grid>
-	</ion-card>
-	<hr />
-	<div class="ion-no-border ion-padding account-card-link funds-link">
-		<ion-text>Funds</ion-text>
-		<ion-icon name="cash-outline" class="ion-margin-end icon"></ion-icon>
+<ion-content mode="ios">
+	<div class="wrap">
+		<div class="white-circle-bg"></div>
+		<div class="user-info">
+			<ion-card class="ion-padding-horizontal ion-no-margin account-card" [routerLink]="['profile']">
+				<ion-grid>
+					<ion-row class="ion-align-items-center">
+						<ion-col size="8">
+							<ion-card-title type="md">{{user.username}}</ion-card-title>
+							<ion-card-subtitle type="md">{{user.email | uppercase}}</ion-card-subtitle>
+						</ion-col>
+						<ion-col size="4">
+							<div class="ion-float-right account-img">
+								<span>{{user.username[0]+user.username[1]}}</span>
+							</div>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+			<ion-card class="ion-no-margin">
+				<ion-list>
+					<ion-item class="ion-no-padding account-card-link funds-link" [routerLink]="['funds']">
+						<ion-text>Funds</ion-text>
+						<ion-icon name="cash-outline" class="ion-margin-end icon"></ion-icon>
+					</ion-item>
+					<ion-item class="ion-no-padding account-card-link" [routerLink]="['profile']">
+						<ion-text>Profile</ion-text>
+						<ion-icon name="person-outline" class="ion-margin-end icon"></ion-icon>
+					</ion-item>
+					<ion-item class="ion-no-padding account-card-link" [routerLink]="['settings']">
+						<ion-text>Settings</ion-text>
+						<ion-icon name="settings-outline" class="ion-margin-end icon"></ion-icon>
+					</ion-item>
+					<ion-item class="ion-no-padding account-card-link" [routerLink]="['invite-friends']">
+						<ion-text>Invite friends</ion-text>
+						<ion-icon name="person-add-outline" class="ion-margin-end icon"></ion-icon>
+					</ion-item>
+					<ion-item class="ion-no-padding account-card-link" (click)="logout()">
+						<ion-text>Logout</ion-text>
+						<ion-icon name="log-out-outline" class="ion-margin-end icon"></ion-icon>
+					</ion-item>
+				</ion-list>
+			</ion-card>
+		</div>
 	</div>
-	<hr />
-	<div class="ion-no-border ion-padding account-card-link" [routerLink]="['profile']">
-		<ion-text>Profile</ion-text>
-		<ion-icon name="person-outline" class="ion-margin-end icon"></ion-icon>
-	</div>
-	<hr />
-	<div class="ion-no-border ion-padding account-card-link" [routerLink]="['settings']">
-		<ion-text>Settings</ion-text>
-		<ion-icon name="settings-outline" class="ion-margin-end icon"></ion-icon>
-	</div>
-	<hr />
-	<div class="ion-no-border ion-padding account-card-link" [routerLink]="['invite-friends']">
-		<ion-text>Invite friends</ion-text>
-		<ion-icon name="person-add-outline" class="ion-margin-end icon"></ion-icon>
-	</div>
-	<hr />
-	<div class="ion-no-border ion-padding account-card-link" (click)="logout()">
-		<ion-text>Logout</ion-text>
-		<ion-icon name="log-out-outline" class="ion-margin-end icon"></ion-icon>
-	</div>
-	<hr />
 </ion-content>

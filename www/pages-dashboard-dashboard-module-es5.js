@@ -285,6 +285,10 @@
         }, {
           key: "generateChartData",
           value: function generateChartData(rawData, initBal) {
+            console.log({
+              rawData: rawData,
+              initBal: initBal
+            });
             this.data = [];
             var openBalTitle = "Open balance";
             var initBalTitle = "Initial balance";

@@ -181,6 +181,7 @@ let DashboardPage = class DashboardPage {
         this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url);
     }
     generateChartData(rawData, initBal) {
+        console.log({ rawData, initBal });
         this.data = [];
         const openBalTitle = "Open balance";
         const initBalTitle = "Initial balance";

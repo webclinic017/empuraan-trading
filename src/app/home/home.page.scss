@@ -1,6 +1,10 @@
 .d-none{
   display: none;
 }
+ion-tab-button{
+  --color-focused:#C99A4C;
+  --color-selected:#C99A4C;
+}
 @media screen and (max-width: 360px) {
   ion-label{
     font-size: 10px;

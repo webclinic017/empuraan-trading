@@ -1,15 +1,66 @@
 *:focus {
     outline: none;
 }
-.logo{
-    height: 100px;
-    width: 100px;
-    margin: 0 auto;
-    padding-top: 10px;
+.first-dark-orange-ball{
+    background-color: #C99A4C;height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    position: absolute;
+    transform: translateX(-62%) translateY(-45%);
+    .first-light-orange-ball{
+        background-color: #E0B64A;
+        height: 300px;
+        width: 300px;
+        top: -10%;
+        left: -13%;
+        border-radius: 50%;
+        position: relative;
+    }
 }
-form{
-    margin: auto 0;
-    // margin-top: 5%;
+
+.second-dark-orange-ball{
+    background-color: #E0B64A;
+    height: 230px;
+    width: 230px;
+    border-radius: 50%;
+    position: absolute;
+    transform: translateX(100%) translateY(-40%);
+    .second-light-orange-ball{
+        background-color: #C99A4C;
+        height: 220px;
+        width: 220px;
+        bottom: -12%;
+        right: -11%;
+        border-radius: 50%;
+        position: relative;
+    }
+}
+.wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    form{
+        width: 100%;
+        height: 90%;
+    }
+}
+.logo{
+    height: 125px;
+    width: 125px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+.title{
+    padding-bottom: 25px;
+    ion-label{
+        font-size: 35px;
+        font-weight:700;
+    }
+}
+.input-field{
+    padding-bottom: 20px;
 }
 .button-col{
     width: 100%;
@@ -17,6 +68,7 @@ form{
 ion-input{
     --placeholder-color: rgba(140,141,140);
     --placeholder-opacity: 1;
+    font-size: 15px;
 }
 ion-item {
     --border-color: rgba(209,179,127);
@@ -24,14 +76,12 @@ ion-item {
 }
 .button{
     width: 100%; 
-    margin-top: 10px;
     border-radius: 15px;
     height: 50px;
     font-size: 14px;
-    box-shadow: 0 0 15px 5px #f0f0f0;
 }
 .login-button{
-    background-color: rgba(33,95,204);
+    background-color: #215fcc;
     color:white;
     display: flex;
     flex-direction: row;
@@ -39,7 +89,7 @@ ion-item {
     justify-content: center;
 }
 .google-button{
-    background-color: rgba(185,43,33);
+    background-color: #b92b21;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -56,6 +106,7 @@ ion-item {
     justify-content: center;
     background-color: #fff;
     color:rgba(203,171,115);
+    box-shadow: 0 0 15px 5px #f0f0f0;
 }
 .link-button{
     float: left;
@@ -66,14 +117,6 @@ ion-item {
 .links-block{
     display: flex;
     flex-direction: column;
-}
-.or{
-    width: 100%;
-    span{
-        font-size: 14px;
-        padding: 10px;
-        margin: 0 auto;
-    }
 }
 h1,h2{
     padding:0;

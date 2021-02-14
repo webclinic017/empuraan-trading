@@ -350,7 +350,7 @@
                       return this.modalController.create({
                         component: src_app_modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_5__["ModalUploadPostComponent"],
                         componentProps: {
-                          demotrading: true
+                          demoTrading: true
                         }
                       });
 
@@ -1237,7 +1237,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-content>\n  <ion-spinner name=\"lines\" *ngIf=\"!dataLoaded;else list\"></ion-spinner>\n  <ion-list>\n    <ion-item #list class=\"ion-no-padding\" *ngFor=\"let blog of blgs\">\n      <h5 class=\"blog-link\" (click)=\"openPostModal(blog)\">- {{blog.title}}</h5>\n    </ion-item>\n  </ion-list>\n\t<ion-label class=\"ion-padding\" *ngIf=\"blgs?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n<ion-fab horizontal=\"end\" vertical=\"bottom\" style=\"position: absolute; bottom: 10px; right: 10px\">\n\t<ion-fab-button (click)=\"openUploadPostModal()\">\n\t\t<ion-icon name=\"add\"></ion-icon>\n\t</ion-fab-button>\n</ion-fab>\n";
+      __webpack_exports__["default"] = "<ion-content>\n  <ion-spinner name=\"lines\" *ngIf=\"!dataLoaded;else list\"></ion-spinner>\n  <ion-list>\n    <ion-item #list class=\"ion-no-padding\" *ngFor=\"let blog of blgs\" (click)=\"openPostModal(blog)\">\n      <h5 class=\"blog-link\">- {{blog.title}}</h5>\n    </ion-item>\n  </ion-list>\n\t<ion-label class=\"ion-padding\" *ngIf=\"blgs?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n<ion-fab horizontal=\"end\" vertical=\"bottom\" style=\"position: absolute; bottom: 10px; right: 10px\">\n\t<ion-fab-button (click)=\"openUploadPostModal()\">\n\t\t<ion-icon name=\"add\"></ion-icon>\n\t</ion-fab-button>\n</ion-fab>\n";
       /***/
     },
 
