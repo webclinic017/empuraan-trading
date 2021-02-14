@@ -29,7 +29,7 @@ export class DemoTradingPage implements OnInit {
   async openUploadPostModal(id: number) {
     const modal = await this.modalController.create({
       component: ModalUploadPostComponent,
-      componentProps: {demotrading: true}
+      componentProps: {demoTrading: true}
     });
     modal.onDidDismiss().then((d) => {
 			if (d.data == true) {

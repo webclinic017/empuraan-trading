@@ -1,8 +1,8 @@
 <ion-content>
   <ion-spinner name="lines" *ngIf="!dataLoaded;else list"></ion-spinner>
   <ion-list>
-    <ion-item #list class="ion-no-padding" *ngFor="let blog of blgs">
-      <h5 class="blog-link" (click)="openPostModal(blog)">- {{blog.title}}</h5>
+    <ion-item #list class="ion-no-padding" *ngFor="let blog of blgs" (click)="openPostModal(blog)">
+      <h5 class="blog-link">- {{blog.title}}</h5>
     </ion-item>
   </ion-list>
 	<ion-label class="ion-padding" *ngIf="blgs?.length == 0">

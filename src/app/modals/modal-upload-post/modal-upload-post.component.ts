@@ -108,10 +108,16 @@ export class ModalUploadPostComponent implements OnInit {
 				this.api.createWithBlob(title, content, stockName, key).subscribe(() => {
 					this.dismissModal(true);
 					this.spinner = false
+				}, ()=>{
+					this.presentErrorToast('Something went wrong.')
+					this.spinner = false
 				});
 			} else {
 				this.api.createWithBlob(title, content, stockName, key, image.blobData, image.name, image.format).subscribe(() => {
 					this.dismissModal(true);
+					this.spinner = false
+				}, () => {
+					this.presentErrorToast('Something went wrong.')
 					this.spinner = false
 				});
 			}

@@ -125,6 +125,7 @@ export class DashboardPage implements OnInit {
 	}
 
 	generateChartData(rawData, initBal: number) {
+		console.log({rawData, initBal})
 		this.data = [];
 		const openBalTitle = "Open balance";
 		const initBalTitle = "Initial balance";
