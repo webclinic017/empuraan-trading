@@ -1,3 +1,6 @@
+*{
+    outline: none;
+}
 ion-toolbar{
     background-color: #e3e3e3;
 }
@@ -41,6 +44,55 @@ ion-title{
 }
 .buy-sell-btn{
     height: 50px;
+}
+.wrap{
+    width: 100%;
+    height: 100%;
+    padding-top:25px;
+}
+.position-title{
+    padding:15px;
+    font-size:25px;
+}
+.position-card{
+    .information{
+        color:black;
+        .stockname{
+            font-weight: 500;
+            padding-right: 15px;
+        }
+        .price{
+            color: #dab65d;
+            font-weight: 800;
+            padding-right: 15px;
+        }
+        .percentage{
+            font-weight: 600;
+        }
+    }
+    .buttons{
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        .buy-btn,
+        .sell-btn{
+            border: 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            height: 40px;
+            width: 46%;
+            color: white;
+            border-radius: 10px;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        .sell-btn{
+            background: rgba(195,40,27);
+        }
+        .buy-btn{
+            background: rgba(33,95,204);
+        }
+    }
 }
 @media screen and (max-width: 360px) {
     ion-title, h3{

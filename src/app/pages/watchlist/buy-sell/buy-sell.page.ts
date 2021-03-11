@@ -23,6 +23,7 @@ export class BuySellPage implements OnInit, AfterViewInit {
   leverage: number = 0
   risk: number = 0
   transactionSpinner: boolean
+  orderValue: string = "market"
   @ViewChild('buySellForm') buySellForm: NgForm
   @ViewChild('marketRadio') marketRadio
   constructor(private route: ActivatedRoute, 
@@ -67,7 +68,7 @@ export class BuySellPage implements OnInit, AfterViewInit {
   
   updateLtp(){
     this.stockService.listen(`${this.company?._id}-${this.wId}`).subscribe((res:any) => {
-      this.company.ltp = res[0].price
+      this.company.ltp = res[0].close
     })
   }
 

@@ -26,6 +26,7 @@ export class StockService {
 		});
 	}
 	emit(eventName, data) {
+		console.log(eventName,data)
 		this.socket.emit(eventName, data);
 	}
 

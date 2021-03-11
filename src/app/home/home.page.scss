@@ -1,9 +1,14 @@
+
 .d-none{
   display: none;
 }
 ion-tab-button{
+  --color: black;
   --color-focused:#C99A4C;
   --color-selected:#C99A4C;
+  ion-icon{
+    font-size: 25px;
+  }
 }
 @media screen and (max-width: 360px) {
   ion-label{

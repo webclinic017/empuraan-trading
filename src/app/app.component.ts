@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NetworkStatus, PluginListenerHandle, Plugins } from '@capacitor/core'
-import { AlertController, Platform, IonRouterOutlet } from '@ionic/angular';
+import { AlertController, Platform, IonRouterOutlet, NavController, NavParams } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Location } from '@angular/common';
@@ -20,6 +20,8 @@ export class AppComponent implements OnInit{
   @ViewChild(IonRouterOutlet, {static: false}) routerOutlet: IonRouterOutlet
   networkListener: PluginListenerHandle
   networkStatus: NetworkStatus 
+  tabBarElement: any;
+  splash = true;
 
   constructor(
     private platform: Platform,
@@ -28,14 +30,22 @@ export class AppComponent implements OnInit{
     private alertController: AlertController,
     private location: Location,
     private router: Router,
-    private userService: UserService,
-    private stockService: StockService
-  ) {}
+    private userService: UserService, 
+    public navCtrl: NavController, 
+    public navParams: NavParams
+  ) {
+  }
 
   async ngOnInit(){
     this.initializeApp()
     this.connectionLostEvent()
     this.backButtonEvent()
+    // this.tabBarElement = document.querySelector('.tabbar');
+    // this.tabBarElement.style.display = 'none';
+    setTimeout(() => {
+      this.splash = false;
+      // this.tabBarElement.style.display = 'flex';
+    }, 4000);
   }
 
   connectionLostEvent(){
@@ -88,7 +98,7 @@ export class AppComponent implements OnInit{
       this.userService.authenticated.subscribe(a => {
         a ? this.router.navigate(['home', 'dashboard']) : this.router.navigate(['home','login'])
       })
-      this.stockService.initStocks().subscribe()
+      // this.stockService.initStocks().subscribe()
     });
   }
 }

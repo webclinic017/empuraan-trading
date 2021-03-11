@@ -147,4 +147,9 @@ export class UserService {
 	checkIfIsOnLoginOrSignUpPage(link: string) {
 		link.includes("login") || link.includes("sign-up") ? this.isOnLoginOrSignUpPage.next(true) : this.isOnLoginOrSignUpPage.next(false);
 	}
+
+	getPlatformOfUser(){
+		if(this.platform.is("ios")) return {ios: true}
+		if(this.platform.is("android")) return {android: true}
+	}
 }

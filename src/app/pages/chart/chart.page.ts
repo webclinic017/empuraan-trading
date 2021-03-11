@@ -1,12 +1,12 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import {
-  widget,
-  IChartingLibraryWidget,
-  ChartingLibraryWidgetOptions,
-  LanguageCode,
-  ResolutionString,
-} from '../../../assets/charting_library/charting_library';
-import * as data from 'src/assets/reliance-data.json';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { timer } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import axios from 'axios';
+import { ticksToTickChart, TradeTick } from "candlestick-convert";
+import { ChartService } from 'src/app/services/chart.service';
+import { environment } from 'src/environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-chart',
@@ -14,140 +14,207 @@ import * as data from 'src/assets/reliance-data.json';
   styleUrls: ['./chart.page.scss'],
 })
 export class ChartPage implements OnInit, OnDestroy {
-  private _symbol: ChartingLibraryWidgetOptions['symbol'] = 'AAPL';
-  private _interval: ChartingLibraryWidgetOptions['interval'] = 'D' as ResolutionString;
-  // BEWARE: no trailing slash is expected in feed URL
-  private _datafeedUrl = 'https://demo_feed.tradingview.com';
-  private _libraryPath: ChartingLibraryWidgetOptions['library_path'] =
-    '/assets/charting_library/';
-  private _chartsStorageUrl: ChartingLibraryWidgetOptions['charts_storage_url'] =
-    'https://saveload.tradingview.com';
-  private _chartsStorageApiVersion: ChartingLibraryWidgetOptions['charts_storage_api_version'] =
-    '1.1';
-  private _clientId: ChartingLibraryWidgetOptions['client_id'] =
-    'tradingview.com';
-  private _userId: ChartingLibraryWidgetOptions['user_id'] = 'public_user_id';
-  private _fullscreen: ChartingLibraryWidgetOptions['fullscreen'] = false;
-  private _autosize: ChartingLibraryWidgetOptions['autosize'] = true;
-  private _containerId: ChartingLibraryWidgetOptions['container_id'] =
-    'tv_chart_container';
-  private _tvWidget: IChartingLibraryWidget | null = null;
+  @Input() symbol;
+  tradingview;
+  ws;
+  wsMessage = 'you may need to send specific message to subscribe data, eg: BTC';
+  hold = true;
+  stockId: string
+  watchlistId: string
+  uToken: string
 
-  @Input()
-  set symbol(symbol: ChartingLibraryWidgetOptions['symbol']) {
-    this._symbol = symbol || this._symbol;
-  }
+  granularityMap = {
+    '1': 60,
+    '5': 300,
+    '30': 30 * 60,
+    '60': 60 * 60,
+    '120': 60 * 60 * 2,
+    '240': 60 * 60 * 4,
+    '360': 60 * 60 * 6,
+    'D': 86400
+  };
 
-  @Input()
-  set interval(interval: ChartingLibraryWidgetOptions['interval']) {
-    this._interval = interval || this._interval;
-  }
-
-  @Input()
-  set datafeedUrl(datafeedUrl: string) {
-    this._datafeedUrl = datafeedUrl || this._datafeedUrl;
-  }
-
-  @Input()
-  set libraryPath(libraryPath: ChartingLibraryWidgetOptions['library_path']) {
-    this._libraryPath = libraryPath || this._libraryPath;
-  }
-
-  @Input()
-  set chartsStorageUrl(
-    chartsStorageUrl: ChartingLibraryWidgetOptions['charts_storage_url']
-  ) {
-    this._chartsStorageUrl = chartsStorageUrl || this._chartsStorageUrl;
-  }
-
-  @Input()
-  set chartsStorageApiVersion(
-    chartsStorageApiVersion: ChartingLibraryWidgetOptions['charts_storage_api_version']
-  ) {
-    this._chartsStorageApiVersion =
-      chartsStorageApiVersion || this._chartsStorageApiVersion;
-  }
-
-  @Input()
-  set clientId(clientId: ChartingLibraryWidgetOptions['client_id']) {
-    this._clientId = clientId || this._clientId;
-  }
-
-  @Input()
-  set userId(userId: ChartingLibraryWidgetOptions['user_id']) {
-    this._userId = userId || this._userId;
-  }
-
-  @Input()
-  set fullscreen(fullscreen: ChartingLibraryWidgetOptions['fullscreen']) {
-    this._fullscreen = fullscreen || this._fullscreen;
-  }
-
-  @Input()
-  set autosize(autosize: ChartingLibraryWidgetOptions['autosize']) {
-    this._autosize = autosize || this._autosize;
-  }
-
-  @Input()
-  set containerId(containerId: ChartingLibraryWidgetOptions['container_id']) {
-    this._containerId = containerId || this._containerId;
+  constructor(private chartService: ChartService, 
+    private route: ActivatedRoute, 
+    private userService: UserService) {
   }
 
   ngOnInit() {
-    function getLanguageFromURL(): LanguageCode | null {
-      const regex = new RegExp('[\\?&]lang=([^&#]*)');
-      const results = regex.exec(location.search);
+    this.route.params.subscribe(p => {
+      this.stockId = p.sId
+      this.watchlistId = p.wId
+      console.log(p)
+    })
+    this.userService.authenticated.subscribe(u => {
+      console.log(u)
+      this.uToken = u.token
+    })
+    this.ws = this.chartService.fakeWebSocket();
 
-      return results === null
-        ? null
-        : (decodeURIComponent(results[1].replace(/\+/g, ' ')) as LanguageCode);
-    }
-
-    const widgetOptions: ChartingLibraryWidgetOptions = {
-      symbol: this._symbol,
-      datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(
-        this._datafeedUrl
-      ),
-      interval: this._interval,
-      container_id: this._containerId,
-      library_path: this._libraryPath,
-      locale: getLanguageFromURL() || 'en',
-      disabled_features: ['use_localstorage_for_settings'],
-      enabled_features: ['study_templates'],
-      charts_storage_url: this._chartsStorageUrl,
-      charts_storage_api_version: this._chartsStorageApiVersion,
-      client_id: this._clientId,
-      user_id: this._userId,
-      fullscreen: this._fullscreen,
-      autosize: this._autosize,
+    this.ws.onopen = () => {
+      console.log('connect success');
+      this.drawTv();
     };
-
-    const tvWidget = new widget(widgetOptions);
-    this._tvWidget = tvWidget;
-
-    tvWidget.onChartReady(() => {
-      tvWidget.headerReady().then(() => {
-        const button = tvWidget.createButton();
-        button.setAttribute('title', 'Click to show a notification popup');
-        button.classList.add('apply-common-tooltip');
-        button.addEventListener('click', () =>
-          tvWidget.showNoticeDialog({
-            title: 'Notification',
-            body: 'TradingView Charting Library API works correctly',
-            callback: () => {
-              console.log('Noticed!');
-            },
-          })
-        );
-        button.innerHTML = 'Check API';
-      });
-    });
   }
 
   ngOnDestroy() {
-    if (this._tvWidget !== null) {
-      this._tvWidget.remove();
-      this._tvWidget = null;
-    }
+    this.ws.close();
+  }
+
+  drawTv() {
+    const that = this;
+
+    this.tradingview = new (window as any).TradingView.widget({
+      // debug: true, // uncomment this line to see Library errors and warnings in the console
+      fullscreen: true,
+      timezone: 'Asia/Kolkata',
+      symbol: that.symbol,
+      interval: '1',
+      container_id: 'tradingview',
+      library_path: 'assets/vendors/charting_library/',
+      locale: 'en',
+      disabled_features: [
+        // 'timeframes_toolbar',
+        // 'go_to_date',
+        // 'use_localstorage_for_settings',
+        'volume_force_overlay',
+        // 'show_interval_dialog_on_key_press',
+        'symbol_search_hot_key',
+        'study_dialog_search_control',
+        'display_market_status',
+        /*'header_compare',
+        'header_symbol_search',
+        'header_fullscreen_button',
+        'header_settings',
+        'header_chart_type',
+        'header_resolutions',*/
+        'control_bar',
+        'edit_buttons_in_legend',
+        'border_around_the_chart',
+        // 'main_series_scale_menu',
+        'star_some_intervals_by_default',
+        'datasource_copypaste',
+        'header_indicators',
+        // 'context_menus',
+        // 'compare_symbol',
+        'header_undo_redo',
+        'border_around_the_chart',
+        'timezone_menu',
+        'remove_library_container_border',
+      ],
+      allow_symbol_change: true,
+      enabled_features: ['study_templates'],
+      // charts_storage_url: 'http://saveload.tradingview.com',
+      charts_storage_api_version: '1.1',
+      client_id: 'tradingview.com',
+      user_id: 'public_user_id',
+      // timezone: 'America/New_York',
+      volumePaneSize: 'tiny',
+      datafeed: {
+        onReady(x) {
+          timer(1e3)
+            .pipe(
+              tap(() => {
+                x({
+                  supported_resolutions: ['1', '5', '30', '60', '120', '240', '360', 'D']
+                });
+              })
+            ).subscribe();
+        },
+        getBars(symbol, granularity, startTime, endTime, onResult, onError, isFirst) {
+          console.log('granularity', granularity);
+          // console.log(startTime, endTime);
+          // console.log('getBars:', arguments[1]);
+          // console.log('symbol:', symbol);
+          const instance = axios.create({
+            baseURL: environment.apiUrl
+          });
+          instance.defaults.headers.common['Authorization'] = 'Bearer ' + this.uToken;
+          instance.defaults.headers.post['Content-Type'] = 'application/json';
+          this.hold = true;
+          // stockid/watchlistId
+          instance.get(`/stocks/history/${this.stockId}/${this.watchlistId}/${granularity}`).then((res) => {
+
+            var finalDataSet = res.data.data.historyData;
+            finalDataSet.map((val) => {
+              val.time = val.date;
+              val.vol = val.volume;
+              return val;
+            });
+            console.log(finalDataSet);
+            onResult(finalDataSet, { noData: false });
+            this.hold = false;
+          });
+
+          // that.mockService.getHistoryList({
+          //   granularity: that.granularityMap[granularity],
+          //   startTime,
+          //   endTime
+          // }).subscribe((data: any) => {
+          //   // push the history data to callback
+          //   console.log(data);
+          //   onResult(data);
+          // });
+        },
+        resolveSymbol(symbol, onResolve) {
+          console.log('resolveSymbol:', arguments);
+          timer(1e3)
+            .pipe(
+              tap(() => {
+                onResolve({
+                  name: that.symbol,
+                  full_name: that.symbol, // display on the chart
+                  base_name: that.symbol,
+                  has_intraday: true, // enable minute and others
+                });
+              })
+            ).subscribe();
+        },
+        getServerTime() {
+          console.log('serverTime:', arguments);
+        },
+        subscribeBars(symbol, granularity, onTick) {
+          that.chartService.listen(`${this.stockId}-${this.watchlistId}`)
+            .subscribe(async (res: any) => {
+              if (res) {
+                res.map((val) => {
+                  val.volume = val.vol;
+                  return val;
+                });
+
+                console.log(res[0]);
+                if (!this.hold) {
+                  // console.log(res[0]);
+                  onTick(res[0]);
+                }
+              }
+
+            });
+
+
+          // that.ws.onmessage = (e) => {
+          //   try {
+          //     const data = e;
+          //     if (data) {
+          //       // realtime data
+          //       // data's timestamp === recent one ? Update the recent one : A new timestamp data
+          //       // in this example mock service always returns a new timestamp(current time)
+          //       console.log(data)
+          //       onTick(data);
+          //     }
+          //   } catch (e) {
+          //     console.error(e);
+          //   }
+          // };
+
+          // // subscribe the realtime data
+          // that.ws.send(`${that.wsMessage}_kline_${that.granularityMap[granularity]}`);
+        },
+        unsubscribeBars() {
+          console.log('refreshing');
+          // that.ws.send('stop receiving data or just close websocket');
+        },
+      },
+    });
   }
 }

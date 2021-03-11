@@ -134,13 +134,13 @@ export class OrdersPage implements OnInit, OnDestroy {
 		this.unsubscribeFromSockets();
 		this.tempPosition.forEach((s: any, i) => {
 			let stockSub: Subscription = this.stockService.listen(`${s.stockId}-${s.watchlistId}`).subscribe((res: any) => {
-				s.ltp = res[0].price;
+				s.ltp = res[0].close;
 			});
 			this.subscribedPositionSockets.unshift(stockSub);
 		});
 		this.tempPending.forEach((s: any, i) => {
 			let stockSub: Subscription = this.stockService.listen(`${s.stockId}-${s.watchlistId}`).subscribe((res: any) => {
-				s.ltp = res[0].price;
+				s.ltp = res[0].close;
 			});
 			this.subscribedPendingSockets.unshift(stockSub);
 		});

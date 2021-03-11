@@ -16,6 +16,44 @@ ion-content {
     align-items: center;
   }
 }
+ion-item{
+  --min-height: 54px;
+  min-width: 100%;
+  --border-color: rgba(233,233,233);
+}
+ion-icon[name="play"]{
+  color:rgba(218,182,93);
+}
+ion-label h3{
+  font-weight: 700;
+}
+.wrap{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    margin-top: 20px;
+    font-size: 26px;
+    font-weight: 700;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  h4 {
+      font-size: 18px;
+      margin-top: 0;
+      font-weight: 300;
+      margin-bottom: 50px;
+  }
+  ion-list{
+    width: 100%;
+  }
+}
+ion-text.stock-price{
+  color:#dab65d;
+}
 @media screen and (max-width: 360px) {
   ion-title{
     font-size:14px !important;

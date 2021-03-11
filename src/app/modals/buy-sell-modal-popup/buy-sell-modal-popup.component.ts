@@ -17,7 +17,7 @@ export class BuySellModalPopupComponent implements OnInit {
 
 	ngOnInit() {
 		this.stockService.listen(`${this.selectedStock.id}-${this.selectedWatchlistId}`).subscribe((res: any) => {
-			this.selectedStock.ltp = res[0].price;
+			this.selectedStock.ltp = res[0].close;
 		});
 	}
 
@@ -31,6 +31,6 @@ export class BuySellModalPopupComponent implements OnInit {
 	}
 	navigateToChart() {
 		this.modalCtrl.dismiss();
-		this.router.navigate(["chart"]);
+		this.router.navigate(["chart", this.selectedStock.id, this.selectedWatchlistId]);
 	}
 }

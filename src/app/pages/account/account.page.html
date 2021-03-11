@@ -4,11 +4,11 @@
 		<ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
 	</ion-toolbar>
 </ion-header>
-<ion-content mode="ios">
+<ion-content>
 	<div class="wrap">
 		<div class="white-circle-bg"></div>
 		<div class="user-info">
-			<ion-card class="ion-padding-horizontal ion-no-margin account-card" [routerLink]="['profile']">
+			<ion-card mode="ios" class="ion-padding-horizontal ion-no-margin account-card" [routerLink]="['profile']">
 				<ion-grid>
 					<ion-row class="ion-align-items-center">
 						<ion-col size="8">
@@ -23,27 +23,27 @@
 					</ion-row>
 				</ion-grid>
 			</ion-card>
-			<ion-card class="ion-no-margin">
+			<ion-card mode="ios" class="ion-no-margin">
 				<ion-list>
-					<ion-item class="ion-no-padding account-card-link funds-link" [routerLink]="['funds']">
+					<!-- <ion-item class="ion-no-padding account-card-link funds-link" [routerLink]="['funds']">
 						<ion-text>Funds</ion-text>
 						<ion-icon name="cash-outline" class="ion-margin-end icon"></ion-icon>
-					</ion-item>
+					</ion-item> -->
 					<ion-item class="ion-no-padding account-card-link" [routerLink]="['profile']">
 						<ion-text>Profile</ion-text>
-						<ion-icon name="person-outline" class="ion-margin-end icon"></ion-icon>
+						<ion-icon src="/assets/svg/user.svg" class="ion-margin-end icon"></ion-icon>
 					</ion-item>
 					<ion-item class="ion-no-padding account-card-link" [routerLink]="['settings']">
 						<ion-text>Settings</ion-text>
-						<ion-icon name="settings-outline" class="ion-margin-end icon"></ion-icon>
+						<ion-icon src="/assets/svg/Settings.svg" class="ion-margin-end icon"></ion-icon>
 					</ion-item>
 					<ion-item class="ion-no-padding account-card-link" [routerLink]="['invite-friends']">
 						<ion-text>Invite friends</ion-text>
-						<ion-icon name="person-add-outline" class="ion-margin-end icon"></ion-icon>
+						<ion-icon src="/assets/svg/user-add.svg" class="ion-margin-end icon"></ion-icon>
 					</ion-item>
 					<ion-item class="ion-no-padding account-card-link" (click)="logout()">
 						<ion-text>Logout</ion-text>
-						<ion-icon name="log-out-outline" class="ion-margin-end icon"></ion-icon>
+						<ion-icon src="/assets/svg/Logout.svg" class="ion-margin-end icon"></ion-icon>
 					</ion-item>
 				</ion-list>
 			</ion-card>

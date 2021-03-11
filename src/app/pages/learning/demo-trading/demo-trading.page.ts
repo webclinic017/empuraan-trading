@@ -52,7 +52,7 @@ export class DemoTradingPage implements OnInit {
 
   filter(e){
     this.filteredDemotrading = this.demotrading.filter(p => p.title.toLowerCase().includes(e.detail.value.toLowerCase()))
-    this.filteredDemotrading.reverse()
+    // this.filteredDemotrading.reverse()
   }
 
 }

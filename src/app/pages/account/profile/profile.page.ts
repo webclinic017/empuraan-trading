@@ -22,7 +22,7 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['home','account'])
   }
 
-  async openCompaniesModal(id) {
+  async openCompaniesModal(id?) {
     const modal = await this.modalController.create({
       component: ModalChangePasswordComponent,
       // componentProps: {selectedWatchlist: id}

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy, IonRouterOutlet, Platform } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, IonRouterOutlet, NavParams, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
@@ -94,6 +94,7 @@ export function tokenGetter() {
     SocialSharing,
     GooglePlus,
     Storage,
+    NavParams,
     ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

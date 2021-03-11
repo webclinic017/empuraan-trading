@@ -6,7 +6,8 @@
 </ion-header>
 <ion-content mode="ios">
 	<div class="wrap">
-		<div class="white-circle-bg"></div>
+		<div class="white-circle-bg"
+			[ngStyle]="{'height': chartLoaded && data[0]?.series?.length <= 1 ? '770px' : '800px'}"></div>
 		<ion-grid>
 			<ion-row class="hello-box">
 				<ion-col class="ion-padding-top">
@@ -16,41 +17,57 @@
 			<ion-row>
 				<ion-col>
 					<ion-label class="funds-title">Funds</ion-label>
-					<ion-card class="funds-card">
+					<ion-card mode="ios" class="funds-card" mode="ios">
 						<ion-list *ngIf="!balanceLoaded">
 							<ion-item class="ion-no-padding">
 								<ion-label class="title">Opening bal:</ion-label>
-								<ion-label class="value"><ion-spinner class="ion-no-padding" name="lines-small"></ion-spinner></ion-label>
+								<ion-label class="value">
+									<ion-spinner class="ion-no-padding" name="lines-small"></ion-spinner>
+								</ion-label>
 							</ion-item>
 							<ion-item class="ion-no-padding">
 								<ion-label class="title">Available bal:</ion-label>
-								<ion-label class="value"><ion-spinner class="ion-no-padding" name="lines-small"></ion-spinner></ion-label>
+								<ion-label class="value">
+									<ion-spinner class="ion-no-padding" name="lines-small"></ion-spinner>
+								</ion-label>
 							</ion-item>
 							<ion-item class="ion-no-padding">
 								<ion-label class="title">P/L:</ion-label>
-								<ion-label class="value"><ion-spinner class="ion-no-padding" name="lines-small"></ion-spinner></ion-label>
+								<ion-label class="value">
+									<ion-spinner class="ion-no-padding" name="lines-small"></ion-spinner>
+								</ion-label>
 							</ion-item>
 							<ion-item class="ion-no-padding">
 								<ion-label class="title">% gain:</ion-label>
-								<ion-label class="value"><ion-spinner class="ion-no-padding" name="lines-small"></ion-spinner></ion-label>
+								<ion-label class="value">
+									<ion-spinner class="ion-no-padding" name="lines-small"></ion-spinner>
+								</ion-label>
 							</ion-item>
 						</ion-list>
 						<ion-list *ngIf="balanceLoaded">
 							<ion-item class="ion-no-padding">
 								<ion-label class="title">Opening bal:</ion-label>
-								<ion-label class="value">{{user?.balance.currency}} {{(user?.balance.openBal != null ? user?.balance.openBal : 0) | number:'1.2'}}</ion-label>
+								<ion-label class="value">{{user?.balance.currency}}
+									{{(user?.balance.openBal != null ? user?.balance.openBal : 0) | number:'1.2'}}
+								</ion-label>
 							</ion-item>
 							<ion-item class="ion-no-padding">
 								<ion-label class="title">Available bal:</ion-label>
-								<ion-label class="value">{{user?.balance.currency}} {{(user?.balance.availableBal != null ? user?.balance.availableBal : 0) | number:'1.2'}}</ion-label>
+								<ion-label class="value">{{user?.balance.currency}}
+									{{(user?.balance.availableBal != null ? user?.balance.availableBal : 0) | number:'1.2'}}
+								</ion-label>
 							</ion-item>
 							<ion-item class="ion-no-padding">
 								<ion-label class="title">P/L:</ion-label>
-								<ion-label class="value">{{user?.balance.currency}} {{(user?.balance.pAndL != null ? user?.balance.pAndL : 0) | number:'1.2'}}</ion-label>
+								<ion-label class="value">{{user?.balance.currency}}
+									{{(user?.balance.pAndL != null ? user?.balance.pAndL : 0) | number:'1.2'}}
+								</ion-label>
 							</ion-item>
 							<ion-item class="ion-no-padding">
 								<ion-label class="title">% gain:</ion-label>
-								<ion-label class="value">{{(user?.balance.gain != null ? user?.balance.gain : 0) | percent:'1.2'}}</ion-label>
+								<ion-label class="value">
+									{{(user?.balance.gain != null ? user?.balance.gain : 0) | percent:'1.2'}}
+								</ion-label>
 							</ion-item>
 						</ion-list>
 					</ion-card>
@@ -59,10 +76,13 @@
 			<ion-row>
 				<ion-col class="funds-chart-card">
 					<ion-label class="funds-chart-title"> Funds Chart </ion-label>
-					<ngx-charts-line-chart *ngIf="chartLoaded && data[0]?.series.length > 1" [legend]="false" [showXAxisLabel]="false" [showYAxisLabel]="false" [xAxis]="true" [yAxis]="true" [timeline]="false" [autoScale]="true" [results]="data" [view]="view">
+					<ngx-charts-line-chart *ngIf="chartLoaded && data[0]?.series.length > 1" [legend]="false"
+						[showXAxisLabel]="false" [showYAxisLabel]="false" [xAxis]="true" [yAxis]="true"
+						[maxXAxisTickLength]="30" [timeline]="false" [autoScale]="true" [results]="data" [view]="view">
 					</ngx-charts-line-chart>
-					<ion-spinner name="lines" style="height: 236px" *ngIf="!chartLoaded" color="dark"></ion-spinner>
-					<ion-label *ngIf="chartLoaded && data[0]?.series.length == 1"> There is no data here for now, go on and trade to see the chart. </ion-label>
+					<ion-spinner name="lines" style="height: 50px" *ngIf="!chartLoaded" color="dark"></ion-spinner>
+					<ion-label *ngIf="chartLoaded && data[0]?.series.length == 1"> There is no data here for now, go on
+						and trade to see the chart. </ion-label>
 				</ion-col>
 			</ion-row>
 			<ion-row class="leaderboard">
@@ -71,35 +91,57 @@
 					<table class="leaderboard-table">
 						<thead class="header-labels">
 							<tr>
-								<th><ion-label>Rank</ion-label></th>
-								<th><ion-label>Name</ion-label></th>
-								<th><ion-label>% Gain</ion-label></th>
+								<th>
+									<ion-label>Rank</ion-label>
+								</th>
+								<th>
+									<ion-label>Name</ion-label>
+								</th>
+								<th>
+									<ion-label>% Gain</ion-label>
+								</th>
 							</tr>
 						</thead>
 						<tbody *ngIf="leaderboardLoaded">
 							<tr *ngFor="let user of leaderboard | slice:0:5">
-								<td><ion-label>{{user?.rank}}</ion-label></td>
-								<td><ion-label>{{user?.userName}}</ion-label></td>
-								<td><ion-label>{{user?.gain | number:'1.1'}}%</ion-label></td>
+								<td>
+									<ion-label>{{user?.rank}}</ion-label>
+								</td>
+								<td>
+									<ion-label>{{user?.userName}}</ion-label>
+								</td>
+								<td>
+									<ion-label>{{user?.gain | number:'1.1'}}%</ion-label>
+								</td>
 							</tr>
 						</tbody>
 						<tbody *ngIf="!leaderboardLoaded">
 							<tr>
-								<td><ion-spinner name="lines-small"></ion-spinner></td>
-								<td><ion-spinner name="lines-small"></ion-spinner></td>
-								<td><ion-spinner name="lines-small"></ion-spinner></td>
+								<td>
+									<ion-spinner name="lines-small"></ion-spinner>
+								</td>
+								<td>
+									<ion-spinner name="lines-small"></ion-spinner>
+								</td>
+								<td>
+									<ion-spinner name="lines-small"></ion-spinner>
+								</td>
 							</tr>
 						</tbody>
 					</table>
 					<ion-item class="ion-no-padding" *ngIf="leaderboardLoaded">
-						<ion-button (click)="navigateToLeaderboard()" color="tertiary" size="small" fill="clear" class="see-more-button"> See more </ion-button>
+						<ion-button (click)="navigateToLeaderboard()" color="tertiary" size="small" fill="clear"
+							class="see-more-button"> See more </ion-button>
 					</ion-item>
 					<ion-item class="ion-no-padding" *ngIf="!leaderboardLoaded">
-						<ion-button color="tertiary" size="small" fill="clear" class="see-more-button"> See more </ion-button>
+						<ion-button color="tertiary" size="small" fill="clear" class="see-more-button"> See more
+						</ion-button>
 					</ion-item>
 				</ion-col>
 			</ion-row>
 		</ion-grid>
-		<div class="white-box-bg"></div>
+		<div [ngClass]="{'white-box-bg': chartLoaded && data[0]?.series.length > 1}"
+			[ngStyle]="{'bottom': isAndroid() ? '-112%' : '-80%',
+			'height': isAndroid() ? '240px' : '200px'}"></div>
 	</div>
 </ion-content>

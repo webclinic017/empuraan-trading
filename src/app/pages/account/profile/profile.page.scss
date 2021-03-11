@@ -1,38 +1,48 @@
-.profile-header{
-    flex-direction: row; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between;
-
-    div{
-        display: flex; 
-        flex-direction: column; 
-        justify-content: start;
-    }
-    h5{
-        margin-bottom:0px;
-    }
-    p{
-        margin-top:5px;
-    }
-    
-    .account-img{
-        height: 85px; 
-        width: 85px; 
-        border-radius: 50%;
+.profile-header {
+    ion-card-content {
+        flex-direction: row;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
-        background: #ffff7f;
-        span{
-            text-align: center;
-            font-size: 45px;
-            color:black;
-            text-transform: capitalize;
+        justify-content: space-between;
+
+        .information {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+
+            .title {
+                color: black;
+                font-size: 18px;
+                text-transform: capitalize;
+            }
+
+            .subtitle {
+                font-size: 15px;
+                color: rgba(30,72,138);
+                font-weight: 700;
+            }
+        }
+
+        .img {
+            height: 85px;
+            width: 85px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #ffff7f;
+
+            span {
+                text-align: center;
+                font-size: 45px;
+                color: black;
+                text-transform: capitalize;
+            }
         }
     }
 }
+
 hr {
     border-top: 1px solid rgba(167, 167, 167, 0.5) !important;
     height: 1px !important;
@@ -43,21 +53,23 @@ hr {
     visibility: visible !important;
     margin-top: 0;
 }
-.account-card-link{
-    display: flex; 
-    flex-direction: row; 
-    align-items: center; 
+
+.account-card-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
 
-    .icon{
+    .icon {
         font-size: 25px;
     }
 }
-.subtitle{
-    color:#737373;
+
+.footer-toolbar{
+    --border-width: 0 !important;
 }
 @media(prefers-color-scheme: dark) {
-    .subtitle{
-        color:#949494;
+    .subtitle {
+        color: #949494;
     }
 }

@@ -147,4 +147,9 @@ export class DashboardPage implements OnInit {
 		this.chartLoaded = true;
 		console.log(this.data)
 	}
+
+	isAndroid(){
+		const platform = this.userService.getPlatformOfUser()
+		return platform.android || false
+	}
 }

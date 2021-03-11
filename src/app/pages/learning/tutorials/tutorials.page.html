@@ -1,18 +1,15 @@
 <ion-content class="ion-padding-top">
-	<ion-list>
-		<div *ngFor="let video of sanitizedVideos; let i = index" class="video-card" >
-			<ion-label class="ion-padding-horizontal"><h4 class="video-title">{{video.name}}</h4></ion-label>
-			<iframe
-				class="ion-padding"
-				width="fit-content"
-				height="250"
-				[src]="video"
-				id="{{'video'+i}}"
-				frameborder="0"
-				allowfullscreen
-				allowtransparency="true"
-				appVideoSwiper
-			></iframe>
-		</div>
-	</ion-list>
+	<div class="wrap">
+		<ion-list>
+			<div *ngFor="let video of sanitizedVideos; let i = index" class="video-card">
+				<iframe class="ion-padding" width="fit-content" height="250" [src]="video" id="{{'video'+i}}"
+					frameborder="0" allowfullscreen allowtransparency="true" appVideoSwiper>
+				</iframe>
+				<ion-label class="ion-padding-horizontal">
+					<h4 class="video-title">{{video.name}}</h4>
+				</ion-label>
+				<hr>
+			</div>
+		</ion-list>
+	</div>
 </ion-content>

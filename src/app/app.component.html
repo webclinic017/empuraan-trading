@@ -1,3 +1,13 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <div class="splash-wrap" [style.display]="splash ? 'flex': 'none'">
+    <img class="splash-screen" src="assets/splash/splash.gif" >
+  </div>
+  <!-- <div class="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+    <div class="flb">
+      <div class="aligner-item aligner-item--top"></div>
+      <img src="assets/svg/user.svg">
+      <div class="aligner-item aligner-item--bottom"></div>
+    </div>
+  </div> -->
+  <ion-router-outlet [hidden]="splash"></ion-router-outlet>
 </ion-app>

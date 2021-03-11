@@ -9,7 +9,7 @@
 		<ion-img slot="end" src="/assets/logo_no_back.png" class="logo"></ion-img>
 	</ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content mode="ios">
 	<super-tabs *ngIf="!dataLoaded">
 		<super-tabs-toolbar slot="top" color="translucent">
 			<super-tab-button>
@@ -25,51 +25,43 @@
 		<super-tabs-container>
 			<super-tab>
 				<ion-searchbar showCancelButton="focus"></ion-searchbar>
-				<!-- <ion-card>
-					<ion-card-content>
-						<ion-card-subtitle class="skeleton-row">
-							<ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-						</ion-card-subtitle>
-						<ion-card-title class="skeleton-row">
-							<ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
-						</ion-card-title>
-					</ion-card-content>
-				</ion-card> -->
-				<ion-list>
-					<ion-item class="ion-no-padding" *ngFor="let item of [].constructor(7)">
-						<ion-grid class="ion-no-padding ion-padding-vertical">
-							<ion-row>
-								<ion-col col="6" class="ion-padding-start">
-									<span style="display: flex; flex-direction: row; justify-content: flex-start;">
-										<ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-									</span>
-									<span style="display: flex; flex-direction: row; justify-content: flex-start;">
-										<ion-skeleton-text animated style="width: 25%;margin-right: 10px;"></ion-skeleton-text>
-										<ion-skeleton-text animated style="width: 15%"></ion-skeleton-text>
-									</span>
-									<span style="display: flex; flex-direction: row; justify-content: flex-start;">
-										<ion-skeleton-text animated style="width: 28%;margin-right: 10px;"></ion-skeleton-text>
-										<ion-skeleton-text animated style="width: 10%"></ion-skeleton-text>
-									</span>
-								</ion-col>
-								<ion-col col="6" class="ion-padding-end">
-									<span style="display: flex; flex-direction: row; justify-content: flex-end;">
-										<ion-skeleton-text animated style="width: 15%;margin-right: 10px;"></ion-skeleton-text>
-										<ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
-									</span>
-									<span style="display: flex; flex-direction: row; justify-content: flex-end;">
-										<ion-skeleton-text animated style="width: 15%;margin-right: 10px;"></ion-skeleton-text>
-										<ion-skeleton-text animated style="width: 15%"></ion-skeleton-text>
-									</span>
-									<!-- <span style="display: flex; flex-direction: row; justify-content: flex-end;">
-										<ion-skeleton-text animated style="width: 15%;margin-right: 10px;"></ion-skeleton-text>
-										<ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
-									</span> -->
-								</ion-col>
-							</ion-row>
-						</ion-grid>
-					</ion-item>
-				</ion-list>
+				<ion-card mode="ios">
+					<ion-list>
+						<ion-item class="ion-no-padding order-item" *ngFor="let item of [].constructor(5)">
+							<ion-grid class="ion-no-padding ion-padding-vertical">
+								<ion-row>
+									<ion-col col="6" class="ion-padding-start">
+										<span style="display: flex; flex-direction: row; justify-content: flex-start;">
+											<ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+										</span>
+										<span style="display: flex; flex-direction: row; justify-content: flex-start;">
+											<ion-skeleton-text animated style="width: 25%;margin-right: 10px;">
+											</ion-skeleton-text>
+											<ion-skeleton-text animated style="width: 15%"></ion-skeleton-text>
+										</span>
+										<span style="display: flex; flex-direction: row; justify-content: flex-start;">
+											<ion-skeleton-text animated style="width: 28%;margin-right: 10px;">
+											</ion-skeleton-text>
+											<ion-skeleton-text animated style="width: 10%"></ion-skeleton-text>
+										</span>
+									</ion-col>
+									<ion-col col="6" class="ion-padding-end">
+										<span style="display: flex; flex-direction: row; justify-content: flex-end;">
+											<ion-skeleton-text animated style="width: 15%;margin-right: 10px;">
+											</ion-skeleton-text>
+											<ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+										</span>
+										<span style="display: flex; flex-direction: row; justify-content: flex-end;">
+											<ion-skeleton-text animated style="width: 15%;margin-right: 10px;">
+											</ion-skeleton-text>
+											<ion-skeleton-text animated style="width: 15%"></ion-skeleton-text>
+										</span>
+									</ion-col>
+								</ion-row>
+							</ion-grid>
+						</ion-item>
+					</ion-list>
+				</ion-card>
 			</super-tab>
 		</super-tabs-container>
 	</super-tabs>
@@ -88,138 +80,136 @@
 		<super-tabs-container (activeTabIndexChange)="tabIndex($event)">
 			<super-tab>
 				<ion-searchbar showCancelButton="focus" (ionChange)="filterPosition($event)"></ion-searchbar>
-				<!-- <ion-card>
-					<ion-card-content>
-						<ion-card-subtitle>Total P&L</ion-card-subtitle>
-						<ion-card-title [ngClass]="{'success': totalPandL > 0, 'failure': totalPandL < 0}">
-							{{totalPandL > 0 ? '+' : ''}}{{totalPandL}}
-						</ion-card-title>
-					</ion-card-content>
-				</ion-card> -->
-				<ion-text class="ion-padding-start ion-padding-top" *ngIf="filteredPosition?.length == 0 || position?.length == 0 && dataLoaded">
+				<ion-text class="ion-padding-start ion-padding-top"
+					*ngIf="filteredPosition?.length == 0 || position?.length == 0 && dataLoaded">
 					There are no position orders currently.
 				</ion-text>
-				<ion-list *ngIf="filteredPosition?.length > 0 || position?.length > 0 && dataLoaded">
-					<ion-item class="ion-no-padding" *ngFor="let p of filteredPosition || position" (click)="ordersActionSheet(p)">
-						<ion-grid class="ion-no-padding ion-padding-vertical">
-							<ion-row>
-								<ion-col col="6" class="ion-padding-start">
-									<p>
-										<span [ngClass]="{'buy': p.orderCategory == 'buy', 'sell': p.orderCategory == 'sell'}"> {{p.name}} </span>
-									</p>
-									<p>Price: {{p.price}}</p>
-									<p>Quantity: {{p?.orderCategory == 'sell' ? '-' : '+'}}{{p.quantity}}</p>
-								</ion-col>
-								<ion-col col="6" class="ion-text-right ion-no-padding">
-									<!-- todo : CENTRALIZE -->
-									<table class="ion-float-right">
-										<tbody>
-											<tr>
-												<td>
-													<p><strong>P&L</strong></p>
-												</td>
-												<td>
-													<p>
-														<ion-text [color]="+p.ltp - p.price >= 0 ? 'success' : 'danger'" *ngIf="p.orderCategory == 'buy'">
-															{{+p.ltp - p.price > 0 ? ' +' : ''}}{{+(p.ltp - p.price)*p.quantity | number:'1.2'}}
-														</ion-text>
-														<ion-text [color]="+p.ltp - p.price >= 0 ? 'success' : 'danger'" *ngIf="p.orderCategory == 'sell'">
-															{{+p.ltp - p.price > 0 ? ' +' : ''}}{{+(p.price - p.ltp)*p.quantity | number:'1.2'}}
-														</ion-text>
-													</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p><strong>LTP</strong></p>
-												</td>
-												<td>
-													<p>{{p.ltp}}</p>
-												</td>
-											</tr>
-											<!-- <tr>
-												<td>
-													<p><strong>SL</strong></p>
-												</td>
-												<td>
-													<p>{{p.stoploss}}</p>
-												</td>
-											</tr> -->
-										</tbody>
-									</table>
-								</ion-col>
-							</ion-row>
-						</ion-grid>
-					</ion-item>
-				</ion-list>
+				<ion-card mode="ios">
+					<ion-list *ngIf="filteredPosition?.length > 0 || position?.length > 0 && dataLoaded">
+						<ion-item class="ion-no-padding order-item" *ngFor="let p of filteredPosition || position"
+							(click)="ordersActionSheet(p)">
+							<ion-grid class="ion-no-padding ion-padding-vertical">
+								<ion-row>
+									<ion-col col="6" class="ion-padding-start">
+										<p>
+											<span
+												[ngClass]="{'buy': p.orderCategory == 'buy', 'sell': p.orderCategory == 'sell'}">
+												{{p.name}} </span>
+										</p>
+										<p>Price: {{p.price}}</p>
+										<p>Quantity: {{p?.orderCategory == 'sell' ? '-' : '+'}}{{p.quantity}}</p>
+									</ion-col>
+									<ion-col col="6" class="ion-text-right ion-no-padding">
+										<table class="ion-float-right">
+											<tbody>
+												<tr>
+													<td>
+														<p><strong>P&L</strong></p>
+													</td>
+													<td>
+														<p>
+															<ion-text
+																[color]="+p.ltp - p.price >= 0 ? 'success' : 'danger'"
+																*ngIf="p.orderCategory == 'buy'">
+																{{+p.ltp - p.price > 0 ? ' +' : ''}}{{+(p.ltp - p.price)*p.quantity | number:'1.2'}}
+															</ion-text>
+															<ion-text
+																[color]="+p.ltp - p.price >= 0 ? 'success' : 'danger'"
+																*ngIf="p.orderCategory == 'sell'">
+																{{+p.ltp - p.price > 0 ? ' +' : ''}}{{+(p.price - p.ltp)*p.quantity | number:'1.2'}}
+															</ion-text>
+														</p>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<p><strong>LTP</strong></p>
+													</td>
+													<td>
+														<p>{{p.ltp}}</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</ion-col>
+								</ion-row>
+							</ion-grid>
+						</ion-item>
+					</ion-list>
+				</ion-card>
 			</super-tab>
 			<super-tab>
 				<ion-searchbar showCancelButton="focus" (ionChange)="filterCompleted($event)"></ion-searchbar>
-				<ion-text class="ion-padding-start ion-padding-top" *ngIf="filteredCompleted?.length == 0 || completed?.length == 0 && dataLoaded">
-					There are no completed orders currently.
-				</ion-text>
-				<ion-list *ngIf="filteredCompleted?.length > 0 || completed?.length > 0 && dataLoaded">
-					<ion-item class="ion-no-padding" *ngFor="let c of filteredCompleted || completed">
-						<ion-grid class="ion-no-padding ion-padding-vertical">
-							<ion-row>
-								<ion-col col="6" class="ion-padding-start">
-									<p>
-										<span [ngClass]="{'buy': c.orderCategory == 'buy', 'sell': c.orderCategory == 'sell'}"> {{c.name}} </span>
-									</p>
-									<!-- <p>Price: {{c.price}}</p> -->
-									<p>Quantity: {{c?.orderCategory == 'sell' ? '-' : '+'}}{{c.quantity}}</p>
-								</ion-col>
-								<ion-col col="6" class="ion-text-right">
-									<p>
-										<span [ngClass]="{'cancelled': c.status == 'cancelled', 'complete': c.status == 'completed'}">
-											{{c.status | uppercase}}
-										</span>
-									</p>
-									<p>
-										<strong>Price</strong>
-										{{c.price}}
-									</p>
-									<!-- <p>
-										<strong>P&L</strong>
-										<span [ngClass]="{'success': c.pAndL > 0, 'failure':c.pAndL < 0}">
-											{{c.pAndL > 0 ? ' +' : ' '}}{{c.pAndL}}
-										</span>
-										0
-									</p> -->
-									<!-- <p>
-										<strong>Exit Price</strong>
-										{{c.exitPrice}}
-										0
-									</p> -->
-								</ion-col>
-							</ion-row>
-						</ion-grid>
-					</ion-item>
-				</ion-list>
+				<div class="wrap">
+					<ion-text class="ion-padding-start ion-padding-top"
+						*ngIf="filteredCompleted?.length == 0 || completed?.length == 0 && dataLoaded">
+						There are no completed orders currently.
+					</ion-text>
+					<ion-card mode="ios">
+						<ion-list *ngIf="filteredCompleted?.length > 0 || completed?.length > 0 && dataLoaded">
+							<ion-item class="ion-no-padding order-item"
+								*ngFor="let c of filteredCompleted || completed">
+								<ion-grid class="ion-no-padding ion-padding-vertical">
+									<ion-row>
+										<ion-col col="6" class="ion-padding-start">
+											<p>
+												<span
+													[ngClass]="{'buy': c.orderCategory == 'buy', 'sell': c.orderCategory == 'sell'}">
+													{{c.name}} </span>
+											</p>
+											<p>Quantity: {{c?.orderCategory == 'sell' ? '-' : '+'}}{{c.quantity}}</p>
+										</ion-col>
+										<ion-col col="6" class="ion-text-right">
+											<p>
+												<span
+													[ngClass]="{'cancelled': c.status == 'cancelled', 'complete': c.status == 'completed'}">
+													{{c.status | uppercase}}
+												</span>
+											</p>
+											<p>
+												<strong>Price</strong>
+												{{c.price}}
+											</p>
+										</ion-col>
+									</ion-row>
+								</ion-grid>
+							</ion-item>
+						</ion-list>
+					</ion-card>
+				</div>
 			</super-tab>
 			<super-tab>
 				<ion-searchbar showCancelButton="focus" (ionChange)="filterPending($event)"></ion-searchbar>
-				<ion-text class="ion-padding-start ion-padding-top" *ngIf="filteredPending?.length == 0 || pending?.length == 0 && dataLoaded">
-					There are no pending orders currently.
-				</ion-text>
-				<ion-list *ngIf="filteredPending?.length > 0 || pending?.length > 0 && dataLoaded">
-					<ion-item class="ion-no-padding" *ngFor="let p of filteredPending || pending" (click)="ordersActionSheet(p)">
-						<ion-grid class="ion-no-padding ion-padding-vertical">
-							<ion-row>
-								<ion-col col="6" class="ion-padding-start">
-									<p>
-										<span [ngClass]="{'buy': p.orderCategory == 'buy', 'sell': p.orderCategory == 'sell'}"> {{p.name}} </span>
-									</p>
-									<p>Quantity: {{p?.orderCategory == 'sell' ? '-' : '+'}}{{p.quantity}}</p>
-								</ion-col>
-								<ion-col col="6" class="ion-text-right column-centralise-text">
-									<p style="margin-bottom:0px"><strong>LTP</strong> {{p.ltp}}</p>
-									<p><strong>{{p.key | titlecase}}</strong> {{p.key == 'stoploss' ? p.stoploss : p.target}}</p>
-								</ion-col>
-							</ion-row>
-						</ion-grid>
-					</ion-item>
-				</ion-list>
+				<div class="wrap">
+					<ion-text class="ion-padding-start ion-padding-top"
+						*ngIf="filteredPending?.length == 0 || pending?.length == 0 && dataLoaded">
+						There are no pending orders currently.
+					</ion-text>
+					<ion-card mode="ios">
+						<ion-list *ngIf="filteredPending?.length > 0 || pending?.length > 0 && dataLoaded">
+							<ion-item class="ion-no-padding order-item" *ngFor="let p of filteredPending || pending"
+								(click)="ordersActionSheet(p)">
+								<ion-grid class="ion-no-padding ion-padding-vertical">
+									<ion-row>
+										<ion-col col="6" class="ion-padding-start">
+											<p>
+												<span
+													[ngClass]="{'buy': p.orderCategory == 'buy', 'sell': p.orderCategory == 'sell'}">
+													{{p.name}} </span>
+											</p>
+											<p>Quantity: {{p?.orderCategory == 'sell' ? '-' : '+'}}{{p.quantity}}</p>
+										</ion-col>
+										<ion-col col="6" class="ion-text-right column-centralise-text">
+											<p style="margin-bottom:0px"><strong>LTP</strong> {{p.ltp}}</p>
+											<p><strong>{{p.key | titlecase}}</strong>
+												{{p.key == 'stoploss' ? p.stoploss : p.target}}</p>
+										</ion-col>
+									</ion-row>
+								</ion-grid>
+							</ion-item>
+						</ion-list>
+					</ion-card>
+				</div>
 			</super-tab>
 		</super-tabs-container>
 	</super-tabs>

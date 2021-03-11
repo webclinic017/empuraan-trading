@@ -6,6 +6,7 @@ import { ModalEditWatchlistsComponent } from "src/app/modals/modal-edit-watchlis
 import { ModalWatchlistCeComponent } from "src/app/modals/modal-watchlist-ce/modal-watchlist-ce.component";
 import { ModalWatchlistComponent } from "src/app/modals/modal-watchlist/modal-watchlist.component";
 import { Stock } from "src/app/models/stock.model";
+import { User } from "src/app/models/user.model";
 import { Watchlist } from "src/app/models/watchlist.model";
 import { StockService } from "src/app/services/stock.service";
 import { UserService } from "src/app/services/user.service";
@@ -24,8 +25,16 @@ export class WatchlistPage implements OnInit, OnDestroy {
 	isSimualted: boolean;
 	spinners: string[];
 	subscribedSockets: Subscription[] = [];
-	spinner: boolean
-	constructor(private modalController: ModalController, private watchlistService: WatchlistService, private actionSheetController: ActionSheetController, private stockService: StockService, private userService: UserService, private toastCtrl: ToastController) {}
+	spinner: boolean;
+	user: User
+	constructor(
+		private modalController: ModalController,
+		private watchlistService: WatchlistService,
+		private actionSheetController: ActionSheetController,
+		private stockService: StockService,
+		private userService: UserService,
+		private toastCtrl: ToastController
+	) {}
 
 	ngOnInit() {
 		this.dataLoaded = false;
@@ -34,12 +43,13 @@ export class WatchlistPage implements OnInit, OnDestroy {
 	}
 
 	ionViewDidEnter() {
-		this.spinner = true
+		this.spinner = true;
 		this.getWatchlists();
 	}
 
 	async getWatchlists(spinner?: boolean) {
-		if(spinner == true) this.spinner = true;
+		if (spinner == true) this.spinner = true;
+		this.userService.authenticated.subscribe(u => this.user = u.user)
 		this.userService.getSettings().subscribe((r: any) => {
 			const datatype = r.data.datatype;
 			if (datatype == "simulated")
@@ -47,11 +57,11 @@ export class WatchlistPage implements OnInit, OnDestroy {
 					this.isSimualted = true;
 					this.watchlists = [];
 					this.watchlists = r.data;
-					console.log('simulated',r)
+					console.log("simulated", r);
 					this.moveInArray();
-					this.updateLtp().finally(()=>{
-						this.dataLoaded = true
-						this.spinner = false
+					this.updateLtp().finally(() => {
+						this.dataLoaded = true;
+						this.spinner = false;
 					});
 				});
 			if (datatype == "realtime")
@@ -59,43 +69,46 @@ export class WatchlistPage implements OnInit, OnDestroy {
 					this.isSimualted = false;
 					this.watchlists = [];
 					this.watchlists = r.data;
-					console.log('realTime',r)
+					console.log("realTime", r);
 					this.moveInArray();
-					this.updateLtp().finally(()=>{
-						this.dataLoaded = true
-						this.spinner = false
+					this.updateLtp().finally(() => {
+						this.dataLoaded = true;
+						this.spinner = false;
 					});
 				});
 		});
 	}
 
 	subscribeToStockSocket(wId, sId) {
-		const wIndex = this.watchlists.indexOf(this.watchlists.find(w => w._id = wId))
-		const watchlist = this.watchlists[wIndex]
-		const sIndex = watchlist.stockIds.indexOf(watchlist.stockIds.find(s => s.id == sId))
-		this.watchlists[wIndex].stockIds[sIndex].isLoaded = false
+		const wIndex = this.watchlists.indexOf(this.watchlists.find((w) => (w._id = wId)));
+		const watchlist = this.watchlists[wIndex];
+		const sIndex = watchlist.stockIds.indexOf(watchlist.stockIds.find((s) => s.id == sId));
+		this.watchlists[wIndex].stockIds[sIndex].isLoaded = false;
 		this.stockService.startStock(sId, wId).subscribe((r) => this.getWatchlists());
 	}
 
 	async updateLtp() {
 		this.unsubscribeFromSockets();
 		this.selectedWatchlistId = this.watchlists[this.selectedWatchlist]?._id;
-		this.watchlists.forEach((w) => {
-			w.stockIds.forEach((s, i) => {
-				if (s.started) {
+		for (let i = 0; i < this.watchlists.length; i++) {
+			const w = this.watchlists[i];
+			for (let j = 0; j < w.stockIds.length; j++) {
+				const s = w.stockIds[j];
+				// if (s.started) {
 					const socketSub: Subscription = this.stockService.listen(`${s.id}-${w._id}`).subscribe((res: any) => {
-						s.ltp = res[0].price;
+						s.ltp = res[0].close;
 					});
 					this.subscribedSockets.push(socketSub);
-				}
-			});
-		});
+				// }
+			}
+		}
 	}
 
 	unsubscribeFromSockets() {
-		this.subscribedSockets.forEach((s) => {
+		for (let i = 0; i < this.subscribedSockets.length; i++) {
+			const s = this.subscribedSockets[i];
 			s.unsubscribe();
-		});
+		}
 		this.subscribedSockets.splice(0, this.subscribedSockets.length);
 	}
 
@@ -186,10 +199,10 @@ export class WatchlistPage implements OnInit, OnDestroy {
 					icon: "trash-outline",
 					handler: () => {
 						this.watchlistService.deleteWatchlist(this.watchlists[this.selectedWatchlist]._id).subscribe((r) => {
-							console.log("delete", r)
-							this.getWatchlists(true).then(()=>{
-								this.presentSuccessToast('Watchlist successfuly deleted')
-							})
+							console.log("delete", r);
+							this.getWatchlists(true).then(() => {
+								this.presentSuccessToast("Watchlist successfuly deleted");
+							});
 						});
 					},
 				},
@@ -202,7 +215,7 @@ export class WatchlistPage implements OnInit, OnDestroy {
 		});
 		await actionSheet.present();
 	}
-	
+
 	async presentSuccessToast(message) {
 		const toast = await this.toastCtrl.create({
 			message,
@@ -220,10 +233,10 @@ export class WatchlistPage implements OnInit, OnDestroy {
 		if (typeof tab == "number") this.selectedWatchlist = tab;
 		else this.selectedWatchlist = tab.detail;
 		this.selectedWatchlistId = this.watchlists[this.selectedWatchlist]._id;
-		this.updateLtp().finally(()=>{
-			this.dataLoaded = true
-			this.spinner = false
-		});;
+		this.updateLtp().finally(() => {
+			this.dataLoaded = true;
+			this.spinner = false;
+		});
 	}
 
 	moveInArray() {

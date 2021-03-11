@@ -7,7 +7,7 @@
 		</ion-row>
 	</ion-grid>
 	<ion-spinner name="lines" *ngIf="!dataLoaded;else cards"></ion-spinner>
-	<ion-card #cards *ngFor="let positional of filteredPositional || positionalPsts" (click)="openPostModal(positional)">
+	<ion-card mode="ios" #cards *ngFor="let positional of filteredPositional || positionalPsts" (click)="openPostModal(positional)">
 		<ion-card-header><h5>{{positional.title}}</h5></ion-card-header>
 		<ion-card-content>
 			<ion-img *ngIf="positional.image != undefined || positional.image != null" [src]="positional.image" class="ion-margin-bottom"></ion-img>

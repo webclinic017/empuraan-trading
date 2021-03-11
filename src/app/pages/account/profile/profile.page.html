@@ -8,30 +8,25 @@
 </ion-header>
 
 <ion-content>
-	<div class="ion-padding profile-header">
-		<div>
-			<ion-text><h5>{{user.username}}</h5></ion-text>
-			<ion-text><p>{{user.email}}</p></ion-text>
-		</div>
-		<div class="ion-float-right account-img">
-			<span>{{user.username[0]+user.username[1]}}</span>
-		</div>
-	</div>
-	<hr />
-	<ion-grid>
-		<ion-row class="ion-margin-bottom">
-			<ion-col size="6" class="ion-text-left subtitle">PAN</ion-col>
-			<ion-col size="6" class="ion-text-right">*233H</ion-col>
-		</ion-row>
-		<ion-row class="ion-margin-bottom">
-			<ion-col size="6" class="ion-text-left subtitle">Demat (BO)</ion-col>
-			<ion-col size="6" class="ion-text-right">1234567875434567</ion-col>
-		</ion-row>
-	</ion-grid>
-	<hr />
-	<div class="ion-no-border ion-padding account-card-link ion-margin-bottom" (click)="openCompaniesModal()">
-		<ion-text>Change password</ion-text>
-		<ion-icon name="sync-outline" class="ion-margin-end icon"></ion-icon>
-	</div>
-	<hr />
+	<ion-card mode="ios" class="profile-header">
+		<ion-card-content>
+			<div class="information">
+				<ion-label class="title">{{user.username}}</ion-label>
+				<ion-label class="subtitle">{{user.email}}</ion-label>
+			</div>
+			<div class="img">
+				<span>{{user.username[0]+user.username[1]}}</span>
+			</div>
+		</ion-card-content>
+	</ion-card>
+	<!--<div class="ion-padding ">
+	</div>-->
 </ion-content>
+<ion-footer>
+	<ion-toolbar class="footer-toolbar">
+		<div class="ion-no-border ion-padding account-card-link" (click)="openCompaniesModal()">
+			<ion-text>Change password</ion-text>
+			<ion-icon name="sync-outline" class="ion-margin-end icon"></ion-icon>
+		</div>
+	</ion-toolbar>
+</ion-footer>

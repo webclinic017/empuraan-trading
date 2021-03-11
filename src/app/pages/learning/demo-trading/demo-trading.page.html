@@ -7,7 +7,7 @@
 		</ion-row>
 	</ion-grid>
 	<ion-spinner name="lines" *ngIf="!dataLoaded;else cards"></ion-spinner>
-	<ion-card #cards *ngFor="let demo of filteredDemotrading || demotrading" (click)="openPostModal(demo)">
+	<ion-card mode="ios" #cards *ngFor="let demo of filteredDemotrading || demotrading" (click)="openPostModal(demo)">
 		<ion-card-header><h5>{{demo.title}}</h5></ion-card-header>
 		<ion-card-content>
 			<ion-img *ngIf="demo.image != undefined || demo.image != null" [src]="demo.image" class="ion-margin-bottom"></ion-img>

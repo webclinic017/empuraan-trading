@@ -57,6 +57,6 @@ export class PositionalPage implements OnInit {
 
   filter(e){
     this.filteredPositional = this.positionalPsts.filter(p => p.title.toLowerCase().includes(e.detail.value.toLowerCase()))
-    this.filteredPositional.reverse()
+    // this.filteredPositional.reverse()
   }
 }

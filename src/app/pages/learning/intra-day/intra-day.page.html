@@ -6,8 +6,15 @@
 			</ion-col>
 		</ion-row>
 	</ion-grid>
+	<ion-card class="post-marubozu">
+		<ion-card-content>
+			<div class="header">
+				<span></span>
+			</div>
+		</ion-card-content>
+	</ion-card>
 	<ion-spinner name="lines" *ngIf="!dataLoaded; else cards"></ion-spinner>
-	<ion-card #cards *ngFor="let intraDay of filteredPosts || intraday" (click)="openPostModal(intraDay)">
+	<ion-card mode="ios" #cards *ngFor="let intraDay of filteredPosts || intraday" (click)="openPostModal(intraDay)">
 		<ion-card-header><h5>{{intraDay.title}}</h5></ion-card-header>
 		<ion-card-content>
 			<ion-img *ngIf="intraDay.image != null || intraDay.image != undefined" [src]="intraDay.image" class="ion-margin-bottom"></ion-img>

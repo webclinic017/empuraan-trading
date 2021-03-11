@@ -16,8 +16,10 @@
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
-    <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <!-- <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" /> -->
+    <preference name="SplashScreenDelay" value="0"/>
+    <preference name="ShowSplashScreen" value="false"/>
     <platform name="android">
         <allow-navigation href="https://*youtube.com/*" />
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">

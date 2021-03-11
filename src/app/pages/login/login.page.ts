@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
 import { ModalController, ToastController } from '@ionic/angular';
@@ -54,6 +52,7 @@ export class LoginPage implements OnInit {
   async google(){
     this.googleSpinner = true
     const googleUser = await Plugins.GoogleAuth.signIn() as any;
+    // console.log(googleUser.auth().currentUser.getToken())
     console.log(googleUser)
     this.userService.googleAuth(googleUser).finally(() => {
       this.googleSpinner = false

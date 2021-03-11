@@ -22,6 +22,17 @@ const STORAGE_KEY = "assets";
 	styleUrls: ["./intra-day.page.scss"],
 })
 export class IntraDayPage implements OnInit {
+	tempPost: Marubozu = {
+		_id: "asoifjoaijsfoqwijr1o3i2jr1iojr",
+		content: "ifuwe iuhewoifjweoi fjew we iofj iwej oewij oweij few ewff ewoi jewo ijewoi jewoif jeowi jewoifj oewij fweoif pwokqpqdp qw lpqw dlqwp[ dlwpqioj doqpiej d",
+		createdDate: "Thu Mar 04 2021 14:55:35 GMT+0000 (Coordinated Universal Time)",
+		embededurl: null,
+		image: null,
+		stockname: "A very new intraday stock name",
+		title: "A very new intraday post title",
+		type: "intraday",
+		user: "sefibra"
+	}
 	intraDayPosts: Post[];
 	intraday: Marubozu[];
 	filteredPosts: Marubozu[];
@@ -32,7 +43,7 @@ export class IntraDayPage implements OnInit {
 	constructor(
 		private modalController: ModalController,
 		private marubozuService: MarubozuService
-	) {}
+	) { }
 
 	ngOnInit() {
 		this.getIntraday();
@@ -76,6 +87,6 @@ export class IntraDayPage implements OnInit {
 
 	filter(ev) {
 		this.filteredPosts = this.intraday.filter((p) => p.title.toLowerCase().includes(ev.detail.value.toLowerCase()));
-		this.filteredPosts.reverse()
+		// this.filteredPosts.reverse()
 	}
 }
