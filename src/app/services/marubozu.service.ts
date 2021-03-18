@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
+import { map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -10,14 +11,22 @@ export class MarubozuService {
 	apiUrl = environment.apiUrl + "marbozzu/";
 	activeTab = new Subject<number>();
 
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient) { }
 
 	getAll() {
 		return this.http.get(this.apiUrl);
 	}
 
 	get(key: string) {
-		return this.http.get(this.apiUrl + key);
+		return this.http.get(this.apiUrl + key)
+			.pipe(map((payload: any) => {
+				const data = payload.data
+				data.forEach(p => {
+					p.color = "#fff"
+				});
+				payload.data = data
+				return payload
+			}));
 	}
 
 	delete(id) {

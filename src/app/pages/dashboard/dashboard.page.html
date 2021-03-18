@@ -78,7 +78,7 @@
 					<ion-label class="funds-chart-title"> Funds Chart </ion-label>
 					<ngx-charts-line-chart *ngIf="chartLoaded && data[0]?.series.length > 1" [legend]="false"
 						[showXAxisLabel]="false" [showYAxisLabel]="false" [xAxis]="true" [yAxis]="true"
-						[maxXAxisTickLength]="30" [timeline]="false" [autoScale]="true" [results]="data" [view]="view">
+						[timeline]="false" [autoScale]="true" [results]="data" [view]="view">
 					</ngx-charts-line-chart>
 					<ion-spinner name="lines" style="height: 50px" *ngIf="!chartLoaded" color="dark"></ion-spinner>
 					<ion-label *ngIf="chartLoaded && data[0]?.series.length == 1"> There is no data here for now, go on
@@ -140,8 +140,6 @@
 				</ion-col>
 			</ion-row>
 		</ion-grid>
-		<div [ngClass]="{'white-box-bg': chartLoaded && data[0]?.series.length > 1}"
-			[ngStyle]="{'bottom': isAndroid() ? '-112%' : '-80%',
-			'height': isAndroid() ? '240px' : '200px'}"></div>
+		<div [ngClass]="{'white-box-bg': chartLoaded && data[0]?.series.length > 1}"></div>
 	</div>
 </ion-content>

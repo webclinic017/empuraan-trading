@@ -2,17 +2,18 @@
     background-color: #C99A4C;
     height: 100%;
     padding: 15px;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .white-circle-bg{
-        width: 600px;
+        width: 150%;
         height: 90%;
         background-color: white;
         position: absolute;
         border-radius: 50%;
-        transform: translateX(-20%) translateY(5%);
     }
     .user-info{
-        transform: translateY(35%);
+        width: 100%;
         .account-card{
             margin-bottom: 50px;
         }
@@ -57,7 +58,7 @@
     .icon{
         font-size: 25px;
         margin-left: auto;
-        color:#C99A4C;
+        color: #dbb962 !important;
     }
 }
 hr {

@@ -13,6 +13,7 @@ import { ModalPostComponent } from "src/app/modals/modal-post/modal-post.compone
 import { MarubozuService } from "src/app/services/marubozu.service";
 import { Marubozu } from "src/app/models/marubozu.model";
 import { Input } from "hammerjs";
+import { ColorGenService } from "src/app/services/color-gen.service";
 
 const STORAGE_KEY = "assets";
 
@@ -22,18 +23,18 @@ const STORAGE_KEY = "assets";
 	styleUrls: ["./intra-day.page.scss"],
 })
 export class IntraDayPage implements OnInit {
-	tempPost: Marubozu = {
-		_id: "asoifjoaijsfoqwijr1o3i2jr1iojr",
-		content: "ifuwe iuhewoifjweoi fjew we iofj iwej oewij oweij few ewff ewoi jewo ijewoi jewoif jeowi jewoifj oewij fweoif pwokqpqdp qw lpqw dlqwp[ dlwpqioj doqpiej d",
-		createdDate: "Thu Mar 04 2021 14:55:35 GMT+0000 (Coordinated Universal Time)",
-		embededurl: null,
-		image: null,
-		stockname: "A very new intraday stock name",
-		title: "A very new intraday post title",
-		type: "intraday",
-		user: "sefibra"
-	}
-	intraDayPosts: Post[];
+	// tempPost: Marubozu = {
+	// 	_id: "asoifjoaijsfoqwijr1o3i2jr1iojr",
+	// 	content: "ifuwe iuhewoifjweoi fjew we iofj iwej oewij oweij few ewff ewoi jewo ijewoi jewoif jeowi jewoifj oewij fweoif pwokqpqdp qw lpqw dlqwp[ dlwpqioj doqpiej d",
+	// 	createdDate: "Thu Mar 04 2021 14:55:35 GMT+0000 (Coordinated Universal Time)",
+	// 	embededurl: null,
+	// 	image: null,
+	// 	stockname: "A very new intraday stock name",
+	// 	title: "A very new intraday post title j jd si dsai jdisaj dis iaj sai ij",
+	// 	type: "intraday",
+	// 	user: "sefibra",
+	// 	color: this.generateRandomColor()
+	// }
 	intraday: Marubozu[];
 	filteredPosts: Marubozu[];
 	isActive: boolean;
@@ -42,7 +43,8 @@ export class IntraDayPage implements OnInit {
 
 	constructor(
 		private modalController: ModalController,
-		private marubozuService: MarubozuService
+		private marubozuService: MarubozuService,
+		private colorGenService: ColorGenService
 	) { }
 
 	ngOnInit() {
@@ -54,7 +56,10 @@ export class IntraDayPage implements OnInit {
 		this.marubozuService.activeTab.subscribe((n) => {
 			if (n == 2) {
 				this.marubozuService.get("intraday").subscribe((r: any) => {
-					this.intraday = r.data;
+					if(this.intraday == null) this.intraday = r.data;
+					this.intraday.forEach(i => {
+						if(i.color == "#fff") i.color = this.generateRandomColor()
+					})
 					this.intraday.reverse()
 					this.dataLoaded = true
 				});
@@ -88,5 +93,17 @@ export class IntraDayPage implements OnInit {
 	filter(ev) {
 		this.filteredPosts = this.intraday.filter((p) => p.title.toLowerCase().includes(ev.detail.value.toLowerCase()));
 		// this.filteredPosts.reverse()
+	}
+
+	generateRandomColor(){
+		const colorHex = this.colorGenService.getRandomColor()
+		const colorRgb = this.colorGenService.hexToRgb(colorHex)
+		// console.log("rgb("+colorRgb.r +","+colorRgb.g+","+colorRgb.b+")")
+		// return "rgb("+colorRgb.r +","+colorRgb.g+","+colorRgb.b+")";
+		return colorHex
+	}
+
+	generateContrastColor(color){
+		return this.colorGenService.contrast(color, 128)
 	}
 }

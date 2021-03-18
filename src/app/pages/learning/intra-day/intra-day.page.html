@@ -6,21 +6,44 @@
 			</ion-col>
 		</ion-row>
 	</ion-grid>
-	<ion-card class="post-marubozu">
+	<!-- <ion-card class="post-marubozu">
 		<ion-card-content>
 			<div class="header">
-				<span></span>
+				<span class="img"
+					[ngStyle]="{'background': tempPost.color, 'color': generateContrastColor(tempPost.color)}">{{tempPost.user.slice(0,2)}}</span>
+				<br>
+				<p class="title">{{tempPost.title.length > 50 ? tempPost.title.slice(0,50) + "..." : tempPost.title}}
+				</p>
+			</div>
+			<span class="username">{{tempPost.user}}</span>
+			<div class="content">
+				<p>{{tempPost.content.length > 100 ? tempPost.content.slice(0,100) + "..." : tempPost.content}}</p>
+			</div>
+		</ion-card-content>
+	</ion-card>  -->
+	<ion-spinner name="lines" *ngIf="!dataLoaded; else cards"></ion-spinner>
+	<ion-card class="post-marubozu" mode="ios" #cards *ngFor="let intraDay of filteredPosts || intraday" (click)="openPostModal(intraDay)">
+		<ion-card-content>
+			<div class="header">
+				<span class="img" *ngIf="intraDay.user != null || intraDay.user != undefined"
+					[ngStyle]="{'background': intraDay.color, 'color': generateContrastColor(intraDay.color)}">{{intraDay.user.slice(0,2)}}</span>
+				<br>
+				<p class="title" [ngStyle]="{'margin-left': intraDay.user != null ? '15px' : '0'}">{{intraDay.title.length > 50 ? intraDay.title.slice(0,50) + "..." : intraDay.title}}
+				</p>
+			</div>
+			<!-- <span class="username" *ngIf="intraDay.user != null || intraDay.user != undefined">{{intraDay.user}}</span> -->
+			<div class="content">
+				<p>{{intraDay.content.length > 100 ? intraDay.content.slice(0,100) + "..." : intraDay.content}}</p>
 			</div>
 		</ion-card-content>
 	</ion-card>
-	<ion-spinner name="lines" *ngIf="!dataLoaded; else cards"></ion-spinner>
-	<ion-card mode="ios" #cards *ngFor="let intraDay of filteredPosts || intraday" (click)="openPostModal(intraDay)">
+	<!-- <ion-card mode="ios" #cards *ngFor="let intraDay of filteredPosts || intraday" (click)="openPostModal(intraDay)">
 		<ion-card-header><h5>{{intraDay.title}}</h5></ion-card-header>
 		<ion-card-content>
 			<ion-img *ngIf="intraDay.image != null || intraDay.image != undefined" [src]="intraDay.image" class="ion-margin-bottom"></ion-img>
 			<ion-text><p>{{intraDay.content | slice:0:120}}{{intraDay.content.length > 0 ? '...' : ''}}</p></ion-text>
 		</ion-card-content>
-	</ion-card>
+	</ion-card> -->
 	<ion-label class="ion-padding" *ngIf="filteredPosts?.length == 0 || intraday?.length == 0">
 		There are currently no posts inside this tab...
 	</ion-label>

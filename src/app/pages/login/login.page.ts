@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, Platform, ToastController } from '@ionic/angular';
 import { ModalFpEmailComponent } from 'src/app/modals/modal-fp-email/modal-fp-email.component';
 
 @Component({
@@ -17,39 +17,43 @@ export class LoginPage implements OnInit {
   userInfo: any
   loginSpinner: boolean
   googleSpinner: boolean
-  constructor(private router: Router, 
-    private userService: UserService, 
+  hideCircle: boolean
+  constructor(private router: Router,
+    private userService: UserService,
     private modalCtrl: ModalController,
-    private toastCtrl: ToastController
-    ) { }
+    private toastCtrl: ToastController,
+    private platform: Platform
+  ) { }
 
   ngOnInit() {
     this.loginSpinner = false
     this.googleSpinner = false
+    this.hideCircle = false
     this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url)
+    this.onKeyboardShowOrHideCircle()
   }
 
-  login(form: NgForm){
+  login(form: NgForm) {
     this.loginSpinner = true
-    if(form.valid){
-      this.userService.logIn(form.value).subscribe(() => {}, 
-      (err) => {
-        this.loginSpinner = false
-        err.error.debug == 'ERR_AUTH_FAILED' && this.presentErrorToast('Email or password is incorrect.')
-      }, 
-      ()=> {
-        form.resetForm()
-        this.loginSpinner = false
-        this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard')
-        this.router.navigate(['home','dashboard'])
-      })
+    if (form.valid) {
+      this.userService.logIn(form.value).subscribe(() => { },
+        (err) => {
+          this.loginSpinner = false
+          err.error.debug == 'ERR_AUTH_FAILED' && this.presentErrorToast('Email or password is incorrect.')
+        },
+        () => {
+          form.resetForm()
+          this.loginSpinner = false
+          this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard')
+          this.router.navigate(['home', 'dashboard'])
+        })
     } else {
       this.loginSpinner = false
       this.presentErrorToast('Something is missing.')
     }
   }
 
-  async google(){
+  async google() {
     this.googleSpinner = true
     const googleUser = await Plugins.GoogleAuth.signIn() as any;
     // console.log(googleUser.auth().currentUser.getToken())
@@ -57,28 +61,38 @@ export class LoginPage implements OnInit {
     this.userService.googleAuth(googleUser).finally(() => {
       this.googleSpinner = false
       this.userService.checkIfIsOnLoginOrSignUpPage('/home/dashboard')
-      this.router.navigate(['home','dashboard'])
+      this.router.navigate(['home', 'dashboard'])
     })
   }
 
-  async openForgotPasswordModal(){
+  async openForgotPasswordModal() {
     const modal = await this.modalCtrl.create({
       component: ModalFpEmailComponent
     });
     return await modal.present()
   }
 
-  forgotPassword(){
+  forgotPassword() {
     this.openForgotPasswordModal()
   }
 
-  async presentErrorToast(message){
+  async presentErrorToast(message) {
     const toast = await this.toastCtrl.create({
       message,
       duration: 2500,
       color: 'danger'
     })
     await toast.present()
+  }
+
+  onKeyboardShowOrHideCircle() {
+    this.platform.keyboardDidShow.subscribe(ev => {
+      this.hideCircle = true
+    });
+
+    this.platform.keyboardDidHide.subscribe(() => {
+      this.hideCircle = false
+    });
   }
 
   // authentication:

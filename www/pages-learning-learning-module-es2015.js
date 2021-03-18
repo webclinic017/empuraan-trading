@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".post-button {\n  width: 100%;\n  height: 50px;\n}\n\nion-spinner {\n  width: 100%;\n  margin: 25px auto;\n}\n\n@media screen and (max-width: 360px) {\n  ion-title {\n    font-size: 15px !important;\n  }\n\n  ion-label, .post-button, p, h5, h3 {\n    font-size: 13px !important;\n  }\n\n  .post-button {\n    height: 40px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbGVhcm5pbmcvaW50cmEtZGF5L2ludHJhLWRheS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxXQUFBO0VBQ0EsWUFBQTtBQUNKOztBQUNBO0VBQ0UsV0FBQTtFQUNBLGlCQUFBO0FBRUY7O0FBQUE7RUFDSTtJQUNFLDBCQUFBO0VBR0o7O0VBREU7SUFDRSwwQkFBQTtFQUlKOztFQUZFO0lBQ0ksWUFBQTtFQUtOO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9sZWFybmluZy9pbnRyYS1kYXkvaW50cmEtZGF5LnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wb3N0LWJ1dHRvbntcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDUwcHg7XG59XG5pb24tc3Bpbm5lcntcbiAgd2lkdGg6IDEwMCU7XG4gIG1hcmdpbjogMjVweCBhdXRvO1xufVxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogMzYwcHgpIHtcbiAgICBpb24tdGl0bGV7XG4gICAgICBmb250LXNpemU6MTVweCAhaW1wb3J0YW50O1xuICAgIH1cbiAgICBpb24tbGFiZWwsIC5wb3N0LWJ1dHRvbiwgcCwgaDUsIGgze1xuICAgICAgZm9udC1zaXplOiAxM3B4ICFpbXBvcnRhbnQ7XG4gICAgfVxuICAgIC5wb3N0LWJ1dHRvbntcbiAgICAgICAgaGVpZ2h0OiA0MHB4O1xuICAgIH1cbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".post-marubozu .header {\n  display: flex;\n  justify-content: start;\n  align-items: center;\n}\n.post-marubozu .header .img {\n  padding: 14px 16px;\n  border-radius: 50%;\n  text-transform: capitalize;\n}\n.post-marubozu .header .title {\n  color: black;\n  margin-left: 15px;\n  font-size: 18px;\n}\n.post-marubozu .username {\n  margin-top: -19px;\n  margin-left: 11px;\n  font-size: 9px;\n  color: black;\n}\n.post-marubozu .content p {\n  font-size: 18px;\n  line-height: 26px;\n  margin-top: 10px;\n}\n.post-button {\n  width: 100%;\n  height: 50px;\n}\nion-spinner {\n  width: 100%;\n  margin: 25px auto;\n}\n@media screen and (max-width: 360px) {\n  ion-title {\n    font-size: 15px !important;\n  }\n\n  ion-label, .post-button, p, h5, h3 {\n    font-size: 13px !important;\n  }\n\n  .post-button {\n    height: 40px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbGVhcm5pbmcvaW50cmEtZGF5L2ludHJhLWRheS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0U7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSxtQkFBQTtBQUFKO0FBRUk7RUFFRSxrQkFBQTtFQUNBLGtCQUFBO0VBQ0EsMEJBQUE7QUFETjtBQUtJO0VBQ0UsWUFBQTtFQUNBLGlCQUFBO0VBQ0EsZUFBQTtBQUhOO0FBT0U7RUFDRSxpQkFBQTtFQUNBLGlCQUFBO0VBQ0EsY0FBQTtFQUNBLFlBQUE7QUFMSjtBQVNJO0VBQ0UsZUFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7QUFQTjtBQVdBO0VBQ0ksV0FBQTtFQUNBLFlBQUE7QUFSSjtBQVVBO0VBQ0UsV0FBQTtFQUNBLGlCQUFBO0FBUEY7QUFTQTtFQUNJO0lBQ0UsMEJBQUE7RUFOSjs7RUFRRTtJQUNFLDBCQUFBO0VBTEo7O0VBT0U7SUFDSSxZQUFBO0VBSk47QUFDRiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xlYXJuaW5nL2ludHJhLWRheS9pbnRyYS1kYXkucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBvc3QtbWFydWJvenUge1xuICAuaGVhZGVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogc3RhcnQ7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcblxuICAgIC5pbWcge1xuICAgICAgLy8gYmFja2dyb3VuZDogeWVsbG93O1xuICAgICAgcGFkZGluZzogMTRweCAxNnB4O1xuICAgICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgICAgdGV4dC10cmFuc2Zvcm06IGNhcGl0YWxpemU7XG4gICAgICAvLyBjb2xvcjogYmxhY2s7XG4gICAgfVxuXG4gICAgLnRpdGxlIHtcbiAgICAgIGNvbG9yOiBibGFjaztcbiAgICAgIG1hcmdpbi1sZWZ0OiAxNXB4O1xuICAgICAgZm9udC1zaXplOiAxOHB4O1xuICAgIH1cbiAgfVxuXG4gIC51c2VybmFtZSB7XG4gICAgbWFyZ2luLXRvcDogLTE5cHg7XG4gICAgbWFyZ2luLWxlZnQ6IDExcHg7XG4gICAgZm9udC1zaXplOiA5cHg7XG4gICAgY29sb3I6IGJsYWNrO1xuICB9XG5cbiAgLmNvbnRlbnQge1xuICAgIHAge1xuICAgICAgZm9udC1zaXplOiAxOHB4O1xuICAgICAgbGluZS1oZWlnaHQ6IDI2cHg7XG4gICAgICBtYXJnaW4tdG9wOiAxMHB4O1xuICAgIH1cbiAgfVxufVxuLnBvc3QtYnV0dG9ue1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogNTBweDtcbn1cbmlvbi1zcGlubmVye1xuICB3aWR0aDogMTAwJTtcbiAgbWFyZ2luOiAyNXB4IGF1dG87XG59XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAzNjBweCkge1xuICAgIGlvbi10aXRsZXtcbiAgICAgIGZvbnQtc2l6ZToxNXB4ICFpbXBvcnRhbnQ7XG4gICAgfVxuICAgIGlvbi1sYWJlbCwgLnBvc3QtYnV0dG9uLCBwLCBoNSwgaDN7XG4gICAgICBmb250LXNpemU6IDEzcHggIWltcG9ydGFudDtcbiAgICB9XG4gICAgLnBvc3QtYnV0dG9ue1xuICAgICAgICBoZWlnaHQ6IDQwcHg7XG4gICAgfVxufSJdfQ== */");
 
 /***/ }),
 
@@ -181,7 +181,7 @@ let DemoTradingPage = class DemoTradingPage {
     }
     filter(e) {
         this.filteredDemotrading = this.demotrading.filter(p => p.title.toLowerCase().includes(e.detail.value.toLowerCase()));
-        this.filteredDemotrading.reverse();
+        // this.filteredDemotrading.reverse()
     }
 };
 DemoTradingPage.ctorParameters = () => [
@@ -209,7 +209,7 @@ DemoTradingPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col>\n\t\t\t\t<ion-searchbar class=\"ion-no-padding\" showCancelButton=\"focus\" (ionChange)=\"filter($event)\"></ion-searchbar>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n\t<ion-spinner name=\"lines\" *ngIf=\"!dataLoaded;else cards\"></ion-spinner>\n\t<ion-card #cards *ngFor=\"let positional of filteredPositional || positionalPsts\" (click)=\"openPostModal(positional)\">\n\t\t<ion-card-header><h5>{{positional.title}}</h5></ion-card-header>\n\t\t<ion-card-content>\n\t\t\t<ion-img *ngIf=\"positional.image != undefined || positional.image != null\" [src]=\"positional.image\" class=\"ion-margin-bottom\"></ion-img>\n\t\t\t<ion-text><p>{{positional.content | slice:0:120}}{{positional.content.length > 0 ? '...' : ''}}</p></ion-text>\n\t\t</ion-card-content>\n\t</ion-card>\n\t<ion-label class=\"ion-padding\" *ngIf=\"filteredPositional?.length == 0 || positionalPsts?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n<ion-fab horizontal=\"end\" vertical=\"bottom\" style=\"position: absolute; bottom: 10px; right: 10px\">\n\t<ion-fab-button (click)=\"openUploadPostModal()\">\n\t\t<ion-icon name=\"add\"></ion-icon>\n\t</ion-fab-button>\n</ion-fab>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col>\n\t\t\t\t<ion-searchbar class=\"ion-no-padding\" showCancelButton=\"focus\" (ionChange)=\"filter($event)\"></ion-searchbar>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n\t<ion-spinner name=\"lines\" *ngIf=\"!dataLoaded;else cards\"></ion-spinner>\n\t<ion-card mode=\"ios\" #cards *ngFor=\"let positional of filteredPositional || positionalPsts\" (click)=\"openPostModal(positional)\">\n\t\t<ion-card-header><h5>{{positional.title}}</h5></ion-card-header>\n\t\t<ion-card-content>\n\t\t\t<ion-img *ngIf=\"positional.image != undefined || positional.image != null\" [src]=\"positional.image\" class=\"ion-margin-bottom\"></ion-img>\n\t\t\t<ion-text><p>{{positional.content | slice:0:120}}{{positional.content.length > 0 ? '...' : ''}}</p></ion-text>\n\t\t</ion-card-content>\n\t</ion-card>\n\t<ion-label class=\"ion-padding\" *ngIf=\"filteredPositional?.length == 0 || positionalPsts?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n<ion-fab horizontal=\"end\" vertical=\"bottom\" style=\"position: absolute; bottom: 10px; right: 10px\">\n\t<ion-fab-button (click)=\"openUploadPostModal()\">\n\t\t<ion-icon name=\"add\"></ion-icon>\n\t</ion-fab-button>\n</ion-fab>\n");
 
 /***/ }),
 
@@ -222,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col>\n\t\t\t\t<ion-searchbar class=\"ion-no-padding\" showCancelButton=\"focus\" (ionChange)=\"filter($event)\"></ion-searchbar>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n\t<ion-spinner name=\"lines\" *ngIf=\"!dataLoaded;else cards\"></ion-spinner>\n\t<ion-card #cards *ngFor=\"let demo of filteredDemotrading || demotrading\" (click)=\"openPostModal(demo)\">\n\t\t<ion-card-header><h5>{{demo.title}}</h5></ion-card-header>\n\t\t<ion-card-content>\n\t\t\t<ion-img *ngIf=\"demo.image != undefined || demo.image != null\" [src]=\"demo.image\" class=\"ion-margin-bottom\"></ion-img>\n\t\t\t<ion-text><p>{{demo.content | slice:0:120}}{{demo.content.length > 0 ? '...' : ''}}</p></ion-text>\n\t\t</ion-card-content>\n\t</ion-card>\n\t<ion-label class=\"ion-padding\" *ngIf=\"filteredDemotrading?.length == 0 || demotrading?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n<ion-fab horizontal=\"end\" vertical=\"bottom\" style=\"position: absolute; bottom: 10px; right: 10px\">\n\t<ion-fab-button (click)=\"openUploadPostModal()\">\n\t\t<ion-icon name=\"add\"></ion-icon>\n\t</ion-fab-button>\n</ion-fab>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col>\n\t\t\t\t<ion-searchbar class=\"ion-no-padding\" showCancelButton=\"focus\" (ionChange)=\"filter($event)\"></ion-searchbar>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n\t<ion-spinner name=\"lines\" *ngIf=\"!dataLoaded;else cards\"></ion-spinner>\n\t<ion-card mode=\"ios\" #cards *ngFor=\"let demo of filteredDemotrading || demotrading\" (click)=\"openPostModal(demo)\">\n\t\t<ion-card-header><h5>{{demo.title}}</h5></ion-card-header>\n\t\t<ion-card-content>\n\t\t\t<ion-img *ngIf=\"demo.image != undefined || demo.image != null\" [src]=\"demo.image\" class=\"ion-margin-bottom\"></ion-img>\n\t\t\t<ion-text><p>{{demo.content | slice:0:120}}{{demo.content.length > 0 ? '...' : ''}}</p></ion-text>\n\t\t</ion-card-content>\n\t</ion-card>\n\t<ion-label class=\"ion-padding\" *ngIf=\"filteredDemotrading?.length == 0 || demotrading?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n<ion-fab horizontal=\"end\" vertical=\"bottom\" style=\"position: absolute; bottom: 10px; right: 10px\">\n\t<ion-fab-button (click)=\"openUploadPostModal()\">\n\t\t<ion-icon name=\"add\"></ion-icon>\n\t</ion-fab-button>\n</ion-fab>\n");
 
 /***/ }),
 
@@ -293,7 +293,7 @@ VideoSwiperDirective = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])(
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Marubozu</ion-title>\n\t\t<ion-img slot=\"end\" src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n\n<ion-content>\n\t<super-tabs [config]=\"config\" (tabChange)=\"tabIndex($event)\" >\n\t\t<super-tabs-toolbar slot=\"top\" color=\"translucent\" scrollable=\"true\" scrollable-padding=\"false\">\n\t\t\t<super-tab-button><ion-label>Tutorials</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Blogs</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Intra-day</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Positional</ion-label></super-tab-button>\n\t\t\t<super-tab-button><ion-label>Demo-trading</ion-label></super-tab-button>\n\t\t</super-tabs-toolbar>\n\t\t<super-tabs-container>\n\t\t\t<super-tab>\n\t\t\t\t<app-tutorials></app-tutorials>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-blogs></app-blogs>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-intra-day></app-intra-day>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-positional></app-positional>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-demo-trading></app-demo-trading>\n\t\t\t</super-tab>\n\t\t</super-tabs-container>\n\t</super-tabs>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n\t<ion-toolbar>\n\t\t<ion-title>Marubozu</ion-title>\n\t\t<ion-img slot=\"end\" src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t</ion-toolbar>\n</ion-header>\n<!-- [config]=\"config\"  -->\n<ion-content mode=\"ios\">\n\t<super-tabs (tabChange)=\"tabIndex($event)\">\n\t\t<super-tabs-toolbar slot=\"top\" color=\"translucent\" scrollable=\"true\" scrollable-padding=\"false\">\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Tutorials</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Blogs</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Intra-day</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Positional</ion-label>\n\t\t\t</super-tab-button>\n\t\t\t<super-tab-button>\n\t\t\t\t<ion-label>Demo-trading</ion-label>\n\t\t\t</super-tab-button>\n\t\t</super-tabs-toolbar>\n\t\t<super-tabs-container>\n\t\t\t<super-tab>\n\t\t\t\t<app-tutorials></app-tutorials>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-blogs></app-blogs>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-intra-day></app-intra-day>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-positional></app-positional>\n\t\t\t</super-tab>\n\t\t\t<super-tab>\n\t\t\t\t<app-demo-trading></app-demo-trading>\n\t\t\t</super-tab>\n\t\t</super-tabs-container>\n\t</super-tabs>\n</ion-content>");
 
 /***/ }),
 
@@ -360,6 +360,66 @@ LearningPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "R4Xk":
+/*!***********************************************!*\
+  !*** ./src/app/services/color-gen.service.ts ***!
+  \***********************************************/
+/*! exports provided: ColorGenService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ColorGenService", function() { return ColorGenService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+let ColorGenService = class ColorGenService {
+    constructor() { }
+    getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+    rgbToYIQ({ r, g, b }) {
+        return ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    }
+    hexToRgb(hex) {
+        if (!hex || hex === undefined || hex === '') {
+            return undefined;
+        }
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : undefined;
+    }
+    contrast(colorHex, threshold = 128) {
+        if (colorHex === undefined) {
+            return '#000';
+        }
+        const rgb = this.hexToRgb(colorHex);
+        if (rgb === undefined) {
+            return '#000';
+        }
+        return this.rgbToYIQ(rgb) >= threshold ? '#000' : '#fff';
+    }
+};
+ColorGenService.ctorParameters = () => [];
+ColorGenService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], ColorGenService);
+
+
+
+/***/ }),
+
 /***/ "W+AG":
 /*!****************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/learning/tutorials/tutorials.page.html ***!
@@ -369,7 +429,7 @@ LearningPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content class=\"ion-padding-top\">\n\t<ion-list>\n\t\t<div *ngFor=\"let video of sanitizedVideos; let i = index\" class=\"video-card\" >\n\t\t\t<ion-label class=\"ion-padding-horizontal\"><h4 class=\"video-title\">{{video.name}}</h4></ion-label>\n\t\t\t<iframe\n\t\t\t\tclass=\"ion-padding\"\n\t\t\t\twidth=\"fit-content\"\n\t\t\t\theight=\"250\"\n\t\t\t\t[src]=\"video\"\n\t\t\t\tid=\"{{'video'+i}}\"\n\t\t\t\tframeborder=\"0\"\n\t\t\t\tallowfullscreen\n\t\t\t\tallowtransparency=\"true\"\n\t\t\t\tappVideoSwiper\n\t\t\t></iframe>\n\t\t</div>\n\t</ion-list>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content class=\"ion-padding-top\">\n\t<div class=\"wrap\">\n\t\t<ion-list>\n\t\t\t<div *ngFor=\"let video of sanitizedVideos; let i = index\" class=\"video-card\">\n\t\t\t\t<iframe class=\"ion-padding\" width=\"fit-content\" height=\"250\" [src]=\"video\" id=\"{{'video'+i}}\"\n\t\t\t\t\tframeborder=\"0\" allowfullscreen allowtransparency=\"true\" appVideoSwiper>\n\t\t\t\t</iframe>\n\t\t\t\t<ion-label class=\"ion-padding-horizontal\">\n\t\t\t\t\t<h4 class=\"video-title\">{{video.name}}</h4>\n\t\t\t\t</ion-label>\n\t\t\t\t<hr>\n\t\t\t</div>\n\t\t</ion-list>\n\t</div>\n</ion-content>");
 
 /***/ }),
 
@@ -382,7 +442,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".logo {\n  height: 70px;\n  width: 70px;\n  padding-right: 10px;\n}\n\nion-title {\n  color: black;\n}\n\n@media screen and (max-width: 360px) {\n  ion-title {\n    font-size: 15px !important;\n  }\n\n  ion-label, ion-select, ion-select-option, p, h5, h3 {\n    font-size: 13px !important;\n  }\n}\n\n@media (prefers-color-scheme: dark) {\n  ion-title {\n    color: white;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbGVhcm5pbmcvbGVhcm5pbmcucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsWUFBQTtFQUNBLFdBQUE7RUFDQSxtQkFBQTtBQUNGOztBQUNBO0VBQ0ksWUFBQTtBQUVKOztBQUFBO0VBQ0k7SUFDRSwwQkFBQTtFQUdKOztFQURFO0lBQ0UsMEJBQUE7RUFJSjtBQUNGOztBQUZBO0VBQ0k7SUFDSSxZQUFBO0VBSU47QUFDRiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xlYXJuaW5nL2xlYXJuaW5nLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5sb2dve1xuICBoZWlnaHQ6IDcwcHg7XG4gIHdpZHRoOiA3MHB4O1xuICBwYWRkaW5nLXJpZ2h0OiAxMHB4O1xufVxuaW9uLXRpdGxle1xuICAgIGNvbG9yOmJsYWNrO1xuICB9XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAzNjBweCkge1xuICAgIGlvbi10aXRsZXtcbiAgICAgIGZvbnQtc2l6ZToxNXB4ICFpbXBvcnRhbnQ7XG4gICAgfVxuICAgIGlvbi1sYWJlbCwgaW9uLXNlbGVjdCwgaW9uLXNlbGVjdC1vcHRpb24sIHAsIGg1LCBoM3tcbiAgICAgIGZvbnQtc2l6ZTogMTNweCAhaW1wb3J0YW50O1xuICAgIH1cbn1cbkBtZWRpYShwcmVmZXJzLWNvbG9yLXNjaGVtZTogZGFyaykge1xuICAgIGlvbi10aXRsZXtcbiAgICAgICAgY29sb3I6d2hpdGU7XG4gICAgfVxufVxuIl19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".logo {\n  height: 70px;\n  width: 70px;\n  padding-right: 10px;\n}\n\nion-title {\n  color: black;\n}\n\n@media screen and (max-width: 360px) {\n  ion-title {\n    font-size: 15px !important;\n  }\n\n  ion-label, ion-select, ion-select-option, p, h5, h3 {\n    font-size: 13px !important;\n  }\n}\n\n@media (prefers-color-scheme: dark) {\n  ion-title {\n    color: white;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbGVhcm5pbmcvbGVhcm5pbmcucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUtBO0VBQ0UsWUFBQTtFQUNBLFdBQUE7RUFDQSxtQkFBQTtBQUpGOztBQU1BO0VBQ0ksWUFBQTtBQUhKOztBQUtBO0VBQ0k7SUFDRSwwQkFBQTtFQUZKOztFQUlFO0lBQ0UsMEJBQUE7RUFESjtBQUNGOztBQUdBO0VBQ0k7SUFDSSxZQUFBO0VBRE47QUFDRiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xlYXJuaW5nL2xlYXJuaW5nLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi8vIHN1cGVyLXRhYnMtdG9vbGJhciB7XG4vLyAgICY6YWZ0ZXIge1xuLy8gICAgIGJhY2tncm91bmQ6ICM2ZjZmNmY7XG4vLyAgIH1cbi8vIH1cbi5sb2dve1xuICBoZWlnaHQ6IDcwcHg7XG4gIHdpZHRoOiA3MHB4O1xuICBwYWRkaW5nLXJpZ2h0OiAxMHB4O1xufVxuaW9uLXRpdGxle1xuICAgIGNvbG9yOmJsYWNrO1xuICB9XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAzNjBweCkge1xuICAgIGlvbi10aXRsZXtcbiAgICAgIGZvbnQtc2l6ZToxNXB4ICFpbXBvcnRhbnQ7XG4gICAgfVxuICAgIGlvbi1sYWJlbCwgaW9uLXNlbGVjdCwgaW9uLXNlbGVjdC1vcHRpb24sIHAsIGg1LCBoM3tcbiAgICAgIGZvbnQtc2l6ZTogMTNweCAhaW1wb3J0YW50O1xuICAgIH1cbn1cbkBtZWRpYShwcmVmZXJzLWNvbG9yLXNjaGVtZTogZGFyaykge1xuICAgIGlvbi10aXRsZXtcbiAgICAgICAgY29sb3I6d2hpdGU7XG4gICAgfVxufVxuIl19 */");
 
 /***/ }),
 
@@ -458,7 +518,7 @@ let PositionalPage = class PositionalPage {
     }
     filter(e) {
         this.filteredPositional = this.positionalPsts.filter(p => p.title.toLowerCase().includes(e.detail.value.toLowerCase()));
-        this.filteredPositional.reverse();
+        // this.filteredPositional.reverse()
     }
 };
 PositionalPage.ctorParameters = () => [
@@ -550,7 +610,7 @@ TutorialsPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".video-card {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.video-card .video-title {\n  font-size: 17px;\n}\n.video-card iframe {\n  -webkit-overflow-scrolling: touch !important;\n  overflow: scroll !important;\n}\n@media screen and (max-width: 360px) {\n  .video-title {\n    font-size: 13px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbGVhcm5pbmcvdHV0b3JpYWxzL3R1dG9yaWFscy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSx1QkFBQTtBQUNKO0FBQUk7RUFDSSxlQUFBO0FBRVI7QUFBSTtFQUNJLDRDQUFBO0VBQ0EsMkJBQUE7QUFFUjtBQUNBO0VBQ0k7SUFDSSxlQUFBO0VBRU47QUFDRiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xlYXJuaW5nL3R1dG9yaWFscy90dXRvcmlhbHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnZpZGVvLWNhcmR7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIC52aWRlby10aXRsZXtcbiAgICAgICAgZm9udC1zaXplOiAxN3B4O1xuICAgIH1cbiAgICBpZnJhbWV7XG4gICAgICAgIC13ZWJraXQtb3ZlcmZsb3ctc2Nyb2xsaW5nOiB0b3VjaCAhaW1wb3J0YW50O1xuICAgICAgICBvdmVyZmxvdzogc2Nyb2xsICFpbXBvcnRhbnQ7XG4gICAgfVxufVxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogMzYwcHgpIHtcbiAgICAudmlkZW8tdGl0bGV7XG4gICAgICAgIGZvbnQtc2l6ZTogMTNweDtcbiAgICB9XG59Il19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".wrap {\n  width: 100%;\n  height: 100%;\n  padding: 15px;\n}\n\nhr {\n  border-top: 1px solid rgba(167, 167, 167, 0.5) !important;\n  height: 1px !important;\n  width: 100% !important;\n  display: block !important;\n  font-size: 2em !important;\n  opacity: 1 !important;\n  visibility: visible !important;\n  margin-bottom: 0;\n}\n\n.video-card {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n\n.video-card .video-title {\n  font-size: 17px;\n}\n\n.video-card iframe {\n  border-radius: 15px;\n}\n\n@media screen and (max-width: 360px) {\n  .video-title {\n    font-size: 13px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbGVhcm5pbmcvdHV0b3JpYWxzL3R1dG9yaWFscy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxXQUFBO0VBQ0EsWUFBQTtFQUNBLGFBQUE7QUFDSjs7QUFDQTtFQUNJLHlEQUFBO0VBQ0Esc0JBQUE7RUFDQSxzQkFBQTtFQUNBLHlCQUFBO0VBQ0EseUJBQUE7RUFDQSxxQkFBQTtFQUNBLDhCQUFBO0VBQ0EsZ0JBQUE7QUFFSjs7QUFDQTtFQUNJLGFBQUE7RUFDQSxzQkFBQTtFQUNBLHVCQUFBO0FBRUo7O0FBQUk7RUFDSSxlQUFBO0FBRVI7O0FBQ0k7RUFDSSxtQkFBQTtBQUNSOztBQUdBO0VBQ0k7SUFDSSxlQUFBO0VBQU47QUFDRiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xlYXJuaW5nL3R1dG9yaWFscy90dXRvcmlhbHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLndyYXB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIHBhZGRpbmc6MTVweDtcbn1cbmhyIHtcbiAgICBib3JkZXItdG9wOiAxcHggc29saWQgcmdiYSgxNjcsIDE2NywgMTY3LCAwLjUpICFpbXBvcnRhbnQ7XG4gICAgaGVpZ2h0OiAxcHggIWltcG9ydGFudDtcbiAgICB3aWR0aDogMTAwJSAhaW1wb3J0YW50O1xuICAgIGRpc3BsYXk6IGJsb2NrICFpbXBvcnRhbnQ7XG4gICAgZm9udC1zaXplOiAyZW0gIWltcG9ydGFudDtcbiAgICBvcGFjaXR5OiAxICFpbXBvcnRhbnQ7XG4gICAgdmlzaWJpbGl0eTogdmlzaWJsZSAhaW1wb3J0YW50O1xuICAgIG1hcmdpbi1ib3R0b206IDA7XG59XG5cbi52aWRlby1jYXJkIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG5cbiAgICAudmlkZW8tdGl0bGUge1xuICAgICAgICBmb250LXNpemU6IDE3cHg7XG4gICAgfVxuXG4gICAgaWZyYW1lIHtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogMTVweDtcbiAgICB9XG59XG5cbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDM2MHB4KSB7XG4gICAgLnZpZGVvLXRpdGxlIHtcbiAgICAgICAgZm9udC1zaXplOiAxM3B4O1xuICAgIH1cbn0iXX0= */");
 
 /***/ }),
 
@@ -711,7 +771,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col>\n\t\t\t\t<ion-searchbar class=\"ion-no-padding\" showCancelButton=\"focus\" (ionChange)=\"filter($event)\"></ion-searchbar>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n\t<ion-spinner name=\"lines\" *ngIf=\"!dataLoaded; else cards\"></ion-spinner>\n\t<ion-card #cards *ngFor=\"let intraDay of filteredPosts || intraday\" (click)=\"openPostModal(intraDay)\">\n\t\t<ion-card-header><h5>{{intraDay.title}}</h5></ion-card-header>\n\t\t<ion-card-content>\n\t\t\t<ion-img *ngIf=\"intraDay.image != null || intraDay.image != undefined\" [src]=\"intraDay.image\" class=\"ion-margin-bottom\"></ion-img>\n\t\t\t<ion-text><p>{{intraDay.content | slice:0:120}}{{intraDay.content.length > 0 ? '...' : ''}}</p></ion-text>\n\t\t</ion-card-content>\n\t</ion-card>\n\t<ion-label class=\"ion-padding\" *ngIf=\"filteredPosts?.length == 0 || intraday?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n<ion-fab horizontal=\"end\" vertical=\"bottom\" style=\"position: absolute; bottom: 10px; right: 10px\">\n\t<ion-fab-button (click)=\"openUploadPostModal()\">\n\t\t<ion-icon name=\"add\"></ion-icon>\n\t</ion-fab-button>\n</ion-fab>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n\t<ion-grid>\n\t\t<ion-row>\n\t\t\t<ion-col>\n\t\t\t\t<ion-searchbar class=\"ion-no-padding\" showCancelButton=\"focus\" (ionChange)=\"filter($event)\"></ion-searchbar>\n\t\t\t</ion-col>\n\t\t</ion-row>\n\t</ion-grid>\n\t<!-- <ion-card class=\"post-marubozu\">\n\t\t<ion-card-content>\n\t\t\t<div class=\"header\">\n\t\t\t\t<span class=\"img\"\n\t\t\t\t\t[ngStyle]=\"{'background': tempPost.color, 'color': generateContrastColor(tempPost.color)}\">{{tempPost.user.slice(0,2)}}</span>\n\t\t\t\t<br>\n\t\t\t\t<p class=\"title\">{{tempPost.title.length > 50 ? tempPost.title.slice(0,50) + \"...\" : tempPost.title}}\n\t\t\t\t</p>\n\t\t\t</div>\n\t\t\t<span class=\"username\">{{tempPost.user}}</span>\n\t\t\t<div class=\"content\">\n\t\t\t\t<p>{{tempPost.content.length > 100 ? tempPost.content.slice(0,100) + \"...\" : tempPost.content}}</p>\n\t\t\t</div>\n\t\t</ion-card-content>\n\t</ion-card>  -->\n\t<ion-spinner name=\"lines\" *ngIf=\"!dataLoaded; else cards\"></ion-spinner>\n\t<ion-card class=\"post-marubozu\" mode=\"ios\" #cards *ngFor=\"let intraDay of filteredPosts || intraday\" (click)=\"openPostModal(intraDay)\">\n\t\t<ion-card-content>\n\t\t\t<div class=\"header\">\n\t\t\t\t<span class=\"img\" *ngIf=\"intraDay.user != null || intraDay.user != undefined\"\n\t\t\t\t\t[ngStyle]=\"{'background': intraDay.color, 'color': generateContrastColor(intraDay.color)}\">{{intraDay.user.slice(0,2)}}</span>\n\t\t\t\t<br>\n\t\t\t\t<p class=\"title\" [ngStyle]=\"{'margin-left': intraDay.user != null ? '15px' : '0'}\">{{intraDay.title.length > 50 ? intraDay.title.slice(0,50) + \"...\" : intraDay.title}}\n\t\t\t\t</p>\n\t\t\t</div>\n\t\t\t<!-- <span class=\"username\" *ngIf=\"intraDay.user != null || intraDay.user != undefined\">{{intraDay.user}}</span> -->\n\t\t\t<div class=\"content\">\n\t\t\t\t<p>{{intraDay.content.length > 100 ? intraDay.content.slice(0,100) + \"...\" : intraDay.content}}</p>\n\t\t\t</div>\n\t\t</ion-card-content>\n\t</ion-card>\n\t<!-- <ion-card mode=\"ios\" #cards *ngFor=\"let intraDay of filteredPosts || intraday\" (click)=\"openPostModal(intraDay)\">\n\t\t<ion-card-header><h5>{{intraDay.title}}</h5></ion-card-header>\n\t\t<ion-card-content>\n\t\t\t<ion-img *ngIf=\"intraDay.image != null || intraDay.image != undefined\" [src]=\"intraDay.image\" class=\"ion-margin-bottom\"></ion-img>\n\t\t\t<ion-text><p>{{intraDay.content | slice:0:120}}{{intraDay.content.length > 0 ? '...' : ''}}</p></ion-text>\n\t\t</ion-card-content>\n\t</ion-card> -->\n\t<ion-label class=\"ion-padding\" *ngIf=\"filteredPosts?.length == 0 || intraday?.length == 0\">\n\t\tThere are currently no posts inside this tab...\n\t</ion-label>\n</ion-content>\n<ion-fab horizontal=\"end\" vertical=\"bottom\" style=\"position: absolute; bottom: 10px; right: 10px\">\n\t<ion-fab-button (click)=\"openUploadPostModal()\">\n\t\t<ion-icon name=\"add\"></ion-icon>\n\t</ion-fab-button>\n</ion-fab>\n");
 
 /***/ }),
 
@@ -746,6 +806,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_modals_modal_upload_post_modal_upload_post_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/modals/modal-upload-post/modal-upload-post.component */ "x7KT");
 /* harmony import */ var src_app_modals_modal_post_modal_post_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/modals/modal-post/modal-post.component */ "N+8n");
 /* harmony import */ var src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/marubozu.service */ "BCkd");
+/* harmony import */ var src_app_services_color_gen_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/color-gen.service */ "R4Xk");
+
 
 
 
@@ -757,9 +819,10 @@ __webpack_require__.r(__webpack_exports__);
 const STORAGE_KEY = "assets";
 let IntraDayPage = class IntraDayPage {
     // images = [];
-    constructor(modalController, marubozuService) {
+    constructor(modalController, marubozuService, colorGenService) {
         this.modalController = modalController;
         this.marubozuService = marubozuService;
+        this.colorGenService = colorGenService;
     }
     ngOnInit() {
         this.getIntraday();
@@ -770,6 +833,10 @@ let IntraDayPage = class IntraDayPage {
             if (n == 2) {
                 this.marubozuService.get("intraday").subscribe((r) => {
                     this.intraday = r.data;
+                    this.intraday.forEach(i => {
+                        if (i.color == "#fff")
+                            i.color = this.generateRandomColor();
+                    });
                     this.intraday.reverse();
                     this.dataLoaded = true;
                 });
@@ -804,12 +871,23 @@ let IntraDayPage = class IntraDayPage {
     }
     filter(ev) {
         this.filteredPosts = this.intraday.filter((p) => p.title.toLowerCase().includes(ev.detail.value.toLowerCase()));
-        this.filteredPosts.reverse();
+        // this.filteredPosts.reverse()
+    }
+    generateRandomColor() {
+        const colorHex = this.colorGenService.getRandomColor();
+        const colorRgb = this.colorGenService.hexToRgb(colorHex);
+        // console.log("rgb("+colorRgb.r +","+colorRgb.g+","+colorRgb.b+")")
+        // return "rgb("+colorRgb.r +","+colorRgb.g+","+colorRgb.b+")";
+        return colorHex;
+    }
+    generateContrastColor(color) {
+        return this.colorGenService.contrast(color, 128);
     }
 };
 IntraDayPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
-    { type: src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_7__["MarubozuService"] }
+    { type: src_app_services_marubozu_service__WEBPACK_IMPORTED_MODULE_7__["MarubozuService"] },
+    { type: src_app_services_color_gen_service__WEBPACK_IMPORTED_MODULE_8__["ColorGenService"] }
 ];
 IntraDayPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({

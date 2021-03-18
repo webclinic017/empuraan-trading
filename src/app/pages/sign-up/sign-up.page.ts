@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ToastController } from "@ionic/angular";
+import { Platform, ToastController } from "@ionic/angular";
 import { Input } from "hammerjs";
 import { User } from "src/app/models/user.model";
 import { UserService } from "src/app/services/user.service";
@@ -13,12 +13,15 @@ import { UserService } from "src/app/services/user.service";
 })
 export class SignUpPage implements OnInit {
 	signupSpinner: boolean;
+	hideCircle: boolean
 
-	constructor(private router: Router, private userService: UserService, private toastCtrl: ToastController) {}
+	constructor(private router: Router, private userService: UserService, private toastCtrl: ToastController, private platform: Platform) { }
 
 	ngOnInit() {
 		this.signupSpinner = false;
+		this.hideCircle = false
 		this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url);
+		this.onKeyboardShowOrHideCircle()
 	}
 
 	signUp(form: NgForm) {
@@ -27,10 +30,10 @@ export class SignUpPage implements OnInit {
 			if (this.checkIfPasswordsMatch(form.value.password, form.value.confirmPassword)) {
 				delete form.value.confirmPassword;
 				this.userService.signUp(form.value).subscribe(
-					(res: any) => {},
+					(res: any) => { },
 					(err) => {
-            this.signupSpinner = false;
-            err.error.debug == 'ERR_USER_ALREADY_EXISTS' && this.presentErrorToast('Email is already in use.');
+						this.signupSpinner = false;
+						err.error.debug == 'ERR_USER_ALREADY_EXISTS' && this.presentErrorToast('Email is already in use.');
 					},
 					() => {
 						this.signupSpinner = false;
@@ -44,30 +47,10 @@ export class SignUpPage implements OnInit {
 				this.presentErrorToast("Passwords dont match.");
 			}
 		} else {
-      this.signupSpinner = false;
-      this.presentErrorToast("Something is missing.");
-    }
+			this.signupSpinner = false;
+			this.presentErrorToast("Something is missing.");
+		}
 	}
-
-	// generateUser(res) {
-	// 	let user: User = {
-	// 		email: res.user.email,
-	// 		username: res.user.username,
-	// 		balance: {
-	// 			availableBal: 0,
-	// 			openBal: 0,
-	// 		},
-	// 	};
-	// 	this.userService.accountDetails().subscribe(
-	// 		(res: any) => {
-	// 			user.balance.availableBal = res.account.initialValue;
-	// 			user.balance.openBal = parseFloat(res.account.currentBalance);
-	// 			user.balance.currency = res.account.currency;
-	// 		},
-	// 		() => {},
-	// 		() => this.userService.user.next(user)
-	// 	);
-	// }
 
 	checkIfPasswordsMatch(password, confirmPassword) {
 		if (password === confirmPassword) return true;
@@ -81,5 +64,15 @@ export class SignUpPage implements OnInit {
 			color: "danger",
 		});
 		await toast.present();
+	}
+
+	onKeyboardShowOrHideCircle() {
+	  this.platform.keyboardDidShow.subscribe(ev => {
+		this.hideCircle = true
+	  });
+  
+	  this.platform.keyboardDidHide.subscribe(() => {
+		this.hideCircle = false
+	  });
 	}
 }

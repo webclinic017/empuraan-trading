@@ -1,3 +1,8 @@
+// super-tabs-toolbar {
+//     &:after {
+//       background: #fafafa;
+//     }
+//   }
 .logo {
     height: 70px;
     width: 70px;
@@ -133,6 +138,9 @@ ion-item {
     --inner-border-width: 10px 0px 10px 0px;
 }
 
+.text-center{
+    text-align: center;
+}
 @media(prefers-color-scheme: dark) {
     .logo {
         height: 40px;

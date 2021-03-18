@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border">
+<ion-header mode="md">
 	<ion-toolbar>
 		<ion-title>{{ post.title }}</ion-title>
 		<ion-buttons slot="end">
@@ -6,8 +6,10 @@
 		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
-<ion-content style="display: flex; flex-direction: column">
-	<!-- <h4 class="ion-padding-horizontal"></h4> -->
-	<ion-img *ngIf="post.image != null || post.image != undefined" [src]="post.image" class="ion-margin"></ion-img>
-	<span class="ion-padding">{{ post.content }}</span>
+<ion-content>
+	<div class="wrap">
+		<!-- <h4 class="ion-padding-horizontal"></h4> -->
+		<ion-img *ngIf="post.image != null || post.image != undefined" [src]="post.image" class="ion-margin"></ion-img>
+		<span class="post-content">{{ post.content }}</span>
+	</div>
 </ion-content>

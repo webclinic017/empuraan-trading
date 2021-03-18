@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border">
+<ion-header mode="md">
 	<ion-toolbar>
 		<ion-title>{{ position != null ? "Edit Position" : "Edit Pending" }}</ion-title>
 		<ion-buttons slot="end">
@@ -7,97 +7,75 @@
 	</ion-toolbar>
 </ion-header>
 <ion-content>
-	<ion-grid>
-		<ion-row>
-			<ion-col class="title-column">
-				<ion-label class="ion-padding" *ngIf="position != null">{{ position.name }}</ion-label>
-				<ion-label class="ion-padding" *ngIf="pending != null">{{ pending.name }}</ion-label>
-				<hr>
-			</ion-col>
-		</ion-row>
-		<ion-row *ngIf="position != null">
-			<ion-col size="6">
-				<ion-card-header>
-					<ion-card-title>Stop-loss</ion-card-title>
-				</ion-card-header>
-				<ion-card-content>
-					<ion-input
-						type="number"
-						class="card-input"
-						name="stopLoss"
-						[(ngModel)]="position.stoploss"
-						required
-						min="0"
-					></ion-input>
-				</ion-card-content>
-			</ion-col>
-			<ion-col size="6">
-				<ion-card-header>
-					<ion-card-title>Target</ion-card-title>
-				</ion-card-header>
-				<ion-card-content>
-					<ion-input
-						type="number"
-						class="card-input"
-						name="target"
-						[(ngModel)]="position.target"
-						required
-						min="0"
-					></ion-input>
-				</ion-card-content>
-			</ion-col>
-		</ion-row>
-		<ion-row *ngIf="pending != null">
-			<ion-col>
-				<div *ngIf="!pending.isStopLoss">
-					<ion-card-header>
-						<ion-card-title>Price</ion-card-title>
-					</ion-card-header>
-					<ion-card-content>
-						<ion-input
-							type="number"
-							class="card-input"
-							name="target"
-							[(ngModel)]="pending.price"
-							required
-							min="0"
-						></ion-input>
-					</ion-card-content>
-				</div>
-				<div *ngIf="pending.isStopLoss">
-					<ion-card-header>
-						<ion-card-title>Stop-loss</ion-card-title>
-					</ion-card-header>
-					<ion-card-content>
-						<ion-input
-							type="number"
-							class="card-input"
-							name="stopLoss"
-							[(ngModel)]="pending.stoploss"
-							required
-							min="0"
-						></ion-input>
-					</ion-card-content>
-				</div>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+	<div class="wrap">
+		<div class="form">
+			<ion-grid>
+				<ion-row>
+					<ion-col class="title-column">
+						<ion-label class="ion-padding" *ngIf="position != null">{{ position.name }}</ion-label>
+						<ion-label class="ion-padding" *ngIf="pending != null">{{ pending.name }}</ion-label>
+					</ion-col>
+				</ion-row>
+				<ion-row *ngIf="position != null">
+					<ion-col size="6">
+						<ion-item class="ion-no-padding">
+							<ion-label position="floating">Stop-loss</ion-label>
+							<ion-input type="text" required min="0" [(ngModel)]="position.stoploss" name="stopLoss">
+							</ion-input>
+						</ion-item>
+						<!-- <span>Stop-loss</span>
+				<ion-input type="number" class="card-input" name="stopLoss" required
+					min="0"></ion-input> -->
+					</ion-col>
+					<ion-col size="6">
+						<ion-item class="ion-no-padding">
+							<ion-label position="floating">Target</ion-label>
+							<ion-input type="text" required min="0" [(ngModel)]="position.target" name="target">
+							</ion-input>
+						</ion-item>
+						<!-- <span>Target</span>
+				<ion-input type="number" class="card-input" name="target" [(ngModel)]="position.target" required
+					min="0"></ion-input> -->
+					</ion-col>
+				</ion-row>
+				<ion-row *ngIf="pending != null">
+					<ion-col>
+						<div *ngIf="!pending.isStopLoss">
+							<ion-item class="ion-no-padding">
+								<ion-label position="floating">Price</ion-label>
+								<ion-input type="text" required min="0" [(ngModel)]="pending.price" name="target">
+								</ion-input>
+							</ion-item>
+							<!-- <span>Price</span>
+					<ion-input type="number" class="card-input" name="target" [(ngModel)]="pending.price" required
+						min="0"></ion-input> -->
+						</div>
+						<div *ngIf="pending.isStopLoss">
+							<ion-item class="ion-no-padding">
+								<ion-label position="floating">Stop-loss</ion-label>
+								<ion-input type="text" required min="0" [(ngModel)]="position.stoploss" name="stopLoss">
+								</ion-input>
+							</ion-item>
+							<!-- <span>Stop-loss</span>
+					<ion-input type="number" class="card-input" name="stopLoss" [(ngModel)]="pending.stoploss" required
+						min="0"></ion-input> -->
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+			<div *ngIf="position != null">
+				<button (click)="savePosition()" class="btn save-btn">
+					Save
+				</button>
+				<button (click)="sellPosition()" class="btn sell-btn">
+					Sell
+				</button>
+			</div>
+			<div *ngIf="pending != null">
+				<button (click)="savePending()" class="btn save-btn">
+					Save
+				</button>
+			</div>
+		</div>
+	</div>
 </ion-content>
-<ion-footer class="ion-padding">
-	<div *ngIf="position != null">
-		<ion-button expand="block" color="success" (click)="savePosition()">
-			<ion-icon name="save-outline" style="padding-right: 5px"></ion-icon>
-			Save
-		</ion-button>
-		<ion-button expand="block" color="danger" (click)="sellPosition()">
-			<ion-icon name="trash-outline" style="padding-right: 5px"></ion-icon>
-			Sell
-		</ion-button>
-	</div>
-	<div *ngIf="pending != null">
-		<ion-button expand="block" color="success" (click)="savePending()">
-			<ion-icon name="save-outline" style="padding-right: 5px"></ion-icon>
-			Save
-		</ion-button>
-	</div>
-</ion-footer>

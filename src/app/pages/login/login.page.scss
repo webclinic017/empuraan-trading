@@ -72,7 +72,7 @@
 ion-input{
     --placeholder-color: rgba(140,141,140);
     --placeholder-opacity: 1;
-    font-size: 15px;
+    font-size: 14px;
 }
 ion-item {
     --border-color: rgba(209,179,127);
@@ -110,7 +110,7 @@ ion-item {
     justify-content: center;
     background-color: #fff;
     color:rgba(203,171,115);
-    box-shadow: 0 0 15px 5px #f0f0f0;
+    box-shadow: 0 2px 5px 0px #c7c7c7;
 }
 .link-button{
     float: left;
@@ -130,13 +130,18 @@ h1,h2{
     h1,h2{
       font-size: 17px;
     }
-    ion-label, ion-text, p, h5, ion-button, span{
+    .title{
+        ion-label{
+            font-size: 17px;
+        }
+    }
+    ion-text, p, h5, ion-button, span{
       font-size: 13px !important;
     }
     ion-icon{
         font-size: 17px;
     }
-    .login-button{
+    .login-button, .google-button, .new-user-button{
         width: 100%; 
         height: 40px;
     }

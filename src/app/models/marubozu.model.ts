@@ -8,4 +8,5 @@ export interface Marubozu {
     stockname: string
     title: string
     type: string
+    color?: string
 }

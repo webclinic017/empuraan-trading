@@ -3,6 +3,9 @@
 		<div class="first-dark-orange-ball">
 			<div class="first-light-orange-ball"></div>
 		</div>
+		<div class="second-dark-orange-ball" *ngIf="!hideCircle">
+			<div class="second-light-orange-ball"></div>
+		</div>
 		<form #loginForm="ngForm" class="ion-padding-horizontal">
 			<ion-img src="/assets/logo_no_back.png" class="logo"></ion-img>
 			<ion-grid>
@@ -50,14 +53,11 @@
 				<ion-row>
 					<ion-col class="links-block" size="12">
 						<button color="tertiary" size="small" fill="clear" class="button new-user-button" routerLink="/home/sign-up">Sign Up</button>
-						<button color="tertiary" size="small" fill="clear" class="link-button ion-float-right" (click)="forgotPassword(loginForm)">Forgot password?</button>
+						<button color="tertiary" size="small" fill="clear" class="link-button ion-float-right" (click)="forgotPassword()">Forgot password?</button>
 						<!-- {{ userInfo | json}} -->
 					</ion-col>
 				</ion-row>
 			</ion-grid>
 		</form>
-		<div class="second-dark-orange-ball">
-			<div class="second-light-orange-ball"></div>
-		</div>
 	</div>
 </ion-content>

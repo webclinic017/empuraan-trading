@@ -1,5 +1,8 @@
 <ion-content>
 	<div class="wrap">
+		<div class="second-dark-orange-ball" *ngIf="!hideCircle">
+			<div class="second-light-orange-ball"></div>
+		</div>
 		<form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)" class="ion-padding-horizontal">
 			<ion-img src="/assets/logo_no_back.png" class="logo"></ion-img>
 			<ion-grid>
@@ -51,8 +54,5 @@
 				</ion-row>
 			</ion-grid>
 		</form>
-		<div class="second-dark-orange-ball">
-			<div class="second-light-orange-ball"></div>
-		</div>
 	</div>
 </ion-content>

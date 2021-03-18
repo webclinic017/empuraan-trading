@@ -21,6 +21,7 @@ export class StockService {
 	listen(eventName) {
 		return new Observable((subscriber) => {
 			this.socket.on(eventName, (data) => {
+				// console.log(eventName,data)
 				subscriber.next(data);
 			});
 		});

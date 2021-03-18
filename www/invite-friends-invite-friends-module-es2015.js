@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n\t\t<ion-buttons slot=\"start\">\n\t\t\t<ion-back-button [defaultHref]=\"['home','watchlist']\" (click)=\"navigateToAccount()\"></ion-back-button>\n\t\t</ion-buttons>\n    <ion-title>Invite friends</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div style=\"height: 100%;width: 100%;display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;\">\n    <ion-label>\n      <span style=\"font-weight: 500;\">Invite your friends<br>for some amazing rewards!</span>\n    </ion-label>\n    <ion-button style=\"width: 80%; height: 50px;\" class=\"ion-margin\" (click)=\"shareLink()\">Invite</ion-button>\n    <ion-label class=\"ion-margin-vertical\">\n      <span style=\"font-weight: 500; font-size: 14px;\">or just copy this link</span>\n    </ion-label>\n    <ion-item style=\"width:80%\">\n      <ion-input readonly [value]=\"link\"></ion-input>\n      <ion-icon name=\"attach-outline\" (click)=\"showToast()\"></ion-icon>\n    </ion-item>\n  </div>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header mode=\"md\">\n  <ion-toolbar>\n\t\t<ion-buttons slot=\"start\">\n\t\t\t<ion-back-button [defaultHref]=\"['home','watchlist']\" (click)=\"navigateToAccount()\"></ion-back-button>\n\t\t</ion-buttons>\n    <ion-title>Invite friends</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div style=\"height: 100%;width: 100%;display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;\">\n    <ion-label>\n      <span style=\"font-weight: 500;\">Invite your friends<br>for some amazing rewards!</span>\n    </ion-label>\n    <ion-button style=\"width: 80%; height: 50px;\" class=\"ion-margin\" (click)=\"shareLink()\">Invite</ion-button>\n    <ion-label class=\"ion-margin-vertical\">\n      <span style=\"font-weight: 500; font-size: 14px;\">or just copy this link</span>\n    </ion-label>\n    <ion-item style=\"width:80%\">\n      <ion-input readonly [value]=\"link\"></ion-input>\n      <ion-icon name=\"attach-outline\" (click)=\"showToast()\"></ion-icon>\n    </ion-item>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -173,7 +173,7 @@ InviteFriendsPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2FjY291bnQvaW52aXRlLWZyaWVuZHMvaW52aXRlLWZyaWVuZHMucGFnZS5zY3NzIn0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("ion-toolbar {\n  box-shadow: 0px -4px 20px 11px #fafafa !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvYWNjb3VudC9pbnZpdGUtZnJpZW5kcy9pbnZpdGUtZnJpZW5kcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSxpREFBQTtBQUFKIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvYWNjb3VudC9pbnZpdGUtZnJpZW5kcy9pbnZpdGUtZnJpZW5kcy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbmlvbi10b29sYmFye1xuICAgIGJveC1zaGFkb3c6IDBweCAtNHB4IDIwcHggMTFweCAjZmFmYWZhICFpbXBvcnRhbnQ7XG59Il19 */");
 
 /***/ })
 

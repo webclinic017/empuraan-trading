@@ -30,7 +30,7 @@
 
     /***/
     function Como(module) {
-      module.exports = JSON.parse("{\"appId\":\"com.empuraanTradingApp.app\",\"appName\":\"Empuraan Trading App\",\"webDir\":\"www\",\"npmClient\":\"npm\",\"plugins\":{\"SplashScreen\":{\"launchShowDuration\":0},\"GoogleAuth\":{\"scopes\":[\"profile\",\"email\"],\"serverClientId\":\"142774913706-4qu129d7tuu8pm504lq51md0f6n0aluc.apps.googleusercontent.com\",\"forceCodeForRefreshToken\":true}},\"cordova\":{\"preferences\":{\"ScrollEnabled\":\"true\",\"BackupWebStorage\":\"none\",\"SplashMaintainAspectRatio\":\"true\",\"FadeSplashScreenDuration\":\"300\",\"SplashShowOnlyFirstTime\":\"false\",\"SplashScreen\":\"screen\",\"SplashScreenDelay\":\"3000\"}}}");
+      module.exports = JSON.parse("{\"appId\":\"com.empuraanTradingApp.app\",\"appName\":\"Empuraan Trading App\",\"webDir\":\"www\",\"npmClient\":\"npm\",\"plugins\":{\"SplashScreen\":{\"launchShowDuration\":0},\"GoogleAuth\":{\"scopes\":[\"profile\",\"email\"],\"serverClientId\":\"142774913706-lknjtcuukrv4er4ffoai68jnm4r5rstk.apps.googleusercontent.com\",\"forceCodeForRefreshToken\":true}},\"cordova\":{\"preferences\":{\"ScrollEnabled\":\"true\",\"BackupWebStorage\":\"none\",\"SplashMaintainAspectRatio\":\"true\",\"FadeSplashScreenDuration\":\"300\",\"SplashShowOnlyFirstTime\":\"false\",\"SplashScreen\":\"screen\",\"SplashScreenDelay\":\"3000\"}}}");
       /***/
     },
 
@@ -123,7 +123,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "*:focus {\n  outline: none;\n}\n\n.first-dark-orange-ball {\n  background-color: #C99A4C;\n  height: 300px;\n  width: 300px;\n  border-radius: 50%;\n  position: absolute;\n  transform: translateX(-62%) translateY(-45%);\n}\n\n.first-dark-orange-ball .first-light-orange-ball {\n  background-color: #E0B64A;\n  height: 300px;\n  width: 300px;\n  top: -10%;\n  left: -13%;\n  border-radius: 50%;\n  position: relative;\n}\n\n.second-dark-orange-ball {\n  background-color: #E0B64A;\n  height: 230px;\n  width: 230px;\n  border-radius: 50%;\n  position: absolute;\n  transform: translateX(100%) translateY(-40%);\n}\n\n.second-dark-orange-ball .second-light-orange-ball {\n  background-color: #C99A4C;\n  height: 220px;\n  width: 220px;\n  bottom: -12%;\n  right: -11%;\n  border-radius: 50%;\n  position: relative;\n}\n\n.wrap {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100vh;\n  width: 100vw;\n}\n\n.wrap form {\n  width: 100%;\n  height: 90%;\n}\n\n.logo {\n  height: 125px;\n  width: 125px;\n  margin: 0 auto;\n  padding-bottom: 20px;\n}\n\n.title {\n  padding-bottom: 25px;\n}\n\n.title ion-label {\n  font-size: 35px;\n  font-weight: 700;\n}\n\n.input-field {\n  padding-bottom: 20px;\n}\n\n.button-col {\n  width: 100%;\n}\n\nion-input {\n  --placeholder-color: rgba(140,141,140);\n  --placeholder-opacity: 1;\n  font-size: 15px;\n}\n\nion-item {\n  --border-color: rgba(209,179,127);\n  --border-bottom-width: 2px;\n}\n\n.button {\n  width: 100%;\n  border-radius: 15px;\n  height: 50px;\n  font-size: 14px;\n}\n\n.login-button {\n  background-color: #215fcc;\n  color: white;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n}\n\n.google-button {\n  background-color: #b92b21;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  color: white;\n}\n\n.google-button span {\n  padding-left: 10px;\n}\n\n.new-user-button {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  background-color: #fff;\n  color: #cbab73;\n  box-shadow: 0 0 15px 5px #f0f0f0;\n}\n\n.link-button {\n  float: left;\n  text-align: left;\n  background-color: transparent;\n  margin-top: 20px;\n}\n\n.links-block {\n  display: flex;\n  flex-direction: column;\n}\n\nh1, h2 {\n  padding: 0;\n  margin: 0;\n}\n\n@media screen and (max-width: 360px) {\n  h1, h2 {\n    font-size: 17px;\n  }\n\n  ion-label, ion-text, p, h5, ion-button, span {\n    font-size: 13px !important;\n  }\n\n  ion-icon {\n    font-size: 17px;\n  }\n\n  .login-button {\n    width: 100%;\n    height: 40px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbG9naW4vbG9naW4ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBQTtBQUNKOztBQUNBO0VBQ0kseUJBQUE7RUFBMEIsYUFBQTtFQUMxQixZQUFBO0VBQ0Esa0JBQUE7RUFDQSxrQkFBQTtFQUNBLDRDQUFBO0FBR0o7O0FBRkk7RUFDSSx5QkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0EsU0FBQTtFQUNBLFVBQUE7RUFDQSxrQkFBQTtFQUNBLGtCQUFBO0FBSVI7O0FBQUE7RUFDSSx5QkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0Esa0JBQUE7RUFDQSxrQkFBQTtFQUNBLDRDQUFBO0FBR0o7O0FBRkk7RUFDSSx5QkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0EsWUFBQTtFQUNBLFdBQUE7RUFDQSxrQkFBQTtFQUNBLGtCQUFBO0FBSVI7O0FBREE7RUFDSSxhQUFBO0VBQ0EsdUJBQUE7RUFDQSxtQkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0FBSUo7O0FBSEk7RUFDSSxXQUFBO0VBQ0EsV0FBQTtBQUtSOztBQUZBO0VBQ0ksYUFBQTtFQUNBLFlBQUE7RUFDQSxjQUFBO0VBQ0Esb0JBQUE7QUFLSjs7QUFIQTtFQUNJLG9CQUFBO0FBTUo7O0FBTEk7RUFDSSxlQUFBO0VBQ0EsZ0JBQUE7QUFPUjs7QUFKQTtFQUNJLG9CQUFBO0FBT0o7O0FBTEE7RUFDSSxXQUFBO0FBUUo7O0FBTkE7RUFDSSxzQ0FBQTtFQUNBLHdCQUFBO0VBQ0EsZUFBQTtBQVNKOztBQVBBO0VBQ0ksaUNBQUE7RUFDQSwwQkFBQTtBQVVKOztBQVJBO0VBQ0ksV0FBQTtFQUNBLG1CQUFBO0VBQ0EsWUFBQTtFQUNBLGVBQUE7QUFXSjs7QUFUQTtFQUNJLHlCQUFBO0VBQ0EsWUFBQTtFQUNBLGFBQUE7RUFDQSxtQkFBQTtFQUNBLG1CQUFBO0VBQ0EsdUJBQUE7QUFZSjs7QUFWQTtFQUNJLHlCQUFBO0VBQ0EsYUFBQTtFQUNBLG1CQUFBO0VBQ0EsbUJBQUE7RUFDQSx1QkFBQTtFQUNBLFlBQUE7QUFhSjs7QUFaSTtFQUNJLGtCQUFBO0FBY1I7O0FBWEE7RUFDSSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSxtQkFBQTtFQUNBLHVCQUFBO0VBQ0Esc0JBQUE7RUFDQSxjQUFBO0VBQ0EsZ0NBQUE7QUFjSjs7QUFaQTtFQUNJLFdBQUE7RUFDQSxnQkFBQTtFQUNBLDZCQUFBO0VBQ0EsZ0JBQUE7QUFlSjs7QUFiQTtFQUNJLGFBQUE7RUFDQSxzQkFBQTtBQWdCSjs7QUFkQTtFQUNJLFVBQUE7RUFDQSxTQUFBO0FBaUJKOztBQWZBO0VBQ0k7SUFDRSxlQUFBO0VBa0JKOztFQWhCRTtJQUNFLDBCQUFBO0VBbUJKOztFQWpCRTtJQUNJLGVBQUE7RUFvQk47O0VBbEJFO0lBQ0ksV0FBQTtJQUNBLFlBQUE7RUFxQk47QUFDRiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xvZ2luL2xvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIio6Zm9jdXMge1xuICAgIG91dGxpbmU6IG5vbmU7XG59XG4uZmlyc3QtZGFyay1vcmFuZ2UtYmFsbHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjQzk5QTRDO2hlaWdodDogMzAwcHg7XG4gICAgd2lkdGg6IDMwMHB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC02MiUpIHRyYW5zbGF0ZVkoLTQ1JSk7XG4gICAgLmZpcnN0LWxpZ2h0LW9yYW5nZS1iYWxse1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRTBCNjRBO1xuICAgICAgICBoZWlnaHQ6IDMwMHB4O1xuICAgICAgICB3aWR0aDogMzAwcHg7XG4gICAgICAgIHRvcDogLTEwJTtcbiAgICAgICAgbGVmdDogLTEzJTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgfVxufVxuXG4uc2Vjb25kLWRhcmstb3JhbmdlLWJhbGx7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI0UwQjY0QTtcbiAgICBoZWlnaHQ6IDIzMHB4O1xuICAgIHdpZHRoOiAyMzBweDtcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgxMDAlKSB0cmFuc2xhdGVZKC00MCUpO1xuICAgIC5zZWNvbmQtbGlnaHQtb3JhbmdlLWJhbGx7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6ICNDOTlBNEM7XG4gICAgICAgIGhlaWdodDogMjIwcHg7XG4gICAgICAgIHdpZHRoOiAyMjBweDtcbiAgICAgICAgYm90dG9tOiAtMTIlO1xuICAgICAgICByaWdodDogLTExJTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgfVxufVxuLndyYXB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGhlaWdodDogMTAwdmg7XG4gICAgd2lkdGg6IDEwMHZ3O1xuICAgIGZvcm17XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICBoZWlnaHQ6IDkwJTtcbiAgICB9XG59XG4ubG9nb3tcbiAgICBoZWlnaHQ6IDEyNXB4O1xuICAgIHdpZHRoOiAxMjVweDtcbiAgICBtYXJnaW46IDAgYXV0bztcbiAgICBwYWRkaW5nLWJvdHRvbTogMjBweDtcbn1cbi50aXRsZXtcbiAgICBwYWRkaW5nLWJvdHRvbTogMjVweDtcbiAgICBpb24tbGFiZWx7XG4gICAgICAgIGZvbnQtc2l6ZTogMzVweDtcbiAgICAgICAgZm9udC13ZWlnaHQ6NzAwO1xuICAgIH1cbn1cbi5pbnB1dC1maWVsZHtcbiAgICBwYWRkaW5nLWJvdHRvbTogMjBweDtcbn1cbi5idXR0b24tY29se1xuICAgIHdpZHRoOiAxMDAlO1xufVxuaW9uLWlucHV0e1xuICAgIC0tcGxhY2Vob2xkZXItY29sb3I6IHJnYmEoMTQwLDE0MSwxNDApO1xuICAgIC0tcGxhY2Vob2xkZXItb3BhY2l0eTogMTtcbiAgICBmb250LXNpemU6IDE1cHg7XG59XG5pb24taXRlbSB7XG4gICAgLS1ib3JkZXItY29sb3I6IHJnYmEoMjA5LDE3OSwxMjcpO1xuICAgIC0tYm9yZGVyLWJvdHRvbS13aWR0aDogMnB4O1xufVxuLmJ1dHRvbntcbiAgICB3aWR0aDogMTAwJTsgXG4gICAgYm9yZGVyLXJhZGl1czogMTVweDtcbiAgICBoZWlnaHQ6IDUwcHg7XG4gICAgZm9udC1zaXplOiAxNHB4O1xufVxuLmxvZ2luLWJ1dHRvbntcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMjE1ZmNjO1xuICAgIGNvbG9yOndoaXRlO1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuLmdvb2dsZS1idXR0b257XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2I5MmIyMTtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBjb2xvcjp3aGl0ZTtcbiAgICBzcGFue1xuICAgICAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG4gICAgfVxufVxuLm5ldy11c2VyLWJ1dHRvbntcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xuICAgIGNvbG9yOnJnYmEoMjAzLDE3MSwxMTUpO1xuICAgIGJveC1zaGFkb3c6IDAgMCAxNXB4IDVweCAjZjBmMGYwO1xufVxuLmxpbmstYnV0dG9ue1xuICAgIGZsb2F0OiBsZWZ0O1xuICAgIHRleHQtYWxpZ246IGxlZnQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gICAgbWFyZ2luLXRvcDogMjBweDtcbn1cbi5saW5rcy1ibG9ja3tcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG59XG5oMSxoMntcbiAgICBwYWRkaW5nOjA7XG4gICAgbWFyZ2luOjA7XG59XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAzNjBweCkge1xuICAgIGgxLGgye1xuICAgICAgZm9udC1zaXplOiAxN3B4O1xuICAgIH1cbiAgICBpb24tbGFiZWwsIGlvbi10ZXh0LCBwLCBoNSwgaW9uLWJ1dHRvbiwgc3BhbntcbiAgICAgIGZvbnQtc2l6ZTogMTNweCAhaW1wb3J0YW50O1xuICAgIH1cbiAgICBpb24taWNvbntcbiAgICAgICAgZm9udC1zaXplOiAxN3B4O1xuICAgIH1cbiAgICAubG9naW4tYnV0dG9ue1xuICAgICAgICB3aWR0aDogMTAwJTsgXG4gICAgICAgIGhlaWdodDogNDBweDtcbiAgICB9XG59Il19 */";
+      __webpack_exports__["default"] = "*:focus {\n  outline: none;\n}\n\n.first-dark-orange-ball {\n  background-color: #C99A4C;\n  height: 300px;\n  width: 300px;\n  border-radius: 50%;\n  position: absolute;\n  left: -46%;\n  top: -17%;\n}\n\n.first-dark-orange-ball .first-light-orange-ball {\n  background-color: #E0B64A;\n  height: 300px;\n  width: 300px;\n  top: -10%;\n  left: -13%;\n  border-radius: 50%;\n  position: relative;\n}\n\n.second-dark-orange-ball {\n  background-color: #E0B64A;\n  height: 230px;\n  width: 230px;\n  border-radius: 50%;\n  position: relative;\n  right: -45%;\n  bottom: -52%;\n}\n\n.second-dark-orange-ball .second-light-orange-ball {\n  background-color: #C99A4C;\n  height: 220px;\n  width: 220px;\n  bottom: -12%;\n  right: -11%;\n  border-radius: 50%;\n  position: relative;\n}\n\n.wrap {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100vh;\n  width: 100vw;\n  overflow: hidden;\n}\n\n.wrap form {\n  width: 100%;\n  height: 90%;\n  position: absolute;\n}\n\n.logo {\n  height: 125px;\n  width: 125px;\n  margin: 0 auto;\n  padding-bottom: 20px;\n}\n\n.title {\n  padding-bottom: 25px;\n}\n\n.title ion-label {\n  font-size: 35px;\n  font-weight: 700;\n}\n\n.input-field {\n  padding-bottom: 20px;\n}\n\n.button-col {\n  width: 100%;\n}\n\nion-input {\n  --placeholder-color: rgba(140,141,140);\n  --placeholder-opacity: 1;\n  font-size: 15px;\n}\n\nion-item {\n  --border-color: rgba(209,179,127);\n  --border-bottom-width: 2px;\n}\n\n.button {\n  width: 100%;\n  border-radius: 15px;\n  height: 50px;\n  font-size: 14px;\n}\n\n.login-button {\n  background-color: #215fcc;\n  color: white;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n}\n\n.google-button {\n  background-color: #b92b21;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  color: white;\n}\n\n.google-button span {\n  padding-left: 10px;\n}\n\n.new-user-button {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  background-color: #fff;\n  color: #cbab73;\n  box-shadow: 0 0 15px 5px #f0f0f0;\n}\n\n.link-button {\n  float: left;\n  text-align: left;\n  background-color: transparent;\n  margin-top: 20px;\n}\n\n.links-block {\n  display: flex;\n  flex-direction: column;\n}\n\nh1, h2 {\n  padding: 0;\n  margin: 0;\n}\n\n@media screen and (max-width: 360px) {\n  h1, h2 {\n    font-size: 17px;\n  }\n\n  .title ion-label {\n    font-size: 17px;\n  }\n\n  ion-text, p, h5, ion-button, span {\n    font-size: 13px !important;\n  }\n\n  ion-icon {\n    font-size: 17px;\n  }\n\n  .login-button, .google-button, .new-user-button {\n    width: 100%;\n    height: 40px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbG9naW4vbG9naW4ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBQTtBQUNKOztBQUNBO0VBQ0kseUJBQUE7RUFBMEIsYUFBQTtFQUMxQixZQUFBO0VBQ0Esa0JBQUE7RUFDQSxrQkFBQTtFQUNBLFVBQUE7RUFDQSxTQUFBO0FBR0o7O0FBRkk7RUFDSSx5QkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0EsU0FBQTtFQUNBLFVBQUE7RUFDQSxrQkFBQTtFQUNBLGtCQUFBO0FBSVI7O0FBQUE7RUFDSSx5QkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0Esa0JBQUE7RUFDQSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0FBR0o7O0FBRkk7RUFDSSx5QkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0EsWUFBQTtFQUNBLFdBQUE7RUFDQSxrQkFBQTtFQUNBLGtCQUFBO0FBSVI7O0FBREE7RUFDSSxhQUFBO0VBQ0EsdUJBQUE7RUFDQSxtQkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0EsZ0JBQUE7QUFJSjs7QUFISTtFQUNJLFdBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7QUFLUjs7QUFGQTtFQUNJLGFBQUE7RUFDQSxZQUFBO0VBQ0EsY0FBQTtFQUNBLG9CQUFBO0FBS0o7O0FBSEE7RUFDSSxvQkFBQTtBQU1KOztBQUxJO0VBQ0ksZUFBQTtFQUNBLGdCQUFBO0FBT1I7O0FBSkE7RUFDSSxvQkFBQTtBQU9KOztBQUxBO0VBQ0ksV0FBQTtBQVFKOztBQU5BO0VBQ0ksc0NBQUE7RUFDQSx3QkFBQTtFQUNBLGVBQUE7QUFTSjs7QUFQQTtFQUNJLGlDQUFBO0VBQ0EsMEJBQUE7QUFVSjs7QUFSQTtFQUNJLFdBQUE7RUFDQSxtQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0FBV0o7O0FBVEE7RUFDSSx5QkFBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSxtQkFBQTtFQUNBLHVCQUFBO0FBWUo7O0FBVkE7RUFDSSx5QkFBQTtFQUNBLGFBQUE7RUFDQSxtQkFBQTtFQUNBLG1CQUFBO0VBQ0EsdUJBQUE7RUFDQSxZQUFBO0FBYUo7O0FBWkk7RUFDSSxrQkFBQTtBQWNSOztBQVhBO0VBQ0ksYUFBQTtFQUNBLG1CQUFBO0VBQ0EsbUJBQUE7RUFDQSx1QkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLGdDQUFBO0FBY0o7O0FBWkE7RUFDSSxXQUFBO0VBQ0EsZ0JBQUE7RUFDQSw2QkFBQTtFQUNBLGdCQUFBO0FBZUo7O0FBYkE7RUFDSSxhQUFBO0VBQ0Esc0JBQUE7QUFnQko7O0FBZEE7RUFDSSxVQUFBO0VBQ0EsU0FBQTtBQWlCSjs7QUFmQTtFQUNJO0lBQ0UsZUFBQTtFQWtCSjs7RUFmTTtJQUNJLGVBQUE7RUFrQlY7O0VBZkU7SUFDRSwwQkFBQTtFQWtCSjs7RUFoQkU7SUFDSSxlQUFBO0VBbUJOOztFQWpCRTtJQUNJLFdBQUE7SUFDQSxZQUFBO0VBb0JOO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9sb2dpbi9sb2dpbi5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIqOmZvY3VzIHtcbiAgICBvdXRsaW5lOiBub25lO1xufVxuLmZpcnN0LWRhcmstb3JhbmdlLWJhbGx7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI0M5OUE0QztoZWlnaHQ6IDMwMHB4O1xuICAgIHdpZHRoOiAzMDBweDtcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIGxlZnQ6IC00NiU7XG4gICAgdG9wOiAtMTclO1xuICAgIC5maXJzdC1saWdodC1vcmFuZ2UtYmFsbHtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI0UwQjY0QTtcbiAgICAgICAgaGVpZ2h0OiAzMDBweDtcbiAgICAgICAgd2lkdGg6IDMwMHB4O1xuICAgICAgICB0b3A6IC0xMCU7XG4gICAgICAgIGxlZnQ6IC0xMyU7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcbiAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIH1cbn1cblxuLnNlY29uZC1kYXJrLW9yYW5nZS1iYWxse1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNFMEI2NEE7XG4gICAgaGVpZ2h0OiAyMzBweDtcbiAgICB3aWR0aDogMjMwcHg7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICByaWdodDogLTQ1JTtcbiAgICBib3R0b206IC01MiU7XG4gICAgLnNlY29uZC1saWdodC1vcmFuZ2UtYmFsbHtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI0M5OUE0QztcbiAgICAgICAgaGVpZ2h0OiAyMjBweDtcbiAgICAgICAgd2lkdGg6IDIyMHB4O1xuICAgICAgICBib3R0b206IC0xMiU7XG4gICAgICAgIHJpZ2h0OiAtMTElO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA1MCU7XG4gICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICB9XG59XG4ud3JhcHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgaGVpZ2h0OiAxMDB2aDtcbiAgICB3aWR0aDogMTAwdnc7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgICBmb3Jte1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgaGVpZ2h0OiA5MCU7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB9XG59XG4ubG9nb3tcbiAgICBoZWlnaHQ6IDEyNXB4O1xuICAgIHdpZHRoOiAxMjVweDtcbiAgICBtYXJnaW46IDAgYXV0bztcbiAgICBwYWRkaW5nLWJvdHRvbTogMjBweDtcbn1cbi50aXRsZXtcbiAgICBwYWRkaW5nLWJvdHRvbTogMjVweDtcbiAgICBpb24tbGFiZWx7XG4gICAgICAgIGZvbnQtc2l6ZTogMzVweDtcbiAgICAgICAgZm9udC13ZWlnaHQ6NzAwO1xuICAgIH1cbn1cbi5pbnB1dC1maWVsZHtcbiAgICBwYWRkaW5nLWJvdHRvbTogMjBweDtcbn1cbi5idXR0b24tY29se1xuICAgIHdpZHRoOiAxMDAlO1xufVxuaW9uLWlucHV0e1xuICAgIC0tcGxhY2Vob2xkZXItY29sb3I6IHJnYmEoMTQwLDE0MSwxNDApO1xuICAgIC0tcGxhY2Vob2xkZXItb3BhY2l0eTogMTtcbiAgICBmb250LXNpemU6IDE1cHg7XG59XG5pb24taXRlbSB7XG4gICAgLS1ib3JkZXItY29sb3I6IHJnYmEoMjA5LDE3OSwxMjcpO1xuICAgIC0tYm9yZGVyLWJvdHRvbS13aWR0aDogMnB4O1xufVxuLmJ1dHRvbntcbiAgICB3aWR0aDogMTAwJTsgXG4gICAgYm9yZGVyLXJhZGl1czogMTVweDtcbiAgICBoZWlnaHQ6IDUwcHg7XG4gICAgZm9udC1zaXplOiAxNHB4O1xufVxuLmxvZ2luLWJ1dHRvbntcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMjE1ZmNjO1xuICAgIGNvbG9yOndoaXRlO1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuLmdvb2dsZS1idXR0b257XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2I5MmIyMTtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBjb2xvcjp3aGl0ZTtcbiAgICBzcGFue1xuICAgICAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG4gICAgfVxufVxuLm5ldy11c2VyLWJ1dHRvbntcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xuICAgIGNvbG9yOnJnYmEoMjAzLDE3MSwxMTUpO1xuICAgIGJveC1zaGFkb3c6IDAgMCAxNXB4IDVweCAjZjBmMGYwO1xufVxuLmxpbmstYnV0dG9ue1xuICAgIGZsb2F0OiBsZWZ0O1xuICAgIHRleHQtYWxpZ246IGxlZnQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gICAgbWFyZ2luLXRvcDogMjBweDtcbn1cbi5saW5rcy1ibG9ja3tcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG59XG5oMSxoMntcbiAgICBwYWRkaW5nOjA7XG4gICAgbWFyZ2luOjA7XG59XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAzNjBweCkge1xuICAgIGgxLGgye1xuICAgICAgZm9udC1zaXplOiAxN3B4O1xuICAgIH1cbiAgICAudGl0bGV7XG4gICAgICAgIGlvbi1sYWJlbHtcbiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTdweDtcbiAgICAgICAgfVxuICAgIH1cbiAgICBpb24tdGV4dCwgcCwgaDUsIGlvbi1idXR0b24sIHNwYW57XG4gICAgICBmb250LXNpemU6IDEzcHggIWltcG9ydGFudDtcbiAgICB9XG4gICAgaW9uLWljb257XG4gICAgICAgIGZvbnQtc2l6ZTogMTdweDtcbiAgICB9XG4gICAgLmxvZ2luLWJ1dHRvbiwgLmdvb2dsZS1idXR0b24sIC5uZXctdXNlci1idXR0b257XG4gICAgICAgIHdpZHRoOiAxMDAlOyBcbiAgICAgICAgaGVpZ2h0OiA0MHB4O1xuICAgIH1cbn0iXX0= */";
       /***/
     },
 
@@ -179,7 +179,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-content>\n\t<div class=\"first-dark-orange-ball\">\n\t\t<div class=\"first-light-orange-ball\"></div>\n\t</div>\n\t<div class=\"wrap\">\n\t\t<form #loginForm=\"ngForm\" class=\"ion-padding-horizontal\">\n\t\t\t<ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t\t\t<ion-grid>\n\t\t\t\t<ion-row class=\"title\">\n\t\t\t\t\t<ion-col class=\"ion-text-center\">\n\t\t\t\t\t\t<ion-label>Log in</ion-label>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row class=\"input-field\">\n\t\t\t\t\t<ion-col>\n\t\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t\t<ion-input placeholder=\"Email address\" type=\"email\" required ngModel name=\"email\"></ion-input>\n\t\t\t\t\t\t</ion-item>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row class=\"input-field\">\n\t\t\t\t\t<ion-col>\n\t\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t\t<ion-input placeholder=\"Password\" type=\"password\" required ngModel name=\"password\"></ion-input>\n\t\t\t\t\t\t</ion-item>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row>\n\t\t\t\t\t<ion-col class=\"button-col\">\n\t\t\t\t\t\t<button class=\"button login-button\" type=\"submit\" (click)=\"login(loginForm)\">\n\t\t\t\t\t\t\tLogin\n\t\t\t\t\t\t\t<ion-spinner color=\"light\" name=\"lines-small\" *ngIf=\"loginSpinner\"></ion-spinner>\n\t\t\t\t\t\t</button>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row>\n\t\t\t\t\t<ion-col>\n\t\t\t\t\t\t<button class=\"button google-button\" (click)=\"google()\">\n\t\t\t\t\t\t\t<ion-icon name=\"logo-google\"></ion-icon>\n\t\t\t\t\t\t\t<span>Login with Google</span>\n\t\t\t\t\t\t\t<ion-spinner name=\"lines-small\" class=\"ion-padding-start\" *ngIf=\"googleSpinner\" color=\"light\"></ion-spinner>\n\t\t\t\t\t\t</button>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row>\n\t\t\t\t\t<ion-col class=\"ion-text-center\">\n\t\t\t\t\t\t<span>OR</span>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row>\n\t\t\t\t\t<ion-col class=\"links-block\" size=\"12\">\n\t\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"button new-user-button\" routerLink=\"/home/sign-up\">Sign Up</button>\n\t\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"link-button ion-float-right\" (click)=\"forgotPassword(loginForm)\">Forgot password?</button>\n\t\t\t\t\t\t<!-- {{ userInfo | json}} -->\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t</ion-grid>\n\t\t</form>\n\t</div>\n\t<div class=\"second-dark-orange-ball\">\n\t\t<div class=\"second-light-orange-ball\"></div>\n\t</div>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-content>\n\t<div class=\"wrap\">\n\t\t<div class=\"first-dark-orange-ball\">\n\t\t\t<div class=\"first-light-orange-ball\"></div>\n\t\t</div>\n\t\t<form #loginForm=\"ngForm\" class=\"ion-padding-horizontal\">\n\t\t\t<ion-img src=\"/assets/logo_no_back.png\" class=\"logo\"></ion-img>\n\t\t\t<ion-grid>\n\t\t\t\t<ion-row class=\"title\">\n\t\t\t\t\t<ion-col class=\"ion-text-center\">\n\t\t\t\t\t\t<ion-label>Log in</ion-label>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row class=\"input-field\">\n\t\t\t\t\t<ion-col>\n\t\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t\t<ion-input placeholder=\"Email address\" type=\"email\" required ngModel name=\"email\"></ion-input>\n\t\t\t\t\t\t</ion-item>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row class=\"input-field\">\n\t\t\t\t\t<ion-col>\n\t\t\t\t\t\t<ion-item class=\"ion-no-padding\">\n\t\t\t\t\t\t\t<ion-input placeholder=\"Password\" type=\"password\" required ngModel name=\"password\"></ion-input>\n\t\t\t\t\t\t</ion-item>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row>\n\t\t\t\t\t<ion-col class=\"button-col\">\n\t\t\t\t\t\t<button class=\"button login-button\" type=\"submit\" (click)=\"login(loginForm)\">\n\t\t\t\t\t\t\tLogin\n\t\t\t\t\t\t\t<ion-spinner color=\"light\" name=\"lines-small\" *ngIf=\"loginSpinner\"></ion-spinner>\n\t\t\t\t\t\t</button>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row>\n\t\t\t\t\t<ion-col>\n\t\t\t\t\t\t<button class=\"button google-button\" (click)=\"google()\">\n\t\t\t\t\t\t\t<ion-icon name=\"logo-google\"></ion-icon>\n\t\t\t\t\t\t\t<span>Login with Google</span>\n\t\t\t\t\t\t\t<ion-spinner name=\"lines-small\" class=\"ion-padding-start\" *ngIf=\"googleSpinner\" color=\"light\"></ion-spinner>\n\t\t\t\t\t\t</button>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row>\n\t\t\t\t\t<ion-col class=\"ion-text-center\">\n\t\t\t\t\t\t<span>OR</span>\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t\t<ion-row>\n\t\t\t\t\t<ion-col class=\"links-block\" size=\"12\">\n\t\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"button new-user-button\" routerLink=\"/home/sign-up\">Sign Up</button>\n\t\t\t\t\t\t<button color=\"tertiary\" size=\"small\" fill=\"clear\" class=\"link-button ion-float-right\" (click)=\"forgotPassword()\">Forgot password?</button>\n\t\t\t\t\t\t<!-- {{ userInfo | json}} -->\n\t\t\t\t\t</ion-col>\n\t\t\t\t</ion-row>\n\t\t\t</ion-grid>\n\t\t</form>\n\t\t<div class=\"second-dark-orange-ball\" *ngIf=\"!hideCircle\">\n\t\t\t<div class=\"second-light-orange-ball\"></div>\n\t\t</div>\n\t</div>\n</ion-content>\n";
       /***/
     },
 
@@ -324,13 +324,14 @@
       "nJHT");
 
       var LoginPage = /*#__PURE__*/function () {
-        function LoginPage(router, userService, modalCtrl, toastCtrl) {
+        function LoginPage(router, userService, modalCtrl, toastCtrl, platform) {
           _classCallCheck(this, LoginPage);
 
           this.router = router;
           this.userService = userService;
           this.modalCtrl = modalCtrl;
           this.toastCtrl = toastCtrl;
+          this.platform = platform;
         }
 
         _createClass(LoginPage, [{
@@ -338,7 +339,9 @@
           value: function ngOnInit() {
             this.loginSpinner = false;
             this.googleSpinner = false;
+            this.hideCircle = false;
             this.userService.checkIfIsOnLoginOrSignUpPage(this.router.url);
+            this.onKeyboardShowOrHideCircle();
           }
         }, {
           key: "login",
@@ -381,6 +384,7 @@
 
                     case 3:
                       googleUser = _context.sent;
+                      // console.log(googleUser.auth().currentUser.getToken())
                       console.log(googleUser);
                       this.userService.googleAuth(googleUser)["finally"](function () {
                         _this2.googleSpinner = false;
@@ -462,6 +466,18 @@
               }, _callee3, this);
             }));
           }
+        }, {
+          key: "onKeyboardShowOrHideCircle",
+          value: function onKeyboardShowOrHideCircle() {
+            var _this3 = this;
+
+            this.platform.keyboardDidShow.subscribe(function (ev) {
+              _this3.hideCircle = true;
+            });
+            this.platform.keyboardDidHide.subscribe(function () {
+              _this3.hideCircle = false;
+            });
+          }
         }]);
 
         return LoginPage;
@@ -476,6 +492,8 @@
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ModalController"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ToastController"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["Platform"]
         }];
       };
 
@@ -571,25 +589,25 @@
         }]);
 
         function GoogleAuthWeb() {
-          var _this3;
+          var _this4;
 
           _classCallCheck(this, GoogleAuthWeb);
 
-          _this3 = _super.call(this, {
+          _this4 = _super.call(this, {
             name: 'GoogleAuth',
             platforms: ['web']
           });
-          if (!_this3.webConfigured) return _possibleConstructorReturn(_this3);
-          _this3.gapiLoaded = new Promise(function (resolve) {
+          if (!_this4.webConfigured) return _possibleConstructorReturn(_this4);
+          _this4.gapiLoaded = new Promise(function (resolve) {
             // HACK: Relying on window object, can't get property in gapi.load callback
             window.gapiResolve = resolve;
 
-            _this3.initialize();
+            _this4.initialize();
           });
 
-          _this3.addUserChangeListener();
+          _this4.addUserChangeListener();
 
-          return _this3;
+          return _this4;
         }
 
         _createClass(GoogleAuthWeb, [{
@@ -624,14 +642,14 @@
           key: "signIn",
           value: function signIn() {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var _this4 = this;
+              var _this5 = this;
 
               return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
                   switch (_context5.prev = _context5.next) {
                     case 0:
                       return _context5.abrupt("return", new Promise(function (resolve, reject) {
-                        return __awaiter(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+                        return __awaiter(_this5, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
                           var serverAuthCode, needsOfflineAccess, offlineAccessResponse, googleUser, user;
                           return regeneratorRuntime.wrap(function _callee4$(_context4) {
                             while (1) {
@@ -751,7 +769,7 @@
           key: "addUserChangeListener",
           value: function addUserChangeListener() {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-              var _this5 = this;
+              var _this6 = this;
 
               return regeneratorRuntime.wrap(function _callee8$(_context8) {
                 while (1) {
@@ -762,7 +780,7 @@
 
                     case 2:
                       gapi.auth2.getAuthInstance().currentUser.listen(function (googleUser) {
-                        _this5.notifyListeners("userChange", googleUser.isSignedIn() ? _this5.getUserFrom(googleUser) : null);
+                        _this6.notifyListeners("userChange", googleUser.isSignedIn() ? _this6.getUserFrom(googleUser) : null);
                       });
 
                     case 3:

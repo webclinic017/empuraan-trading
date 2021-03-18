@@ -78,7 +78,7 @@ export class DashboardPage implements OnInit {
 	chartLoaded: boolean;
 	view = [];
 
-	constructor(private router: Router, private userService: UserService, private platform: Platform, private screenOrientation: ScreenOrientation) {}
+	constructor(private router: Router, private userService: UserService, private platform: Platform, private screenOrientation: ScreenOrientation) { }
 
 	ngOnInit() {
 		this.balanceLoaded = false;
@@ -125,12 +125,12 @@ export class DashboardPage implements OnInit {
 	}
 
 	generateChartData(rawData, initBal: number) {
-		console.log({rawData, initBal})
+		console.log({ rawData, initBal })
 		this.data = [];
 		const openBalTitle = "Open balance";
 		const initBalTitle = "Initial balance";
-		let openBalSeries: any = [];
-		let initBalSeries: any = [];
+		let openBalSeries: any[] = [];
+		let initBalSeries: any[] = [];
 
 		// openBalSeries.name = openBalTitle;
 		rawData.forEach((el) => {
@@ -141,14 +141,23 @@ export class DashboardPage implements OnInit {
 		rawData.forEach((el) => {
 			initBalSeries.push({ name: new Date(el.createdAt), value: initBal });
 		});
-
+		
+		const lastInitBalSeries = initBalSeries[initBalSeries.length - 1]
+		const lastDateInInitBalSeries = new Date(lastInitBalSeries.name)
+		const lastDayInMonth = new Date(2008, lastDateInInitBalSeries.getMonth() + 1, 0).getDate()
+		const remainingDaysToFillIn = lastDayInMonth - lastDateInInitBalSeries.getDate()
+		for (let i = 1; i <= remainingDaysToFillIn; i++) {
+			const date = new Date(lastInitBalSeries.name)
+			const refinedDate = new Date(date.setDate(date.getDate() + i));
+			initBalSeries.push({ name: refinedDate, value: initBal });
+		}
+		
 		this.data.push({ series: openBalSeries, name: openBalTitle });
 		this.data.push({ series: initBalSeries, name: initBalTitle });
 		this.chartLoaded = true;
-		console.log(this.data)
 	}
 
-	isAndroid(){
+	isAndroid() {
 		const platform = this.userService.getPlatformOfUser()
 		return platform.android || false
 	}

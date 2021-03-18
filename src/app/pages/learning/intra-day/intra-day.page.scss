@@ -1,3 +1,39 @@
+.post-marubozu {
+  .header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    .img {
+      // background: yellow;
+      padding: 14px 16px;
+      border-radius: 50%;
+      text-transform: capitalize;
+      // color: black;
+    }
+
+    .title {
+      color: black;
+      margin-left: 15px;
+      font-size: 18px;
+    }
+  }
+
+  .username {
+    margin-top: -19px;
+    margin-left: 11px;
+    font-size: 9px;
+    color: black;
+  }
+
+  .content {
+    p {
+      font-size: 18px;
+      line-height: 26px;
+      margin-top: 10px;
+    }
+  }
+}
 .post-button{
     width: 100%;
     height: 50px;

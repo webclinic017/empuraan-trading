@@ -1,11 +1,15 @@
-.splash-wrap{
+
+
+.splash-wrap {
+  background-color: rgba(250, 253, 252);
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: 100%;
-  .splash-screen{
-    background-color: #3ebffb;
+
+  .splash-screen {
+    background-color: rgba(250, 253, 252);
     width: 90%;
     height: 70&;
     animation: pulse 1s linear forwards;
