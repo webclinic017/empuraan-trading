@@ -67,6 +67,15 @@ And last but not least, we run `npx cap open android`. <br>
 Now if you have Android Studio installed on your computer, it will open it up for you. <br>
 If not, go and install Android studio and try this line again.
 
+### 1.5th step - Enabling video displaying on Android devices
+
+The ```iframe``` tag, that allows us to display videos on our app, doesn't work by default <br>
+on Android devices. It instead displays a CleartextTraffic error, which is not ideal. <br>
+
+To counter this, find the _AndroidManifest.xml_ file with the keybind SHIFT + CTRL/COMMAND + A <br>
+and find the ```<application>``` opening tag. Inside of it write the following: <br>
+```<application android:usesCleartextTraffic="true">```. That should fix the video displaying error. <br>
+
 ### Second step - Generating an APK in Android Studio for Android devices
 
 In Android Studio, in the _Build_ tab, click on _Generate Signed Bundle / APK..._
