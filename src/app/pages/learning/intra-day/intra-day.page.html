@@ -33,6 +33,7 @@
 			</div>
 			<!-- <span class="username" *ngIf="intraDay.user != null || intraDay.user != undefined">{{intraDay.user}}</span> -->
 			<div class="content">
+				<ion-img *ngIf="intraDay.image != null || intraDay.image != undefined" [src]="intraDay.image" class="ion-margin-vertical"></ion-img>
 				<p>{{intraDay.content.length > 100 ? intraDay.content.slice(0,100) + "..." : intraDay.content}}</p>
 			</div>
 		</ion-card-content>

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import axios from 'axios';
@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './chart.page.html',
   styleUrls: ['./chart.page.scss'],
 })
-export class ChartPage implements OnInit, OnDestroy {
+export class ChartPage implements OnInit, OnDestroy, AfterViewInit {
   @Input() symbol;
   tradingview;
   ws;
@@ -34,12 +34,14 @@ export class ChartPage implements OnInit, OnDestroy {
     'D': 86400
   };
 
-  constructor(private chartService: ChartService, 
-    private route: ActivatedRoute, 
+  constructor(private chartService: ChartService,
+    private route: ActivatedRoute,
     private userService: UserService) {
   }
-
   ngOnInit() {
+
+  }
+  ngAfterViewInit() {
     this.route.params.subscribe(p => {
       this.stockId = p.sId
       this.watchlistId = p.wId
@@ -55,7 +57,11 @@ export class ChartPage implements OnInit, OnDestroy {
       console.log('connect success');
       this.drawTv();
     };
+
   }
+
+  // ionViewDidLoad() {
+  // }
 
   ngOnDestroy() {
     this.ws.close();

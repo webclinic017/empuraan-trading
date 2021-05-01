@@ -3167,7 +3167,10 @@
 
         _createClass(ChartPage, [{
           key: "ngOnInit",
-          value: function ngOnInit() {
+          value: function ngOnInit() {}
+        }, {
+          key: "ngAfterViewInit",
+          value: function ngAfterViewInit() {
             var _this = this;
 
             this.route.params.subscribe(function (p) {
@@ -3186,7 +3189,9 @@
 
               _this.drawTv();
             };
-          }
+          } // ionViewDidLoad() {
+          // }
+
         }, {
           key: "ngOnDestroy",
           value: function ngOnDestroy() {

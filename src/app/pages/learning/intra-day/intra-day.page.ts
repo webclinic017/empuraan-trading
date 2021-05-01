@@ -56,11 +56,13 @@ export class IntraDayPage implements OnInit {
 		this.marubozuService.activeTab.subscribe((n) => {
 			if (n == 2) {
 				this.marubozuService.get("intraday").subscribe((r: any) => {
-					if(this.intraday == null) this.intraday = r.data;
-					this.intraday.forEach(i => {
-						if(i.color == "#fff") i.color = this.generateRandomColor()
-					})
+					// if(this.intraday == null) {
+					this.intraday = r.data;
 					this.intraday.reverse()
+					// }
+					this.intraday.forEach(i => {
+						if (i.color == "#fff") i.color = this.generateRandomColor()
+					})
 					this.dataLoaded = true
 				});
 			}
@@ -95,7 +97,7 @@ export class IntraDayPage implements OnInit {
 		// this.filteredPosts.reverse()
 	}
 
-	generateRandomColor(){
+	generateRandomColor() {
 		const colorHex = this.colorGenService.getRandomColor()
 		const colorRgb = this.colorGenService.hexToRgb(colorHex)
 		// console.log("rgb("+colorRgb.r +","+colorRgb.g+","+colorRgb.b+")")
@@ -103,7 +105,7 @@ export class IntraDayPage implements OnInit {
 		return colorHex
 	}
 
-	generateContrastColor(color){
+	generateContrastColor(color) {
 		return this.colorGenService.contrast(color, 128)
 	}
 }

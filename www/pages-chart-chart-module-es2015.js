@@ -3055,6 +3055,8 @@ let ChartPage = class ChartPage {
         };
     }
     ngOnInit() {
+    }
+    ngAfterViewInit() {
         this.route.params.subscribe(p => {
             this.stockId = p.sId;
             this.watchlistId = p.wId;
@@ -3070,6 +3072,8 @@ let ChartPage = class ChartPage {
             this.drawTv();
         };
     }
+    // ionViewDidLoad() {
+    // }
     ngOnDestroy() {
         this.ws.close();
     }

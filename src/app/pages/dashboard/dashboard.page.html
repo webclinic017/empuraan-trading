@@ -80,8 +80,8 @@
 						[showXAxisLabel]="false" [showYAxisLabel]="false" [xAxis]="true" [yAxis]="true"
 						[timeline]="false" [autoScale]="true" [results]="data" [view]="view">
 					</ngx-charts-line-chart>
-					<ion-spinner name="lines" style="height: 50px" *ngIf="!chartLoaded" color="dark"></ion-spinner>
-					<ion-label *ngIf="chartLoaded && data[0]?.series.length == 1"> There is no data here for now, go on
+					<ion-spinner name="lines" style="height: 50px" *ngIf="!chartLoaded && data != null" color="dark"></ion-spinner>
+					<ion-label *ngIf="chartLoaded && data[0]?.series.length <= 1 || data == null"> There is no data here for now, go on
 						and trade to see the chart. </ion-label>
 				</ion-col>
 			</ion-row>

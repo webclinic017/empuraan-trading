@@ -11,66 +11,7 @@ import { ScreenOrientation } from "@ionic-native/screen-orientation/ngx";
 	styleUrls: ["./dashboard.page.sass"],
 })
 export class DashboardPage implements OnInit {
-	data: any = [
-		// {
-		//   "name": "Open balance",
-		//   "series": [
-		//     {
-		//       "name": "1",
-		//       "value": 0
-		//     },
-		//     {
-		//       "name": "5",
-		//       "value": 150
-		//     },
-		//     {
-		//       "name": "10",
-		//       "value": 250
-		//     },
-		//     {
-		//       "name": "15",
-		//       "value": 510
-		//     },
-		//     {
-		//       "name": "20",
-		//       "value": 720
-		//     },
-		//     {
-		//       "name": "25",
-		//       "value": 680
-		//     },
-		//   ]
-		// },
-		// {
-		//   "name": "Init balance",
-		//   "series": [
-		//     {
-		//       "name": "1",
-		//       "value": 500
-		//     },
-		//     {
-		//       "name": "5",
-		//       "value": 500
-		//     },
-		//     {
-		//       "name": "10",
-		//       "value": 500
-		//     },
-		//     {
-		//       "name": "15",
-		//       "value": 500
-		//     },
-		//     {
-		//       "name": "20",
-		//       "value": 500
-		//     },
-		//     {
-		//       "name": "25",
-		//       "value": 500
-		//     },
-		//   ]
-		// },
-	];
+	data
 	leaderboard;
 	user: User;
 	balanceLoaded: boolean;
@@ -102,7 +43,7 @@ export class DashboardPage implements OnInit {
 					this.user.balance.gain = this.user.balance.pAndL / this.user.balance.openBal;
 					this.user.balance.currency = r.account.currency;
 					this.balanceLoaded = true;
-					this.generateChartData(chart.data, r.account.initialAmount);
+					if(chart.data.length > 0) this.generateChartData(chart.data, r.account.initialAmount);
 				});
 			});
 		});
@@ -141,7 +82,7 @@ export class DashboardPage implements OnInit {
 		rawData.forEach((el) => {
 			initBalSeries.push({ name: new Date(el.createdAt), value: initBal });
 		});
-		
+
 		const lastInitBalSeries = initBalSeries[initBalSeries.length - 1]
 		const lastDateInInitBalSeries = new Date(lastInitBalSeries.name)
 		const lastDayInMonth = new Date(2008, lastDateInInitBalSeries.getMonth() + 1, 0).getDate()
@@ -151,7 +92,7 @@ export class DashboardPage implements OnInit {
 			const refinedDate = new Date(date.setDate(date.getDate() + i));
 			initBalSeries.push({ name: refinedDate, value: initBal });
 		}
-		
+
 		this.data.push({ series: openBalSeries, name: openBalTitle });
 		this.data.push({ series: initBalSeries, name: initBalTitle });
 		this.chartLoaded = true;

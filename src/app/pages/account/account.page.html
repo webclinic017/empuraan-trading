@@ -29,19 +29,19 @@
 						<ion-text>Funds</ion-text>
 						<ion-icon name="cash-outline" class="ion-margin-end icon"></ion-icon>
 					</ion-item> -->
-					<ion-item class="ion-no-padding account-card-link" [routerLink]="['profile']">
+					<ion-item class="ion-no-padding account-card-link" [routerLink]="['profile']" detail='false'>
 						<ion-text>Profile</ion-text>
 						<ion-icon src="/assets/svg/user.svg" class="ion-margin-end icon"></ion-icon>
 					</ion-item>
-					<ion-item class="ion-no-padding account-card-link" [routerLink]="['settings']">
+					<ion-item class="ion-no-padding account-card-link" [routerLink]="['settings']" detail='false'>
 						<ion-text>Settings</ion-text>
 						<ion-icon src="/assets/svg/Settings.svg" class="ion-margin-end icon"></ion-icon>
 					</ion-item>
-					<ion-item class="ion-no-padding account-card-link" [routerLink]="['invite-friends']">
+					<ion-item class="ion-no-padding account-card-link" [routerLink]="['invite-friends']" detail='false'>
 						<ion-text>Invite friends</ion-text>
 						<ion-icon src="/assets/svg/user-add.svg" class="ion-margin-end icon"></ion-icon>
 					</ion-item>
-					<ion-item class="ion-no-padding account-card-link" (click)="logout()">
+					<ion-item class="ion-no-padding account-card-link" (click)="logout()" detail='false'>
 						<ion-text>Logout</ion-text>
 						<ion-icon src="/assets/svg/Logout.svg" class="ion-margin-end icon"></ion-icon>
 					</ion-item>
